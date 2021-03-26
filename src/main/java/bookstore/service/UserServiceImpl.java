@@ -39,6 +39,7 @@ public class UserServiceImpl implements UserService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         //Get Admin from DB
         Admin admin = findByUsername(username);
+        
         //if user not exists then throw the exception
         if(admin == null){
             throw new UsernameNotFoundException("Invalid username");
@@ -47,6 +48,7 @@ public class UserServiceImpl implements UserService {
         List<GrantedAuthority> authorities = convertRolesToGrantedAuthorities(admin.getRoleid());
         
         User userOfSpringSecurity = new User(username, username, authorities);
+        
         return userOfSpringSecurity;
     }
     

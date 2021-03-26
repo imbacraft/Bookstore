@@ -29,13 +29,10 @@
                         <i>Successfully registered. Try to sign in!!!</i>
                     </div>
                 </c:if>
-                <!-- Icon -->
-                <div class="fadeIn first">
-                    <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
-                </div>
+  
 
                 <!-- Login Form -->
-                <form:form action="/authenticate" method="post">
+                <form:form action="${pageContext.request.contextPath}/authenticate" method="post">
                     <input type="text" id="login" class="fadeIn second" name="username" placeholder="login">
                     <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
                     <input type="submit" class="fadeIn fourth" value="Log In">

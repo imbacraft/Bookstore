@@ -8,10 +8,8 @@ package bookstore;
 
 
 import bookstore.service.UserService;
-import bookstore.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -27,20 +25,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     UserService userService;
     
        @Override
-      protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(authenticationProvider());
-      }
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+		 auth.authenticationProvider(authenticationProvider());
+	}
     
-    @Override
-    protected void configure(HttpSecurity http) throws Exception{
-      http
-                .csrf().disable()
+     @Override
+	public void configure(HttpSecurity http) throws Exception {
+		  http
                 .authorizeRequests()//Restrict access based on HttpServletRequest
-                .antMatchers("/admin/**").hasRole("ADMIN")//Only Admin has access to /admin
+                .antMatchers("/admin/**").hasRole("admin")//Only Admin has access to /admin
+                .antMatchers("/teacher/**").hasRole("TEACHER")
                 .antMatchers("/").authenticated()
+                
                 .and()
                 .formLogin()//We are changing the process of login
-                .loginPage("/loginPage")//Show my form at this URL
+                .loginPage("/login")//Show my form at this URL
                 .loginProcessingUrl("/authenticate")//When submit button is pressed the request will be sent to this URL
                 .permitAll()//Allow everyone to see login page. Don't have to be logged in.
                 
@@ -48,9 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 
                 .and().exceptionHandling().accessDeniedPage("/access-denied")
                 ;
-    
-    
-    }
+	}
     
     
     @Bean
@@ -65,4 +62,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
+
+
+
 }
