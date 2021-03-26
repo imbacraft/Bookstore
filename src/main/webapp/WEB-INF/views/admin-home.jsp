@@ -26,7 +26,7 @@
         </p>
         
         <br/>
-        <form:form action="/logout" method="POST">
+        <form:form action="${pageContext.request.contextPath}/logout" method="POST">
             <input type="submit" value="Logout">
         </form:form>
     </body>

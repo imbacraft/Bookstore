@@ -33,7 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configure(HttpSecurity http) throws Exception {
 		  http
                 .authorizeRequests()//Restrict access based on HttpServletRequest
-                .antMatchers("/admin/**").hasRole("admin")//Only Admin has access to /admin
+                .antMatchers("/admin/**").hasRole("ADMIN")//Only Admin has access to /admin
                 .antMatchers("/teacher/**").hasRole("TEACHER")
                 .antMatchers("/").authenticated()
                 

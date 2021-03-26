@@ -14,9 +14,29 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Welcome to Home Page!</h1>
+        <h1>Welcome to Spring Security</h1>
 
-     
+        <p>
+            User: <sec:authentication property="principal.username"/>
+            <br/>
+            Role(s):<sec:authentication property="principal.authorities"/>
+        </p>
+        <hr/>
+        <sec:authorize access="hasRole('ADMIN')">
+            <div>
+                <a href="${pageContext.request.contextPath}/admin">Administrator Home Page</a>
+            </div>
+        </sec:authorize>
+        <br/>
+        <sec:authorize access="hasRole('TEACHER')">
+            <div>
+                <a href="/teacher">Teacher Home Page</a>
+            </div>
+        </sec:authorize>
+        <br/>
+        <form:form action="/logout" method="POST">
+            <input type="submit" value="Logout">
+        </form:form>
     </body>
 
 

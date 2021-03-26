@@ -40,7 +40,7 @@
 
                 <!-- Remind Password -->
                 <div id="formFooter">
-                    <a class="underlineHover" href="/register">Register</a>
+                    <a class="underlineHover" href="${pageContext.request.contextPath}/register">Register</a>
                 </div>
 
             </div>

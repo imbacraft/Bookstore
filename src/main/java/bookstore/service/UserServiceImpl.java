@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
         //convert roleid to GrantedAuthority Object (required by Spring)
         List<GrantedAuthority> authorities = convertRolesToGrantedAuthorities(admin.getRoleid());
         
-        User userOfSpringSecurity = new User(username, username, authorities);
+        User userOfSpringSecurity = new User(admin.getUsername(), admin.getPassword(), authorities);
         
         return userOfSpringSecurity;
     }
