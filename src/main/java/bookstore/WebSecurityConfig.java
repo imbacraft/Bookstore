@@ -32,13 +32,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      @Override
 	public void configure(HttpSecurity http) throws Exception {
 		  http
-                .authorizeRequests()//Restrict access based on HttpServletRequest
+                .authorizeRequests()  //Restrict access based on HttpServletRequest
+                .antMatchers("/","/home").permitAll() //Everybody (Visitors) have access to /bookstore and bookstore/home
                 .antMatchers("/admin/**").hasRole("ADMIN")//Only Admin has access to /admin
-                .antMatchers("/teacher/**").hasRole("TEACHER")
-                .antMatchers("/").authenticated()
-                
+                .antMatchers("/customer/**").hasRole("CUSTOMER")//Only Customer has access to /customer/**
+                .antMatchers("/service/**").hasRole("SERVICEAGENT")//Only CustomerServiceAgent has access to /service/**
+                .antMatchers("/stock/**").hasRole("STOCKMANAGER")//Only StockManager has access to /stock/**
+                          
                 .and()
-                .formLogin()//We are changing the process of login
+                .formLogin()//We are changing the default Spring security process of login
                 .loginPage("/login")//Show my form at this URL
                 .loginProcessingUrl("/authenticate")//When submit button is pressed the request will be sent to this URL
                 .permitAll()//Allow everyone to see login page. Don't have to be logged in.

@@ -47,7 +47,7 @@ public class Admin implements Serializable {
     private String password;
     @JoinColumn(name = "roleid", referencedColumnName = "roleid")
     @ManyToOne(optional = false)
-    private Roles roleid;
+    private Role role;
 
     public Admin() {
     }
@@ -86,12 +86,12 @@ public class Admin implements Serializable {
         this.password = password;
     }
 
-    public Roles getRoleid() {
-        return roleid;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoleid(Roles roleid) {
-        this.roleid = roleid;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     @Override

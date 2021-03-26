@@ -6,7 +6,7 @@
 package bookstore.service;
 
 import bookstore.entity.Admin;
-import bookstore.entity.Roles;
+import bookstore.entity.Role;
 import bookstore.repo.AdminRepo;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +26,7 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     AdminRepo adminRepo;
+    
     @Autowired
     PasswordEncoder passwordEncoder;
 
@@ -45,14 +46,14 @@ public class UserServiceImpl implements UserService {
             throw new UsernameNotFoundException("Invalid username");
         }
         //convert roleid to GrantedAuthority Object (required by Spring)
-        List<GrantedAuthority> authorities = convertRolesToGrantedAuthorities(admin.getRoleid());
+        List<GrantedAuthority> authorities = convertRolesToGrantedAuthorities(admin.getRole());
         
         User userOfSpringSecurity = new User(admin.getUsername(), admin.getPassword(), authorities);
         
         return userOfSpringSecurity;
     }
     
-    private List<GrantedAuthority> convertRolesToGrantedAuthorities(Roles role){
+    private List<GrantedAuthority> convertRolesToGrantedAuthorities(Role role){
         
             List<GrantedAuthority> authorities = new ArrayList();
             
@@ -64,13 +65,13 @@ public class UserServiceImpl implements UserService {
     }
     
     @Override
-    public Admin saveUser(Admin newadmin){
+    public Admin saveUser(Admin admin){
         
         return null;
 //        String plainPassword = admin.getPassword();
 //        String hashedPassword = passwordEncoder.encode(plainPassword);
 //        admin.setPassword(hashedPassword);
-//        Role role = roleRepo.findByRnameContaining("USER");
+//        Role role = roleRepo.findByRolenameContaining("USER");
 //        admin.addRole(role);
 //        admin = userRepo.save(admin);
 //        return admin;
