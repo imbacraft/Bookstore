@@ -6,11 +6,14 @@
 package bookstore.service;
 
 import bookstore.entity.Admin;
+import bookstore.entity.Customer;
 import bookstore.entity.Role;
 import bookstore.repo.AdminRepo;
+import bookstore.repo.CustomerRepo;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -28,27 +31,46 @@ public class UserServiceImpl implements UserService {
     AdminRepo adminRepo;
     
     @Autowired
+    CustomerRepo customerRepo;
+    
+    @Autowired
     PasswordEncoder passwordEncoder;
 
     
     @Override
-    public Admin findByUsername(String username) {
+    public Admin findAdminByUsername(String username) {
         return adminRepo.findByUsername(username);
     }
-
+    
+    @Override
+    public Customer findCustomerByUsername(String username) {
+        return customerRepo.findByUsername(username);
+    }
+    
+   
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        //Get Admin from DB
-        Admin admin = findByUsername(username);
+        User userOfSpringSecurity;
+
+        //Try to get Admin from DB
+        Admin admin = findAdminByUsername(username);
+        
+        Customer customer = findCustomerByUsername(username);
         
         //if user not exists then throw the exception
-        if(admin == null){
-            throw new UsernameNotFoundException("Invalid username");
-        }
-        //convert roleid to GrantedAuthority Object (required by Spring)
-        List<GrantedAuthority> authorities = convertRolesToGrantedAuthorities(admin.getRole());
+        if(admin != null ){
+           List<GrantedAuthority> authorities = convertRolesToGrantedAuthorities(admin.getRole());
         
-        User userOfSpringSecurity = new User(admin.getUsername(), admin.getPassword(), authorities);
+            userOfSpringSecurity = new User(admin.getUsername(), admin.getPassword(), authorities); 
+        } else if (customer != null){
+        
+            List<GrantedAuthority> authorities = convertRolesToGrantedAuthorities(customer.getRole());
+        
+            userOfSpringSecurity = new User(customer.getUsername(), customer.getPassword(), authorities); 
+        } else {
+             throw new UsernameNotFoundException("Invalid username");
+        }
+       
         
         return userOfSpringSecurity;
     }
@@ -65,7 +87,7 @@ public class UserServiceImpl implements UserService {
     }
     
     @Override
-    public Admin saveUser(Admin admin){
+    public Admin saveUser(Admin newadmin){
         
         return null;
 //        String plainPassword = admin.getPassword();
@@ -76,5 +98,7 @@ public class UserServiceImpl implements UserService {
 //        admin = userRepo.save(admin);
 //        return admin;
     }
+
+
     
 }

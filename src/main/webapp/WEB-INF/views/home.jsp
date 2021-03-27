@@ -46,7 +46,7 @@
 
         <sec:authorize access="hasRole('CUSTOMER')">
             <div>
-                <a href="/teacher">Account Information</a>
+                <a href="${pageContext.request.contextPath}/customer">Account Information</a>
             </div>
 
             <form:form action="${pageContext.request.contextPath}/logout" method="POST">
