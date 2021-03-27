@@ -85,7 +85,6 @@ public class Book implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "publicationdate")
-    @Temporal(TemporalType.DATE)
     private LocalDate publicationdate;
     @Basic(optional = false)
     @NotNull

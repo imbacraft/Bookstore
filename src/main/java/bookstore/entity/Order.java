@@ -57,7 +57,6 @@ public class Order implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "datetime")
-    @Temporal(TemporalType.TIMESTAMP)
     private LocalDate datetime;
     @Basic(optional = false)
     @NotNull
@@ -85,14 +84,14 @@ public class Order implements Serializable {
     @NotNull
     @Column(name = "totalprice")
     private BigDecimal totalprice;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderid")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
     private List<Ticket> ticketList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderid1")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
     private List<BookPerOrder> bookPerOrderList;
-    @JoinColumn(name = "customer", referencedColumnName = "customer")
+    @JoinColumn(name = "customerid", referencedColumnName = "customerid")
     @ManyToOne
     private Customer customer;
-    @JoinColumn(name = "visitor", referencedColumnName = "visitor")
+    @JoinColumn(name = "visitorid", referencedColumnName = "visitorid")
     @ManyToOne
     private Visitor visitor;
 

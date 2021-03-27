@@ -47,13 +47,13 @@ public class Role implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "rolename")
     private String rolename;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "roleid")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
     private List<Customerserviceagent> customerserviceagentList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "roleid")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
     private List<Stockmanager> stockmanagerList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "roleid")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
     private List<Visitor> visitorList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "roleid")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
     private List<Customer> customerList;
 
     public Role() {

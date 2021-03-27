@@ -69,7 +69,7 @@ public class Ticket implements Serializable {
     @JoinColumn(name = "visitorid", referencedColumnName = "visitorid")
     @ManyToOne
     private Visitor visitor;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ticketid")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ticket")
     private List<Ticketanswer> ticketanswerList;
 
     public Ticket() {

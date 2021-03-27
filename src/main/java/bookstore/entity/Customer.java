@@ -108,21 +108,20 @@ public class Customer implements Serializable {
     @Column(name = "postalcode")
     private int postalcode;
     @Column(name = "dateofbirth")
-    @Temporal(TemporalType.DATE)
     private LocalDate dateofbirth;
     @Size(max = 60)
     @Column(name = "paypalaccount")
     private String paypalaccount;
     @Column(name = "discountcoupon")
     private Integer discountcoupon;
-    @OneToMany(mappedBy = "customerid")
+    @OneToMany(mappedBy = "customer")
     private List<Ticket> ticketList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customerid")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
     private List<Review> reviewList;
     @JoinColumn(name = "roleid", referencedColumnName = "roleid")
     @ManyToOne(optional = false)
     private Role role;
-    @OneToMany(mappedBy = "customerid")
+    @OneToMany(mappedBy = "customer")
     private List<Order> orderList;
 
     public Customer() {

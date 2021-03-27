@@ -88,12 +88,12 @@ public class Visitor implements Serializable {
     @NotNull
     @Column(name = "phone")
     private int phone;
-    @OneToMany(mappedBy = "visitorid")
+    @OneToMany(mappedBy = "visitor")
     private List<Ticket> ticketList;
     @JoinColumn(name = "roleid", referencedColumnName = "roleid")
     @ManyToOne(optional = false)
     private Role role;
-    @OneToMany(mappedBy = "visitorid")
+    @OneToMany(mappedBy = "visitor")
     private List<Order> orderList;
 
     public Visitor() {
