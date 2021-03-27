@@ -6,7 +6,9 @@
 package bookstore.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,10 +16,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -43,6 +47,14 @@ public class Role implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "rolename")
     private String rolename;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "roleid")
+    private List<Customerserviceagent> customerserviceagentList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "roleid")
+    private List<Stockmanager> stockmanagerList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "roleid")
+    private List<Visitor> visitorList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "roleid")
+    private List<Customer> customerList;
 
     public Role() {
     }
@@ -70,6 +82,42 @@ public class Role implements Serializable {
 
     public void setRolename(String rolename) {
         this.rolename = rolename;
+    }
+
+    @XmlTransient
+    public List<Customerserviceagent> getCustomerserviceagentList() {
+        return customerserviceagentList;
+    }
+
+    public void setCustomerserviceagentList(List<Customerserviceagent> customerserviceagentList) {
+        this.customerserviceagentList = customerserviceagentList;
+    }
+
+    @XmlTransient
+    public List<Stockmanager> getStockmanagerList() {
+        return stockmanagerList;
+    }
+
+    public void setStockmanagerList(List<Stockmanager> stockmanagerList) {
+        this.stockmanagerList = stockmanagerList;
+    }
+
+    @XmlTransient
+    public List<Visitor> getVisitorList() {
+        return visitorList;
+    }
+
+    public void setVisitorList(List<Visitor> visitorList) {
+        this.visitorList = visitorList;
+    }
+
+    @XmlTransient
+    public List<Customer> getCustomerList() {
+        return customerList;
+    }
+
+    public void setCustomerList(List<Customer> customerList) {
+        this.customerList = customerList;
     }
 
     @Override
