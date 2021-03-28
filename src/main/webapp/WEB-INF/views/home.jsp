@@ -19,7 +19,14 @@
 
         <h2>This is Visitor's homepage</h2>
 
-        <a href="${pageContext.request.contextPath}/login">Login with your customer acccount</a>
+
+        <sec:authorize access="!isAuthenticated()">
+
+            <!-- if user is not authenticated, show this link. Otherwise, it stays hidden.--> 
+            <a href="${pageContext.request.contextPath}/login">Login with your customer acccount</a>
+
+        </sec:authorize>
+
 
         <h3>Bestseller books</h3>
 
@@ -45,25 +52,25 @@
         <br/>
 
         <sec:authorize access="hasRole('CUSTOMER')">
-            
+
             <div>
                 <h3>Welcome, <sec:authentication property="principal.username" /> !</h3>
             </div>
-            
+
             <div>
                 <a href="${pageContext.request.contextPath}/customer">Account Details</a>
             </div>
-            
+
             <br>
-            
+
             <form:form action="${pageContext.request.contextPath}/logout" method="POST">
                 <input type="submit" value="Logout">
             </form:form>
 
         </sec:authorize>
 
-                
-                
+
+
         <sec:authorize access="hasRole('SERVICEAGENT')">
             <div>
                 <a href="${pageContext.request.contextPath}/service">Go to Customer Service Agent Management Page</a>
