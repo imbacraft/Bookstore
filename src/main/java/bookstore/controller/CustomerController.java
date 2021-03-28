@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CustomerController {
     
     @GetMapping
-    public String adminHome(){
-        return "customer-home";
+    public String customerHome(){
+        return "customer-account";
     }
 }

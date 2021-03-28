@@ -38,9 +38,9 @@
                     <input type="submit" class="fadeIn fourth" value="Log In">
                 </form:form>
 
-                <!-- Remind Password -->
+                <!-- Register -->
                 <div id="formFooter">
-                    <a class="underlineHover" href="${pageContext.request.contextPath}/register">Don't have an account? Register</a>
+                    Don't have an account? <a class="underlineHover" href="${pageContext.request.contextPath}/register"> Register</a>
                 </div>
 
             </div>

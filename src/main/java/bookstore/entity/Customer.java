@@ -145,6 +145,18 @@ public class Customer implements Serializable {
         this.postalcode = postalcode;
     }
 
+    public Customer(String firstname, String lastname, String email, String username, String password, String country, String street, int streetnumber, Role role) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.country = country;
+        this.street = street;
+        this.streetnumber = streetnumber;
+        this.role = role;
+    }
+
     public Integer getCustomerid() {
         return customerid;
     }
@@ -314,7 +326,9 @@ public class Customer implements Serializable {
 
     @Override
     public String toString() {
-        return "bookstore.entity.Customer[ customerid=" + customerid + " ]";
+        return "Customer{" + "customerid=" + customerid + ", firstname=" + firstname + ", lastname=" + lastname + ", email=" + email + ", phone=" + phone + ", username=" + username + ", password=" + password + ", country=" + country + ", street=" + street + ", streetnumber=" + streetnumber + ", postalcode=" + postalcode + ", dateofbirth=" + dateofbirth + ", paypalaccount=" + paypalaccount + ", discountcoupon=" + discountcoupon + ", ticketList=" + ticketList + ", reviewList=" + reviewList + ", role=" + role + ", orderList=" + orderList + '}';
     }
+
+
     
 }

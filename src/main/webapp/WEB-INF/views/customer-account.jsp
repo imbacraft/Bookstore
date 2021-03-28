@@ -13,5 +13,7 @@
     </head>
     <body>
         <h1>This is Customer Homepage</h1>
+        
+        <p>${customer.username}</p>
     </body>
 </html>

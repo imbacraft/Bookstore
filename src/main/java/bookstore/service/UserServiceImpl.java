@@ -13,6 +13,7 @@ import bookstore.entity.Stockmanager;
 import bookstore.repo.AdminRepo;
 import bookstore.repo.CustomerRepo;
 import bookstore.repo.CustomerServiceAgentRepo;
+import bookstore.repo.RoleRepo;
 import bookstore.repo.StockmanagerRepo;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +43,9 @@ public class UserServiceImpl implements UserService {
     
     @Autowired
     StockmanagerRepo stockmanagerRepo;
+    
+    @Autowired
+    RoleRepo roleRepo;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -125,16 +129,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Admin saveUser(Admin newadmin) {
+    public Customer saveUser(Customer newcustomer) {
 
-        return null;
-//        String plainPassword = admin.getPassword();
-//        String hashedPassword = passwordEncoder.encode(plainPassword);
-//        admin.setPassword(hashedPassword);
-//        Role role = roleRepo.findByRolenameContaining("USER");
-//        admin.addRole(role);
-//        admin = userRepo.save(admin);
-//        return admin;
+        String plainPassword = newcustomer.getPassword();
+        
+        //encode password with Bcrypt
+        String hashedPassword = passwordEncoder.encode(plainPassword);
+        newcustomer.setPassword(hashedPassword);
+        
+        //find customer role from DB
+        Role role = roleRepo.findByRolenameContaining("CUSTOMER");
+        newcustomer.setRole(role);
+        
+        //save customer to DB
+        newcustomer = customerRepo.save(newcustomer);
+        
+        return newcustomer;
     }
 
 
