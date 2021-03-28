@@ -28,6 +28,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -57,6 +58,7 @@ public class Order implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "datetime")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate datetime;
     @Basic(optional = false)
     @NotNull

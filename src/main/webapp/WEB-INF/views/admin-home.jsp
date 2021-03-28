@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,9 +22,12 @@
             Role(s):<sec:authentication property="principal.authorities"/>
         </p>
         <hr/>
-        <p>
-            You are administrator. You can do anything you want....
-        </p>
+        <h1> Administrator Home Page </h1>
+        
+        <a href="${pageContext.request.contextPath}/admin/customers">Manage Customers</a>
+        <a href="${pageContext.request.contextPath}/admin/serviceagents">Manage Customer Service Agents</a>
+        <a href="${pageContext.request.contextPath}/admin/books">Manage Books</a>
+        <a href="${pageContext.request.contextPath}/admin/stockmanagers">Manage Stock Managers</a>
         
         <br/>
         <form:form action="${pageContext.request.contextPath}/logout" method="POST">

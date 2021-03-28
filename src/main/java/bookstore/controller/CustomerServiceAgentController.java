@@ -19,6 +19,6 @@ public class CustomerServiceAgentController {
     
     @GetMapping
     public String serviceAgentHome(){
-        return "serviceagent-management";
+        return "serviceagent-home";
     }
 }
