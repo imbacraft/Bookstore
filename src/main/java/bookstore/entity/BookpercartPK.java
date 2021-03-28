@@ -16,31 +16,31 @@ import javax.validation.constraints.NotNull;
  * @author Dell
  */
 @Embeddable
-public class BookPerOrderPK implements Serializable {
+public class BookpercartPK implements Serializable {
 
     @Basic(optional = false)
     @NotNull
-    @Column(name = "orderid")
-    private int orderid;
+    @Column(name = "cartid")
+    private int cartid;
     @Basic(optional = false)
     @NotNull
     @Column(name = "bookid")
     private int bookid;
 
-    public BookPerOrderPK() {
+    public BookpercartPK() {
     }
 
-    public BookPerOrderPK(int orderid, int bookid) {
-        this.orderid = orderid;
+    public BookpercartPK(int cartid, int bookid) {
+        this.cartid = cartid;
         this.bookid = bookid;
     }
 
-    public int getOrderid() {
-        return orderid;
+    public int getCartid() {
+        return cartid;
     }
 
-    public void setOrderid(int orderid) {
-        this.orderid = orderid;
+    public void setCartid(int cartid) {
+        this.cartid = cartid;
     }
 
     public int getBookid() {
@@ -54,7 +54,7 @@ public class BookPerOrderPK implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) orderid;
+        hash += (int) cartid;
         hash += (int) bookid;
         return hash;
     }
@@ -62,11 +62,11 @@ public class BookPerOrderPK implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof BookPerOrderPK)) {
+        if (!(object instanceof BookpercartPK)) {
             return false;
         }
-        BookPerOrderPK other = (BookPerOrderPK) object;
-        if (this.orderid != other.orderid) {
+        BookpercartPK other = (BookpercartPK) object;
+        if (this.cartid != other.cartid) {
             return false;
         }
         if (this.bookid != other.bookid) {
@@ -77,7 +77,7 @@ public class BookPerOrderPK implements Serializable {
 
     @Override
     public String toString() {
-        return "bookstore.entity.BookPerOrderPK[ orderid=" + orderid + ", bookid=" + bookid + " ]";
+        return "bookstore.entity.BookpercartPK[ cartid=" + cartid + ", bookid=" + bookid + " ]";
     }
     
 }

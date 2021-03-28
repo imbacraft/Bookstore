@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,8 +20,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -109,7 +106,7 @@ public class Customer implements Serializable {
     @Column(name = "postalcode")
     private int postalcode;
     @Column(name = "dateofbirth")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateofbirth;
     @Size(max = 60)
     @Column(name = "paypalaccount")
@@ -117,14 +114,10 @@ public class Customer implements Serializable {
     @Column(name = "discountcoupon")
     private Integer discountcoupon;
     @OneToMany(mappedBy = "customer")
-    private List<Ticket> ticketList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
-    private List<Review> reviewList;
+    private List<Cart> cartList;
     @JoinColumn(name = "roleid", referencedColumnName = "roleid")
     @ManyToOne(optional = false)
     private Role role;
-    @OneToMany(mappedBy = "customer")
-    private List<Order> orderList;
 
     public Customer() {
     }
@@ -147,7 +140,7 @@ public class Customer implements Serializable {
         this.postalcode = postalcode;
     }
 
-    public Customer(String firstname, String lastname, String email, String username, String password, String country, String street, int streetnumber, Role role) {
+    public Customer(String firstname, String lastname, String email, String username, String password, String country, String street, int streetnumber) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
@@ -156,7 +149,6 @@ public class Customer implements Serializable {
         this.country = country;
         this.street = street;
         this.streetnumber = streetnumber;
-        this.role = role;
     }
 
     public Integer getCustomerid() {
@@ -272,38 +264,20 @@ public class Customer implements Serializable {
     }
 
     @XmlTransient
-    public List<Ticket> getTicketList() {
-        return ticketList;
+    public List<Cart> getCartList() {
+        return cartList;
     }
 
-    public void setTicketList(List<Ticket> ticketList) {
-        this.ticketList = ticketList;
-    }
-
-    @XmlTransient
-    public List<Review> getReviewList() {
-        return reviewList;
-    }
-
-    public void setReviewList(List<Review> reviewList) {
-        this.reviewList = reviewList;
+    public void setCartList(List<Cart> cartList) {
+        this.cartList = cartList;
     }
 
     public Role getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(Role roleid) {
         this.role = role;
-    }
-
-    @XmlTransient
-    public List<Order> getOrderList() {
-        return orderList;
-    }
-
-    public void setOrderList(List<Order> orderList) {
-        this.orderList = orderList;
     }
 
     @Override
@@ -328,9 +302,7 @@ public class Customer implements Serializable {
 
     @Override
     public String toString() {
-        return "Customer{" + "customerid=" + customerid + ", firstname=" + firstname + ", lastname=" + lastname + ", email=" + email + ", phone=" + phone + ", username=" + username + ", password=" + password + ", country=" + country + ", street=" + street + ", streetnumber=" + streetnumber + ", postalcode=" + postalcode + ", dateofbirth=" + dateofbirth + ", paypalaccount=" + paypalaccount + ", discountcoupon=" + discountcoupon + ", ticketList=" + ticketList + ", reviewList=" + reviewList + ", role=" + role + ", orderList=" + orderList + '}';
+        return "bookstore.entity.Customer[ customerid=" + customerid + " ]";
     }
-
-
     
 }

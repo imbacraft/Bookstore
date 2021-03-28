@@ -6,7 +6,6 @@
 package bookstore.entity;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,12 +16,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -88,13 +85,9 @@ public class Visitor implements Serializable {
     @NotNull
     @Column(name = "phone")
     private int phone;
-    @OneToMany(mappedBy = "visitor")
-    private List<Ticket> ticketList;
     @JoinColumn(name = "roleid", referencedColumnName = "roleid")
     @ManyToOne(optional = false)
     private Role role;
-    @OneToMany(mappedBy = "visitor")
-    private List<Order> orderList;
 
     public Visitor() {
     }
@@ -187,30 +180,12 @@ public class Visitor implements Serializable {
         this.phone = phone;
     }
 
-    @XmlTransient
-    public List<Ticket> getTicketList() {
-        return ticketList;
-    }
-
-    public void setTicketList(List<Ticket> ticketList) {
-        this.ticketList = ticketList;
-    }
-
     public Role getRole() {
         return role;
     }
 
     public void setRole(Role role) {
         this.role = role;
-    }
-
-    @XmlTransient
-    public List<Order> getOrderList() {
-        return orderList;
-    }
-
-    public void setOrderList(List<Order> orderList) {
-        this.orderList = orderList;
     }
 
     @Override

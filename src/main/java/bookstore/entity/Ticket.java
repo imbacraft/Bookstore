@@ -63,9 +63,9 @@ public class Ticket implements Serializable {
     @JoinColumn(name = "customerid", referencedColumnName = "customerid")
     @ManyToOne
     private Customer customer;
-    @JoinColumn(name = "orderid", referencedColumnName = "orderid")
+    @JoinColumn(name = "cartid", referencedColumnName = "cartid")
     @ManyToOne(optional = false)
-    private Order order;
+    private Cart cart;
     @JoinColumn(name = "visitorid", referencedColumnName = "visitorid")
     @ManyToOne
     private Visitor visitor;
@@ -125,12 +125,12 @@ public class Ticket implements Serializable {
         this.customer = customer;
     }
 
-    public Order getOrder() {
-        return order;
+    public Cart getCart() {
+        return cart;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 
     public Visitor getVisitor() {

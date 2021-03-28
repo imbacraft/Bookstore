@@ -35,30 +35,30 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @author Dell
  */
 @Entity
-@Table(name = "orderid")
+@Table(name = "cart")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Order.findAll", query = "SELECT o FROM Order o")
-    , @NamedQuery(name = "Order.findByOrderid", query = "SELECT o FROM Order o WHERE o.orderid = :orderid")
-    , @NamedQuery(name = "Order.findByLocalDatetime", query = "SELECT o FROM Order o WHERE o.datetime = :datetime")
-    , @NamedQuery(name = "Order.findByPayment", query = "SELECT o FROM Order o WHERE o.payment = :payment")
-    , @NamedQuery(name = "Order.findByQuantity", query = "SELECT o FROM Order o WHERE o.quantity = :quantity")
-    , @NamedQuery(name = "Order.findByPricebeforetax", query = "SELECT o FROM Order o WHERE o.pricebeforetax = :pricebeforetax")
-    , @NamedQuery(name = "Order.findByShippingcost", query = "SELECT o FROM Order o WHERE o.shippingcost = :shippingcost")
-    , @NamedQuery(name = "Order.findByTax", query = "SELECT o FROM Order o WHERE o.tax = :tax")
-    , @NamedQuery(name = "Order.findByTotalprice", query = "SELECT o FROM Order o WHERE o.totalprice = :totalprice")})
-public class Order implements Serializable {
+    @NamedQuery(name = "Cart.findAll", query = "SELECT c FROM Cart c")
+    , @NamedQuery(name = "Cart.findByCartid", query = "SELECT c FROM Cart c WHERE c.cartid = :cartid")
+    , @NamedQuery(name = "Cart.findByLocalDatetime", query = "SELECT c FROM Cart c WHERE c.datetime = :datetime")
+    , @NamedQuery(name = "Cart.findByPayment", query = "SELECT c FROM Cart c WHERE c.payment = :payment")
+    , @NamedQuery(name = "Cart.findByQuantity", query = "SELECT c FROM Cart c WHERE c.quantity = :quantity")
+    , @NamedQuery(name = "Cart.findByPricebeforetax", query = "SELECT c FROM Cart c WHERE c.pricebeforetax = :pricebeforetax")
+    , @NamedQuery(name = "Cart.findByShippingcost", query = "SELECT c FROM Cart c WHERE c.shippingcost = :shippingcost")
+    , @NamedQuery(name = "Cart.findByTax", query = "SELECT c FROM Cart c WHERE c.tax = :tax")
+    , @NamedQuery(name = "Cart.findByTotalprice", query = "SELECT c FROM Cart c WHERE c.totalprice = :totalprice")})
+public class Cart implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "orderid")
-    private Integer orderid;
+    @Column(name = "cartid")
+    private Integer cartid;
     @Basic(optional = false)
     @NotNull
     @Column(name = "datetime")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDate datetime;
     @Basic(optional = false)
     @NotNull
@@ -86,10 +86,8 @@ public class Order implements Serializable {
     @NotNull
     @Column(name = "totalprice")
     private BigDecimal totalprice;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
-    private List<Ticket> ticketList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
-    private List<BookPerOrder> bookPerOrderList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cart")
+    private List<Bookpercart> bookpercartList;
     @JoinColumn(name = "customerid", referencedColumnName = "customerid")
     @ManyToOne
     private Customer customer;
@@ -97,15 +95,15 @@ public class Order implements Serializable {
     @ManyToOne
     private Visitor visitor;
 
-    public Order() {
+    public Cart() {
     }
 
-    public Order(Integer orderid) {
-        this.orderid = orderid;
+    public Cart(Integer cartid) {
+        this.cartid = cartid;
     }
 
-    public Order(Integer orderid, LocalDate datetime, String payment, int quantity, BigDecimal pricebeforetax, BigDecimal shippingcost, BigDecimal tax, BigDecimal totalprice) {
-        this.orderid = orderid;
+    public Cart(Integer cartid, LocalDate datetime, String payment, int quantity, BigDecimal pricebeforetax, BigDecimal shippingcost, BigDecimal tax, BigDecimal totalprice) {
+        this.cartid = cartid;
         this.datetime = datetime;
         this.payment = payment;
         this.quantity = quantity;
@@ -115,19 +113,19 @@ public class Order implements Serializable {
         this.totalprice = totalprice;
     }
 
-    public Integer getOrderid() {
-        return orderid;
+    public Integer getCartid() {
+        return cartid;
     }
 
-    public void setOrderid(Integer orderid) {
-        this.orderid = orderid;
+    public void setCartid(Integer cartid) {
+        this.cartid = cartid;
     }
 
-    public LocalDate getLocalDatetime() {
+    public LocalDate getDatetime() {
         return datetime;
     }
 
-    public void setLocalDatetime(LocalDate datetime) {
+    public void setDatetime(LocalDate datetime) {
         this.datetime = datetime;
     }
 
@@ -180,54 +178,45 @@ public class Order implements Serializable {
     }
 
     @XmlTransient
-    public List<Ticket> getTicketList() {
-        return ticketList;
+    public List<Bookpercart> getBookpercartList() {
+        return bookpercartList;
     }
 
-    public void setTicketList(List<Ticket> ticketList) {
-        this.ticketList = ticketList;
+    public void setBookpercartList(List<Bookpercart> bookpercartList) {
+        this.bookpercartList = bookpercartList;
     }
 
-    @XmlTransient
-    public List<BookPerOrder> getBookPerOrderList() {
-        return bookPerOrderList;
-    }
-
-    public void setBookPerOrderList(List<BookPerOrder> bookPerOrderList) {
-        this.bookPerOrderList = bookPerOrderList;
-    }
-
-    public Customer getCustomerid() {
+    public Customer getCustomer() {
         return customer;
     }
 
-    public void setCustomerid(Customer customer) {
+    public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 
-    public Visitor getVisitorid() {
+    public Visitor getVisitor() {
         return visitor;
     }
 
-    public void setVisitorid(Visitor visitor) {
+    public void setVisitor(Visitor visitor) {
         this.visitor = visitor;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (orderid != null ? orderid.hashCode() : 0);
+        hash += (cartid != null ? cartid.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Order)) {
+        if (!(object instanceof Cart)) {
             return false;
         }
-        Order other = (Order) object;
-        if ((this.orderid == null && other.orderid != null) || (this.orderid != null && !this.orderid.equals(other.orderid))) {
+        Cart other = (Cart) object;
+        if ((this.cartid == null && other.cartid != null) || (this.cartid != null && !this.cartid.equals(other.cartid))) {
             return false;
         }
         return true;
@@ -235,7 +224,7 @@ public class Order implements Serializable {
 
     @Override
     public String toString() {
-        return "bookstore.entity.Order[ orderid=" + orderid + " ]";
+        return "bookstore.entity.Cart[ cartid=" + cartid + " ]";
     }
     
 }

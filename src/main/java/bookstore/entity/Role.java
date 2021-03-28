@@ -36,17 +36,21 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Role.findByRolename", query = "SELECT r FROM Role r WHERE r.rolename = :rolename")})
 public class Role implements Serializable {
 
+    
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "roleid")
     private Integer roleid;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "rolename")
     private String rolename;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
     private List<Customerserviceagent> customerserviceagentList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
@@ -76,13 +80,6 @@ public class Role implements Serializable {
         this.roleid = roleid;
     }
 
-    public String getRolename() {
-        return rolename;
-    }
-
-    public void setRolename(String rolename) {
-        this.rolename = rolename;
-    }
 
     @XmlTransient
     public List<Customerserviceagent> getCustomerserviceagentList() {
@@ -143,6 +140,14 @@ public class Role implements Serializable {
     @Override
     public String toString() {
         return "bookstore.entity.Role[ roleid=" + roleid + " ]";
+    }
+
+    public String getRolename() {
+        return rolename;
+    }
+
+    public void setRolename(String rolename) {
+        this.rolename = rolename;
     }
     
 }

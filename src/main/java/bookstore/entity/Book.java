@@ -10,7 +10,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,10 +21,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -117,18 +113,16 @@ public class Book implements Serializable {
     @Size(max = 45)
     @Column(name = "isbn13")
     private String isbn13;
+    @ManyToMany(mappedBy = "bookList")
+    private List<Author> authorList;
     @JoinTable(name = "joinedbookcategory", joinColumns = {
         @JoinColumn(name = "bookid", referencedColumnName = "bookid")}, inverseJoinColumns = {
         @JoinColumn(name = "category", referencedColumnName = "categid")})
     @ManyToMany
     private List<Category> categoryList;
-    @ManyToMany(mappedBy = "bookList")
-    private List<Author> authorList;
     @JoinColumn(name = "booktype", referencedColumnName = "booktypeid")
     @ManyToOne(optional = false)
     private Booktype booktype;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookid")
-    private List<Review> reviewList;
 
     public Book() {
     }
@@ -263,15 +257,6 @@ public class Book implements Serializable {
     }
 
     @XmlTransient
-    public List<Category> getCategoryList() {
-        return categoryList;
-    }
-
-    public void setCategoryList(List<Category> categoryList) {
-        this.categoryList = categoryList;
-    }
-
-    @XmlTransient
     public List<Author> getAuthorList() {
         return authorList;
     }
@@ -280,21 +265,21 @@ public class Book implements Serializable {
         this.authorList = authorList;
     }
 
+    @XmlTransient
+    public List<Category> getCategoryList() {
+        return categoryList;
+    }
+
+    public void setCategoryList(List<Category> categoryList) {
+        this.categoryList = categoryList;
+    }
+
     public Booktype getBooktype() {
         return booktype;
     }
 
     public void setBooktype(Booktype booktype) {
         this.booktype = booktype;
-    }
-
-    @XmlTransient
-    public List<Review> getReviewList() {
-        return reviewList;
-    }
-
-    public void setReviewList(List<Review> reviewList) {
-        this.reviewList = reviewList;
     }
 
     @Override

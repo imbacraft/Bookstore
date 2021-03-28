@@ -52,7 +52,7 @@ public class Review implements Serializable {
     private String reviewbody;
     @JoinColumn(name = "bookid", referencedColumnName = "bookid")
     @ManyToOne(optional = false)
-    private Book bookid;
+    private Book book;
     @JoinColumn(name = "customerid", referencedColumnName = "customerid")
     @ManyToOne(optional = false)
     private Customer customer;
@@ -94,12 +94,12 @@ public class Review implements Serializable {
         this.reviewbody = reviewbody;
     }
 
-    public Book getBookid() {
-        return bookid;
+    public Book getBook() {
+        return book;
     }
 
-    public void setBookid(Book bookid) {
-        this.bookid = bookid;
+    public void setBook(Book book) {
+        this.book = book;
     }
 
     public Customer getCustomer() {
