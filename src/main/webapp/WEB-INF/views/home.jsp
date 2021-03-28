@@ -45,16 +45,25 @@
         <br/>
 
         <sec:authorize access="hasRole('CUSTOMER')">
+            
             <div>
-                <a href="${pageContext.request.contextPath}/customer">Account Information</a>
+                <h3>Welcome, <sec:authentication property="principal.username" /> !</h3>
             </div>
-
+            
+            <div>
+                <a href="${pageContext.request.contextPath}/customer">Account Details</a>
+            </div>
+            
+            <br>
+            
             <form:form action="${pageContext.request.contextPath}/logout" method="POST">
                 <input type="submit" value="Logout">
             </form:form>
 
         </sec:authorize>
 
+                
+                
         <sec:authorize access="hasRole('SERVICEAGENT')">
             <div>
                 <a href="${pageContext.request.contextPath}/service">Go to Customer Service Agent Management Page</a>
