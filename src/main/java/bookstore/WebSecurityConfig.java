@@ -36,9 +36,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()  //Restrict access based on HttpServletRequest
                 .antMatchers("/","/home").permitAll() //Everybody (Visitors) have access to /bookstore and bookstore/home
                 .antMatchers("/admin/**").hasRole("ADMIN")//Only Admin has access to /admin
-                .antMatchers("/customer/**").hasAnyRole("CUSTOMER", "ADMIN", "SERVICEAGENT")//Only Customer has access to /customer/**
-                .antMatchers("/service/**").hasAnyRole("SERVICEAGENT", "ADMIN")//Only CustomerServiceAgent has access to /service/**
-                .antMatchers("/stock/**").hasAnyRole("STOCKMANAGER", "ADMIN")//Only StockManager has access to /stock/**
+                .antMatchers("/customer/**").hasAnyRole("CUSTOMER", "ADMIN", "SERVICEAGENT")
+                .antMatchers("/service/**").hasAnyRole("SERVICEAGENT", "ADMIN")
+                .antMatchers("/stock/**").hasAnyRole("STOCKMANAGER", "ADMIN")
                           
                 .and()
                 .formLogin()//We are changing the default Spring security process of login

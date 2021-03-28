@@ -20,7 +20,7 @@
         <h2>This is Visitor's homepage</h2>
 
         <a href="${pageContext.request.contextPath}/login">Login with your customer acccount</a>
-        
+
         <h3>Bestseller books</h3>
 
 
@@ -55,7 +55,29 @@
 
         </sec:authorize>
 
-        <br/>
+        <sec:authorize access="hasRole('SERVICEAGENT')">
+            <div>
+                <a href="${pageContext.request.contextPath}/service">Go to Customer Service Agent Management Page</a>
+            </div>
+
+            <form:form action="${pageContext.request.contextPath}/logout" method="POST">
+                <input type="submit" value="Logout">
+            </form:form>
+
+        </sec:authorize>
+
+
+        <sec:authorize access="hasRole('STOCKMANAGER')">
+            <div>
+                <a href="${pageContext.request.contextPath}/stock">Go to Stock Management Page</a>
+            </div>
+
+            <form:form action="${pageContext.request.contextPath}/logout" method="POST">
+                <input type="submit" value="Logout">
+            </form:form>
+
+        </sec:authorize>
+
 
 
 
