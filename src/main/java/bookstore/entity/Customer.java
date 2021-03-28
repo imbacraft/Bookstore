@@ -247,11 +247,11 @@ public class Customer implements Serializable {
         this.postalcode = postalcode;
     }
 
-    public LocalDate getLocalDateofbirth() {
+    public LocalDate getDateofbirth() {
         return dateofbirth;
     }
 
-    public void setLocalDateofbirth(LocalDate dateofbirth) {
+    public void setDateofbirth(LocalDate dateofbirth) {
         this.dateofbirth = dateofbirth;
     }
 

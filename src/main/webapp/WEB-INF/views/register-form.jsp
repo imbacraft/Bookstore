@@ -10,7 +10,7 @@
     </head>
     <body>
        
-                    <h5>Create Customer account.</h5>
+                    <h3>Create Customer account.</h3>
                     
                     <form:form class="" method="post" action="${pageContext.request.contextPath}/register" modelAttribute="customer">
 

@@ -22,7 +22,11 @@
             Role(s):<sec:authentication property="principal.authorities"/>
         </p>
         <hr/>
-        <h1> Administrator Book Management Page </h1>
+        <h1> Book Management Page </h1>
+        
+         <sec:authorize access="hasRole('ADMIN')">
+        <a href="${pageContext.request.contextPath}/admin">Administrator Home</a>
+         </sec:authorize>
 
         <table border="1">
             <tr>
@@ -46,7 +50,6 @@
                 <th>Delete</th>
             </tr>   
 
-            <c:set var="counter" value="0" scope="page"/>
 
             <c:forEach items="${listOfBooks}" var="book"> 
 
@@ -86,7 +89,7 @@
 
 
         </table>
-
+ 
         <br/>
         <form:form action="${pageContext.request.contextPath}/logout" method="POST">
             <input type="submit" value="Logout">

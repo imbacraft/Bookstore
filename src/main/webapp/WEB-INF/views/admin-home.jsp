@@ -22,14 +22,15 @@
             Role(s):<sec:authentication property="principal.authorities"/>
         </p>
         <hr/>
-        <h1> Administrator Home Page </h1>
+
         
         <a href="${pageContext.request.contextPath}/admin/customers">Manage Customers</a>
         <a href="${pageContext.request.contextPath}/admin/serviceagents">Manage Customer Service Agents</a>
         <a href="${pageContext.request.contextPath}/admin/books">Manage Books</a>
         <a href="${pageContext.request.contextPath}/admin/stockmanagers">Manage Stock Managers</a>
         
-        <br/>
+        <br>
+        <br>
         <form:form action="${pageContext.request.contextPath}/logout" method="POST">
             <input type="submit" value="Logout">
         </form:form>

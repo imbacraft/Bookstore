@@ -25,6 +25,10 @@
             <!-- if user is not authenticated, show this link. Otherwise, it stays hidden.--> 
             <a href="${pageContext.request.contextPath}/login">Login with your customer acccount</a>
 
+            <br>
+            
+            Don't have an account? <a class="underlineHover" href="${pageContext.request.contextPath}/register"> Register</a>
+
         </sec:authorize>
 
 
