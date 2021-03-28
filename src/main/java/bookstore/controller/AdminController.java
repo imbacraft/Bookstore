@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import bookstore.repo.CartRepo;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @RequestMapping("/admin")
 @Controller
@@ -42,7 +44,7 @@ public class AdminController {
     }
     
     @GetMapping("/customers")
-    public String manageCustomers(Model model){
+    public String showCustomers(Model model){
     List<Customer> customers = customerRepo.findAll();
     List<Cart> carts = cartRepo.findAll();
     
@@ -54,4 +56,17 @@ public class AdminController {
     return "manage-customers";
     }
     
-}
+    @GetMapping("/customers/delete")
+    public String deleteCustomer(@RequestParam("id") int id, RedirectAttributes attributes){
+        
+        Customer customer = customerRepo.findById(id).get();
+        String successMessage = "Customer "+ customer.getFirstname()+" "+customer.getLastname()+" successfully deleted!!";
+        attributes.addFlashAttribute("successMessage", successMessage);
+        
+        customerRepo.deleteById(id);
+        
+        return "redirect:/admin/customers";
+    }
+    }
+    
+

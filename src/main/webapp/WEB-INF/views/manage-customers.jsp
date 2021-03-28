@@ -30,8 +30,9 @@
         <sec:authorize access="hasRole('SERVICEAGENT')">
             <a href="${pageContext.request.contextPath}/service">Service Agent Home</a>
         </sec:authorize>
-
-
+            
+            <p>${successMessage}</p>
+            <br>
         <h2> Customer account details list </h2>
         <table border="1">
             <tr>
@@ -52,7 +53,7 @@
                 <th>Delete</th>
             </tr>   
 
-
+            
             <c:forEach items="${listOfCustomers}" var="customer"> 
 
                 <c:forEach begin="0" end="${customers.length}" var="counter">
