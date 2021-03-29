@@ -24,37 +24,37 @@
     </c:if>
     
      <form:form  action="${link}" method="POST" modelAttribute = "bookToEdit">
-            Code:<input type="number" name="id" readonly value="${bookToEdit.bookid}"/>
+            Code:<input path="bookid" type="number" name="id" readonly value="${bookToEdit.bookid}"/>
         <br/>
       
-     title:<input type="text" name="title" value="${bookToEdit.title}"/>
+     title:<input path="title" type="text" name="title" value="${bookToEdit.title}"/>
         <br/>
        
-       description: <input type="text" name="description" value="${bookToEdit.description}"/>
+       description: <input path="description" type="text" name="description" value="${bookToEdit.description}"/>
         <br/>
          
-        price: <input  type="number" name="price" value="${bookToEdit.price}"/>
+        price: <input path="price" type="number" name="price" value="${bookToEdit.price}"/>
         <br/>
         
-         publisher : <input  type="text" name="publisher" value="${bookToEdit.publisher}"   />
+         publisher : <input path="publisher" type="text" name="publisher" value="${bookToEdit.publisher}"   />
         <br/>
         
-        publication date:<input type="date" name="publication date" value="${bookToEdit.publicationdate}"/>
+        publication date:<input path="publicationdate" type="date" name="publication date" value="${bookToEdit.publicationdate}"/>
         <br/>
        
-       edition: <input type="number" name="edition" value="${bookToEdit.edition}"/>
+       edition: <input path="edition" type="number" name="edition" value="${bookToEdit.edition}"/>
         <br/>
          
-       pages: <input  type="number" name="pages" value="${bookToEdit.pages}"/>
+       pages: <input path="pages"  type="number" name="pages" value="${bookToEdit.pages}"/>
         <br/>
         
-         language: <input type="text" name="language" value="${bookToEdit.language}"/>
+         language: <input path="language" type="text" name="language" value="${bookToEdit.language}"/>
         <br/>
          
-        frontCover: <input  type="text" name="frontCover" value="${bookToEdit.frontcover}"/>
+        frontCover: <input path="frontcover" type="text" name="frontCover" value="${bookToEdit.frontcover}"/>
         <br/>
         
-         backCover : <input  type="text" name="backCover" value="${bookToEdit.backcover}"   />
+         backCover : <input path="backcover"  type="text" name="backCover" value="${bookToEdit.backcover}"   />
         <br/>
         
        count:<input type="number" name="count" value="${bookToEdit.count}"/>
@@ -69,7 +69,7 @@
         
         
         <input type="submit" value="Submit"/>
-    </form>
+     </form:form>
         
         
     </body>
