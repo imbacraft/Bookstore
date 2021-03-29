@@ -6,65 +6,83 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Registration page</title>
-      
+
     </head>
     <body>
-       
-                    <h3>Create Customer account.</h3>
-                    
-                    <form:form class="" method="post" action="${pageContext.request.contextPath}/register" modelAttribute="customer">
 
-                     
-                            <label for="fname" class="cols-sm-2 control-label">First Name</label>
-                           
-                                        <form:input class="form-control" path="firstname" id="firstname"  placeholder="Enter your first name"/>
-                      
-                                        <br>
-                                        
-                                        
-                            <label for="lname" class="cols-sm-2 control-label">Last Name</label>
-                            
-                                        <form:input class="form-control" path="lastname" id="lastname"  placeholder="Enter your Name"/>
-                                        
-                                         <br>
+        <h3>Register account</h3>
 
-                            <label for="email" class="cols-sm-2 control-label">Your Email</label>
-                          
-                                        <form:input type="email" class="form-control" path="email" id="email"  placeholder="Enter your Email"/>
-
-                                         <br>
-                                         
-                            <label for="username" class="cols-sm-2 control-label">Username</label>
-                          
-                                        <form:input class="form-control" path="username" id="username"  placeholder="Enter your Username"/>
-                                        <form:errors class="form-control" path="username"  />
-
-                                         <br>
-                                         
-                                        <label for="password">Password</label>
-                            
-                                        <form:password class="form-control" path="password" id="password"  placeholder="Enter your Password"/>
-                                        
-                                        
-                                         <br>
-                                         
-                                         <label for="country">Country</label>
-                            
-                                        <form:input class="form-control" path="country" id="country"  placeholder="Enter your Country"/>
-                                        
-                                         <br>
-                                        
-                                        
-                                            <label for="street">Address</label>
-                            
-                                        <form:input class="form-control" path="street" id="street"  placeholder="Enter Street name"/>
-                                        <form:input class="form-control" path="streetnumber" id="streetnumber"  placeholder="Enter Street number"/>
-
-                    
-                            <input id="button" type="submit"  value="Register"/>
+        <form:form method="post" action="${pageContext.request.contextPath}/register" modelAttribute="customer">
 
 
-                    </form:form>
+            <label for="fname">First Name</label>
+
+            <form:input class="form-control" path="firstname" id="firstname"  placeholder="Enter your first name"/>
+
+            <br>
+
+
+            <label for="lname">Last Name</label>
+
+            <form:input class="form-control" path="lastname" id="lastname"  placeholder="Enter your Name"/>
+
+            <br>
+
+            <label for="email" >Your Email</label>
+
+            <form:input type="email"  path="email" id="email"  placeholder="Enter your Email"/>
+
+            <br>
+
+            <label for="username" >Username</label>
+
+            <form:input path="username" id="username"  placeholder="Enter your Username" required="true"/>
+            <form:errors path="username"  />
+
+            <br>
+
+            <label for="password">Password</label>
+
+            <form:password path="password" id="password"  placeholder="Enter your Password"/>
+
+
+            <br>
+
+            <label for="country">Country</label>
+
+            <form:input path="country" id="country"  placeholder="Enter your Country"/>
+
+            <br>
+
+
+            <label for="street">Address</label>
+
+            <form:input class="form-control" path="street" id="street"  placeholder="Enter Street name"/>
+            
+            <label for="streetnumber">Street number</label>
+            <form:input path="streetnumber" id="streetnumber"  placeholder="Enter Street number"/>
+            
+            <label for="street">Postal Code</label>
+            <form:input path="postalcode" id="postalcode"  placeholder="Enter Postal Code" />
+
+            <br>
+
+            <label for="dateofbirth">Date of Birth</label>
+
+            <form:input path="dateofbirth" id="dateofbirth"  placeholder="Enter Date of Birth" />
+            
+             <br>
+
+            <label for="paypalaccount">PayPal Account</label>
+            <form:input path="paypalaccount" id="paypalaccount"  placeholder="Enter PayPal Account" />
+
+            <br>
+
+
+            <input id="button" type="submit"  value="Register"/>
+
+
+        </form:form>
 
 
     </body>

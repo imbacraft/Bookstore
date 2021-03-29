@@ -76,7 +76,7 @@ public class Customer implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "phone")
-    private int phone;
+    private long phone;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -183,11 +183,11 @@ public class Customer implements Serializable {
         this.email = email;
     }
 
-    public int getPhone() {
+    public long getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(long phone) {
         this.phone = phone;
     }
 

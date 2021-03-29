@@ -3,7 +3,6 @@ package bookstore.controller;
 import bookstore.entity.Book;
 import bookstore.entity.Customer;
 import bookstore.entity.Cart;
-import bookstore.entity.Role;
 import bookstore.repo.BookRepo;
 import bookstore.repo.CustomerRepo;
 import java.util.List;
@@ -13,10 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import bookstore.repo.CartRepo;
+import bookstore.service.UserService;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -32,6 +31,9 @@ public class AdminController {
     
     @Autowired
     CartRepo cartRepo;
+    
+    @Autowired
+    UserService userService;
     
     
     @GetMapping
@@ -72,11 +74,8 @@ public class AdminController {
     @GetMapping("/customers/create")
     public String showCreateCustomerForm(@ModelAttribute("customerToEdit") Customer customer, BindingResult result){
         
-        
         return "create-customer";
     }
-    
-    
     
     
     @GetMapping("/customers/delete")
@@ -105,13 +104,10 @@ public class AdminController {
     @PostMapping("/customers/update")
     public String updateCustomer(Customer customer, RedirectAttributes attributes){
         
-        //Applying role to customer manually
-        Role role = new Role(4);
-        customer.setRole(role);
         
         System.out.println("Customer to be updated"+customer);
         
-        customerRepo.save(customer);
+        userService.saveUser(customer);
         
         String successMessage = "Customer "+ customer.getFirstname()+" "+customer.getLastname()+" successfully updated!!";
         attributes.addFlashAttribute("successMessage", successMessage);

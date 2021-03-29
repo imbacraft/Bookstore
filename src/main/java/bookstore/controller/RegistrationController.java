@@ -32,8 +32,6 @@ public class RegistrationController {
             return "register-form";
         }
         
-//        System.out.println(">>>>> customer:"+ newcustomer);
-        
         //save customer  to DB
         userService.saveUser(newcustomer);
         

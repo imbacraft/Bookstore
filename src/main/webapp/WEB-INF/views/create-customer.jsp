@@ -12,21 +12,11 @@
 
         <h3>Create/Update Customer form</h3>
 
-        <c:if test="${customerToEdit==null}">
-            <c:url value="/admin/customers/create" var="link"/>
-        </c:if>
-
-
-        <c:if test="${customerToEdit!=null}">
-            <c:url  value="/admin/customers/update" var="link"/>
-        </c:if>
-
-
         <p>${successMessage}</p>
 
         <br>
         
-        <form:form  action="${link}" method="POST" modelAttribute = "customerToEdit">
+        <form:form  action="${pageContext.request.contextPath}/admin/customers/update" method="POST" modelAttribute = "customerToEdit">
 
             <label for="customerid">Customer ID</label>
             <form:input path="customerid" id="customerid"  value="${customerToEdit.customerid}" readonly="true"/>
@@ -58,6 +48,7 @@
             <label for="username">Username</label>
 
             <form:input path="username" id="username"  placeholder="Enter Customer Username" value="${customerToEdit.username}"/>
+            <form:errors path="username"  />
 
             <br>
 
@@ -79,7 +70,7 @@
 
             <form:input path="street" id="street"  placeholder="Enter Street name" value="${customerToEdit.street}"/>
             <form:input path="streetnumber" id="streetnumber"  placeholder="Enter Street number" value="${customerToEdit.streetnumber}"/>
-            <form:input path="postalcode" id="postalcode"  placeholder="Enter Street number" value="${customerToEdit.postalcode}"/>
+            <form:input path="postalcode" id="postalcode"  placeholder="Enter Postal Code" value="${customerToEdit.postalcode}"/>
 
             <br>
 
