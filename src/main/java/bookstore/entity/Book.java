@@ -119,10 +119,10 @@ public class Book implements Serializable {
     @JoinTable(name = "joinedbookcategory", joinColumns = {
         @JoinColumn(name = "bookid", referencedColumnName = "bookid")}, inverseJoinColumns = {
         @JoinColumn(name = "category", referencedColumnName = "categid")})
-    @ManyToMany
+    @ManyToMany (cascade = CascadeType.ALL)
     private List<Category> categoryList;
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "booktype", referencedColumnName = "booktypeid")
-    @ManyToOne(optional = false)
     private Booktype booktype;
 
     public Book() {
@@ -305,7 +305,9 @@ public class Book implements Serializable {
 
     @Override
     public String toString() {
-        return "bookstore.entity.Book[ bookid=" + bookid + " ]";
+        return "Book{" + "bookid=" + bookid + ", title=" + title + ", description=" + description + ", price=" + price + ", publisher=" + publisher + ", publicationdate=" + publicationdate + ", edition=" + edition + ", pages=" + pages + ", language=" + language + ", frontcover=" + frontcover + ", backcover=" + backcover + ", count=" + count + ", isbn10=" + isbn10 + ", isbn13=" + isbn13 + ", authorList=" + authorList + ", categoryList=" + categoryList + ", booktype=" + booktype + '}';
     }
+
+   
     
 }

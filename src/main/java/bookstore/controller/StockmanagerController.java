@@ -57,18 +57,11 @@ public class StockmanagerController {
     }
     
     @RequestMapping(value = "/books/create", method = RequestMethod.GET)
-    public String showBookForm(@ModelAttribute("booktoEdit")Book book,BindingResult result){
+    public String showBookForm(@ModelAttribute("bookToEdit")Book book,BindingResult result){
         
         return "CreateUpdateBookForm";
     }
     
-      @RequestMapping(value = "/books/create", method = RequestMethod.POST)
-    public String create(Book book, RedirectAttributes attributes){
-        bookRepo.save(book);
-        String minima = "book "+  book.getTitle()+ " successfully created!!";
-        attributes.addFlashAttribute("message", minima);//na thumithw na balw edw pou tha mpei to mhnuma
-        return "redirect:/stock/books";//Redirect instructs client to sent a new GET request to /customer
-    }
     
     @GetMapping("/books/delete")
     public String delete(@RequestParam("id") int id, RedirectAttributes attributes){
@@ -83,15 +76,22 @@ public class StockmanagerController {
     //*******Updatee********
      @GetMapping("/books/update/{id}")
     public String showFormUpdate(@PathVariable("id") int id, Model model){
+        
+        
         Book book = bookRepo.findById(id).get();
+        
+        System.out.println(book.toString());
+        
         model.addAttribute("bookToEdit", book);
         return "CreateUpdateBookForm";//einai h idia forma me pio panw
     }
     
     @PostMapping(value="/books/update")
     public String update(Book book, RedirectAttributes attributes){
+        
+        System.out.println(book.toString());
         bookRepo.save(book);
-        String minima = "Book updated successfully!!";
+        String minima = "Book created/updated successfully!!";
         attributes.addFlashAttribute("message", minima);
         return "redirect:/stock/books";
     }
