@@ -1,0 +1,108 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Registration page</title>
+
+    </head>
+    <body>
+
+        <h3>Create/Update Customer form</h3>
+
+        <c:if test="${customerToEdit==null}">
+            <c:url value="/admin/customers/create" var="link"/>
+        </c:if>
+
+
+        <c:if test="${customerToEdit!=null}">
+            <c:url  value="/admin/customers/update" var="link"/>
+        </c:if>
+
+
+        <p>${successMessage}</p>
+
+        <br>
+        
+        <form:form  action="${link}" method="POST" modelAttribute = "customerToEdit">
+
+            <label for="customerid">Customer ID</label>
+            <form:input path="customerid" id="customerid"  value="${customerToEdit.customerid}" readonly="true"/>
+
+            <label for="firstname">First Name</label>
+
+            <form:input path="firstname" id="firstname"  placeholder="Enter Customer first name" value="${customerToEdit.firstname}"/>
+
+            <br>
+
+            <label for="lastname">Last Name</label>
+
+            <form:input path="lastname" id="lastname"  placeholder="Enter Customer Last Name"  value="${customerToEdit.lastname}"/>
+
+            <br>
+
+            <label for="email" >Your Email</label>
+
+            <form:input type="email" path="email" id="email"  placeholder="Enter Customer Email"  value="${customerToEdit.email}"/>
+
+            <br>
+
+            <label for="phone">Phone</label>
+
+            <form:input path="phone" id="phone"  placeholder="Enter Customer Phone" value="${customerToEdit.phone}"/>
+
+            <br>
+
+            <label for="username">Username</label>
+
+            <form:input path="username" id="username"  placeholder="Enter Customer Username" value="${customerToEdit.username}"/>
+
+            <br>
+
+            <label for="password">Password</label>
+
+            <form:input path="password" id="password"  placeholder="Enter your Password" value="${customerToEdit.password}"/>
+
+
+            <br>
+
+            <label for="country">Country</label>
+
+            <form:input path="country" id="country"  placeholder="Enter your Country" value="${customerToEdit.country}" />
+
+            <br>
+
+
+            <label for="street">Address</label>
+
+            <form:input path="street" id="street"  placeholder="Enter Street name" value="${customerToEdit.street}"/>
+            <form:input path="streetnumber" id="streetnumber"  placeholder="Enter Street number" value="${customerToEdit.streetnumber}"/>
+            <form:input path="postalcode" id="postalcode"  placeholder="Enter Street number" value="${customerToEdit.postalcode}"/>
+
+            <br>
+
+            <label for="dateofbirth">Date of Birth</label>
+
+            <form:input path="dateofbirth" id="dateofbirth"  placeholder="Enter Date of Birth" value="${customerToEdit.dateofbirth}"/>
+
+            <br>
+
+            <label for="paypalaccount">PayPal Account</label>
+            <form:input path="paypalaccount" id="paypalaccount"  placeholder="Enter PayPal Account" value="${customerToEdit.paypalaccount}"/>
+
+            <br>
+
+            <label for="discountcoupon">Discount Coupon</label>
+            <form:input path="discountcoupon" id="discountcoupon"  placeholder="Enter Discount Coupon" value="${customerToEdit.discountcoupon}"/>
+
+            
+            <input type="submit" value="Create/Update Customer"/>
+
+
+        </form:form>
+
+
+    </body>
+</html>

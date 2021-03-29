@@ -276,7 +276,7 @@ public class Customer implements Serializable {
         return role;
     }
 
-    public void setRole(Role roleid) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
@@ -302,7 +302,9 @@ public class Customer implements Serializable {
 
     @Override
     public String toString() {
-        return "bookstore.entity.Customer[ customerid=" + customerid + " ]";
+        return "Customer{" + "customerid=" + customerid + ", firstname=" + firstname + ", lastname=" + lastname + ", email=" + email + ", phone=" + phone + ", username=" + username + ", password=" + password + ", country=" + country + ", street=" + street + ", streetnumber=" + streetnumber + ", postalcode=" + postalcode + ", dateofbirth=" + dateofbirth + ", paypalaccount=" + paypalaccount + ", discountcoupon=" + discountcoupon + ", cartList=" + cartList + ", role=" + role + '}';
     }
+
+  
     
 }

@@ -15,7 +15,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Welcome to Administrator Home Page</h1>
+        <h1>Welcome to Customer Management Page</h1>
         <p>
             User: <sec:authentication property="principal.username"/>
             <br/>
@@ -30,9 +30,13 @@
         <sec:authorize access="hasRole('SERVICEAGENT')">
             <a href="${pageContext.request.contextPath}/service">Service Agent Home</a>
         </sec:authorize>
-            
-            <p>${successMessage}</p>
-            <br>
+
+        <p>${successMessage}</p>
+        
+        <br>
+        
+        <a href="${pageContext.request.contextPath}/admin/customers/create">Create customer</a>
+        
         <h2> Customer account details list </h2>
         <table border="1">
             <tr>
@@ -42,18 +46,30 @@
                 <th>Email</th>
                 <th>Phone</th>
                 <th>Username</th>
-                <th>Password</th>
+
+                <sec:authorize access="hasRole('ADMIN')">
+
+                    <th>Password</th>
+
+                </sec:authorize>
+
                 <th>Country</th>
                 <th>Street</th>
                 <th>Streetnumber</th>
                 <th>Date of Birth</th>
                 <th>PayPal Account</th>
                 <th>discountcoupon</th>
-                <th>Update</th>
-                <th>Delete</th>
+
+                <sec:authorize access="hasRole('ADMIN')">
+                    <th>Update</th>
+                    <th>Delete</th>
+
+                </sec:authorize>
+
+
             </tr>   
 
-            
+
             <c:forEach items="${listOfCustomers}" var="customer"> 
 
                 <c:forEach begin="0" end="${customers.length}" var="counter">
@@ -67,7 +83,15 @@
                         <td>${customer.email}</td>
                         <td>${customer.phone}</td>
                         <td>${customer.username}</td>
-                        <td>${customer.password}</td>
+
+                        <sec:authorize access="hasRole('ADMIN')">
+
+                            <td>${customer.password}</td>
+
+                        </sec:authorize>
+
+
+
                         <td>${customer.country}</td>
                         <td>${customer.street}</td>
                         <td>${customer.streetnumber}</td>
@@ -75,12 +99,16 @@
                         <td>${customer.paypalaccount}</td>
                         <td>${customer.discountcoupon}</td>
 
-                        <td>      
-                            <a href="${pageContext.request.contextPath}/admin/customers/update/${customer.customerid}">Update</a>
-                        </td>
-                        <td>
-                            <a href="${pageContext.request.contextPath}/admin/customers/delete?id=${customer.customerid}">Delete</a>
-                        </td>
+
+                        <sec:authorize access="hasRole('ADMIN')">
+                            <td>      
+                                <a href="${pageContext.request.contextPath}/admin/customers/update?id=${customer.customerid}">Update</a>
+                            </td>
+                            <td>
+                                <a href="${pageContext.request.contextPath}/admin/customers/delete?id=${customer.customerid}">Delete</a>
+                            </td>
+
+                        </sec:authorize>
 
 
                     </tr>
@@ -93,55 +121,6 @@
 
         <br/>
 
-      <h2> Customer Orders </h2>
-        <table border="1">
-            <tr>
-                <th>Order ID</th>
-                <th>Customer ID</th>
-                <th>Customer First Name</th>
-                <th>Customer Last Name</th>
-                <th>Datetime</th>
-                <th>Payment</th>
-                <th>Quantity</th>
-                <th>pricebeforetax</th>
-                <th>shippingcost</th>
-                <th>tax</th>
-                <th>totalprice</th>
-                <th>Update</th>
-                <th>Delete</th>
-            </tr>   
-
-
-            <c:forEach items="${listOfCarts}" var="cart"> 
-
-                    <tr>
-
-                        <td>${cart.cartid}</td>
-                        <td>${cart.customer.customerid}</td>
-                        <td>${cart.customer.firstname}</td>
-                        <td>${cart.customer.lastname}</td>
-                        <td>${cart.datetime}</td>
-                        <td>${cart.payment}</td>
-                        <td>${cart.quantity}</td>
-                        <td>${cart.pricebeforetax}</td>
-                        <td>${cart.shippingcost}</td>
-                        <td>${cart.tax}</td>
-                        <td>${cart.totalprice}</td>
-  
-                        <td>      
-                            <a href="${pageContext.request.contextPath}/admin/customers/update/${cart.cartid}">Update</a>
-                        </td>
-                        <td>
-                            <a href="${pageContext.request.contextPath}/admin/customers/delete?id=${cart.cartid}">Delete</a>
-                        </td>
-
-
-                    </tr>
-
-            </c:forEach>
-
-
-        </table>
         <form:form action="${pageContext.request.contextPath}/logout" method="POST">
             <input type="submit" value="Logout">
         </form:form>

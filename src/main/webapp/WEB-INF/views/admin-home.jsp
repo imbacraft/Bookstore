@@ -25,8 +25,13 @@
 
         
         <a href="${pageContext.request.contextPath}/admin/customers">Manage Customers</a>
+        <br>
+        <a href="${pageContext.request.contextPath}/admin/carts">Manage Orders</a>
+        <br>
         <a href="${pageContext.request.contextPath}/admin/serviceagents">Manage Customer Service Agents</a>
+        <br>
         <a href="${pageContext.request.contextPath}/admin/books">Manage Books</a>
+        <br>
         <a href="${pageContext.request.contextPath}/admin/stockmanagers">Manage Stock Managers</a>
         
         <br>
