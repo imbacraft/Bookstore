@@ -21,4 +21,6 @@ public interface StockmanagerRepo extends JpaRepository<Stockmanager, Integer> {
     //query must be defined here, because it requires the final parameter "?1"
     @Query(value = "SELECT st FROM Stockmanager st WHERE st.username = ?1")
     Stockmanager findStockmanagerByUsername(String username);
+    
+    
 }

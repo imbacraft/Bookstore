@@ -91,6 +91,12 @@
             <div>
                 <a href="${pageContext.request.contextPath}/stock">Go to Stock Management Page</a>
             </div>
+            
+            <p>
+                User: <sec:authentication property="principal.username"/>
+                <br/>
+                Role(s):<sec:authentication property="principal.authorities"/>
+            </p>
 
             <form:form action="${pageContext.request.contextPath}/logout" method="POST">
                 <input type="submit" value="Logout">

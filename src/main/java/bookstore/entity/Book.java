@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -73,7 +74,7 @@ public class Book implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "price")
-    private BigDecimal price;
+    private float price;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -118,10 +119,10 @@ public class Book implements Serializable {
     @JoinTable(name = "joinedbookcategory", joinColumns = {
         @JoinColumn(name = "bookid", referencedColumnName = "bookid")}, inverseJoinColumns = {
         @JoinColumn(name = "category", referencedColumnName = "categid")})
-    @ManyToMany
+    @ManyToMany (cascade = CascadeType.ALL)
     private List<Category> categoryList;
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "booktype", referencedColumnName = "booktypeid")
-    @ManyToOne(optional = false)
     private Booktype booktype;
 
     public Book() {
@@ -131,7 +132,7 @@ public class Book implements Serializable {
         this.bookid = bookid;
     }
 
-    public Book(Integer bookid, String title, String description, BigDecimal price, String publisher, LocalDate publicationdate, int edition, int pages, String language, int count) {
+    public Book(Integer bookid, String title, String description, float price, String publisher, LocalDate publicationdate, int edition, int pages, String language, int count) {
         this.bookid = bookid;
         this.title = title;
         this.description = description;
@@ -168,11 +169,11 @@ public class Book implements Serializable {
         this.description = description;
     }
 
-    public BigDecimal getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 
@@ -304,7 +305,9 @@ public class Book implements Serializable {
 
     @Override
     public String toString() {
-        return "bookstore.entity.Book[ bookid=" + bookid + " ]";
+        return "Book{" + "bookid=" + bookid + ", title=" + title + ", description=" + description + ", price=" + price + ", publisher=" + publisher + ", publicationdate=" + publicationdate + ", edition=" + edition + ", pages=" + pages + ", language=" + language + ", frontcover=" + frontcover + ", backcover=" + backcover + ", count=" + count + ", isbn10=" + isbn10 + ", isbn13=" + isbn13 + ", authorList=" + authorList + ", categoryList=" + categoryList + ", booktype=" + booktype + '}';
     }
+
+   
     
 }
