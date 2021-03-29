@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -113,7 +114,7 @@ public class Book implements Serializable {
     @Size(max = 45)
     @Column(name = "isbn13")
     private String isbn13;
-    @ManyToMany(mappedBy = "bookList")
+    @ManyToMany(mappedBy = "bookList",cascade={CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     private List<Author> authorList;
     @JoinTable(name = "joinedbookcategory", joinColumns = {
         @JoinColumn(name = "bookid", referencedColumnName = "bookid")}, inverseJoinColumns = {
@@ -121,7 +122,7 @@ public class Book implements Serializable {
     @ManyToMany
     private List<Category> categoryList;
     @JoinColumn(name = "booktype", referencedColumnName = "booktypeid")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false,cascade={CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     private Booktype booktype;
 
     public Book() {

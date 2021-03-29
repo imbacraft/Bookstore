@@ -10,18 +10,19 @@ import bookstore.repo.BookRepo;
 import bookstore.repo.CartRepo;
 import bookstore.repo.CustomerRepo;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -56,20 +57,48 @@ public class StockmanagerController {
     return "stock-management";
     }
     
-    //delete book
-    @DeleteMapping("/books{bookid}")
-    public ResponseEntity<String> deleteBook(@PathVariable int bookid){
-        //find book with id=bookid
-        Optional<Book> book=bookRepo.findById(bookid);
-        if(!book.isPresent()){
-            return ResponseEntity.notFound().build();
-        }else{
-            bookRepo.delete(book.get());
-            return ResponseEntity.ok("Succesfully deleted!!!!!");
-        }
+    @RequestMapping(value = "/books/create", method = RequestMethod.GET)
+    public String showBookForm(){
+        return "CreateUpdateBookForm";
+    }
+    
+      @RequestMapping(value = "/books/create", method = RequestMethod.POST)
+    public String create(Book book, RedirectAttributes attributes){
+        bookRepo.save(book);
+        String minima = "book "+  book.getTitle()+ " successfully created!!";
+        attributes.addFlashAttribute("message", minima);//na thumithw na balw edw pou tha mpei to mhnuma
+        return "redirect:/stock/books";//Redirect instructs client to sent a new GET request to /customer
+    }
+    
+    @GetMapping("/books/delete")
+    public String delete(@RequestParam("id") int id, RedirectAttributes attributes){
+        Book book=bookRepo.findById(id).get();
+        bookRepo.delete(book);
+        String minima = "Book "+book.getTitle()+book.getCategoryList()+" successfully deleted!!";
+        attributes.addFlashAttribute("message", minima);
+        return "redirect:/stock/books";
     }
     
     
+    //*******Updatee********
+     @GetMapping("/books/update/{id}")
+    public String showFormUpdate(@PathVariable("id") int id, Model model){
+        Book book = bookRepo.findById(id).get();
+        model.addAttribute("bookToEdit", book);
+        return "CreateUpdateBookForm";//einai h idia forma me pio panw
+    }
+    
+    @RequestMapping(value="/books/update", method=RequestMethod.POST)
+    public String update(Book book, RedirectAttributes attributes){
+        bookRepo.save(book);
+        String minima = "Book updated successfully!!";
+        attributes.addFlashAttribute("message", minima);
+        return "redirect:/stock/books";
+    }
+    
+    
+    
+
     //add stock
     @PutMapping("/books/{bookid}")
     public ResponseEntity<Book> updateBookStock(@RequestBody Book bookDetails,

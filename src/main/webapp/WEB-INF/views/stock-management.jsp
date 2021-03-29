@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,6 +24,14 @@
         </p>
         <hr/>
         <h1> Book Management Page </h1>
+        
+          <h1>List of books</h1>
+        <div>
+            <h3>Books</h3>
+            <p>
+                ${message}
+            </p>
+            <a href="${pageContext.request.contextPath}/stock/books/create">Add a book to the database</a>
         
          <sec:authorize access="hasRole('STOCKMANAGER')">
         <a href="${pageContext.request.contextPath}/stock">StockManager Home</a>
