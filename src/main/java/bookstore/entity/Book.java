@@ -74,7 +74,7 @@ public class Book implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "price")
-    private BigDecimal price;
+    private float price;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -114,7 +114,7 @@ public class Book implements Serializable {
     @Size(max = 45)
     @Column(name = "isbn13")
     private String isbn13;
-    @ManyToMany(mappedBy = "bookList",cascade={CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @ManyToMany(mappedBy = "bookList")
     private List<Author> authorList;
     @JoinTable(name = "joinedbookcategory", joinColumns = {
         @JoinColumn(name = "bookid", referencedColumnName = "bookid")}, inverseJoinColumns = {
@@ -122,7 +122,7 @@ public class Book implements Serializable {
     @ManyToMany
     private List<Category> categoryList;
     @JoinColumn(name = "booktype", referencedColumnName = "booktypeid")
-    @ManyToOne(optional = false,cascade={CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @ManyToOne(optional = false)
     private Booktype booktype;
 
     public Book() {
@@ -132,7 +132,7 @@ public class Book implements Serializable {
         this.bookid = bookid;
     }
 
-    public Book(Integer bookid, String title, String description, BigDecimal price, String publisher, LocalDate publicationdate, int edition, int pages, String language, int count) {
+    public Book(Integer bookid, String title, String description, float price, String publisher, LocalDate publicationdate, int edition, int pages, String language, int count) {
         this.bookid = bookid;
         this.title = title;
         this.description = description;
@@ -169,11 +169,11 @@ public class Book implements Serializable {
         this.description = description;
     }
 
-    public BigDecimal getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 

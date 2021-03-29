@@ -17,10 +17,10 @@
             <h1>Create your trainer</h1>
         
     <c:if test="${bookToEdit==null}">
-        <c:url value="/books/create" var="link"/>
+        <c:url value="/stock/books/create" var="link"/>
     </c:if>
-    <c:if test="${booksToEdit!=null}">
-        <c:url  value="/books/update" var="link"/>
+    <c:if test="${bookToEdit!=null}">
+        <c:url  value="/stock/books/update" var="link"/>
     </c:if>
     
      <form:form  action="${link}" method="POST" modelAttribute = "bookToEdit">
@@ -39,7 +39,7 @@
          publisher : <input path="publisher" type="text" name="publisher" value="${bookToEdit.publisher}"   />
         <br/>
         
-        publication date:<input path="publication date" type="date" name="publication date" value="${bookToEdit.publicationdate}"/>
+        publication date:<input path="publication-date" type="date" pattern="yyyy-MM-dd" name="publication-date" value="${bookToEdit.publicationdate}"/>
         <br/>
        
        edition: <input path="edition" type="number" name="edition" value="${bookToEdit.edition}"/>

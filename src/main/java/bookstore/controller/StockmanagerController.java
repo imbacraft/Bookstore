@@ -11,16 +11,13 @@ import bookstore.repo.CartRepo;
 import bookstore.repo.CustomerRepo;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -60,7 +57,7 @@ public class StockmanagerController {
     }
     
     @RequestMapping(value = "/books/create", method = RequestMethod.GET)
-    public String showBookForm(@ModelAttribute("bookToEdit")Book book,BindingResult result){
+    public String showBookForm(@ModelAttribute("booktoEdit")Book book,BindingResult result){
         
         return "CreateUpdateBookForm";
     }
@@ -84,14 +81,14 @@ public class StockmanagerController {
     
     
     //*******Updatee********
-     @GetMapping("/books/update")
-    public String showFormUpdate(@RequestParam("id") int id, Model model){
+     @GetMapping("/books/update/{id}")
+    public String showFormUpdate(@PathVariable("id") int id, Model model){
         Book book = bookRepo.findById(id).get();
         model.addAttribute("bookToEdit", book);
         return "CreateUpdateBookForm";//einai h idia forma me pio panw
     }
     
-    @RequestMapping(value="/books/update", method=RequestMethod.POST)
+    @PostMapping(value="/books/update")
     public String update(Book book, RedirectAttributes attributes){
         bookRepo.save(book);
         String minima = "Book updated successfully!!";
