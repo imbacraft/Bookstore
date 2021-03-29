@@ -84,8 +84,8 @@ public class StockmanagerController {
     
     
     //*******Updatee********
-     @GetMapping("/books/update/{id}")
-    public String showFormUpdate(@PathVariable("id") int id, Model model){
+     @GetMapping("/books/update")
+    public String showFormUpdate(@RequestParam("id") int id, Model model){
         Book book = bookRepo.findById(id).get();
         model.addAttribute("bookToEdit", book);
         return "CreateUpdateBookForm";//einai h idia forma me pio panw
