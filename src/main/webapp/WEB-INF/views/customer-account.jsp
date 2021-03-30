@@ -23,6 +23,7 @@
         <h2>Your Account Details</h2>
         
         
+        
         <p>First Name: ${customer.firstname}</p>
         <p>Last Name: ${customer.lastname}</p>
         <p>Email: ${customer.email}</p>
