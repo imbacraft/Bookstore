@@ -43,11 +43,8 @@ public class AdminController {
     
     @GetMapping("/books")
     public String showAllBooks(Model model){
-    List<Book> books = bookRepo.findAll();
-    
-    model.addAttribute("listOfBooks", books);
-        
-    return "manage-books";
+
+    return "redirect:/stock/books";
     }
     
     @GetMapping("/customers")

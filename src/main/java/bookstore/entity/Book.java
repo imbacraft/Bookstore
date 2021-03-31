@@ -13,6 +13,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -121,7 +122,7 @@ public class Book implements Serializable {
         @JoinColumn(name = "category", referencedColumnName = "categid")})
     @ManyToMany (cascade = CascadeType.ALL)
     private List<Category> categoryList;
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @ManyToOne( optional = false)
     @JoinColumn(name = "booktype", referencedColumnName = "booktypeid")
     private Booktype booktype;
 

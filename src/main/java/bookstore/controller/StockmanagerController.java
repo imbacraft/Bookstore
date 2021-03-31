@@ -6,6 +6,8 @@
 package bookstore.controller;
 
 import bookstore.entity.Book;
+import bookstore.entity.Booktype;
+import bookstore.entity.Category;
 import bookstore.repo.BookRepo;
 import bookstore.repo.CartRepo;
 import bookstore.repo.CustomerRepo;
@@ -22,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import bookstore.repo.BooktypeRepo;
+import bookstore.repo.CategoryRepo;
 
 /**
  *
@@ -40,6 +44,12 @@ public class StockmanagerController {
     @Autowired
     CartRepo cartRepo;
     
+    @Autowired
+    BooktypeRepo booktypeRepo;
+    
+    @Autowired
+    CategoryRepo categoryRepo;
+    
     @GetMapping
     public String showStockHome(){
     return "stockManagerHome";
@@ -57,7 +67,13 @@ public class StockmanagerController {
     }
     
     @RequestMapping(value = "/books/create", method = RequestMethod.GET)
-    public String showBookForm(@ModelAttribute("bookToEdit")Book book,BindingResult result){
+    public String showBookForm(@ModelAttribute("bookToEdit")Book book,BindingResult result, Model model){
+        
+        List<Booktype> booktypes = booktypeRepo.findAll();
+        List<Category> categories = categoryRepo.findAll();
+        
+        model.addAttribute("booktypes", booktypes);
+        model.addAttribute("categories", categories);
         
         return "CreateUpdateBookForm";
     }
@@ -80,7 +96,12 @@ public class StockmanagerController {
         
         Book book = bookRepo.findById(id).get();
         
-        System.out.println(book.toString());
+        List<Booktype> booktypes = booktypeRepo.findAll();
+        List<Category> categories = categoryRepo.findAll();
+        
+        model.addAttribute("booktypes", booktypes);
+        model.addAttribute("categories", categories);
+        
         
         model.addAttribute("bookToEdit", book);
         return "CreateUpdateBookForm";//einai h idia forma me pio panw

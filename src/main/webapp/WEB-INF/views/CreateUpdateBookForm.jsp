@@ -14,11 +14,11 @@
         <title>JSP Page</title>
     </head>
     <body>
-        
-        
+
+
         <h1>Create/Update Book Form</h1>
 
-   
+
         <form:form  action="${pageContext.request.contextPath}/stock/books/update" method="POST" modelAttribute = "bookToEdit">
             Code: <form:input path="bookid" name="id" readonly="true" value="${bookToEdit.bookid}"/>
             <br/>
@@ -27,13 +27,48 @@
             <br/>
 
             description: <form:input path="description" name="description" value="${bookToEdit.description}"/>
-            
+
             <br/>
 
-            booktype: <form:input path="booktype.name"  name="booktypeid" value="${bookToEdit.booktype.name}"/>
-            
+            Booktype:
+            <form:select path = "booktype.booktypeid">
+
+                <form:option value=""> --Select Booktype--</form:option>
+
+                <c:forEach var = "booktype" items = "${booktypes}">
+                    <form:option value="${booktype.booktypeid}"> ${booktype.name}</form:option>                 
+                </c:forEach>
+
+            </form:select>
+
+
             <br/>
-            
+
+            Category 1:
+            <form:select path = "categoryList">
+
+                <form:option value=""> --Select Category 1--</form:option>
+
+                <c:forEach var = "category" items = "${categories}">
+                    <form:option value="${category.categid}"> ${category.name}</form:option>                 
+                </c:forEach>
+
+            </form:select>
+
+            <br>
+
+            Category 2:
+            <form:select path = "categoryList">
+
+                <form:option value=""> --Select Category 2--</form:option>
+
+                <c:forEach var = "category" items = "${categories}">
+                    <form:option value="${category.categid}"> ${category.name}</form:option>                 
+                </c:forEach>
+
+            </form:select>
+            <br>
+
             price: <form:input path="price" name="price" value="${bookToEdit.price}"/>
             <br/>
 
