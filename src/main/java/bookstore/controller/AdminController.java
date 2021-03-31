@@ -42,7 +42,7 @@ public class AdminController {
     }
     
     @GetMapping("/books")
-    public String manageBooks(Model model){
+    public String showAllBooks(Model model){
     List<Book> books = bookRepo.findAll();
     
     model.addAttribute("listOfBooks", books);

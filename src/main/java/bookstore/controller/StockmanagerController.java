@@ -48,7 +48,7 @@ public class StockmanagerController {
     
     //click manage books-->show the list
     @GetMapping("/books")
-    public String manageBooks(Model model){
+    public String showAllBooks(Model model){
     List<Book> books = bookRepo.findAll();
     
     model.addAttribute("booksList", books);
@@ -96,19 +96,7 @@ public class StockmanagerController {
         return "redirect:/stock/books";
     }
     
+     }
     
     
 
-//    //add stock
-//    @PutMapping("/books/{bookid}")
-//    public ResponseEntity<Book> updateBookStock(@RequestBody Book bookDetails,
-//            @PathVariable int bookid){
-//        Book book=bookRepo.findById(bookid).get();//to get kanei to optional Book , book
-//        book.setCount(bookDetails.getCount()+20);//slightly Random increase in stock account
-//        book=bookRepo.save(book);
-//        return ResponseEntity.status(HttpStatus.OK).body(book);
-//        
-//   }
-    
-    
-}

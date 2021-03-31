@@ -14,15 +14,14 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>This is Stock Management Homepage</h1>
-        
-         
+
         <p>
             User: <sec:authentication property="principal.username"/>
             <br/>
             Role(s):<sec:authentication property="principal.authorities"/>
         </p>
         <hr/>
+        
         <h1> Book Management Page </h1>
         
           <h1>List of books</h1>
