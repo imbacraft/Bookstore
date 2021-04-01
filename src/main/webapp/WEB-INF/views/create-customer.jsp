@@ -60,8 +60,17 @@
             <br>
 
             <label for="country">Country</label>
+            
+            <form:select path = "country.countryid">
 
-            <form:input path="country" id="country"  placeholder="Enter your Country" value="${customerToEdit.country}" />
+                <form:option value=""> --Select Country--</form:option>
+
+                <c:forEach var = "country" items = "${countries}">
+                    <form:option value="${country.countryid}"> ${country.name}</form:option>                 
+                </c:forEach>
+
+            </form:select>
+
 
             <br>
 

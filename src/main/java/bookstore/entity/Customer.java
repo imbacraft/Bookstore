@@ -20,6 +20,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -46,7 +48,7 @@ import org.springframework.format.annotation.DateTimeFormat;
     , @NamedQuery(name = "Customer.findByStreet", query = "SELECT c FROM Customer c WHERE c.street = :street")
     , @NamedQuery(name = "Customer.findByStreetnumber", query = "SELECT c FROM Customer c WHERE c.streetnumber = :streetnumber")
     , @NamedQuery(name = "Customer.findByPostalcode", query = "SELECT c FROM Customer c WHERE c.postalcode = :postalcode")
-    , @NamedQuery(name = "Customer.findByLocalDateofbirth", query = "SELECT c FROM Customer c WHERE c.dateofbirth = :dateofbirth")
+    , @NamedQuery(name = "Customer.findByDateofbirth", query = "SELECT c FROM Customer c WHERE c.dateofbirth = :dateofbirth")
     , @NamedQuery(name = "Customer.findByPaypalaccount", query = "SELECT c FROM Customer c WHERE c.paypalaccount = :paypalaccount")
     , @NamedQuery(name = "Customer.findByDiscountcoupon", query = "SELECT c FROM Customer c WHERE c.discountcoupon = :discountcoupon")})
 public class Customer implements Serializable {
@@ -63,7 +65,7 @@ public class Customer implements Serializable {
     @Column(name = "firstname")
     private String firstname;
     @Basic(optional = false)
-    @NotNull
+    @NotNull()
     @Size(min = 1, max = 60)
     @Column(name = "lastname")
     private String lastname;
@@ -77,6 +79,7 @@ public class Customer implements Serializable {
     @NotNull
     @Column(name = "phone")
     private long phone;
+    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -87,11 +90,6 @@ public class Customer implements Serializable {
     @Size(min = 1, max = 80)
     @Column(name = "password")
     private String password;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 60)
-    @Column(name = "country")
-    private String country;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -106,11 +104,14 @@ public class Customer implements Serializable {
     @Column(name = "postalcode")
     private int postalcode;
     @Column(name = "dateofbirth")
-     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateofbirth;
     @Size(max = 60)
     @Column(name = "paypalaccount")
     private String paypalaccount;
+    @JoinColumn(name = "country", referencedColumnName = "countryid")
+    @ManyToOne(optional = false)
+    private Country country;
     @Column(name = "discountcoupon")
     private Integer discountcoupon;
     @OneToMany(mappedBy = "customer")
@@ -126,7 +127,7 @@ public class Customer implements Serializable {
         this.customerid = customerid;
     }
 
-    public Customer(Integer customerid, String firstname, String lastname, String email, int phone, String username, String password, String country, String street, int streetnumber, int postalcode) {
+    public Customer(Integer customerid, String firstname, String lastname, String email, int phone, String username, String password, Country country, String street, int streetnumber, int postalcode) {
         this.customerid = customerid;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -140,7 +141,7 @@ public class Customer implements Serializable {
         this.postalcode = postalcode;
     }
 
-    public Customer(String firstname, String lastname, String email, String username, String password, String country, String street, int streetnumber) {
+    public Customer(String firstname, String lastname, String email, String username, String password, Country country, String street, int streetnumber) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
@@ -159,100 +160,12 @@ public class Customer implements Serializable {
         this.customerid = customerid;
     }
 
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public long getPhone() {
-        return phone;
-    }
-
-    public void setPhone(long phone) {
-        this.phone = phone;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getCountry() {
+    public Country getCountry() {
         return country;
     }
 
-    public void setCountry(String country) {
+    public void setCountry(Country country) {
         this.country = country;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public int getStreetnumber() {
-        return streetnumber;
-    }
-
-    public void setStreetnumber(int streetnumber) {
-        this.streetnumber = streetnumber;
-    }
-
-    public int getPostalcode() {
-        return postalcode;
-    }
-
-    public void setPostalcode(int postalcode) {
-        this.postalcode = postalcode;
-    }
-
-    public LocalDate getDateofbirth() {
-        return dateofbirth;
-    }
-
-    public void setDateofbirth(LocalDate dateofbirth) {
-        this.dateofbirth = dateofbirth;
-    }
-
-    public String getPaypalaccount() {
-        return paypalaccount;
-    }
-
-    public void setPaypalaccount(String paypalaccount) {
-        this.paypalaccount = paypalaccount;
     }
 
     public Integer getDiscountcoupon() {
@@ -305,6 +218,92 @@ public class Customer implements Serializable {
         return "Customer{" + "customerid=" + customerid + ", firstname=" + firstname + ", lastname=" + lastname + ", email=" + email + ", phone=" + phone + ", username=" + username + ", password=" + password + ", country=" + country + ", street=" + street + ", streetnumber=" + streetnumber + ", postalcode=" + postalcode + ", dateofbirth=" + dateofbirth + ", paypalaccount=" + paypalaccount + ", discountcoupon=" + discountcoupon + ", cartList=" + cartList + ", role=" + role + '}';
     }
 
-  
-    
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public long getPhone() {
+        return phone;
+    }
+
+    public void setPhone(long phone) {
+        this.phone = phone;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public int getStreetnumber() {
+        return streetnumber;
+    }
+
+    public void setStreetnumber(int streetnumber) {
+        this.streetnumber = streetnumber;
+    }
+
+    public int getPostalcode() {
+        return postalcode;
+    }
+
+    public void setPostalcode(int postalcode) {
+        this.postalcode = postalcode;
+    }
+
+    public LocalDate getDateofbirth() {
+        return dateofbirth;
+    }
+
+    public void setDateofbirth(LocalDate dateofbirth) {
+        this.dateofbirth = dateofbirth;
+    }
+
+    public String getPaypalaccount() {
+        return paypalaccount;
+    }
+
+    public void setPaypalaccount(String paypalaccount) {
+        this.paypalaccount = paypalaccount;
+    }
+
 }

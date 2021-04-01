@@ -3,6 +3,7 @@ package bookstore.controller;
 import bookstore.entity.Book;
 import bookstore.entity.Customer;
 import bookstore.entity.Cart;
+import bookstore.entity.Country;
 import bookstore.entity.Customerserviceagent;
 import bookstore.entity.Stockmanager;
 import bookstore.repo.BookRepo;
@@ -14,9 +15,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import bookstore.repo.CartRepo;
+import bookstore.repo.CountryRepo;
 import bookstore.repo.CustomerServiceAgentRepo;
 import bookstore.repo.StockmanagerRepo;
 import bookstore.service.UserService;
+import java.util.HashMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,6 +48,9 @@ public class AdminController {
     @Autowired
     CustomerServiceAgentRepo customerServiceAgentRepo;
     
+    @Autowired 
+    CountryRepo countryRepo;
+    
     
     @GetMapping
     public String adminHome(){
@@ -67,7 +73,7 @@ public class AdminController {
     @GetMapping("/customers")
     public String showCustomers(Model model){
     List<Customer> customers = customerRepo.findAll();
-    
+   
     model.addAttribute("listOfCustomers", customers);
         
     return "manage-customers";
@@ -77,7 +83,11 @@ public class AdminController {
   
     
     @GetMapping("/customers/create")
-    public String showCreateCustomerForm(@ModelAttribute("customerToEdit") Customer customer, BindingResult result){
+    public String showCreateCustomerForm(@ModelAttribute("customerToEdit") Customer customer, BindingResult result, Model model){
+        
+        List<Country> countries = countryRepo.findAll();
+        
+        model.addAttribute("countries", countries);
         
         return "create-customer";
     }
@@ -100,6 +110,9 @@ public class AdminController {
     public String showUpdateCustomerForm(@RequestParam("id") int id, Model model){
         
         Customer customer = customerRepo.findById(id).get();
+        List<Country> countries = countryRepo.findAll();
+        
+        model.addAttribute("countries", countries);
         
         model.addAttribute("customerToEdit", customer);
         

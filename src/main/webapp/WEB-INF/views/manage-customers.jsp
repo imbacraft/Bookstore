@@ -92,7 +92,7 @@
 
 
 
-                        <td>${customer.country}</td>
+                        <td>${customer.country.name}</td>
                         <td>${customer.street}</td>
                         <td>${customer.streetnumber}</td>
                         <td>${customer.dateofbirth}</td>

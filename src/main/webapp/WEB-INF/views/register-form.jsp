@@ -52,7 +52,15 @@
 
             <label for="country">Country</label>
 
-            <form:input path="country" id="country"  placeholder="Enter your Country"/>
+             <form:select path = "country.countryid">
+
+                <form:option value=""> --Select Country--</form:option>
+
+                <c:forEach var = "country" items = "${countries}">
+                    <form:option value="${country.countryid}"> ${country.name}</form:option>                 
+                </c:forEach>
+
+            </form:select>
 
             <br>
 

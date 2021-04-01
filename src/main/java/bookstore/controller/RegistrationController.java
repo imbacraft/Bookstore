@@ -1,10 +1,14 @@
 package bookstore.controller;
 
+import bookstore.entity.Country;
 import bookstore.entity.Customer;
+import bookstore.repo.CountryRepo;
 import bookstore.service.UserService;
+import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,8 +21,17 @@ public class RegistrationController {
     @Autowired
     UserService userService;
     
+    @Autowired
+    CountryRepo countryRepo;
+    
+    
     @GetMapping("/register")
-    public String showRegisterForm(@ModelAttribute("customer") Customer newcustomer){
+    public String showRegisterForm(@ModelAttribute("customer") Customer newcustomer, Model model){
+        
+        List<Country> countries = countryRepo.findAll();
+        
+        model.addAttribute("countries", countries);
+        
         return "register-form";
     }
     

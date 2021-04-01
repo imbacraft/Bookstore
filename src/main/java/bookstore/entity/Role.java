@@ -36,7 +36,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Role.findByRolename", query = "SELECT r FROM Role r WHERE r.rolename = :rolename")})
 public class Role implements Serializable {
 
-    
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -45,12 +44,12 @@ public class Role implements Serializable {
     @Column(name = "roleid")
     private Integer roleid;
     
-    @Basic(optional = false)
+     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "rolename")
     private String rolename;
-    
+     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
     private List<Customerserviceagent> customerserviceagentList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
