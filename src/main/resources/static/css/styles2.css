@@ -1,0 +1,118 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 1, 2021, 7:29:42 PM
+    Author     : Σταθης Καράμπελας
+*/
+body{
+    margin:0 0;
+}
+.navbar-nav {
+  margin-right: 100px;
+}
+#topSpan {
+  margin-left: 50px;
+}
+
+#partWithLogo {
+  background-color: cornsilk;
+  height: 200px;
+  margin-left: 90px;
+  margin-right: 90px;
+}
+.col-lg-3 {
+  background-color: red;
+}
+#bookLogo {
+  position: relative;
+  border-radius: 50%;
+  height: 180px;
+  margin-left: 50px;
+}
+
+.TitleText {
+  margin-left: 60px;
+  font-family: sans-serif;
+}
+#searchText {
+  position: relative;
+  width: 300px;
+  top: 50px;
+  height: 30px;
+  right: 30px;
+}
+#form {
+  position: relative;
+  top: 40px;
+  right: 60px;
+}
+
+#searchSelect {
+  position: relative;
+  top: 50px;
+  right: 4px;
+  height: 30px;
+  right: 36px;
+  width: 120px;
+}
+#searchButton {
+  top: 50px;
+  right: 14px;
+  background-color: yellow;
+  color: #ffd04d;
+  background-image: url(https://www.hive.co.uk//Content/StoreFront/assets/CSS/images/search.png);
+  /* to xeraki */
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 18px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ffd04d;
+  border-radius: 0 3px 3px 0;
+  display: flex;
+  height: 30px;
+  width: 30px;
+  position: absolute;
+}
+.LoginRow {
+  position: relative;
+  top: 50px;
+}
+
+#LoginText {
+  font-size: x-small;
+}
+
+#basketIcon {
+  border-radius: 50%;
+  background-color: yellow;
+  color: #ffd04d;
+  height: 40px;
+  width: 40px;
+}
+
+#number {
+  background-color: #ffd04d;
+  color: #3a3a3a;
+  padding-top: 3px;
+  position: absolute;
+
+  color: #fff;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  padding-top: 1px;
+  text-align: center;
+
+  top: 0px;
+  font-family: proxima-nova, arial, sans-serif;
+}
+
+/* Να δεις γιατί δεν παίζει σαν Selector!!! , dhl hr{....} */
+#hr {
+  border-top: 1px dashed black;
+}

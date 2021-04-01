@@ -15,46 +15,171 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Bookstore Home</title>
- 
+        <link rel="stylesheet" href="./css/styles.css" />
+        <link rel="stylesheet" href="./css/styles2.css" />
+        <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
     </head>
     <body>
-        <h1>Welcome to our Bookstore!</h1>
-        <hr/>
+        
+   
+    <nav class="navbar navbar-expand-lg navbar-dark bg-info">
+      <!-- bazw brand an thelw -->
+      <span id="topSpan">
+        <a class="navbar-brand" href="">Supporting your high street</a>
+        <a class="navbar-brand" href="http://www.google.com" target="_blank"
+          >Find out how</a
+        >
+      </span>
 
-        <h2>This is Visitor's homepage</h2>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarTogglerDemo02"
+        aria-controls="navbarTogglerDemo02"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <!-- an thelw to menu st aristera arkei na metaferw to ul
+      opote prosthetw mia klash=ml-auto -->
+        <!-- toggler, an thelw na mikrainei h othoni kai na sumparasurei to menu -->
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="">Welcome,user</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">Account</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">Reviews</a>
+          </li>
+          <li class="nav-item">
+            <a href="" class="nav-link">Συχνές ερωτήσεις</a>
+          </li>
+          <li class="nav-item">
+            <a href="" class="nav-link">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Logo-Login-Basket -->
+    <section id="partWithLogo">
+      <!-- me ton parakatw tropo xwrizw mia lwrida se 3 merh -->
+      <!-- ti ginetai omws an mikrunw to viewport -->
+      <!-- tote allazei, h klash -->
+      <!-- <div class="row">
+        <div class="col col-3">col</div>
+        <div class="col col-6">col</div>
+        <div class="col col-3">col</div>
+      </div> -->
+      <!-- kai ginetai ws ekshs -->
+      <!-- an mikrunw to vieport, to kathe col erxetai to ena katw ap to allo 
+      ARA EINAI RESPONSIVE-->
+
+      <div class="row">
+        <!-- 3 sthles/row sto megalo viewport, 2 sto mikrotero, kai 1 otan mikrunei teleiws -->
+        <div class="col-lg-4 col-md-6">
+          <!-- bazw sto 1/3 ths sthlhs 2 boxes->ara div, ara to ena katw ap to allo
+          titlos +logia -->
+          <div class="col-6">
+            <img src="./images/bookLogo1.jpg" alt="bookLogo" id="bookLogo" />
+          </div>
+          <div class="col-6 TitleText">
+            <a href="">BOOKS ARE TREASURE</a>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <form action="" id="form">
+            <input type="text" placeholder="Search..." id="searchText" />
+            <select id="searchSelect">
+              <option value="1">Medicine</option>
+              <option value="2">Sports</option>
+            </select>
+            <input type="button" value="" id="searchButton" />
+          </form>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="row LoginRow">
+            <div class="col-lg-6 Login">
+              <div class="col-6">
+                <h6 id="LoginText">Click Here to Login</h6>
+              </div>
+              <div class="col-6">
+                <a href="http://www.google.com">Login</a>
+              </div>
+              <div class="col-6">
+                <hr id="hr" />
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <img
+                src="./images/shoppingIcon.png"
+                alt="basket"
+                id="basketIcon"
+              />
+              <span id="number">0</span>
+              <div class="col-6">
+                <a href="">Basket</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="section">
+
+        
+        
+        <nav onchange="location=this.value">
+      <header><b>Books</b></header>
+     
+      <c:forEach items="${categories}" var="category">
+       <div>
+        <b><a href="${pageContext.request.contextPath}/books/${category.name}">${category.name}</a></b>
+      </div>
+      </c:forEach>
+        
+           
+      
+    </nav>
       
         
-        <button>Books</button>
-        <div>
-        <select name="category" id="category" onchange="location=this.value">
-            <option value="">Select category</option>
-            <c:forEach items="${categories}" var="category">  
-                  <option value="${pageContext.request.contextPath}/books/${category.name}">${category.name}</option>
-        </c:forEach>
-        </select>
-            </div>
+         <nav onchange="location=this.value">
+      <header><b>Books</b></header>
+      <c:forEach items="${authors}" var="author">
+      <div>
+        <b><a href="${pageContext.request.contextPath}/authors/${author.lastname}">${author.lastname}</a></b>
+      </div>
+      </c:forEach>
+      
+    </nav>
+
+       
+          <nav onchange="location=this.value">
+      <header><b>Books</b></header>
+      <c:forEach items="${bestSellers}" var="book">
+      <div>
+        <b><a href="${pageContext.request.contextPath}/books/search/${book.bookid}">${book.title}</a></b>
+      </div>
+      </c:forEach>
+          </nav>
         
-        <button>Authors</button>
-        <div>
-            <select name="author" id="author" onchange="location=this.value">
-                <option value="">Select category</option>
-                <c:forEach items="${authors}" var="author">
-                    <option value="${pageContext.request.contextPath}/authors/${author.lastname}">${author.lastname}</option>
-                </c:forEach>
-            </select>
-            
-        </div>
-        
-         <button>BestSellers</button>
-        <div>
-            <select name="bestSellingBooks" id="bestSellingBooks" onchange="location=this.value">
-                <option value="">Select bestseller</option>
-                <c:forEach items="${bestSellers}" var="book">
-                    <option value="${pageContext.request.contextPath}/books/search/${book.bookid}">${book.title}</option>
-                </c:forEach>
-            </select>
-            
-        </div>
+        </section>
+      
+       
+      
+    
         
     
         <sec:authorize access="!isAuthenticated()">
