@@ -31,15 +31,21 @@
             <a href="${pageContext.request.contextPath}/service">Service Agent Home</a>
         </sec:authorize>
 
-        <br/>
+        <br>
 
-        <h2> Customer Orders </h2>
+        <a href="${pageContext.request.contextPath}/service/carts/create">Create Order/Cart</a>
+        
+        <h2> Orders/Carts </h2>
+        
         <table border="1">
             <tr>
                 <th>Order ID</th>
                 <th>Customer ID</th>
                 <th>Customer First Name</th>
                 <th>Customer Last Name</th>
+                <th>Visitor ID</th>
+                <th>Visitor First Name</th>
+                <th>Visitor Last Name</th>
                 <th>Datetime</th>
                 <th>Payment</th>
                 <th>Quantity</th>
@@ -60,6 +66,9 @@
                     <td>${cart.customer.customerid}</td>
                     <td>${cart.customer.firstname}</td>
                     <td>${cart.customer.lastname}</td>
+                    <td>${cart.visitor.visitorid}</td>
+                    <td>${cart.visitor.firstname}</td>
+                    <td>${cart.visitor.lastname}</td>
                     <td>${cart.datetime}</td>
                     <td>${cart.payment}</td>
                     <td>${cart.quantity}</td>
@@ -69,10 +78,10 @@
                     <td>${cart.totalprice}</td>
 
                     <td>      
-                        <a href="${pageContext.request.contextPath}/admin/customers/update/${cart.cartid}">Update</a>
+                        <a href="${pageContext.request.contextPath}/service/carts/update?id=${cart.cartid}">Update</a>
                     </td>
                     <td>
-                        <a href="${pageContext.request.contextPath}/admin/customers/delete?id=${cart.cartid}">Delete</a>
+                        <a href="${pageContext.request.contextPath}/service/carts/delete?id=${cart.cartid}">Delete</a>
                     </td>
 
 

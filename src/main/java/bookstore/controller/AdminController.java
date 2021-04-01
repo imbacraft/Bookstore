@@ -59,13 +59,8 @@ public class AdminController {
     
     @GetMapping("/carts")
     public String showCarts(Model model){
-    List<Cart> carts = cartRepo.findAll();
-    
-    model.addAttribute("listOfCarts", carts);
-    
-       carts.forEach(System.out::println);
-        
-    return "manage-carts";
+
+    return "redirect:/service/carts";
     }
     
     @GetMapping("/customers/create")

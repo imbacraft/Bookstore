@@ -7,7 +7,7 @@ package bookstore.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -22,13 +22,12 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import org.springframework.format.annotation.DateTimeFormat;
+import static org.springframework.format.annotation.DateTimeFormat.ISO.DATE_TIME;
 
 /**
  *
@@ -58,8 +57,8 @@ public class Cart implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "datetime")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDate datetime;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime datetime;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 60)
@@ -92,7 +91,7 @@ public class Cart implements Serializable {
     @ManyToOne
     private Customer customer;
     @JoinColumn(name = "visitorid", referencedColumnName = "visitorid")
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.DETACH)
     private Visitor visitor;
 
     public Cart() {
@@ -102,7 +101,7 @@ public class Cart implements Serializable {
         this.cartid = cartid;
     }
 
-    public Cart(Integer cartid, LocalDate datetime, String payment, int quantity, BigDecimal pricebeforetax, BigDecimal shippingcost, BigDecimal tax, BigDecimal totalprice) {
+    public Cart(Integer cartid, LocalDateTime datetime, String payment, int quantity, BigDecimal pricebeforetax, BigDecimal shippingcost, BigDecimal tax, BigDecimal totalprice) {
         this.cartid = cartid;
         this.datetime = datetime;
         this.payment = payment;
@@ -121,11 +120,11 @@ public class Cart implements Serializable {
         this.cartid = cartid;
     }
 
-    public LocalDate getDatetime() {
+    public LocalDateTime getDatetime() {
         return datetime;
     }
 
-    public void setDatetime(LocalDate datetime) {
+    public void setDatetime(LocalDateTime datetime) {
         this.datetime = datetime;
     }
 

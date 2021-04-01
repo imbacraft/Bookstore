@@ -76,7 +76,7 @@
 
             <label for="dateofbirth">Date of Birth</label>
 
-            <form:input path="dateofbirth" id="dateofbirth"  placeholder="Enter Date of Birth" value="${customerToEdit.dateofbirth}"/>
+            <form:input type="date" path="dateofbirth" id="dateofbirth"  placeholder="Enter Date of Birth" value="${customerToEdit.dateofbirth}"/>
 
             <br>
 
