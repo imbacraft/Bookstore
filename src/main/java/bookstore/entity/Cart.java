@@ -91,7 +91,7 @@ public class Cart implements Serializable {
     @ManyToOne
     private Customer customer;
     @JoinColumn(name = "visitorid", referencedColumnName = "visitorid")
-    @ManyToOne(cascade = CascadeType.DETACH)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Visitor visitor;
 
     public Cart() {

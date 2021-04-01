@@ -129,7 +129,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Customer saveUser(Customer newcustomer) {
+    public Customer saveCustomer(Customer newcustomer) {
 
         String plainPassword = newcustomer.getPassword();
         
@@ -145,6 +145,26 @@ public class UserServiceImpl implements UserService {
         newcustomer = customerRepo.save(newcustomer);
         
         return newcustomer;
+    }
+    
+    
+    @Override
+    public Stockmanager saveStockmanager(Stockmanager stockmanager) {
+
+        String plainPassword = stockmanager.getPassword();
+        
+        //encode password with Bcrypt
+        String hashedPassword = passwordEncoder.encode(plainPassword);
+        stockmanager.setPassword(hashedPassword);
+        
+        //find customer role from DB
+        Role role = roleRepo.findByRolenameContaining("STOCKMANAGER");
+        stockmanager.setRole(role);
+        
+        //save stockmanager to DB
+       stockmanager = stockmanagerRepo.save(stockmanager);
+        
+        return stockmanager;
     }
 
 

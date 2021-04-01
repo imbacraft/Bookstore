@@ -22,6 +22,16 @@
         </p>
         <hr/>
         
+             <sec:authorize access="hasRole('ADMIN')">
+            <a href="${pageContext.request.contextPath}/admin">Administrator Home</a>
+        </sec:authorize>
+
+        <sec:authorize access="hasRole('SERVICEAGENT')">
+            <a href="${pageContext.request.contextPath}/service">Service Agent Home</a>
+        </sec:authorize>
+            
+            <br>
+        
         <h1> Book Management Page </h1>
         
           <h1>List of books</h1>

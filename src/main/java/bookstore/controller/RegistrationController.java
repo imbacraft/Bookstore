@@ -33,7 +33,7 @@ public class RegistrationController {
         }
         
         //save customer  to DB
-        userService.saveUser(newcustomer);
+        userService.saveCustomer(newcustomer);
         
         //redirect and add attribute to request
         attributes.addFlashAttribute("registered", "Successfully registered");

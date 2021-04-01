@@ -24,10 +24,14 @@
         <hr/>
 
         
-       
         <a href="${pageContext.request.contextPath}/stock/books">Manage Books</a>
+        <a href="${pageContext.request.contextPath}/home">Home</a>
         
+        <br>
         
+         <form:form action="${pageContext.request.contextPath}/logout" method="POST">
+            <input type="submit" value="Logout">
+        </form:form>
       
     </body>
 </html>

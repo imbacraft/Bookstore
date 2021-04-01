@@ -96,7 +96,7 @@ public class Stockmanager implements Serializable {
         return role;
     }
 
-    public void setRoleid(Role role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 

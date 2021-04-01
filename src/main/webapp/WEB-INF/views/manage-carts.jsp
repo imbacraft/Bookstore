@@ -33,8 +33,6 @@
 
         <br>
 
-        <a href="${pageContext.request.contextPath}/service/carts/create">Create Order/Cart</a>
-        
         <h2> Orders/Carts </h2>
         
         <table border="1">
@@ -53,7 +51,6 @@
                 <th>shippingcost</th>
                 <th>tax</th>
                 <th>totalprice</th>
-                <th>Update</th>
                 <th>Delete</th>
             </tr>   
 
@@ -77,9 +74,6 @@
                     <td>${cart.tax}</td>
                     <td>${cart.totalprice}</td>
 
-                    <td>      
-                        <a href="${pageContext.request.contextPath}/service/carts/update?id=${cart.cartid}">Update</a>
-                    </td>
                     <td>
                         <a href="${pageContext.request.contextPath}/service/carts/delete?id=${cart.cartid}">Delete</a>
                     </td>

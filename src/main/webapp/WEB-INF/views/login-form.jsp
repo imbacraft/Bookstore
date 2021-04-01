@@ -36,8 +36,8 @@
 
                 <!-- Login Form -->
                 <form:form action="${pageContext.request.contextPath}/authenticate" method="post">
-                    <input type="text" id="login" name="username" placeholder="login">
-                    <input type="password" id="password" name="password" placeholder="password">
+                    <input type="text" id="login" name="username" placeholder="Enter your username">
+                    <input type="password" id="password" name="password" placeholder="Enter your password">
                     <input type="submit" value="Log In">
                 </form:form>
 

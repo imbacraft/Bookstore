@@ -17,5 +17,7 @@ public interface UserService extends UserDetailsService{
     
     Stockmanager findStockmanagerByUsername(String username);
     
-    Customer saveUser(Customer newCustomer);
+    Customer saveCustomer(Customer customer);
+    
+    Stockmanager saveStockmanager(Stockmanager stockmanager);
 }

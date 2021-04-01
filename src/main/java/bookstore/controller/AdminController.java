@@ -3,6 +3,7 @@ package bookstore.controller;
 import bookstore.entity.Book;
 import bookstore.entity.Customer;
 import bookstore.entity.Cart;
+import bookstore.entity.Stockmanager;
 import bookstore.repo.BookRepo;
 import bookstore.repo.CustomerRepo;
 import java.util.List;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import bookstore.repo.CartRepo;
+import bookstore.repo.StockmanagerRepo;
 import bookstore.service.UserService;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -35,17 +37,27 @@ public class AdminController {
     @Autowired
     UserService userService;
     
+    @Autowired
+    StockmanagerRepo stockmanagerRepo;
+    
     
     @GetMapping
     public String adminHome(){
         return "admin-home";
     }
-    
+    //////////
+    //BOOKS
+    /////////
     @GetMapping("/books")
     public String showAllBooks(Model model){
 
     return "redirect:/stock/books";
     }
+    
+    
+     //////////////
+    //CUSTOMERS
+    ///////////////
     
     @GetMapping("/customers")
     public String showCustomers(Model model){
@@ -57,11 +69,7 @@ public class AdminController {
     }
     
     
-    @GetMapping("/carts")
-    public String showCarts(Model model){
-
-    return "redirect:/service/carts";
-    }
+  
     
     @GetMapping("/customers/create")
     public String showCreateCustomerForm(@ModelAttribute("customerToEdit") Customer customer, BindingResult result){
@@ -99,7 +107,7 @@ public class AdminController {
         
         System.out.println("Customer to be updated"+customer);
         
-        userService.saveUser(customer);
+        userService.saveCustomer(customer);
         
         String successMessage = "Customer "+ customer.getFirstname()+" "+customer.getLastname()+" successfully updated!!";
         attributes.addFlashAttribute("successMessage", successMessage);
@@ -107,6 +115,72 @@ public class AdminController {
         return "redirect:/admin/customers";
     
     }
+    
+     ////////////////////
+    //CARTS
+    ////////////////////
+    
+      @GetMapping("/carts")
+    public String showCarts(Model model){
+
+    return "redirect:/service/carts";
+    }
+    
+     ////////////////////
+    //STOCKMANAGERS
+    ////////////////////
+    
+    @GetMapping("/stockmanagers")
+    public String showAllStockmanagers(Model model){
+        List<Stockmanager> stockmanagers = stockmanagerRepo.findAll();
+        
+        model.addAttribute("listOfStockmanagers", stockmanagers);
+        
+        return "manage-stockmanagers";
+    
+    }
+    
+    @GetMapping("/stockmanagers/create")
+    public String showStockmanagerCreateUpdateForm(@ModelAttribute("stockmanagerToEdit") Stockmanager stockmanager, BindingResult result){
+        
+        return "create-update-stockmanager";
+    }
+    
+    @GetMapping("/stockmanagers/delete")
+    public String deleteStockmanager(@RequestParam("id") int id, RedirectAttributes attributes){
+        
+        Stockmanager stockmanager = stockmanagerRepo.findById(id).get();
+        
+        String successMessage = "Stockmanager "+ stockmanager.getUsername() +" successfully deleted!!";
+        attributes.addFlashAttribute("successMessage", successMessage);
+        
+        stockmanagerRepo.deleteById(id);
+        
+        return "redirect:/admin/stockmanagers";
+    }
+    
+    @GetMapping("/stockmanagers/update")
+    public String showUpdateStockmanagerForm(@RequestParam("id") int id, Model model){
+        
+        Stockmanager stockmanager = stockmanagerRepo.findById(id).get();
+        
+        model.addAttribute("stockmanagerToEdit", stockmanager);
+        
+        return "create-update-stockmanager";
+    }
+ 
+    @PostMapping("/stockmanagers/update")
+    public String updateCustomer(Stockmanager stockmanager, RedirectAttributes attributes){
+       
+        userService.saveStockmanager(stockmanager);
+        
+        String successMessage = "Stockmanager "+ stockmanager.getUsername()+" successfully updated!!";
+        attributes.addFlashAttribute("successMessage", successMessage);
+       
+        return "redirect:/admin/stockmanagers";
+    
+    }
+    
     
 }
     
