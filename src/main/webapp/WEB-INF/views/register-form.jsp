@@ -10,6 +10,8 @@
     </head>
     <body>
 
+        <a href="${pageContext.request.contextPath}/home">Home</a>
+        
         <h3>Register account</h3>
 
         <form:form method="post" action="${pageContext.request.contextPath}/register" modelAttribute="customer">
@@ -17,14 +19,14 @@
 
             <label for="fname">First Name</label>
 
-            <form:input class="form-control" path="firstname" id="firstname"  placeholder="Enter your first name"/>
+            <form:input  path="firstname" id="firstname"  placeholder="Enter your first name"/>
 
             <br>
 
 
             <label for="lname">Last Name</label>
 
-            <form:input class="form-control" path="lastname" id="lastname"  placeholder="Enter your Name"/>
+            <form:input  path="lastname" id="lastname"  placeholder="Enter your Name"/>
 
             <br>
 
@@ -69,7 +71,7 @@
 
             <label for="dateofbirth">Date of Birth</label>
 
-            <form:input path="dateofbirth" id="dateofbirth"  placeholder="Enter Date of Birth" />
+            <form:input type="date" path="dateofbirth" id="dateofbirth"  placeholder="Enter Date of Birth" />
             
              <br>
 
@@ -77,7 +79,6 @@
             <form:input path="paypalaccount" id="paypalaccount"  placeholder="Enter PayPal Account" />
 
             <br>
-
 
             <input id="button" type="submit"  value="Register"/>
 

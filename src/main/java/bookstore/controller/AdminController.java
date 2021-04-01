@@ -3,6 +3,7 @@ package bookstore.controller;
 import bookstore.entity.Book;
 import bookstore.entity.Customer;
 import bookstore.entity.Cart;
+import bookstore.entity.Customerserviceagent;
 import bookstore.entity.Stockmanager;
 import bookstore.repo.BookRepo;
 import bookstore.repo.CustomerRepo;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import bookstore.repo.CartRepo;
+import bookstore.repo.CustomerServiceAgentRepo;
 import bookstore.repo.StockmanagerRepo;
 import bookstore.service.UserService;
 import org.springframework.validation.BindingResult;
@@ -39,6 +41,9 @@ public class AdminController {
     
     @Autowired
     StockmanagerRepo stockmanagerRepo;
+    
+    @Autowired
+    CustomerServiceAgentRepo customerServiceAgentRepo;
     
     
     @GetMapping
@@ -181,6 +186,60 @@ public class AdminController {
     
     }
     
+     ////////////////////
+    //SERVICE AGENTS
+    ////////////////////
+    
+      @GetMapping("/serviceagents")
+    public String showAllServiceAgents(Model model){
+        List<Customerserviceagent> serviceagents = customerServiceAgentRepo.findAll();
+        
+        model.addAttribute("listOfServiceagents", serviceagents);
+        
+        return "manage-serviceagents";
+    
+    }
+    
+    @GetMapping("/serviceagents/create")
+    public String showServiceagentCreateUpdateForm(@ModelAttribute("serviceagentToEdit") Customerserviceagent serviceagent, BindingResult result){
+        
+        return "create-update-serviceagent";
+    }
+    
+    @GetMapping("/serviceagents/delete")
+    public String deleteServiceagent(@RequestParam("id") int id, RedirectAttributes attributes){
+        
+        Customerserviceagent serviceagent = customerServiceAgentRepo.findById(id).get();
+        
+        String successMessage = "Stockmanager "+ serviceagent.getUsername() +" successfully deleted!!";
+        attributes.addFlashAttribute("successMessage", successMessage);
+        
+        stockmanagerRepo.deleteById(id);
+        
+        return "redirect:/admin/serviceagents";
+    }
+    
+    @GetMapping("/serviceagents/update")
+    public String showUpdateServiceagentForm(@RequestParam("id") int id, Model model){
+        
+        Customerserviceagent serviceagent = customerServiceAgentRepo.findById(id).get();
+        
+        model.addAttribute("serviceagentToEdit", serviceagent);
+        
+        return "create-update-serviceagent";
+    }
+ 
+    @PostMapping("/serviceagents/update")
+    public String updateCustomer(Customerserviceagent serviceagent, RedirectAttributes attributes){
+       
+        userService.saveServiceagent(serviceagent);
+        
+        String successMessage = "Customer Service Agent "+ serviceagent.getUsername()+" successfully updated!!";
+        attributes.addFlashAttribute("successMessage", successMessage);
+       
+        return "redirect:/admin/serviceagents";
+    
+    }
     
 }
     

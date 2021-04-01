@@ -166,6 +166,25 @@ public class UserServiceImpl implements UserService {
         
         return stockmanager;
     }
+    
+    @Override
+    public Customerserviceagent saveServiceagent(Customerserviceagent serviceagent) {
+
+        String plainPassword = serviceagent.getPassword();
+        
+        //encode password with Bcrypt
+        String hashedPassword = passwordEncoder.encode(plainPassword);
+        serviceagent.setPassword(hashedPassword);
+        
+        //find customer role from DB
+        Role role = roleRepo.findByRolenameContaining("AGENT");
+       serviceagent.setRole(role);
+        
+        //save stockmanager to DB
+       serviceagent = customerServiceAgentRepo.save(serviceagent);
+        
+        return serviceagent;
+    }
 
 
 
