@@ -41,6 +41,7 @@
                 <th>Count</th>
                 <th>ISBN-10</th>
                 <th>ISBN-13</th>
+                <th>Buy</th>
                
             </tr>   
 
@@ -65,6 +66,9 @@
                         <td>${book.count}</td>
                         <td>${book.isbn10}</td>
                         <td>${book.isbn13}</td>
+                        <td>
+                            <a href="${pageContext.request.contextPath}/cart/buy/${book.bookid}">Buy now</a>
+                        </td>
 
 
                     </tr>
@@ -75,5 +79,7 @@
 
         </table>
  
+        <a href="${pageContext.request.contextPath}/cart/index">Show cart</a>
+        
     </body>
 </html>

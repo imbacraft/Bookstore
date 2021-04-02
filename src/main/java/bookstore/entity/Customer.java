@@ -7,6 +7,7 @@ package bookstore.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -53,12 +54,6 @@ import org.springframework.format.annotation.DateTimeFormat;
     , @NamedQuery(name = "Customer.findByDiscountcoupon", query = "SELECT c FROM Customer c WHERE c.discountcoupon = :discountcoupon")})
 public class Customer implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "customerid")
-    private Integer customerid;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 60)
@@ -76,7 +71,7 @@ public class Customer implements Serializable {
     @Column(name = "email")
     private String email;
     @Basic(optional = false)
-    @NotNull
+    @NotNull()
     @Column(name = "phone")
     private long phone;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
@@ -90,6 +85,7 @@ public class Customer implements Serializable {
     @Size(min = 1, max = 80)
     @Column(name = "password")
     private String password;
+    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -104,11 +100,17 @@ public class Customer implements Serializable {
     @Column(name = "postalcode")
     private int postalcode;
     @Column(name = "dateofbirth")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate dateofbirth;
     @Size(max = 60)
     @Column(name = "paypalaccount")
     private String paypalaccount;
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "customerid")
+    private Integer customerid;
     @JoinColumn(name = "country", referencedColumnName = "countryid")
     @ManyToOne(optional = false)
     private Country country;

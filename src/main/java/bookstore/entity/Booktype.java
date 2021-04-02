@@ -37,17 +37,18 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Booktype.findByName", query = "SELECT b FROM Booktype b WHERE b.name = :name")})
 public class Booktype implements Serializable {
 
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "name")
+    private String name;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "booktypeid")
     private Integer booktypeid;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "name")
-    private String name;
     @OneToMany(mappedBy = "booktype")
     private List<Book> bookList;
 
@@ -71,13 +72,6 @@ public class Booktype implements Serializable {
         this.booktypeid = booktypeid;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     @XmlTransient
     public List<Book> getBookList() {
@@ -111,6 +105,14 @@ public class Booktype implements Serializable {
     @Override
     public String toString() {
         return "bookstore.entity.Booktype[ booktypeid=" + booktypeid + " ]";
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
     
 }

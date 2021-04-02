@@ -8,6 +8,7 @@ package bookstore.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -23,7 +24,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -55,19 +59,13 @@ import org.springframework.format.annotation.DateTimeFormat;
     , @NamedQuery(name = "Book.findByIsbn13", query = "SELECT b FROM Book b WHERE b.isbn13 = :isbn13")})
 public class Book implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "bookid")
-    private Integer bookid;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 200)
     @Column(name = "title")
     private String title;
     @Basic(optional = false)
-    @NotNull
+    @NotNull()
     @Size(min = 1, max = 3000)
     @Column(name = "description")
     private String description;
@@ -75,16 +73,17 @@ public class Book implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "price")
-    private float price;
+    private BigDecimal price;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "publisher")
     private String publisher;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Column(name = "publicationdate")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern= "yyyy-MM-dd")
     private LocalDate publicationdate;
     @Basic(optional = false)
     @NotNull
@@ -106,7 +105,7 @@ public class Book implements Serializable {
     @Column(name = "backcover")
     private String backcover;
     @Basic(optional = false)
-    @NotNull
+    @NotNull()
     @Column(name = "count")
     private int count;
     @Size(max = 45)
@@ -115,6 +114,14 @@ public class Book implements Serializable {
     @Size(max = 45)
     @Column(name = "isbn13")
     private String isbn13;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "book")
+    private List<Bookpercart> bookpercartList;
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "bookid")
+    private Integer bookid;
     @ManyToMany(mappedBy = "bookList")
     private List<Author> authorList;
     @JoinTable(name = "joinedbookcategory", joinColumns = {
@@ -133,7 +140,7 @@ public class Book implements Serializable {
         this.bookid = bookid;
     }
 
-    public Book(Integer bookid, String title, String description, float price, String publisher, LocalDate publicationdate, int edition, int pages, String language, int count) {
+    public Book(Integer bookid, String title, String description, BigDecimal price, String publisher, LocalDate publicationdate, int edition, int pages, String language, int count) {
         this.bookid = bookid;
         this.title = title;
         this.description = description;
@@ -154,6 +161,58 @@ public class Book implements Serializable {
         this.bookid = bookid;
     }
 
+
+    @XmlTransient
+    public List<Author> getAuthorList() {
+        return authorList;
+    }
+
+    public void setAuthorList(List<Author> authorList) {
+        this.authorList = authorList;
+    }
+
+    @XmlTransient
+    public List<Category> getCategoryList() {
+        return categoryList;
+    }
+
+    public void setCategoryList(List<Category> categoryList) {
+        this.categoryList = categoryList;
+    }
+
+    public Booktype getBooktype() {
+        return booktype;
+    }
+
+    public void setBooktype(Booktype booktype) {
+        this.booktype = booktype;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (bookid != null ? bookid.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Book)) {
+            return false;
+        }
+        Book other = (Book) object;
+        if ((this.bookid == null && other.bookid != null) || (this.bookid != null && !this.bookid.equals(other.bookid))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" + "bookid=" + bookid + ", title=" + title + ", description=" + description + ", price=" + price + ", publisher=" + publisher + ", publicationdate=" + publicationdate + ", edition=" + edition + ", pages=" + pages + ", language=" + language + ", frontcover=" + frontcover + ", backcover=" + backcover + ", count=" + count + ", isbn10=" + isbn10 + ", isbn13=" + isbn13 + ", authorList=" + authorList + ", categoryList=" + categoryList + ", booktype=" + booktype + '}';
+    }
+
     public String getTitle() {
         return title;
     }
@@ -170,11 +229,11 @@ public class Book implements Serializable {
         this.description = description;
     }
 
-    public float getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
@@ -259,54 +318,12 @@ public class Book implements Serializable {
     }
 
     @XmlTransient
-    public List<Author> getAuthorList() {
-        return authorList;
+    public List<Bookpercart> getBookpercartList() {
+        return bookpercartList;
     }
 
-    public void setAuthorList(List<Author> authorList) {
-        this.authorList = authorList;
-    }
-
-    @XmlTransient
-    public List<Category> getCategoryList() {
-        return categoryList;
-    }
-
-    public void setCategoryList(List<Category> categoryList) {
-        this.categoryList = categoryList;
-    }
-
-    public Booktype getBooktype() {
-        return booktype;
-    }
-
-    public void setBooktype(Booktype booktype) {
-        this.booktype = booktype;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (bookid != null ? bookid.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Book)) {
-            return false;
-        }
-        Book other = (Book) object;
-        if ((this.bookid == null && other.bookid != null) || (this.bookid != null && !this.bookid.equals(other.bookid))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Book{" + "bookid=" + bookid + ", title=" + title + ", description=" + description + ", price=" + price + ", publisher=" + publisher + ", publicationdate=" + publicationdate + ", edition=" + edition + ", pages=" + pages + ", language=" + language + ", frontcover=" + frontcover + ", backcover=" + backcover + ", count=" + count + ", isbn10=" + isbn10 + ", isbn13=" + isbn13 + ", authorList=" + authorList + ", categoryList=" + categoryList + ", booktype=" + booktype + '}';
+    public void setBookpercartList(List<Bookpercart> bookpercartList) {
+        this.bookpercartList = bookpercartList;
     }
 
    

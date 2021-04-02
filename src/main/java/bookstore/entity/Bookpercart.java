@@ -6,6 +6,8 @@
 package bookstore.entity;
 
 import java.io.Serializable;
+import javax.persistence.AssociationOverride;
+import javax.persistence.AssociationOverrides;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -39,6 +41,9 @@ public class Bookpercart implements Serializable {
     @NotNull
     @Column(name = "quantity")
     private int quantity;
+    @JoinColumn(name = "bookid", referencedColumnName = "bookid", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Book book;
     @JoinColumn(name = "cartid", referencedColumnName = "cartid", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Cart cart;
@@ -75,6 +80,14 @@ public class Bookpercart implements Serializable {
         this.quantity = quantity;
     }
 
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
     public Cart getCart() {
         return cart;
     }
@@ -105,7 +118,9 @@ public class Bookpercart implements Serializable {
 
     @Override
     public String toString() {
-        return "bookstore.entity.Bookpercart[ bookpercartPK=" + bookpercartPK + " ]";
+        return "Bookpercart{" + "bookpercartPK=" + bookpercartPK + ", quantity=" + quantity + ", book=" + book + ", cart=" + cart + '}';
     }
+
+   
     
 }

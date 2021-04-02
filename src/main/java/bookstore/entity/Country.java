@@ -33,18 +33,22 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Country.findByName", query = "SELECT c FROM Country c WHERE c.name = :name")})
 public class Country implements Serializable {
 
+    @Size(max = 80)
+    @Column(name = "name")
+    private String name;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "countryid")
     private Integer countryid;
-    @Size(max = 80)
-    @Column(name = "name")
-    private String name;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "country")
     private List<Customer> customerList;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "country")
+    private List<Visitor> visitorList;
 
     public List<Customer> getCustomerList() {
         return customerList;
@@ -52,6 +56,14 @@ public class Country implements Serializable {
 
     public void setCustomerList(List<Customer> customerList) {
         this.customerList = customerList;
+    }
+
+    public List<Visitor> getVisitorList() {
+        return visitorList;
+    }
+
+    public void setVisitorList(List<Visitor> visitorList) {
+        this.visitorList = visitorList;
     }
 
     public Country() {
@@ -69,13 +81,6 @@ public class Country implements Serializable {
         this.countryid = countryid;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     @Override
     public int hashCode() {
@@ -100,6 +105,14 @@ public class Country implements Serializable {
     @Override
     public String toString() {
         return "bookstore.entity.Country[ countryid=" + countryid + " ]";
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
     
 }

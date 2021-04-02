@@ -6,6 +6,7 @@
 package bookstore.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,10 +17,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -41,12 +44,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Visitor.findByPhone", query = "SELECT v FROM Visitor v WHERE v.phone = :phone")})
 public class Visitor implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "visitorid")
-    private Integer visitorid;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 60)
@@ -66,11 +63,6 @@ public class Visitor implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "country")
-    private String country;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
     @Column(name = "street")
     private String street;
     @Basic(optional = false)
@@ -85,6 +77,18 @@ public class Visitor implements Serializable {
     @NotNull
     @Column(name = "phone")
     private int phone;
+    @OneToMany(mappedBy = "visitor")
+    private List<Cart> cartList;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "visitorid")
+    private Integer visitorid;
+    @JoinColumn(name = "country", referencedColumnName = "countryid")
+    @ManyToOne(optional = false)
+    private Country country;
     @JoinColumn(name = "roleid", referencedColumnName = "roleid")
     @ManyToOne(optional = false)
     private Role role;
@@ -96,7 +100,7 @@ public class Visitor implements Serializable {
         this.visitorid = visitorid;
     }
 
-    public Visitor(Integer visitorid, String firstname, String lastname, String email, String country, String street, int streetnumber, int postalcode, int phone) {
+    public Visitor(Integer visitorid, String firstname, String lastname, String email, Country country, String street, int streetnumber, int postalcode, int phone) {
         this.visitorid = visitorid;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -114,6 +118,49 @@ public class Visitor implements Serializable {
 
     public void setVisitorid(Integer visitorid) {
         this.visitorid = visitorid;
+    }
+
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (visitorid != null ? visitorid.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Visitor)) {
+            return false;
+        }
+        Visitor other = (Visitor) object;
+        if ((this.visitorid == null && other.visitorid != null) || (this.visitorid != null && !this.visitorid.equals(other.visitorid))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "bookstore.entity.Visitor[ visitorid=" + visitorid + " ]";
     }
 
     public String getFirstname() {
@@ -138,14 +185,6 @@ public class Visitor implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
     }
 
     public String getStreet() {
@@ -180,37 +219,13 @@ public class Visitor implements Serializable {
         this.phone = phone;
     }
 
-    public Role getRole() {
-        return role;
+    @XmlTransient
+    public List<Cart> getCartList() {
+        return cartList;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (visitorid != null ? visitorid.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Visitor)) {
-            return false;
-        }
-        Visitor other = (Visitor) object;
-        if ((this.visitorid == null && other.visitorid != null) || (this.visitorid != null && !this.visitorid.equals(other.visitorid))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "bookstore.entity.Visitor[ visitorid=" + visitorid + " ]";
+    public void setCartList(List<Cart> cartList) {
+        this.cartList = cartList;
     }
     
 }

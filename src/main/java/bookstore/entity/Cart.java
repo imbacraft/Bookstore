@@ -27,7 +27,6 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import org.springframework.format.annotation.DateTimeFormat;
-import static org.springframework.format.annotation.DateTimeFormat.ISO.DATE_TIME;
 
 /**
  *
@@ -39,35 +38,24 @@ import static org.springframework.format.annotation.DateTimeFormat.ISO.DATE_TIME
 @NamedQueries({
     @NamedQuery(name = "Cart.findAll", query = "SELECT c FROM Cart c")
     , @NamedQuery(name = "Cart.findByCartid", query = "SELECT c FROM Cart c WHERE c.cartid = :cartid")
-    , @NamedQuery(name = "Cart.findByLocalDatetime", query = "SELECT c FROM Cart c WHERE c.datetime = :datetime")
+    , @NamedQuery(name = "Cart.findByDatetime", query = "SELECT c FROM Cart c WHERE c.datetime = :datetime")
     , @NamedQuery(name = "Cart.findByPayment", query = "SELECT c FROM Cart c WHERE c.payment = :payment")
-    , @NamedQuery(name = "Cart.findByQuantity", query = "SELECT c FROM Cart c WHERE c.quantity = :quantity")
     , @NamedQuery(name = "Cart.findByPricebeforetax", query = "SELECT c FROM Cart c WHERE c.pricebeforetax = :pricebeforetax")
     , @NamedQuery(name = "Cart.findByShippingcost", query = "SELECT c FROM Cart c WHERE c.shippingcost = :shippingcost")
     , @NamedQuery(name = "Cart.findByTax", query = "SELECT c FROM Cart c WHERE c.tax = :tax")
     , @NamedQuery(name = "Cart.findByTotalprice", query = "SELECT c FROM Cart c WHERE c.totalprice = :totalprice")})
 public class Cart implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "cartid")
-    private Integer cartid;
     @Basic(optional = false)
     @NotNull
     @Column(name = "datetime")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime datetime;
     @Basic(optional = false)
-    @NotNull
+    @NotNull()
     @Size(min = 1, max = 60)
     @Column(name = "payment")
     private String payment;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "quantity")
-    private int quantity;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
@@ -77,6 +65,7 @@ public class Cart implements Serializable {
     @NotNull
     @Column(name = "shippingcost")
     private BigDecimal shippingcost;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Column(name = "tax")
@@ -85,6 +74,12 @@ public class Cart implements Serializable {
     @NotNull
     @Column(name = "totalprice")
     private BigDecimal totalprice;
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "cartid")
+    private Integer cartid;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cart")
     private List<Bookpercart> bookpercartList;
     @JoinColumn(name = "customerid", referencedColumnName = "customerid")
@@ -101,11 +96,10 @@ public class Cart implements Serializable {
         this.cartid = cartid;
     }
 
-    public Cart(Integer cartid, LocalDateTime datetime, String payment, int quantity, BigDecimal pricebeforetax, BigDecimal shippingcost, BigDecimal tax, BigDecimal totalprice) {
+    public Cart(Integer cartid, LocalDateTime datetime, String payment, BigDecimal pricebeforetax, BigDecimal shippingcost, BigDecimal tax, BigDecimal totalprice) {
         this.cartid = cartid;
         this.datetime = datetime;
         this.payment = payment;
-        this.quantity = quantity;
         this.pricebeforetax = pricebeforetax;
         this.shippingcost = shippingcost;
         this.tax = tax;
@@ -120,61 +114,6 @@ public class Cart implements Serializable {
         this.cartid = cartid;
     }
 
-    public LocalDateTime getDatetime() {
-        return datetime;
-    }
-
-    public void setDatetime(LocalDateTime datetime) {
-        this.datetime = datetime;
-    }
-
-    public String getPayment() {
-        return payment;
-    }
-
-    public void setPayment(String payment) {
-        this.payment = payment;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public BigDecimal getPricebeforetax() {
-        return pricebeforetax;
-    }
-
-    public void setPricebeforetax(BigDecimal pricebeforetax) {
-        this.pricebeforetax = pricebeforetax;
-    }
-
-    public BigDecimal getShippingcost() {
-        return shippingcost;
-    }
-
-    public void setShippingcost(BigDecimal shippingcost) {
-        this.shippingcost = shippingcost;
-    }
-
-    public BigDecimal getTax() {
-        return tax;
-    }
-
-    public void setTax(BigDecimal tax) {
-        this.tax = tax;
-    }
-
-    public BigDecimal getTotalprice() {
-        return totalprice;
-    }
-
-    public void setTotalprice(BigDecimal totalprice) {
-        this.totalprice = totalprice;
-    }
 
     @XmlTransient
     public List<Bookpercart> getBookpercartList() {
@@ -224,6 +163,54 @@ public class Cart implements Serializable {
     @Override
     public String toString() {
         return "bookstore.entity.Cart[ cartid=" + cartid + " ]";
+    }
+
+    public LocalDateTime getDatetime() {
+        return datetime;
+    }
+
+    public void setDatetime(LocalDateTime datetime) {
+        this.datetime = datetime;
+    }
+
+    public String getPayment() {
+        return payment;
+    }
+
+    public void setPayment(String payment) {
+        this.payment = payment;
+    }
+
+    public BigDecimal getPricebeforetax() {
+        return pricebeforetax;
+    }
+
+    public void setPricebeforetax(BigDecimal pricebeforetax) {
+        this.pricebeforetax = pricebeforetax;
+    }
+
+    public BigDecimal getShippingcost() {
+        return shippingcost;
+    }
+
+    public void setShippingcost(BigDecimal shippingcost) {
+        this.shippingcost = shippingcost;
+    }
+
+    public BigDecimal getTax() {
+        return tax;
+    }
+
+    public void setTax(BigDecimal tax) {
+        this.tax = tax;
+    }
+
+    public BigDecimal getTotalprice() {
+        return totalprice;
+    }
+
+    public void setTotalprice(BigDecimal totalprice) {
+        this.totalprice = totalprice;
     }
     
 }
