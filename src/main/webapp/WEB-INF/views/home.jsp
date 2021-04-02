@@ -74,25 +74,13 @@
 
     <!-- Logo-Login-Basket -->
     <section id="partWithLogo">
-      <!-- me ton parakatw tropo xwrizw mia lwrida se 3 merh -->
-      <!-- ti ginetai omws an mikrunw to viewport -->
-      <!-- tote allazei, h klash -->
-      <!-- <div class="row">
-        <div class="col col-3">col</div>
-        <div class="col col-6">col</div>
-        <div class="col col-3">col</div>
-      </div> -->
-      <!-- kai ginetai ws ekshs -->
-      <!-- an mikrunw to vieport, to kathe col erxetai to ena katw ap to allo 
-      ARA EINAI RESPONSIVE-->
-
-      <div class="row">
+ <div class="row">
         <!-- 3 sthles/row sto megalo viewport, 2 sto mikrotero, kai 1 otan mikrunei teleiws -->
         <div class="col-lg-4 col-md-6">
           <!-- bazw sto 1/3 ths sthlhs 2 boxes->ara div, ara to ena katw ap to allo
           titlos +logia -->
           <div class="col-6">
-            <img src="./images/bookLogo1.jpg" alt="bookLogo" id="bookLogo" />
+            <img src="/static.images/bookLogo1.jpg" alt="bookLogo" id="bookLogo" />
           </div>
           <div class="col-6 TitleText">
             <a href="">BOOKS ARE TREASURE</a>
@@ -145,18 +133,14 @@
       <header><b>Books</b></header>
      
       <c:forEach items="${categories}" var="category">
-       <div>
-        <b><a href="${pageContext.request.contextPath}/books/${category.name}">${category.name}</a></b>
-      </div>
-      </c:forEach>
-        
-           
-      
+     <div>   <b><a href="${pageContext.request.contextPath}/books/${category.name}">${category.name}</a></b>
+
+     </div> </c:forEach>
     </nav>
       
         
          <nav onchange="location=this.value">
-      <header><b>Books</b></header>
+      <header><b>Authors</b></header>
       <c:forEach items="${authors}" var="author">
       <div>
         <b><a href="${pageContext.request.contextPath}/authors/${author.lastname}">${author.lastname}</a></b>
@@ -167,13 +151,16 @@
 
        
           <nav onchange="location=this.value">
-      <header><b>Books</b></header>
+      <header><b>Bestsellers</b></header>
       <c:forEach items="${bestSellers}" var="book">
       <div>
         <b><a href="${pageContext.request.contextPath}/books/search/${book.bookid}">${book.title}</a></b>
-      </div>
-      </c:forEach>
+     +</div>
+       </c:forEach>
           </nav>
+        
+        
+        
         
         </section>
       
