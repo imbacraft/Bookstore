@@ -37,7 +37,7 @@ public class HomeController {
        model.addAttribute("categories",categories);
     model.addAttribute("authors", allAuthors);
     model.addAttribute("bestSellers", bestSellers);
-       return "home";
+       return "main";
    }
   
     
