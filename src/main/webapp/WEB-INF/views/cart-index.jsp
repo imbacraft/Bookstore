@@ -31,24 +31,50 @@
 
         <table cellpadding="2" cellspacing="2" border="1">
             <tr>
-                <th>Product</th>
+                <th>Book</th>
                 <th>Title</th>
                 <th>Format</th>
                  <th>Quantity</th>
-                 <th>Price</th>
+                 <th>Subtotal</th>
+                 <th>Remove</th>
             </tr>
-            <c:set var="total" value="0"></c:set>
+            
+            <% double total = 0.0; %>
+            
             <c:forEach var="bookpercart" items="${sessionScope.cart}">
+                <c:set var="subtotal" value="${bookpercart.book.price * bookpercart.quantity}"></c:set>
+              
+                <% total = total + (double) pageContext.getAttribute("subtotal");  %>
+                
                 <tr>
-                    <td><img src="${bookpercart.book.frontcover}" width="50"></td>
+                    <td><a href="${pageContext.request.contextPath}/books/search/${bookpercart.book.bookid}"><img src="${bookpercart.book.frontcover}" ></a></td>
                     <td>${bookpercart.book.title}</td>
                     <td>${bookpercart.book.booktype.name}</td>
-                    <td>${bookpercart.quantity }</td>
-                    <td>${bookpercart.book.price }</td>
+                            <td>
+                                <form action = "${pageContext.request.contextPath}/cart/index" method="post">
+                                    <input name="bookid" value="${bookpercart.book.bookid}" hidden>
+                                    <input type= "number" name ="quantity" min=1 placeholder = "${bookpercart.quantity }">
+                                    <button type="submit"> Update</button>
+                            </form>
+                            </td>
+                    <td>${subtotal}</td>
+                    <td><a href="${pageContext.request.contextPath}/cart/remove/${bookpercart.book.bookid}">Remove</a></td>
+                     
+                   
                     
                 </tr>
             </c:forEach>
+                
+                <tr>
+                    <td colspan="6">
+                        Total: <%=total%>
+                    </td>
+                    
+                </tr>
+     
+                
         </table>
+           
 
         <a href="${pageContext.request.contextPath}/home">Continue shopping</a>
         <a href="${pageContext.request.contextPath}/cart/checkout">Checkout</a>

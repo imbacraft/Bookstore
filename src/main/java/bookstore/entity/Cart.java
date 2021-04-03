@@ -6,8 +6,8 @@
 package bookstore.entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -22,6 +22,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -57,23 +59,24 @@ public class Cart implements Serializable {
     @Column(name = "payment")
     private String payment;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Column(name = "pricebeforetax")
-    private BigDecimal pricebeforetax;
+    private double pricebeforetax;
     @Basic(optional = false)
     @NotNull
     @Column(name = "shippingcost")
-    private BigDecimal shippingcost;
+    private double shippingcost;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Column(name = "tax")
-    private BigDecimal tax;
+    private double tax;
     @Basic(optional = false)
     @NotNull
     @Column(name = "totalprice")
-    private BigDecimal totalprice;
+    private double totalprice;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -96,7 +99,7 @@ public class Cart implements Serializable {
         this.cartid = cartid;
     }
 
-    public Cart(Integer cartid, LocalDateTime datetime, String payment, BigDecimal pricebeforetax, BigDecimal shippingcost, BigDecimal tax, BigDecimal totalprice) {
+    public Cart(Integer cartid, LocalDateTime datetime, String payment, double pricebeforetax, double shippingcost, double tax, double totalprice) {
         this.cartid = cartid;
         this.datetime = datetime;
         this.payment = payment;
@@ -181,35 +184,35 @@ public class Cart implements Serializable {
         this.payment = payment;
     }
 
-    public BigDecimal getPricebeforetax() {
+    public double getPricebeforetax() {
         return pricebeforetax;
     }
 
-    public void setPricebeforetax(BigDecimal pricebeforetax) {
+    public void setPricebeforetax(double pricebeforetax) {
         this.pricebeforetax = pricebeforetax;
     }
 
-    public BigDecimal getShippingcost() {
+    public double getShippingcost() {
         return shippingcost;
     }
 
-    public void setShippingcost(BigDecimal shippingcost) {
+    public void setShippingcost(double shippingcost) {
         this.shippingcost = shippingcost;
     }
 
-    public BigDecimal getTax() {
+    public double getTax() {
         return tax;
     }
 
-    public void setTax(BigDecimal tax) {
+    public void setTax(double tax) {
         this.tax = tax;
     }
 
-    public BigDecimal getTotalprice() {
+    public double getTotalprice() {
         return totalprice;
     }
 
-    public void setTotalprice(BigDecimal totalprice) {
+    public void setTotalprice(double totalprice) {
         this.totalprice = totalprice;
     }
     

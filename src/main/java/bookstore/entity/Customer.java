@@ -65,6 +65,7 @@ public class Customer implements Serializable {
     @Column(name = "lastname")
     private String lastname;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 80)
@@ -100,8 +101,8 @@ public class Customer implements Serializable {
     @Column(name = "postalcode")
     private int postalcode;
     @Column(name = "dateofbirth")
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    private LocalDate dateofbirth;
+    @Temporal(TemporalType.DATE)
+    private Date dateofbirth;
     @Size(max = 60)
     @Column(name = "paypalaccount")
     private String paypalaccount;
@@ -292,11 +293,11 @@ public class Customer implements Serializable {
         this.postalcode = postalcode;
     }
 
-    public LocalDate getDateofbirth() {
+    public Date getDateofbirth() {
         return dateofbirth;
     }
 
-    public void setDateofbirth(LocalDate dateofbirth) {
+    public void setDateofbirth(Date dateofbirth) {
         this.dateofbirth = dateofbirth;
     }
 

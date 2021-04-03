@@ -55,6 +55,7 @@ public class Visitor implements Serializable {
     @Column(name = "lastname")
     private String lastname;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 60)
@@ -162,6 +163,13 @@ public class Visitor implements Serializable {
     public String toString() {
         return "bookstore.entity.Visitor[ visitorid=" + visitorid + " ]";
     }
+    @XmlTransient
+    public List<Cart> getCartList() {
+        return cartList;
+    }
+    public void setCartList(List<Cart> cartList) {
+        this.cartList = cartList;
+    }
 
     public String getFirstname() {
         return firstname;
@@ -217,15 +225,6 @@ public class Visitor implements Serializable {
 
     public void setPhone(int phone) {
         this.phone = phone;
-    }
-
-    @XmlTransient
-    public List<Cart> getCartList() {
-        return cartList;
-    }
-
-    public void setCartList(List<Cart> cartList) {
-        this.cartList = cartList;
     }
     
 }

@@ -6,12 +6,12 @@
 package bookstore.entity;
 
 import java.io.Serializable;
-import javax.persistence.AssociationOverride;
-import javax.persistence.AssociationOverrides;
 import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -29,47 +29,45 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Bookpercart.findAll", query = "SELECT b FROM Bookpercart b")
-    , @NamedQuery(name = "Bookpercart.findByCartid", query = "SELECT b FROM Bookpercart b WHERE b.bookpercartPK.cartid = :cartid")
-    , @NamedQuery(name = "Bookpercart.findByBookid", query = "SELECT b FROM Bookpercart b WHERE b.bookpercartPK.bookid = :bookid")
+    , @NamedQuery(name = "Bookpercart.findByBookpercartid", query = "SELECT b FROM Bookpercart b WHERE b.bookpercartid = :bookpercartid")
     , @NamedQuery(name = "Bookpercart.findByQuantity", query = "SELECT b FROM Bookpercart b WHERE b.quantity = :quantity")})
 public class Bookpercart implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected BookpercartPK bookpercartPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "bookpercartid")
+    private Integer bookpercartid;
     @Basic(optional = false)
     @NotNull
     @Column(name = "quantity")
     private int quantity;
-    @JoinColumn(name = "bookid", referencedColumnName = "bookid", insertable = false, updatable = false)
+    @JoinColumn(name = "bookid", referencedColumnName = "bookid")
     @ManyToOne(optional = false)
     private Book book;
-    @JoinColumn(name = "cartid", referencedColumnName = "cartid", insertable = false, updatable = false)
+    @JoinColumn(name = "cartid", referencedColumnName = "cartid")
     @ManyToOne(optional = false)
     private Cart cart;
-
+    
     public Bookpercart() {
     }
 
-    public Bookpercart(BookpercartPK bookpercartPK) {
-        this.bookpercartPK = bookpercartPK;
+    public Bookpercart(Integer bookpercartid) {
+        this.bookpercartid = bookpercartid;
     }
 
-    public Bookpercart(BookpercartPK bookpercartPK, int quantity) {
-        this.bookpercartPK = bookpercartPK;
+    public Bookpercart(Integer bookpercartid, int quantity) {
+        this.bookpercartid = bookpercartid;
         this.quantity = quantity;
     }
 
-    public Bookpercart(int cartid, int bookid) {
-        this.bookpercartPK = new BookpercartPK(cartid, bookid);
+    public Integer getBookpercartid() {
+        return bookpercartid;
     }
 
-    public BookpercartPK getBookpercartPK() {
-        return bookpercartPK;
-    }
-
-    public void setBookpercartPK(BookpercartPK bookpercartPK) {
-        this.bookpercartPK = bookpercartPK;
+    public void setBookpercartid(Integer bookpercartid) {
+        this.bookpercartid = bookpercartid;
     }
 
     public int getQuantity() {
@@ -92,14 +90,14 @@ public class Bookpercart implements Serializable {
         return cart;
     }
 
-    public void setCart(Cart cart) {
+    public void setCartid(Cart cart) {
         this.cart = cart;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (bookpercartPK != null ? bookpercartPK.hashCode() : 0);
+        hash += (bookpercartid != null ? bookpercartid.hashCode() : 0);
         return hash;
     }
 
@@ -110,7 +108,7 @@ public class Bookpercart implements Serializable {
             return false;
         }
         Bookpercart other = (Bookpercart) object;
-        if ((this.bookpercartPK == null && other.bookpercartPK != null) || (this.bookpercartPK != null && !this.bookpercartPK.equals(other.bookpercartPK))) {
+        if ((this.bookpercartid == null && other.bookpercartid != null) || (this.bookpercartid != null && !this.bookpercartid.equals(other.bookpercartid))) {
             return false;
         }
         return true;
@@ -118,9 +116,7 @@ public class Bookpercart implements Serializable {
 
     @Override
     public String toString() {
-        return "Bookpercart{" + "bookpercartPK=" + bookpercartPK + ", quantity=" + quantity + ", book=" + book + ", cart=" + cart + '}';
+        return "bookstore.entity.Bookpercart[ bookpercartid=" + bookpercartid + " ]";
     }
-
-   
     
 }

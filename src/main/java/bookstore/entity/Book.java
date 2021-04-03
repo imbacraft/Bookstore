@@ -6,7 +6,6 @@
 package bookstore.entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -70,10 +69,11 @@ public class Book implements Serializable {
     @Column(name = "description")
     private String description;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Column(name = "price")
-    private BigDecimal price;
+    private double price;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -83,7 +83,7 @@ public class Book implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "publicationdate")
-    @DateTimeFormat(pattern= "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate publicationdate;
     @Basic(optional = false)
     @NotNull
@@ -140,7 +140,7 @@ public class Book implements Serializable {
         this.bookid = bookid;
     }
 
-    public Book(Integer bookid, String title, String description, BigDecimal price, String publisher, LocalDate publicationdate, int edition, int pages, String language, int count) {
+    public Book(Integer bookid, String title, String description, double price, String publisher, LocalDate publicationdate, int edition, int pages, String language, int count) {
         this.bookid = bookid;
         this.title = title;
         this.description = description;
@@ -212,6 +212,13 @@ public class Book implements Serializable {
     public String toString() {
         return "Book{" + "bookid=" + bookid + ", title=" + title + ", description=" + description + ", price=" + price + ", publisher=" + publisher + ", publicationdate=" + publicationdate + ", edition=" + edition + ", pages=" + pages + ", language=" + language + ", frontcover=" + frontcover + ", backcover=" + backcover + ", count=" + count + ", isbn10=" + isbn10 + ", isbn13=" + isbn13 + ", authorList=" + authorList + ", categoryList=" + categoryList + ", booktype=" + booktype + '}';
     }
+    @XmlTransient
+    public List<Bookpercart> getBookpercartList() {
+        return bookpercartList;
+    }
+    public void setBookpercartList(List<Bookpercart> bookpercartList) {
+        this.bookpercartList = bookpercartList;
+    }
 
     public String getTitle() {
         return title;
@@ -229,11 +236,11 @@ public class Book implements Serializable {
         this.description = description;
     }
 
-    public BigDecimal getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -315,15 +322,6 @@ public class Book implements Serializable {
 
     public void setIsbn13(String isbn13) {
         this.isbn13 = isbn13;
-    }
-
-    @XmlTransient
-    public List<Bookpercart> getBookpercartList() {
-        return bookpercartList;
-    }
-
-    public void setBookpercartList(List<Bookpercart> bookpercartList) {
-        this.bookpercartList = bookpercartList;
     }
 
    

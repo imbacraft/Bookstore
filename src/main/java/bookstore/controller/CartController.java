@@ -7,8 +7,6 @@ package bookstore.controller;
 
 import bookstore.entity.Book;
 import bookstore.entity.Bookpercart;
-import bookstore.entity.BookpercartPK;
-import bookstore.entity.Cart;
 import bookstore.repo.BookRepo;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -37,6 +36,21 @@ public class CartController {
         return "cart-index";
 
     }
+    
+    
+    //For some reason this method doesn't work
+    @PostMapping("/index")
+    public String increaseQuantity(@RequestParam("bookid") String bookid, @RequestParam("quantity") String quantity, HttpSession session) {
+        int updatedquantity = Integer.parseInt(quantity);
+        int id = Integer.parseInt(bookid);
+        
+        List<Bookpercart> cart = (List<Bookpercart>) session.getAttribute("cart");
+        
+        cart.get(id).setQuantity(updatedquantity);
+        
+        session.setAttribute("cart", cart);
+        return "redirect:/cart/index";
+    }
 
     @GetMapping("/buy/{id}")
     public String buyBook(@PathVariable("id") Integer id, HttpSession session) {
@@ -49,10 +63,6 @@ public class CartController {
 
             //Create cart
             List<Bookpercart> cart = new ArrayList<>();
-
-//            //set bookid as bookpercartPK
-//            BookpercartPK bookpercartPK = new BookpercartPK();
-//            bookpercartPK.setBookid(book.getBookid());
 
             //create bookpercart
             Bookpercart bookpercart = new Bookpercart();
@@ -76,9 +86,7 @@ public class CartController {
             int index = this.exists(id, cart);
 
             if (index == -1) {
-//                //set bookid as bookpercartPK
-//                BookpercartPK bookpercartPK = new BookpercartPK();
-//                bookpercartPK.setBookid(book.getBookid());
+
                 //create bookpercart
                 Bookpercart bookpercart = new Bookpercart();
                 bookpercart.setBook(book);
@@ -114,10 +122,13 @@ public class CartController {
         session.setAttribute("cart", cart);
         return "redirect:/cart/index";
     }
+    
+    
+    
 
     private int exists(int id, List<Bookpercart> cart) {
         for (int i = 0; i < cart.size(); i++) {
-            if (id == cart.get(i).getBookpercartPK().getBookid()) {
+            if (id == cart.get(i).getBook().getBookid()) {
                 return i;
             }
         }
