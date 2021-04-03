@@ -7,7 +7,6 @@ package bookstore.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -21,8 +20,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -101,8 +98,8 @@ public class Customer implements Serializable {
     @Column(name = "postalcode")
     private int postalcode;
     @Column(name = "dateofbirth")
-    @Temporal(TemporalType.DATE)
-    private Date dateofbirth;
+    @DateTimeFormat(pattern= "yyyy-MM-dd")
+    private LocalDate dateofbirth;
     @Size(max = 60)
     @Column(name = "paypalaccount")
     private String paypalaccount;
@@ -293,11 +290,11 @@ public class Customer implements Serializable {
         this.postalcode = postalcode;
     }
 
-    public Date getDateofbirth() {
+    public LocalDate getDateofbirth() {
         return dateofbirth;
     }
 
-    public void setDateofbirth(Date dateofbirth) {
+    public void setDateofbirth(LocalDate dateofbirth) {
         this.dateofbirth = dateofbirth;
     }
 

@@ -47,7 +47,7 @@
                 <% total = total + (double) pageContext.getAttribute("subtotal");  %>
                 
                 <tr>
-                    <td><a href="${pageContext.request.contextPath}/books/search/${bookpercart.book.bookid}"><img src="${bookpercart.book.frontcover}" ></a></td>
+                    <td><a href="${pageContext.request.contextPath}/books/search/${bookpercart.book.bookid}"><img src="${bookpercart.book.frontcover}" width="100"></a></td>
                     <td>${bookpercart.book.title}</td>
                     <td>${bookpercart.book.booktype.name}</td>
                             <td>
@@ -57,7 +57,7 @@
                                     <button type="submit"> Update</button>
                             </form>
                             </td>
-                    <td>${subtotal}</td>
+                    <td>${subtotal} &euro;</td>
                     <td><a href="${pageContext.request.contextPath}/cart/remove/${bookpercart.book.bookid}">Remove</a></td>
                      
                    
@@ -67,7 +67,7 @@
                 
                 <tr>
                     <td colspan="6">
-                        Total: <%=total%>
+                        Total: <%=total%> &euro;
                     </td>
                     
                 </tr>

@@ -23,6 +23,10 @@
 
         <h2>This is Visitor's homepage</h2>
       
+        <a href="${pageContext.request.contextPath}/cart/index">Cart</a>
+        ${sessionScope.cart.size()}
+        
+        <br>
         
         <button>Books</button>
         <div>
