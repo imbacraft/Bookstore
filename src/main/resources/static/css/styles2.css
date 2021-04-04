@@ -1,24 +1,23 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : Apr 1, 2021, 7:29:42 PM
-    Author     : Σταθης Καράμπελας
-*/
-body,html{
-    margin:0 0;
+
+
+html,body{
+    margin:0;
 }
-.navbar-nav {
+.ml-auto {
   margin-right: 100px;
 }
 #topSpan {
   margin-left: 50px;
 }
 
+/*pesticide.io analog*/
+/* html * {
+  background: rgba(255, 0, 0, 0.1);
+  box-shadow: 0 0 0 1px red;
+} */
+
 #partWithLogo {
-  background-color: cornsilk;
+  /* background-color: cornsilk; */
   height: 200px;
   margin-left: 90px;
   margin-right: 90px;
@@ -34,8 +33,10 @@ body,html{
 }
 
 .TitleText {
-  margin-left: 60px;
   font-family: sans-serif;
+  justify-content: center;
+  width: inherit;
+  margin-left: 4rem;
 }
 #searchText {
   position: relative;
@@ -116,3 +117,134 @@ body,html{
 #hr {
   border-top: 1px dashed black;
 }
+
+/* inherit property, tha klhronomhsei to property tou section, tou parent element */
+#freeHomeDelivery {
+  height: inherit;
+  width: 200px;
+  /* me ton sunduasmo position absolute kai margin-right(right)=0, mou phgainei to element terma deksia */
+  position: absolute;
+  right: 70px;
+  border: solid 1px grey;
+  background-color: aquamarine;
+}
+
+#freeHomeDeliveryText {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+/* Carousel section css */
+#carousel {
+  background-color: orange;
+  height: 100px;
+}
+
+/* book of the month css */
+#bookOfTheMonth {
+  margin-top: 0;
+  height: auto;
+  width: 100%;
+  background-color: blanchedalmond;
+}
+
+#bookMonthDiv {
+  height: inherit;
+  margin: 0 20%;
+}
+
+/*  */
+#monthBookImage {
+  margin-top: 5%;
+  margin-bottom: 5%;
+  margin-left: 15%;
+  height:240px;
+  width:150px;
+  justify-content: center;
+  align-items: center;
+}
+
+#bookMonthColText {
+  text-align: center;
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-family: "Open Sans", Arial, sans-serif;
+
+  font-size: 14px;
+  line-height: 20px;
+  -webkit-text-size-adjust: none;
+}
+
+
+/* author of the month css*/
+#authorOfTheMonth {
+  margin-top: 0;
+  height: auto;
+  width: 100%;
+  background-color: blanchedalmond;
+}
+
+#authorMonthDiv {
+  height: inherit;
+  margin: 0 20%;
+}
+
+/*  */
+#monthauthorImage {
+  margin-top: 5%;
+  margin-bottom: 5%;
+  margin-left: 15%;
+  justify-content: center;
+  align-items: center;
+}
+
+#authorMonthColText {
+  text-align: center;
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-family: "Open Sans", Arial, sans-serif;
+
+  font-size: 14px;
+  line-height: 20px;
+  -webkit-text-size-adjust: none;
+}
+
+.monthAuthorBooksImages {
+  height: 200px;
+  width: 130px;
+}
+
+.monthAuthorBooksImages:nth-child(2){
+    margin-left: 30%;
+    
+}
+
+
+
+
+/* Readers choice -->Upcoming */
+#ReadersChoice {
+  height: 50px;
+  margin: 0 15%;
+}
+
+#verticalLine {
+  border-left: solid grey;
+  margin-left: 6px;
+}
+
+/* upcoming books */
+#upcomingBooks {
+  height: auto;
+  margin: 0 15%;
+}
+

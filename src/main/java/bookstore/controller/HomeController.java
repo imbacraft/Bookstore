@@ -6,6 +6,8 @@ import bookstore.entity.Category;
 import bookstore.repo.AuthorRepo;
 import bookstore.repo.BookRepo;
 import bookstore.repo.CategoryRepo;
+import bookstore.service.bookService;
+import java.util.HashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +29,9 @@ public class HomeController {
     @Autowired
     AuthorRepo authorRepo;
     
+    @Autowired
+    bookService bookService;
+    
 
     //*****all categories in homepage as options in select tag in 
      @RequestMapping
@@ -34,9 +39,14 @@ public class HomeController {
         List<Category> categories= categoryRepo.findAll();
         List<Author> allAuthors=authorRepo.findAll();
         List<Book> bestSellers=bookRepo.findTop5();
+        Book bookOfMonth=bookService.getRandomBookOfTheMonth();
+        HashMap<Author,List<Book>> monthAuthorDetails=bookService.authorPerMonthDetails();
        model.addAttribute("categories",categories);
     model.addAttribute("authors", allAuthors);
     model.addAttribute("bestSellers", bestSellers);
+    model.addAttribute("bookOfMonth",bookOfMonth);
+    model.addAttribute("monthAuthorMap",monthAuthorDetails);
+    
        return "home";
    }
   

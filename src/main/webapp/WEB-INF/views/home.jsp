@@ -23,6 +23,13 @@
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"
     />
+        
+         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+ 
+        
+   
     </head>
     <body>
         
@@ -80,7 +87,7 @@
           <!-- bazw sto 1/3 ths sthlhs 2 boxes->ara div, ara to ena katw ap to allo
           titlos +logia -->
           <div class="col-6">
-            <img src="/static.images/bookLogo1.jpg" alt="bookLogo" id="bookLogo" />
+            <img src="" alt="bookLogo" id="bookLogo" />
           </div>
           <div class="col-6 TitleText">
             <a href="">BOOKS ARE TREASURE</a>
@@ -127,8 +134,7 @@
     
     <section class="section">
 
-        
-        
+    
         <nav onchange="location=this.value">
       <header><b>Books</b></header>
      
@@ -155,14 +161,168 @@
       <c:forEach items="${bestSellers}" var="book">
       <div>
         <b><a href="${pageContext.request.contextPath}/books/search/${book.bookid}">${book.title}</a></b>
-     +</div>
+     </div>
        </c:forEach>
           </nav>
-        
-        
-        
-        
+         
         </section>
+    
+    
+    
+    <!-- Carousel with 3 categories -->
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img class="d-block w-100" src="./images/Batman-etc.jpg" alt="First slide">
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="./images/MentalHealth.jpg" alt="Second slide">
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="./images/SportsAndOutdoor.jpg" alt="Third slide">
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div> 
+    <hr>
+    
+     <!-- book of the month -->
+ <section id="bookOfTheMonth">
+   <div id="bookMonthDiv">
+    <div class="row">
+      <div class="col-4">
+        <img id="monthBookImage" src="${bookOfMonth.frontcover}" alt="aaa">
+      </div>
+      <div class="col-7 bookMonthCol">
+        <h2>book of the month</h2>
+        <h6>${bookOfMonth.title}</h6>
+
+        <p id="bookMonthColText"> ${bookOfMonth.description}
+        </p>
+        <div>
+            <a href="${pageContext.request.contextPath}/books/search/${bookOfMonth.bookid}">Find Out More>></a>
+        </div>
+      </div>
+    </div>
+   </div>
+     </section>
+     
+     
+     <!-- Readers choice New and Upcoming -->
+<section id="ReadersChoice">
+  <div class="row">
+    <div class="col-4">
+      <hr>
+    </div>
+    <div class="col-4">
+      <span>Reader's choice:New and Upcoming</span><span id="verticalLine"></span> <a href="" >See all</a>
+    </div>
+    <div class="col-4">
+      <hr>
+    </div>
+  </div>
+
+</section>
+     
+     
+     
+     <!-- new books and upcoming -->
+
+    
+    
+    
+    <!--author of the month-->
+   <section id="authorOfTheMonth">
+  <div id="authorMonthDiv">
+   <div class="row">
+     <div class="col-4">
+       <img id="monthauthorImage" src="./images/bookLogo.png" alt="aaa">
+     </div>
+     <div class="col-7 authorMonthCol">
+       <h2>author of the month</h2>
+       <h6>${monthAuthorMap.keySet().toArray()[0].firstname}${" "} ${monthAuthorMap.keySet().toArray()[0].lastname}</h6>
+
+       <p id="authorMonthColText">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+         It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+       </p>
+        <div>
+            <a href="${pageContext.request.contextPath}/authors/${monthAuthorMap.keySet().toArray()[0].lastname}">Find Out More about ${monthAuthorMap.keySet().toArray()[0].firstname}>></a>
+        </div>
+     
+      
+
+<c:forEach items="${monthAuthorMap}" var="entry">
+    <c:forEach items="${entry.value}" var="bookElement">
+        <img class="monthAuthorBooksImages" src="${bookElement.frontcover}">
+    </c:forEach>
+    
+</c:forEach>
+       
+     </div>
+   </div>
+  </div>
+  
+
+</section>
+
+    
+    
+    
+    
+    
+    
+ 
+ 
+           <footer>
+      <div id="footer">
+          <div style="text-align: center;" id="whoWeAre" class="footerBlock">
+              <p   >Who we are</p>
+          </div>
+          <div id="helpfulLinks" class="footerBlock">
+              <span style="text-align: center;">Helpful links</span>
+              <ul>
+                  <li href="#">Sign in / Register</li>
+                  <li href="#">My Account</li>
+                  <li href="#">Contact us</li>
+                  <li href="#">FAQs</li>
+                  <li href="#">Log out</li>
+              </ul>
+          </div>
+          <div id="socialLinks" class="footerBlock">
+              <ul         style="float: left;
+              left: 17%;">
+                  <li><img src="f_logo_RGB-Blue_128.png" width="24" height="24" alt="Facebook logo"/><span style="margin-bottom:  150px">Facebook</span></li>
+                  
+                  <li><img src="2021 Twitter logo - blue-128.png" width="24" height="24" alt="Twitter logo"/>Twitter</li>
+                  
+                  <li><img src="pinterest-logo-128.png" alt="Pinterest logo" width="24" height="24"/>Pinterest</li>
+                  <li><img src="yt_logo_rgb_light-128.png" alt="YouTube logo"  height="16"/></li>
+                  
+                  
+              </ul>
+          </div>
+               
+          
+      </div>
+                  
+      </footer>
+ 
+      
+   
+ 
+    
       
        
       
@@ -254,6 +414,10 @@
         </sec:authorize>
 
 
+                
+         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 
     </body>

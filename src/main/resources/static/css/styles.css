@@ -1,0 +1,134 @@
+@keyframes item-fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    flex: 1;
+    opacity: 1;
+  }
+}
+
+.section {
+  margin-top: 0;
+  margin-left: 90px;
+  margin-right: 90px;
+  height: 40px;
+  position: relative;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: start;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+nav {
+  /* to z-index fernei mprosta ta options, enw antitheta tha krubontousan apo pisw */
+  z-index: 7;
+  height: 40px;
+  margin-left: 15px;
+  background-color: cornsilk;
+  border-radius: 10px;
+  display: flex;
+  /* menei opwsdhpote to flex-flow, an to bgalw ginontai orizontia */
+  flex-flow: column nowrap;
+  justify-content: stretch;
+  transition: 120ms height linear, 120ms width linear,
+    120ms background-color linear;
+}
+
+nav > header {
+  display: flex;
+  height: 30px;
+  align-items: center;
+  justify-content: start;
+  transition: 180ms font-size linear;
+  cursor: pointer;
+}
+
+nav > header > b {
+  font-size: 2rem;
+}
+
+nav:hover {
+  background-color: cornflowwhiteerblue;
+  transition: 120ms background-color linear;
+}
+
+nav:hover > header {
+  transition: 180ms font-size linear;
+  font-size: 1.2em;
+}
+
+/* ousiastika auto krubei ta options, kai otan kaneis hover fainontai */
+nav > div {
+  height: 20px;
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 240ms background-color linear;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+nav:hover > div {
+  animation: 240ms item-fade-in linear forwards;
+  animation-delay: 120ms;
+  transition: 120ms background-color linear;
+}
+
+nav:nth-child(1):hover > div:hover,
+nav:nth-child(2):hover > div:hover {
+  background-color: blueviolet;
+  transition: 120ms background-color linear;
+}
+
+nav:nth-child(2) > div {
+  justify-content: center;
+}
+
+nav:nth-child(2) > div > header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+/*    footer*/
+#footer {
+  display: flex;
+  position: relative;
+  width: auto;
+  flex-wrap: wrap;
+}
+
+.footerBlock {
+  position: relative;
+
+  display: inline-flex;
+
+  width: auto;
+  line-height: 2;
+  align-content: center;
+  flex-grow: 1;
+}
+
+#whoWeAre {
+  background-color: #ededed;
+  display: block;
+}
+
+#helpfulLinks {
+  text-align: center;
+  background-color: #ededed;
+  border-left: 1px solid #cccccc;
+  border-right: 1px solid #cccccc;
+  display: block;
+}
+#helpfulLinks ul {
+  text-align: start;
+}
+#socialLinks {
+  background-color: #e0e0e0;
+}
