@@ -14,7 +14,7 @@
         <title>BookaPorta bookstore user registration</title>
         <%@include file="styles.jspf" %>
     </head>
-    <body style="max-width: 1024px; margin: 0 auto;">
+    <body style="max-width: 1182px; margin: 0 auto;">
         <%@include file="header.jspf" %>
         <%@include file="register-form.jspf" %>
         <%@include file="footer.jspf" %>
