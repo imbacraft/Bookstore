@@ -45,18 +45,27 @@
 }
 
 #main-menu-item-modal {
-    display: none;
-    z-index: 10;
-    position: absolute;
-    
-    width: 500px;
-    height: 500px;
-    background-color: white;
-    border-radius: 5px;
-    margin: 0 auto;
-    border: 1px solid grey;
-    
+	display: none;
+	z-index: 10;
+	position: absolute;
+	width: 500px;
+	height: 500px;
+	background-color: white;
+	border-radius: 5px;
+	margin: 0 auto;
+	border: 1px solid #f0ecec;
+	flex-flow: column wrap;
+	box-shadow: 5px 5px 6px 6px #f6f6f6;
 }
+
+    
+    #main-menu-item-modal a {
+	text-decoration: none;
+	text-decoration-color: black;
+	margin: 15px;
+	padding-left: 25px;
+}
+
 </style>
 
 <div class="frontpage">    
@@ -69,37 +78,32 @@
         
    </div>
     
+
     
-    
-    <div id="main-menu-item-modal">
-        <ul>
-            <c:forEach items="${categories}" var="category">  
-               
-                <li>${category.name}</li>
-            </c:forEach>
-            <li></li>
-        </ul>
-    <div>
-        <select name="category" id="category" onchange="location=this.value">
-            <option value="">Select category</option>
-            <c:forEach items="${categories}" var="category">  
-                <option value="${pageContext.request.contextPath}/books/${category.name}">${category.name}</option>
-            </c:forEach>
-        </select>
+    <div id="main-menu-item-modal" onchange="location=this.value">
+              
+      
+     
+     <c:forEach items="${categories}" var="category">
+     
+         <a href="${pageContext.request.contextPath}/books/${category.name}">${category.name}</a>
+      
+     </c:forEach>
     </div>
+    
 </div>
 
     
   
        
-</div>
+
 
 <script>
     let booksModal = document.getElementById("main-menu-item-modal");
 
     function popMainMenuModal(item)
     {
-        if (booksModal.style.display !== "block") booksModal.style.display = "block";
+        if (booksModal.style.display !== "flex") booksModal.style.display = "flex";
         else booksModal.style.display = "none";
     }
 
