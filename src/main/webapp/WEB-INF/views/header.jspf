@@ -1,0 +1,259 @@
+<%@ page pageEncoding="UTF-8" %>
+<%@include file="banner_greece.jspf" %>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+    header {
+       /* display: inline-block; */
+     /*  margin: auto; */
+    }
+    #top-box {
+        left: -2048px;
+        width: 4096px;
+        height: 10px;
+        position: fixed;
+        z-index: 2;
+        background-color: #ffd04d;
+        border-style: solid;
+        border-color: #ffd04d;
+    }
+    
+
+#top-container {
+        height: 140px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    
+#logo {
+    display: flex;
+	/* ; */
+	cursor: pointer;
+	/* display: inline-block; */
+	/* display: inline-flex; */
+	position: relative;
+	top: 50px;
+	/* left: 60px; */
+	margin-left: 20px;
+        height: 60px;
+} 
+
+#search {
+
+	display: flex;
+	position: relative;
+	/*! margin: 0 20px; */
+	/* padding-top: 20px; */
+	top: 50px;
+	height: 60px;
+	width: 450px;
+	float: left;	font-size: 16pt;
+}
+
+
+
+#searchBar {
+	/* position: relative; */
+	display: inline-flex;
+	/* width: 200px; */
+	flex: 0 0 60px;
+	/* border-radius: 3px 0 0 3px; */
+	/* margin: 0 auto; */
+	/* left: 100px; */
+	/* top: 15px; */
+}
+    
+
+    
+ 
+    
+    #searchBar #searchBox input[type="submit"] {
+	display: flex;
+	flex: 0 0 40px;
+	position: relative;
+	width: 100%;
+	min-height: 1px;
+	padding-right: 22px;
+	padding-left: 22px;
+	background-color: #ffd04d;
+	height: 60px;
+
+	color: #ffd04d;
+	cursor: pointer;
+	background-image: url("magnifier.png");
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 18px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #ffd04d;
+	border-radius: 0 3px 3px 0;
+        margin-left: -2px;
+    }
+    
+#account-checkbox, .myAccount {
+
+	top: 30px;
+	position: relative;
+        height: 50px;
+        
+	padding-bottom: 5px;
+	background-color: white;
+	border: none;
+	border-bottom: 3px solid gold;
+	font-size: 14pt;
+}
+    .myAccount-modal {
+        position: relative;
+        display: inline-block;
+        left: 350px;
+        top: 20px;
+    }
+    
+    #my-account-menu li {
+        color: #2794ad;
+        font-size: 14pt;
+        text-decoration: none;
+    }
+    
+    #login-modal {
+	position: absolute;
+	font-family: Helvetica, Arial, sans-serif;
+	z-index: 10;
+	height: 150px;
+	/* width: 200px; */
+	background-color: white;
+	color: #2794ad;
+	display: none;
+	border-radius: 5px;
+	border: 1px solid #cccccc;
+	right: 250px;
+	top: 120px;
+	/* width: min-content; */        font-size: 14pt;
+        text-decoration: none;
+}      
+
+    #cart {
+	position: relative;
+	display: block;
+	/* left: 400px; */
+	top: 50px;
+	cursor: pointer;
+        /*! margin-left: 40px; */
+	height: 100px;
+	width: 100px;
+    }
+ 
+
+#cart-img {
+	background-image: url("basket.png");
+	background-size: 42px 40px;
+	background-repeat: no-repeat;
+	width: 42px;
+	height: 42px;
+	top: 10px;
+	position: relative;
+}
+
+#cart-ammount {        
+	display: inline-block;
+	position: relative;
+	bottom: 15px;
+	left: 50px;
+	background-color: gold;
+	z-index: -1;
+	width: 28px;
+	height: 35px;
+	border-color: gold;
+	border: 24px;
+	border-radius: 15px;
+	background-position-x: -10px;
+	padding-left: 5px;
+	padding-top: 6px;
+	text-align: left;
+	padding-top: 5px;
+}
+#items-number {
+	display: block;
+	position: relative;
+	bottom: 50px;
+	left: 50px;
+	width: 30px;
+	height: 30px;
+	border: 30px gold;
+	border-radius: 30px;
+	background-color: gold;
+	margin-right: 0;
+        
+}
+        
+#cart p {
+	bottom: 30px;
+	position: relative;
+}     
+    
+    
+    
+
+</style>
+
+
+<header>
+    <div id="top-box"></div>
+    
+    <div id="top-container">   
+        
+        <div id="logo">
+            <a href="/bookstore/">
+                <img src="bookaporta-logo.png"  width=300  alt="Bookaporta logo"/>   
+            </a>
+        </div>
+        
+        <div id="search">    
+            <div id="searchBar">
+                    <input id="searchField" type="text" placeholder="Search"  size="40"/>
+                <div id="searchBox">
+                    <input  type="submit" value="Search"/>
+                </div>
+            </div>
+        </div>
+        
+        <div class="myAccount">       
+            <input type="button"  onclick="toggleModal()" id="account-checkbox" value="Μy Account"/>       
+        </div>
+        
+        <div id="login-modal" >
+            <div >
+                <ul id="my-account-menu">
+                    <li><a href="#">My Account</a></li>
+                    <li><a href="#">Sign In or Register</a></li>
+                    <li><a href="#">Order History</a></li>
+                    <li><a href="#">Wishlist</a></li>
+                </ul>
+            </div>
+        </div>   
+
+            
+        
+        <div id="cart">
+            <div id="cart-img">
+            </div>
+            <div id="items-number">0</div>
+            <p>Cart</p>
+        </div>           
+    </div>
+    
+    <hr style="height: 1px; border-width: 0; color: #e0e0e0; background-color: #e0e0e0;"/>
+</header>
+
+
+<script>
+    let loginModal = document.getElementById("login-modal");
+    function toggleModal()
+    {
+        if (loginModal.style.display !== "inline-block") loginModal.style.display = "inline-block";
+        else loginModal.style.display = "none";
+    } 
+</script>    
+

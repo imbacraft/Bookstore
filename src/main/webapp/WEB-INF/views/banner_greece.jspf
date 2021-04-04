@@ -1,0 +1,78 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+<style>
+    #blueLiberationBanner {
+        z-index: 1;
+        position: fixed;
+        background-color: navy;
+        width: auto; 
+        height: 40px;     
+        text-align: center; 
+        font-family: Helvetica, Arial, sans-serif;
+        top: 15px;
+        opacity: 0.7;
+        display: inline-block;
+    }
+    
+   
+    #blueLiberationBanner #closeButton {
+        position: absolute;
+        display: inline;
+        right: 4%;
+        top: 7px;
+        float: right;
+        font-size: 15px;
+
+        height: 25px;
+        background-color: navy;
+        border-color: #666666;
+        color: white;
+        font-size: 12px;
+        border-width: 1px;
+
+    }
+    
+    #blueLiberationBanner a {
+        padding-top: 12px;
+        display: inline-block;
+        color: white;
+        
+    }
+    .wikipedia-greek-independence {
+        margin: 0 auto;
+        width: auto;
+    }
+
+</style>
+
+<section> 
+    <div id="blueLiberationBanner" >
+       
+            <img style="
+                 position: absolute;
+                 display: inline-block;
+                 left: 4%;
+                 background-color: navy;
+                 height: 30px;
+                 margin-top:  4px;"
+                 src="greek_flag.webp" alt="Greek flag"/>
+            
+            <div class="wikipedia-greek-independence">
+                <a href='https://en.wikipedia.org/wiki/Greek_War_of_Independence' target="_blank">200 years since the beginning of the Hellenic War of Independence.</a>
+            </div>
+    
+            <form>          
+                <input id="closeButton"  type="button" value="Dismiss" onclick="closeBanner()"/>
+            </form>
+          
+    
+</section>
+
+<script>
+    let banner = document.getElementById('blueLiberationBanner');
+    function closeBanner()
+    {
+        banner.style.display = 'none';
+    }
+</script>
+   
