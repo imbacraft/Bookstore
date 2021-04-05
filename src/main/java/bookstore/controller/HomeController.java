@@ -57,11 +57,11 @@ public class HomeController {
    @GetMapping("books/search/{bookid}")
    public String getSpecificBook(@PathVariable("bookid") int id,Model model){
        Book book=bookRepo.findById(id).get();
-       model.addAttribute("specificBook",book.getTitle());
-       
+       List<Author> authorsByBook=authorRepo.findByBook(id);
+       model.addAttribute("book",book);
+       model.addAttribute("authorsByBook",authorsByBook);
        return "specificBook";
-       
-   }
+    }
    
    
    
