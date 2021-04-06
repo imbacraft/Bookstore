@@ -38,7 +38,6 @@ public class CartController {
     }
     
     
-    //For some reason this method doesn't work
     @PostMapping("/index")
     public String increaseQuantity(@RequestParam("bookid") String bookid, @RequestParam("quantity") String quantity, HttpSession session) {
         int updatedquantity = Integer.parseInt(quantity);
@@ -46,7 +45,9 @@ public class CartController {
         
         List<Bookpercart> cart = (List<Bookpercart>) session.getAttribute("cart");
         
-        cart.get(id).setQuantity(updatedquantity);
+        int index = this.getBookIndex(id, cart);
+        
+        cart.get(index).setQuantity(updatedquantity);
         
         session.setAttribute("cart", cart);
         return "redirect:/cart/index";
@@ -73,8 +74,6 @@ public class CartController {
             
             //add bookpercart to cart
             cart.add(bookpercart);
-
-            
             
             //set cart as session attribute
             session.setAttribute("cart", cart);
@@ -83,7 +82,7 @@ public class CartController {
 
             List<Bookpercart> cart = (List<Bookpercart>) session.getAttribute("cart");
 
-            int index = this.exists(id, cart);
+            int index = this.getBookIndex(id, cart);
 
             if (index == -1) {
 
@@ -116,7 +115,7 @@ public class CartController {
     public String remove(@PathVariable("id") int id, HttpSession session) {
         
         List<Bookpercart> cart = (List<Bookpercart>) session.getAttribute("cart");
-        int index = this.exists(id, cart);
+        int index = this.getBookIndex(id, cart);
         cart.remove(index);
         
         session.setAttribute("cart", cart);
@@ -125,9 +124,12 @@ public class CartController {
     
     
     
-
-    private int exists(int id, List<Bookpercart> cart) {
+    //This method gets a Bookid and finds at which index position the book stands in Cart list.
+    //If the book doesnt exist in the cart, returns -1.
+    private int getBookIndex(int id, List<Bookpercart> cart) {
+        
         for (int i = 0; i < cart.size(); i++) {
+            
             if (id == cart.get(i).getBook().getBookid()) {
                 return i;
             }
