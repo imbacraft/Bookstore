@@ -3,109 +3,142 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <style>
-    .frontpage {
-        display: block;
-        position: relative;
-    }
-    .main-menu-entry {
-        display: flex;
-        height : 40px;
-        width: auto;
-        text-align: center;
-        margin: 0 80px;
-    }
-    .main-menu-entry input{
-        flex-grow: 1;
-        height : 40px;
-        width: 70px;
+.frontpage {
+    display: block;
+    position: relative;
+}
 
-        
-        
-
-	margin: 0px;
-        padding: 0px;
-	font-size: 16pt;
-         
-        padding:0 10px;
-        
-        border: none;
-        background-color: white;
-        cursor: pointer;
-    }
+.main-menu-entry {
+    display: flex;
+    height : 40px;
+    // width: auto;
+    /*! text-align: center; */
+    // margin: 0 80px;
+    justify-content: space-evenly;
+ }
+ 
+.main-menu-entry input {
+    /*! flex-grow: 1; */
+    height : 40px;
+    /*! width: 30px; */
+    background-color: rgba( 255, 255, 255, 0);
+    /*! margin: 0px; */
+    font-size: 16pt;
+    padding:0 10px;
+    border: none;
+    cursor: pointer;
+    /*! flex-shrink: 1; */
+}
    
-    .main-menu-entry input:hover {
-        color: #2794ad;  
-    }
+.main-menu-entry input:hover {
+    color: #2794ad;  
+}
     
-    #adInMenu {
-        width: 700px;
-        height: 35px;
-        background-color: #2794ad;
-           
+#adInMenu {
+    width: 700px;
+    height: 35px;
+    background-color: #2794ad;          
 }
 
-#main-menu-item-modal {
-	display: none;
-	z-index: 10;
-	position: absolute;
-	width: 500px;
-	height: 500px;
-	background-color: white;
-	border-radius: 5px;
-	margin: 0 auto;
-	border: 1px solid #f0ecec;
-	flex-flow: column wrap;
-	box-shadow: 5px 5px 6px 6px #f6f6f6;
+.main-menu-item-modal {
+    /* display: none; */
+     z-index: 10;
+     position: absolute;
+     background-color: white;
+     border-radius: 5px;
+     // margin: 0 auto;
+     border: 1px solid #f0ecec;
+     flex-flow: column wrap;
+     box-shadow: grey 5px 5px 6px;
 }
 
     
-    #main-menu-item-modal a {
-	text-decoration: none;
-	text-decoration-color: black;
-	margin: 15px;
-	padding-left: 25px;
+.main-menu-item-modal a {
+    text-decoration: none;
+    color: black;
+    // margin: 7px;
+    padding-left: 25px;
 }
 
 </style>
 
-<div class="frontpage">    
+<section class="main-menu-bar">    
    
    <div class="main-menu-entry">
-       <input type="button"  onclick="popMainMenuModal('book')" id="books-menu-choice" value="Books"/>
-       <input type="button"  onclick="popMainMenuModal()"  value="Best Sellers"/>
-       <input type="button"  onclick="popMainMenuModal()"  value="Authors"/>
-       <input type="button"  onclick="popMainMenuModal()"  value="Offers"/>
+       <input type="button"  onclick="popMenuModal('main-menu-item-books')"  onmouseleave="popMenuModal('main-menu-item-books')"value="Books"/>
+       <input type="button"  onclick="popMenuModal('main-menu-item-best-sellers')"  value="Best Sellers"/>
+       <input type="button"  onclick="popMenuModal('main-menu-item-authors')"  value="Authors"/>
+       <input type="button"  onclick="popMenuModal('offers')"  value="Offers"/>
         
    </div>
     
 
-    
-    <div id="main-menu-item-modal" onchange="location=this.value">
-              
-      
-     
-     <c:forEach items="${categories}" var="category">
-     
-         <a href="${pageContext.request.contextPath}/books/${category.name}">${category.name}</a>
-      
-     </c:forEach>
-    </div>
-    
-</div>
 
-    
-  
-       
+        <div class="main-menu-item-modal" id="main-menu-item-books" style="display: none;" onchange="location=this.value">
 
+            <c:forEach items="${categories}" var="category">
+                <a href="${pageContext.request.contextPath}/books/${category.name}">${category.name}</a>
+            </c:forEach>
+        </div>
+        
+        <div class="main-menu-item-modal" id="main-menu-item-authors" style="display: none;" onchange="location=this.value">>
+     
+                <c:forEach items="${authors}" var="author">
+                    <a href="${pageContext.request.contextPath}/authors/${author.lastname}">${author.lastname}</a>
+                </c:forEach>           
+        </div>
+        
+        <div  class="main-menu-item-modal" id="main-menu-item-best-sellers" style="display: none;" onchange="location=this.value">
+        
+            <c:forEach items="${bestSellers}" var="book">
+                <a href="${pageContext.request.contextPath}/books/search/${book.bookid}">${book.title}</a>
+            </c:forEach>
+        </div>
+        
+        
+    <hr style="height: 1px; border-width: 0; color: #e0e0e0; background-color: #e0e0e0;"/>      
+ 
+
+</section>
 
 <script>
-    let booksModal = document.getElementById("main-menu-item-modal");
 
-    function popMainMenuModal(item)
+    function popMenuModal(item)
     {
-        if (booksModal.style.display !== "flex") booksModal.style.display = "flex";
-        else booksModal.style.display = "none";
+        
+         let css = document.getElementById(item).style;
+        
+        if (css.display !== "flex") {
+            css.display = "flex";
+            
+            css.style = "flex-flow: column wrap;";
+         
+            switch ( item ) {
+                case 'main-menu-item-books':
+                    css.width = "300px";
+                    css.height = "400px";
+                    css.left = "5%";
+                    break;
+                case "main-menu-item-best-sellers":
+                    css.width = "400px";
+                    css.height = "400px";
+                    css.left = "22%";
+                    break;
+                case "main-menu-item-authors":
+                    css.width = "400px";
+                    css.height = "400px";
+                    css.left = "40%";
+                    break;
+            };
+            
+        } else {
+            css.display = "none";           
+        }; 
     }
-
+    
+const mouseEventObject = document.getElementById(item);
+mouseEventObject.addEventListener("mouseleave", e => css.display = "none");
+const mouseEventLeaveButton = document.getElementById(item);
+mouseEventObject.addEventListener("mouseclick", e => css.display = "none");
     
 </script>
