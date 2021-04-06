@@ -2,6 +2,7 @@ package bookstore.controller;
 
 import bookstore.entity.Author;
 import bookstore.entity.Book;
+import bookstore.entity.Booktype;
 import bookstore.entity.Category;
 import bookstore.repo.AuthorRepo;
 import bookstore.repo.BookRepo;
@@ -55,11 +56,29 @@ public class HomeController {
   //  ****Books PerCategory --in model --sent in jsp select --as options
    @GetMapping("/books/{categoryName}")
    public String showBooksPerCategory(@PathVariable("categoryName") String categoryName,Model model){
+       //menu tabs
+        List<Category> categories= categoryRepo.findAll();
+        List<Author> allAuthors=authorRepo.findAll();
        //bring all books where category=categoryName
        List<Book> booksPerCategory=bookRepo.findByCategory(categoryName);
        
+       //find author Per Book
+       HashMap<Integer,Author> authorPerBook=bookService.findAuthorPerBook();
+       
+       //fetch BookTypes Per Book
+       HashMap<Book,List<Booktype>> bookBooktypes=bookService.fetchBookPossibleBookTypes();
+       
+     
+       
        //model.addbooks
        model.addAttribute("booksPerCategory",booksPerCategory);
+        model.addAttribute("categories",categories);
+         model.addAttribute("authors", allAuthors);
+         model.addAttribute("authorPerBook", authorPerBook);
+         model.addAttribute("bookBooktypes", bookBooktypes);
+         
+         
+         
        
      return "BooksPerCategory";  
    }

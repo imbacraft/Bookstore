@@ -6,7 +6,6 @@
 package bookstore.entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.Basic;
@@ -23,6 +22,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -124,6 +124,9 @@ public class Book implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "booktype", referencedColumnName = "booktypeid")
     private Booktype booktype;
+    
+    @Transient
+    private List<Booktype> booktypes;
 
     public Book() {
     }
@@ -144,6 +147,16 @@ public class Book implements Serializable {
         this.language = language;
         this.count = count;
     }
+
+    public List<Booktype> getBooktypes() {
+        return booktypes;
+    }
+
+    public void setBooktypes(List<Booktype> booktypes) {
+        this.booktypes = booktypes;
+    }
+    
+    
 
     public Integer getBookid() {
         return bookid;

@@ -17,12 +17,38 @@
         <title>Bookstore Home</title>
         <link rel="stylesheet" href="./css/styles.css" />
         <link rel="stylesheet" href="./css/styles2.css" />
+        <link rel="stylesheet" href="./css/multipleItemsCarousel.css"/>
         <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"
     />
+        
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <!-- Latest compiled and minified CSS -->
+      <link
+        rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous"
+      />
+
+      <!-- Optional theme -->
+      <link
+        rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+        crossorigin="anonymous"
+      />
+
+      <!-- Latest compiled and minified JavaScript -->
+      <script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"
+      ></script>
+
         
          <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -59,7 +85,7 @@
         <!-- an thelw to menu st aristera arkei na metaferw to ul
       opote prosthetw mia klash=ml-auto -->
         <!-- toggler, an thelw na mikrainei h othoni kai na sumparasurei to menu -->
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav navbar-right">
           <li class="nav-item">
             <a class="nav-link" href="">Welcome,user</a>
           </li>
@@ -239,6 +265,98 @@
      
      
      <!-- new books and upcoming -->
+     <section id="upcomingBooks">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="carousel slide multi-item-carousel" id="theCarousel">
+          <div class="carousel-inner">
+            <div class="item active">
+              <div class="col-xs-4">
+                <a href="#1"
+                  ><img
+                    src="./images/MentalHealth.jpg"
+                    class="img-responsive"
+                /></a>
+              </div>
+            </div>
+            <div class="item">
+              <div class="col-xs-4">
+                <a href="#1"
+                  ><img
+                    src="./images/NewBooks.jpg"
+                    class="img-responsive"
+                /></a>
+              </div>
+            </div>
+            <div class="item">
+              <div class="col-xs-4">
+                <a href="#1"
+                  ><img
+                    src="./images/SportsAndOutdoor.jpg"
+                    class="img-responsive"
+                /></a>
+              </div>
+            </div>
+            <div class="item">
+              <div class="col-xs-4">
+                <a href="#1"
+                  ><img
+                    src="http://placehold.it/300/673ab7/000000"
+                    class="img-responsive"
+                /></a>
+              </div>
+            </div>
+            <div class="item">
+              <div class="col-xs-4">
+                <a href="#1"
+                  ><img
+                    src="http://placehold.it/300/4caf50/000000"
+                    class="img-responsive"
+                /></a>
+              </div>
+            </div>
+            <div class="item">
+              <div class="col-xs-4">
+                <a href="#1"
+                  ><img
+                    src="http://placehold.it/300/8bc34a/000000"
+                    class="img-responsive"
+                /></a>
+              </div>
+            </div>
+            <!-- add  more items here -->
+            <!-- Example item start:  -->
+
+            <div class="item">
+              <div class="col-xs-4">
+                <a href="#1"
+                  ><img
+                    src="http://placehold.it/300/8bc34a/000000"
+                    class="img-responsive"
+                /></a>
+              </div>
+            </div>
+
+            <!--  Example item end -->
+          </div>
+          <a
+            class="left carousel-control"
+            href="#theCarousel"
+            data-slide="prev"
+            ><i class="glyphicon glyphicon-chevron-left"></i
+          ></a>
+          <a
+            class="right carousel-control"
+            href="#theCarousel"
+            data-slide="next"
+            ><i class="glyphicon glyphicon-chevron-right"></i
+          ></a>
+        </div>
+      </div>
+    </div>
+  </div>
+     </section>
 
     
     
@@ -320,7 +438,7 @@
       </footer>
  
       
-   
+        <script src="./javascript/javascript1.js"></script>
  
     
       

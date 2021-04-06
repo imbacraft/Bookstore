@@ -3,12 +3,8 @@
 html,body{
     margin:0;
 }
-.ml-auto {
-  margin-right: 100px;
-}
-#topSpan {
-  margin-left: 50px;
-}
+
+
 
 /*pesticide.io analog*/
 /* html * {
@@ -244,7 +240,8 @@ html,body{
 
 /* upcoming books */
 #upcomingBooks {
-  height: auto;
+  height: 200px;
   margin: 0 15%;
+  
 }
 
