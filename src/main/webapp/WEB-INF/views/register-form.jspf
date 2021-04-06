@@ -26,8 +26,8 @@
     left: 130px;
     font-size: 12pt;
 }
+ 
 
-.registration input:after
 registration h3 {
     left: 50px;
 }
@@ -43,12 +43,13 @@ registration h3 {
     border: 2px solid #2794ad; 
     border-radius: 3px;
 }
+
         </style>
     </head>
     <body>
         <div style="margin-left: 80px; " class="registration"> 
             
-      <!--  <a href="${pageContext.request.contextPath}/home">Home</a> -->
+      
         
         <h3>Register account</h3>
 
@@ -87,10 +88,9 @@ registration h3 {
 
             <form:password path="password" id="password"  placeholder="Enter your Password" required="true"/>
 
-            <label for="password">Repeat password</label>
-
-            <form:password path="password" id="password"  placeholder="Re-enter your Password" required="true"/>
-
+            <input type="password" onkeyup="validatePassword();" placeholder="Re-enter your password" id="confirm-password" required/>
+            <br/>
+            <p id="password-feedback" style="font-family: 'Arial', sans; margin: 10px"></p>
             <br/>
 
           <!--  <label for="country">Country</label> -->
@@ -141,3 +141,26 @@ registration h3 {
         </div>
     </body>
 </html>
+
+
+<script>
+let passOK = false;
+
+const pass1 = document.getElementById("password");
+const pass2 = document.getElementById("confirm-password");
+const passwdFeedback = document.getElementById("password-feedback");
+
+function validatePassword()
+{
+    if (pass1.value === pass2.value) {
+
+        passwdFeedback.innerHTML=" ";
+
+    }
+    else {
+        passwdFeedback.innerHTML="The passwords don't match";
+    }
+}
+pass1.value.onkeyup=validatePassword();
+
+</script>
