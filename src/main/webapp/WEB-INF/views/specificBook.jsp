@@ -16,7 +16,7 @@
         
         
         <div class="frontcover">
-        <img class=frontcover src="${book.frontcover}"
+        <img class="frontcover" src="${book.frontcover}"
         alt="frontcover not found">
         </div>
         
