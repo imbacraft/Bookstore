@@ -29,16 +29,9 @@
 
         <br>
 
+        Cart  Details
         <table cellpadding="2" cellspacing="2" border="1">
-            <tr>
-                <th>Book</th>
-                <th>Title</th>
-                <th>Format</th>
-                 <th>Quantity</th>
-                 <th>Subtotal</th>
-                 <th>Remove</th>
-            </tr>
-            
+
             <% double total = 0.0; %>
             
             <c:forEach var="bookpercart" items="${sessionScope.cart}">
@@ -47,18 +40,18 @@
                 <% total = total + (double) pageContext.getAttribute("subtotal");  %>
                 
                 <tr>
-                    <td><a href="${pageContext.request.contextPath}/books/search/${bookpercart.book.bookid}"><img src="${bookpercart.book.frontcover}" width="100"></a></td>
-                    <td>${bookpercart.book.title}</td>
-                    <td>${bookpercart.book.booktype.name}</td>
-                            <td>
-                                <form:form action = "${pageContext.request.contextPath}/cart/index" method="post">
-                                    <input name="bookid" id="bookid" value="${bookpercart.book.bookid}" hidden>
-                                    <input type= "number" id="quantity" name ="quantity" value = ${bookpercart.quantity } min=1 placeholder = "${bookpercart.quantity }">
-                                    <button type="submit">Update </button>
-                                </form:form>
+                    <td><a href="${pageContext.request.contextPath}/books/search/${bookpercart.book.bookid}"><img src="${bookpercart.book.frontcover}" width="100"></a>
+                        
+                    ${bookpercart.book.title}
+                    
+                    ${bookpercart.book.booktype.name}
+
+                    <br>
+                    
+                    Quantity: ${bookpercart.quantity }
+
                             </td>
                     <td>${subtotal} &euro;</td>
-                    <td><a href="${pageContext.request.contextPath}/cart/remove/${bookpercart.book.bookid}">Remove</a></td>
                      
                    
                     
@@ -76,8 +69,9 @@
         </table>
            
 
-        <a href="${pageContext.request.contextPath}/home">Continue shopping</a>
-        <a href="${pageContext.request.contextPath}/payment">Procceed to Payment</a>
+        <a href="${pageContext.request.contextPath}/cart/index">Back to Basket</a>
+        
+        <a href="${pageContext.request.contextPath}/cart/payment">Procceed to Payment</a>
         
         
     </body>
