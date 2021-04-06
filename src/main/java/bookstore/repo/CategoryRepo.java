@@ -8,6 +8,7 @@ package bookstore.repo;
 import bookstore.entity.Category;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -19,6 +20,10 @@ public interface CategoryRepo extends JpaRepository<Category,Integer> {
 
    @Override
    public List<Category> findAll();
+   
+   @Query(value="select category.* from category,book,joinedbookcategory where joinedbookcategory.bookid=?1"
+            + " and joinedbookcategory.category=category.categid;",nativeQuery = true)
+    List<Category>findByBook(int bookid);
+} 
     
-    
-}
+
