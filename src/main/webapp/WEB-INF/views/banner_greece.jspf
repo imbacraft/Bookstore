@@ -1,28 +1,35 @@
 <%-- any content can be specified here e.g.: --%>
 <%@ page pageEncoding="UTF-8" %>
 <style>
-    #blueLiberationBanner {
+#blueLiberationBanner {
         z-index: 1;
         position: fixed;
         background-color: navy;
-        width: auto; 
-        height: 40px;     
+        flex-basis: 1182px;
+        /*! max-width: 1182px; */
+        
+        /*! height: 40px; */     
         text-align: center; 
         font-family: Helvetica, Arial, sans-serif;
         top: 15px;
         opacity: 0.7;
-        display: inline-block;
-    }
-    
+        display: inline-flex;
+        /*! flex-wrap: wrap; */
+        /*! margin: 0 0; */
+        right: 0;
+        left: 0;
+        /*! max-height: 170px; */
+        padding-bottom: 3px;
+}   
    
     #blueLiberationBanner #closeButton {
-        position: absolute;
-        display: inline;
+        position: relative;
+        display: inline-flex;
         right: 4%;
         top: 7px;
         float: right;
         font-size: 15px;
-
+        margin: 0 30px;
         height: 25px;
         background-color: navy;
         border-color: #666666;
@@ -34,9 +41,10 @@
     
     #blueLiberationBanner a {
         padding-top: 12px;
-        display: inline-block;
+        display: inline-flex;
         color: white;
-        
+        margin: 0 auto;
+        width: auto;
     }
     .wikipedia-greek-independence {
         margin: 0 auto;
@@ -49,11 +57,12 @@
     <div id="blueLiberationBanner" >
        
             <img style="
-                 position: absolute;
-                 display: inline-block;
-                 left: 4%;
+                 position: relative;
+                 display: inline-flex;
+                 
                  background-color: navy;
                  height: 30px;
+                 margin: 0 30px;
                  margin-top:  4px;"
                  src="greek_flag.webp" alt="Greek flag"/>
             
