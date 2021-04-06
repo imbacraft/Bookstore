@@ -28,57 +28,15 @@
                     </h1>
 
 
+                    <p class="lead mb-4">
+                        Please fill the form below to complete the order payment
+                    </p>
 
                     <!-- Cart contents here -->
                     <div class="card mb-4">
                         <div class="card-body">
-                          
-        
-     
-        Cart  Details
-        <table cellpadding="2" cellspacing="2" border="1">
-
-            <% double total = 0.0; %>
-            
-            <c:forEach var="bookpercart" items="${sessionScope.cart}">
-                <c:set var="subtotal" value="${bookpercart.book.price * bookpercart.quantity}"></c:set>
-              
-                <% total = total + (double) pageContext.getAttribute("subtotal");  %>
-                
-                <tr>
-                    <td><a href="${pageContext.request.contextPath}/books/search/${bookpercart.book.bookid}"><img src="${bookpercart.book.frontcover}" width="100"></a>
-                        
-                    ${bookpercart.book.title}
-                    
-                    ${bookpercart.book.booktype.name}
-
-                    <br>
-                    
-                    Quantity: ${bookpercart.quantity }
-
-                            </td>
-                    <td>Book Price ${subtotal} &euro;</td>
-                     
-                   
-                    
-                </tr>
-            </c:forEach>
-                
-                <tr>
-                    <td colspan="6">
-                        Shipping Cost: <%=total%> &euro;
-                    </td>
-                
-                
-                <tr>
-                    <td colspan="6">
-                        Total: <%=total%> &euro;
-                    </td>
-                    
-                </tr>
-     
-                
-        </table>
+                            <h5>Leather Bag</h5>
+                            <p class="lead">USD 9.99</p>
                         </div>
                     </div>
 
@@ -87,7 +45,6 @@
                     <form:form action="${pageContext.request.contextPath}/payment" method="post" id="payment-form">
                         <input id="api-key" name="api-key" value="${stripePublicKey}" hidden>
                         <input id="token" name="token" value="" hidden>
-                        <input id="amount" name="amount" value="${amount}" hidden>
 
                         <div class="form-group">
                             <label class="font-weight-medium" for="card-element">

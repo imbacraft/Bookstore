@@ -29,7 +29,7 @@
 
         <br>
 
-        Basket
+        Cart  Details
         <table cellpadding="2" cellspacing="2" border="1">
 
             <% double total = 0.0; %>
