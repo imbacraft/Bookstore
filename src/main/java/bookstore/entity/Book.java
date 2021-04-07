@@ -6,6 +6,10 @@
 package bookstore.entity;
 
 import java.io.Serializable;
+<<<<<<< HEAD
+=======
+import java.time.LocalDate;
+>>>>>>> stathis-branch
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -21,6 +25,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -64,10 +69,19 @@ public class Book implements Serializable {
         @JoinColumn(name = "category", referencedColumnName = "categid")})
     @ManyToMany
     private List<Category> categoryList;
+<<<<<<< HEAD
     @ManyToMany(mappedBy = "bookList")
     private List<Author> authorList;
     @OneToMany(mappedBy = "book")
     private List<Bookdetails> bookdetailsList;
+=======
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "booktype", referencedColumnName = "booktypeid")
+    private Booktype booktype;
+    
+    @Transient
+    private List<Booktype> booktypes;
+>>>>>>> stathis-branch
 
     public Book() {
     }
@@ -81,6 +95,16 @@ public class Book implements Serializable {
         this.title = title;
         this.description = description;
     }
+
+    public List<Booktype> getBooktypes() {
+        return booktypes;
+    }
+
+    public void setBooktypes(List<Booktype> booktypes) {
+        this.booktypes = booktypes;
+    }
+    
+    
 
     public Integer getBookid() {
         return bookid;

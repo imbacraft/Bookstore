@@ -2,13 +2,22 @@ package bookstore.controller;
 
 import bookstore.entity.Author;
 import bookstore.entity.Book;
+<<<<<<< HEAD
 import bookstore.entity.Format;
+=======
+import bookstore.entity.Booktype;
+>>>>>>> stathis-branch
 import bookstore.entity.Category;
 import bookstore.repo.AuthorRepo;
 import bookstore.repo.BookRepo;
 import bookstore.repo.FormatRepo;
 import bookstore.repo.CategoryRepo;
+<<<<<<< HEAD
 import bookstore.service.BookService;
+=======
+import bookstore.service.bookService;
+import java.util.HashMap;
+>>>>>>> stathis-branch
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,10 +40,14 @@ public class HomeController {
     AuthorRepo authorRepo;
     
     @Autowired
+<<<<<<< HEAD
     FormatRepo formatRepo;
     
     @Autowired
     BookService bookService;
+=======
+    bookService bookService;
+>>>>>>> stathis-branch
     
 
     //*****all categories in homepage as options in select tag in 
@@ -43,10 +56,19 @@ public class HomeController {
         List<Category> categories= categoryRepo.findAll();
         List<Author> allAuthors=authorRepo.findAll();
         List<Book> bestSellers=bookRepo.findTop5();
+        Book bookOfMonth=bookService.getRandomBookOfTheMonth();
+        HashMap<Author,List<Book>> monthAuthorDetails=bookService.authorPerMonthDetails();
        model.addAttribute("categories",categories);
     model.addAttribute("authors", allAuthors);
     model.addAttribute("bestSellers", bestSellers);
+<<<<<<< HEAD
        return "main";
+=======
+    model.addAttribute("bookOfMonth",bookOfMonth);
+    model.addAttribute("monthAuthorMap",monthAuthorDetails);
+    
+       return "home";
+>>>>>>> stathis-branch
    }
   
     
@@ -54,11 +76,29 @@ public class HomeController {
   //  ****Books PerCategory --in model --sent in jsp select --as options
    @GetMapping("/books/{categoryName}")
    public String showBooksPerCategory(@PathVariable("categoryName") String categoryName,Model model){
+       //menu tabs
+        List<Category> categories= categoryRepo.findAll();
+        List<Author> allAuthors=authorRepo.findAll();
        //bring all books where category=categoryName
        List<Book> booksPerCategory=bookRepo.findByCategory(categoryName);
        
+       //find author Per Book
+       HashMap<Integer,Author> authorPerBook=bookService.findAuthorPerBook();
+       
+       //fetch BookTypes Per Book
+       HashMap<Book,List<Booktype>> bookBooktypes=bookService.fetchBookPossibleBookTypes();
+       
+     
+       
        //model.addbooks
        model.addAttribute("booksPerCategory",booksPerCategory);
+        model.addAttribute("categories",categories);
+         model.addAttribute("authors", allAuthors);
+         model.addAttribute("authorPerBook", authorPerBook);
+         model.addAttribute("bookBooktypes", bookBooktypes);
+         
+         
+         
        
      return "BooksPerCategory";  
    }
@@ -97,6 +137,10 @@ public class HomeController {
        model.addAttribute("booksPerAuthor", booksPerAuthor);      
        return "bookPerAuthor";
    }
+   
+   
+   //*******BestSeller Specific****
+  
    
    
    

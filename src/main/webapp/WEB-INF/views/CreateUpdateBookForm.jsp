@@ -14,8 +14,14 @@
         <title>JSP Page</title>
     </head>
     <body>
+<<<<<<< HEAD
 
 
+=======
+        
+        
+        
+>>>>>>> stathis-branch
         <h1>Create/Update Book Form</h1>
 
 
