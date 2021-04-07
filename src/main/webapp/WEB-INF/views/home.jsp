@@ -175,7 +175,7 @@
         
         <br>
         
-<<<<<<< HEAD
+
         <button>Books</button>
         
 =======
@@ -245,7 +245,7 @@
 
         <p id="bookMonthColText"> ${bookOfMonth.description}
         </p>
->>>>>>> stathis-branch
+
         <div>
             <a href="${pageContext.request.contextPath}/books/search/${bookOfMonth.bookid}">Find Out More>></a>
         </div>

@@ -21,8 +21,11 @@ public interface AuthorRepo extends JpaRepository<Author, Integer> {
             + " and book.bookid=joinedbookauthor.bookid and book.bookid=?1 ",nativeQuery = true)
     List<Author> findByBook(int bookid);
 
-    @Query(value="select * from author where lastname='Bryant';",nativeQuery=true)
-    public Author findSpecificByLastName();//specific
+    
+//    There is a Named Query in Author entity for this
+    
+//    @Query(value="select * from author where lastname='Bryant';",nativeQuery=true)
+//    public Author findSpecificByLastName();//specific
    
     //necessary in BooksPerCategory, where you have to show specific book's author
    @Query(value="select * from author,book,joinedbookauthor where author.authorid=joinedbookauthor.authorid and book.bookid=joinedbookauthor.bookid and book.bookid=?1",nativeQuery=true)

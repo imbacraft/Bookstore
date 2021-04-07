@@ -40,8 +40,12 @@ public class BookService {
     //na diorthwthei otan exoume orderss!!
     public HashMap<Author,List<Book>> authorPerMonthDetails(){
         HashMap<Author,List<Book>>  monthAuthorBooksMap=new HashMap();
-        Author monthAuthor=authorRepo.findSpecificByLastName();
+        
+        //Random index number here. Needs to be fixed
+        Author monthAuthor=authorRepo.getOne(1);
+        
         List<Book> monthAuthorBooks=bookRepo.findByAuthorLastName(monthAuthor.getLastname());
+        
         monthAuthorBooksMap.put(monthAuthor, monthAuthorBooks);
         return monthAuthorBooksMap;
  }
