@@ -55,7 +55,7 @@
           
             <c:forEach items="${book.bookdetailsList}"  var="bookDetail">   
                 <h5>${bookDetail.format.name}</h5>
-                <h5>$ ${bookDetail.price}</h5>
+                <h5>&euro; ${bookDetail.price}</h5>
            <c:choose>
 	<c:when test="${bookDetail.count<30}">
 	 <h6>⚠ Only  ${bookDetail.count} left in stock! </h6>
@@ -400,7 +400,7 @@ nav:nth-child(2) > div > header {
 
 .hr{
     margin-right: 30%;
-
+}
 
 
 
