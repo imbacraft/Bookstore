@@ -187,16 +187,15 @@
             <img class="image" src="${book.bookdetailsList.toArray()[0].frontcover}" alt="bookImage" ><!--to frontcover tha nai se kathe biblio to idio, opote pairnw to [0] -->
         </div>
         <div class="col-5">
-          <!-- <p id="bookTitle"><a href="">The Wolf Half Trilogy</a></p> -->
-          
+ 
           <h5 class="mainContent"><a href="${pageContext.request.contextPath}/books/search/${book.bookid}">${book.title}</a></h5>
           <c:forEach items="${book.authorList}" var="author">
-          <h5><a href="${pageContext.request.contextPath}/authors/${author.lastname}"> ${author.firstname}${" "}${author.lastname}</a></h5>
+          <h5> ${author.firstname}${" "}${author.lastname}</h5>
         </c:forEach>
         
           
             <c:forEach items="${book.bookdetailsList}"  var="bookDetail">   
-                <h5><a href="${pageContext.request.contextPath}.books/search/${book.bookid}">${bookDetail.format.name}</a> </h5>
+                <h5>${bookDetail.format.name}</h5>
                 <h5>$ ${bookDetail.price}</h5>
                 <hr style="margin-right: 30%;">
           <c:if test="${bookDetail.count<5}">
