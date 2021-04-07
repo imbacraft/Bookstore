@@ -84,7 +84,7 @@
 
 
         <a href="${pageContext.request.contextPath}/home">Continue shopping</a>
-        <a href="${pageContext.request.contextPath}/payment">Procceed to Delivery Address Options</a>
+        <a href="${pageContext.request.contextPath}/cart/address">Procceed to Delivery Address Options</a>
 
 
     </body>
