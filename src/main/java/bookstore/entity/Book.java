@@ -6,10 +6,7 @@
 package bookstore.entity;
 
 import java.io.Serializable;
-<<<<<<< HEAD
-=======
 import java.time.LocalDate;
->>>>>>> stathis-branch
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -69,19 +66,11 @@ public class Book implements Serializable {
         @JoinColumn(name = "category", referencedColumnName = "categid")})
     @ManyToMany
     private List<Category> categoryList;
-<<<<<<< HEAD
     @ManyToMany(mappedBy = "bookList")
     private List<Author> authorList;
     @OneToMany(mappedBy = "book")
     private List<Bookdetails> bookdetailsList;
-=======
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "booktype", referencedColumnName = "booktypeid")
-    private Booktype booktype;
-    
-    @Transient
-    private List<Booktype> booktypes;
->>>>>>> stathis-branch
+
 
     public Book() {
     }
@@ -96,14 +85,6 @@ public class Book implements Serializable {
         this.description = description;
     }
 
-    public List<Booktype> getBooktypes() {
-        return booktypes;
-    }
-
-    public void setBooktypes(List<Booktype> booktypes) {
-        this.booktypes = booktypes;
-    }
-    
     
 
     public Integer getBookid() {

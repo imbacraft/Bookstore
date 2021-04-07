@@ -2,22 +2,15 @@ package bookstore.controller;
 
 import bookstore.entity.Author;
 import bookstore.entity.Book;
-<<<<<<< HEAD
 import bookstore.entity.Format;
-=======
-import bookstore.entity.Booktype;
->>>>>>> stathis-branch
 import bookstore.entity.Category;
 import bookstore.repo.AuthorRepo;
 import bookstore.repo.BookRepo;
 import bookstore.repo.FormatRepo;
 import bookstore.repo.CategoryRepo;
-<<<<<<< HEAD
 import bookstore.service.BookService;
-=======
-import bookstore.service.bookService;
+import bookstore.service.BookService;
 import java.util.HashMap;
->>>>>>> stathis-branch
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,14 +33,12 @@ public class HomeController {
     AuthorRepo authorRepo;
     
     @Autowired
-<<<<<<< HEAD
     FormatRepo formatRepo;
     
     @Autowired
     BookService bookService;
-=======
-    bookService bookService;
->>>>>>> stathis-branch
+
+
     
 
     //*****all categories in homepage as options in select tag in 
@@ -61,14 +52,13 @@ public class HomeController {
        model.addAttribute("categories",categories);
     model.addAttribute("authors", allAuthors);
     model.addAttribute("bestSellers", bestSellers);
-<<<<<<< HEAD
-       return "main";
-=======
+
+
     model.addAttribute("bookOfMonth",bookOfMonth);
     model.addAttribute("monthAuthorMap",monthAuthorDetails);
     
        return "home";
->>>>>>> stathis-branch
+
    }
   
     
@@ -86,7 +76,7 @@ public class HomeController {
        HashMap<Integer,Author> authorPerBook=bookService.findAuthorPerBook();
        
        //fetch BookTypes Per Book
-       HashMap<Book,List<Booktype>> bookBooktypes=bookService.fetchBookPossibleBookTypes();
+     
        
      
        
@@ -95,7 +85,7 @@ public class HomeController {
         model.addAttribute("categories",categories);
          model.addAttribute("authors", allAuthors);
          model.addAttribute("authorPerBook", authorPerBook);
-         model.addAttribute("bookBooktypes", bookBooktypes);
+//         model.addAttribute("bookBooktypes", bookBooktypes);
          
          
          
@@ -111,8 +101,8 @@ public class HomeController {
        List<Author> authorsByBook= authorRepo.findByBook(id);
        model.addAttribute("authorsByBook",authorsByBook);
        
-       List<Book> booksFromSameAuthor= bookService.findBooksFromSameAuthor(id);
-       model.addAttribute("booksFromSameAuthor",booksFromSameAuthor);
+//       List<Book> booksFromSameAuthor= bookService.findBooksFromSameAuthor(id);
+//       model.addAttribute("booksFromSameAuthor",booksFromSameAuthor);
        String bookTitle= book.getTitle();
        List<Book> SameBooksDifFormat= bookRepo.findSameBooksDifFormat ( id, bookTitle );
        model.addAttribute( "SameBooksDifFormat", SameBooksDifFormat);
