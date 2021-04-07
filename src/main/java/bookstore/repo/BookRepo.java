@@ -33,7 +33,11 @@ public interface BookRepo extends JpaRepository<Book, Integer> {
     @Query(value="Select book.* from book order by book.price desc limit 0,5",nativeQuery=true)
     List<Book> findTop5();
     
+    @Query(value="select book.* from book where book.bookid !=?1 and book.title=?2", nativeQuery = true)
+    List<Book> findSameBooksDifFormat( int bookid, String booktitle);  
     
+    @Query(value="select book.* from book,joinedbookauthor where joinedbookauthor.authorid=?1 and joinedbookauthor.bookid !=book.bookid", nativeQuery= true)
+    List<Book> findBooksFromSameAuthor(int authorid,int bookid);
     
     
 }

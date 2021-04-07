@@ -5,7 +5,12 @@
  */
 package bookstore.repo;
 
+<<<<<<< HEAD:src/main/java/bookstore/repo/FormatRepo.java
 import bookstore.entity.Format;
+=======
+import bookstore.entity.Booktype;
+import java.util.List;
+>>>>>>> 0c01eb5d3b4c93043b7959a8bd71297773efd617:src/main/java/bookstore/repo/BooktypeRepo.java
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -16,4 +21,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface FormatRepo extends JpaRepository<Format, Integer> {
     
+     
 }

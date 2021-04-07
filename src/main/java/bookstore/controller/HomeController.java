@@ -2,10 +2,13 @@ package bookstore.controller;
 
 import bookstore.entity.Author;
 import bookstore.entity.Book;
+import bookstore.entity.Booktype;
 import bookstore.entity.Category;
 import bookstore.repo.AuthorRepo;
 import bookstore.repo.BookRepo;
+import bookstore.repo.BooktypeRepo;
 import bookstore.repo.CategoryRepo;
+import bookstore.service.BookService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +29,12 @@ public class HomeController {
     
     @Autowired
     AuthorRepo authorRepo;
+    
+    @Autowired
+    BooktypeRepo booktypeRepo;
+    
+    @Autowired
+    BookService bookService;
     
 
     //*****all categories in homepage as options in select tag in 
@@ -57,11 +66,22 @@ public class HomeController {
    @GetMapping("books/search/{bookid}")
    public String getSpecificBook(@PathVariable("bookid") int id,Model model){
        Book book=bookRepo.findById(id).get();
-       model.addAttribute("specificBook",book.getTitle());
+       model.addAttribute("book",book);
        
+       List<Author> authorsByBook= authorRepo.findByBook(id);
+       model.addAttribute("authorsByBook",authorsByBook);
+       
+       List<Book> booksFromSameAuthor= bookService.findBooksFromSameAuthor(id);
+       model.addAttribute("booksFromSameAuthor",booksFromSameAuthor);
+       String bookTitle= book.getTitle();
+       List<Book> SameBooksDifFormat= bookRepo.findSameBooksDifFormat ( id, bookTitle );
+       model.addAttribute( "SameBooksDifFormat", SameBooksDifFormat);
+       
+        List <Category> categByBook=categoryRepo.findByBook(id);
+        model.addAttribute("categByBook", categByBook);
+        
        return "specificBook";
-       
-   }
+    }
    
    
    
