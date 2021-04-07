@@ -30,148 +30,7 @@
   
   <body>
       
-    <nav class="navbar navbar-expand-lg navbar-dark bg-info">
-      <!-- bazw brand an thelw -->
-      <span id="topSpan">
-        <a class="navbar-brand" href="">Supporting your high street</a>
-        <a class="navbar-brand" href="http://www.google.com" target="_blank"
-          >Find out how</a
-        >
-      </span>
 
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarTogglerDemo02"
-        aria-controls="navbarTogglerDemo02"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-        <!-- an thelw to menu st aristera arkei na metaferw to ul
-      opote prosthetw mia klash=ml-auto -->
-
-        <!-- toggler, an thelw na mikrainei h othoni kai na sumparasurei to menu -->
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="">Welcome,user</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="">Account</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="">Reviews</a>
-          </li>
-          <li class="nav-item">
-            <a href="" class="nav-link">Συχνές ερωτήσεις</a>
-          </li>
-          <li class="nav-item">
-            <a href="" class="nav-link">Contact</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
-    <!-- Logo-Login-Basket -->
-    <section id="partWithLogo">
-     
-
-      <div class="row">
-        <!-- 3 sthles/row sto megalo viewport, 2 sto mikrotero, kai 1 otan mikrunei teleiws -->
-        <div class="col-lg-4 col-md-6">
-          <!-- bazw sto 1/3 ths sthlhs 2 boxes->ara div, ara to ena katw ap to allo
-          titlos +logia -->
-          <div class="col-6">
-            <img src="./images/bookLogo1.jpg" alt="bookLogo" id="bookLogo" />
-          </div>
-          <div class="col-6 TitleText">
-            <a href=""><span>Books are Treasure</span></a>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6">
-          <form action="" id="form">
-            <input type="text" placeholder="Search..." id="searchText" />
-            <select id="searchSelect">
-              <option value="1">Medicine</option>
-              <option value="2">Sports</option>
-            </select>
-            <input type="button" value="" id="searchButton" />
-          </form>
-        </div>
-        <div class="col-lg-4 col-md-6">
-          <div class="row LoginRow">
-            <div class="col-lg-6 Login">
-              <div class="col-6">
-                <h6 id="LoginText">Click Here to Login</h6>
-              </div>
-              <div class="col-6">
-                <a href="http://www.google.com">Login</a>
-              </div>
-              <div class="col-6">
-                <hr id="hr" />
-              </div>
-            </div>
-
-      
-        
-    </body>
-
-            <div class="col-lg-6">
-              <img
-                src="./images/shoppingIcon.png"
-                alt="basket"
-                id="basketIcon"
-              />
-              <span id="number">0</span>
-              <div class="col-6">
-                <a href="">Basket</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-<hr>
- <!-- Menu -->
-
-    <section class="section" >
-      
-         <nav onchange="location=this.value">
-      <header><b>Books</b></header>
-     
-      <c:forEach items="${categories}" var="category">
-     <div>   <b><a href="${pageContext.request.contextPath}/books/${category.name}">${category.name}</a></b>
-
-     </div> </c:forEach>
-    </nav>
-      
-        
-         <nav onchange="location=this.value">
-      <header><b>Authors</b></header>
-      <c:forEach items="${authors}" var="author">
-      <div>
-        <b><a href="${pageContext.request.contextPath}/authors/${author.lastname}">${author.lastname}</a></b>
-      </div>
-      </c:forEach>
-      
-    </nav>
-
-       
-          <nav onchange="location=this.value">
-      <header><b>Bestsellers</b></header>
-      <c:forEach items="${bestSellers}" var="book">
-      <div>
-        <b><a href="${pageContext.request.contextPath}/books/search/${book.bookid}">${book.title}</a></b>
-     </div>
-       </c:forEach>
-          </nav>
-             
-     
-  </section>
  
   <hr>
 
@@ -190,9 +49,9 @@
  
           <h5 class="mainContent"><a href="${pageContext.request.contextPath}/books/search/${book.bookid}">${book.title}</a></h5>
           <c:forEach items="${book.authorList}" var="author">
-          <h5> ${author.firstname}${" "}${author.lastname}</h5>
+          <h5> by <a href="${pageContext.request.contextPath}/authors/${author.lastname}"> ${author.firstname}${" "}${author.lastname}</a></h5>
         </c:forEach>
-        
+          <br>
           
             <c:forEach items="${book.bookdetailsList}"  var="bookDetail">   
                 <h5>${bookDetail.format.name}</h5>
@@ -210,7 +69,7 @@
                   <form:form action="${pageContext.request.contextPath}/cart/buy/${book.bookid}" method="GET">
                       <c:forEach items="${book.bookdetailsList}"  var="bookDetail">
                       <div class="formatsBasket">
-                          <input type="radio" id="format" name="format"  value="${bookDetail.format.formatid}">
+                          <input type="radio" id="format" name="format" required value="${bookDetail.format.formatid}">
                       <label for="format">${bookDetail.format.name}</label>
                       </div>
                   </c:forEach>
@@ -466,7 +325,7 @@ nav:nth-child(2) > div > header {
 }
 
 .image {
-  height: 260px;
+  height: 310px;
   width: 200px;
   margin: 10% 0 10% 0;
 }
