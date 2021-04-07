@@ -21,6 +21,7 @@ public interface BookRepo extends JpaRepository<Book, Integer> {
     Optional<Book> findById(int bookId);
     
     @Query(value="select book.* from book,category,joinedbookcategory where book.bookid=joinedbookcategory.bookid"
+<<<<<<< HEAD
 
             + " and category.categoryid=joinedbookcategory.categoryid and category.name=?1 "
             ,nativeQuery = true)
@@ -29,19 +30,33 @@ public interface BookRepo extends JpaRepository<Book, Integer> {
      
 
     
+=======
+            + " and category.categoryid=joinedbookcategory.categoryid and category.name=?1 ",nativeQuery = true)
+    List<Book> findByCategory(String categoryName);//paizei, den thelei ta booktype
+ 
+>>>>>>> 3da697d38a3c58706e88b88f5286633e83ee430b
     @Query(value="select book.* from book,author,joinedbookauthor where book.bookid=joinedbookauthor.bookid \n" +
 "and author.authorid=joinedbookauthor.authorid  and author.lastname=?1;",nativeQuery=true)
     List<Book> findByAuthorLastName(String lastName);
     
     
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3da697d38a3c58706e88b88f5286633e83ee430b
     @Query(value="select book.*,bookdetails.price from bookdetails,book,format\n" +
     "where book.bookid=bookdetails.bookid and format.formatid=bookdetails.formatid\n" +
     "order by bookdetails.price\n" +
     "desc limit 0,5;",nativeQuery=true)
     List<Book> findTop5();//tha paizei
 
+<<<<<<< HEAD
 
+=======
+//    @Query(value="Select book.* from book order by book.price desc limit 0,5",nativeQuery=true)
+//    List<Book> findTop5();
+    
+>>>>>>> 3da697d38a3c58706e88b88f5286633e83ee430b
     
 
     

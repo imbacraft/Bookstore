@@ -116,7 +116,9 @@ public class Cartitem implements Serializable {
 
     @Override
     public String toString() {
-        return "bookstore.entity.Cartitem[ cartitemid=" + cartitemid + " ]";
+        return "Cartitem{" + "cartitemid=" + cartitemid + ", quantity=" + quantity + ", bookdetails=" + bookdetails + ", cart=" + cart + '}';
     }
+
+
     
 }

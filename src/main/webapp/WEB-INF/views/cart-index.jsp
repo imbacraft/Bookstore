@@ -8,6 +8,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -34,54 +35,58 @@
                 <th>Book</th>
                 <th>Title</th>
                 <th>Format</th>
-                 <th>Quantity</th>
-                 <th>Subtotal</th>
-                 <th>Remove</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+                <th>Remove</th>
             </tr>
-            
+
             <% double total = 0.0; %>
-            
+
             <c:forEach var="cartitem" items="${sessionScope.cart}">
-                
-                
-                <c:set var="subtotal" value="${cartitem.bookdetails.book.price * cartitem.quantity}"></c:set>
+
+
+                <c:set var="subtotal" value="${cartitem.bookdetails.price * cartitem.quantity}"></c:set>
+
               
+
                 <% total = total + (double) pageContext.getAttribute("subtotal");  %>
-                
+
                 <tr>
-                    <td><a href="${pageContext.request.contextPath}/books/search/${cartitem.book.bookid}"><img src="${cartitem.bookdetails.book.frontcover}" width="100"></a></td>
+                    <td><a href="${pageContext.request.contextPath}/books/search/${cartitem.bookdetails.book.bookid}"><img src="${cartitem.bookdetails.frontcover}" width="100"></a></td>
                     <td>${cartitem.bookdetails.book.title}</td>
-                    <td>${cartitem.bookdetails.book.format.name}</td>
-                            <td>
-                                <form:form action = "${pageContext.request.contextPath}/cart/index" method="post">
-                                    <input name="bookid" id="bookid" value="${cartitem.bookdetails.book.bookid}" hidden>
-                                    <input type= "number" id="quantity" name ="quantity" value = ${cartitem.quantity } min=1 placeholder = "${cartitem.quantity }">
-                                    <button type="submit">Update </button>
-                                </form:form>
-                            </td>
-                    <td>${subtotal} &euro;</td>
-                    <td><a href="${pageContext.request.contextPath}/cart/remove/${cartitem.bookdetails.book.bookid}">Remove</a></td>
-                     
-                   
-                    
+                    <td>${cartitem.bookdetails.format.name}</td>
+                    <td>
+                        <form:form action = "${pageContext.request.contextPath}/cart/index" method="post">
+                            <input name="bookid" id="bookid" value="${cartitem.bookdetails.book.bookid}" hidden>
+                            <input name="formatid" id="formatid" value="${cartitem.bookdetails.format.formatid}" hidden>
+                            <input type= "number" id="quantity" name ="quantity" value = ${cartitem.quantity } min=1 placeholder = "${cartitem.quantity }">
+                            <button type="submit">Update </button>
+                        </form:form>
+                    </td>
+                    <td> <fmt:formatNumber value="${subtotal}" maxFractionDigits="3"/>&euro;</td>
+                    <td><a href="${pageContext.request.contextPath}/cart/remove/${cartitem.bookdetails.book.bookid}/${cartitem.bookdetails.format.formatid}">Remove</a></td>
+
+
+
                 </tr>
             </c:forEach>
-                
-                <tr>
-                    <td colspan="6">
-                        Total: <%=total%> &euro;
-                    </td>
-                    
-                </tr>
-     
-                
+
+                <% pageContext.setAttribute("total", total); %>
+            <tr>
+                <td colspan="6">
+                    Total: <fmt:formatNumber value="${total}" maxFractionDigits="3"/>&euro;
+                </td>
+
+            </tr>
+
+
         </table>
-           
+
 
         <a href="${pageContext.request.contextPath}/home">Continue shopping</a>
-        <a href="${pageContext.request.contextPath}/payment">Procceed to Payment</a>
-        
-        
+        <a href="${pageContext.request.contextPath}/payment">Procceed to Delivery Address Options</a>
+
+
     </body>
 
 

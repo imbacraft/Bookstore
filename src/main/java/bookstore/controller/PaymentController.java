@@ -35,23 +35,23 @@ public class PaymentController {
         List<Cartitem> cart = (List<Cartitem>) session.getAttribute("cart");
         
         
-        int amount = 0;
+        double amount = 0;
         
         for (Cartitem item : cart) {
         
-                
-            
-                amount += item.getBookdetails().getPrice();
+                    
+                amount += item.getBookdetails().getPrice() * item.getQuantity();
             
         }
+        
+        double roundedamount = this.round(amount, 2);
 
-        System.out.println(">>>Amount to be payed: "+ amount);
+        System.out.println(">>>Amount to be payed: "+ roundedamount + " Euros");
         
         
         model.addAttribute("stripePublicKey", API_PUBLIC_KEY);
         model.addAttribute("amount", amount * 100);
 
-        System.out.println(">>>>Sending API PUBLIC KEY to JSP: " + API_PUBLIC_KEY);
         
         return "charge";
     }
@@ -82,4 +82,14 @@ public class PaymentController {
         
         return "redirect:/";
     }
+    
+    
+    public double round(double value, int places) {
+    if (places < 0) throw new IllegalArgumentException();
+
+    long factor = (long) Math.pow(10, places);
+    value = value * factor;
+    long tmp = Math.round(value);
+    return (double) tmp / factor;
+}
 }
