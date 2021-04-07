@@ -15,6 +15,7 @@
         <%@include file="styles.jspf" %>
     </head>
     <body style="max-width: 1182px; margin: 0 auto;">
+        <%@include file="banner_greece.jspf" %>
         <%@include file="header.jspf" %>
         <%@include file="main_menu_bar.jspf" %>
         <%@include file="frontmatter.jspf" %>

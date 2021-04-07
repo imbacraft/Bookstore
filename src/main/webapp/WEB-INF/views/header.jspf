@@ -1,32 +1,40 @@
 <%@ page pageEncoding="UTF-8" %>
-<%@include file="banner_greece.jspf" %>
+
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style>
-    header {
-       /* display: inline-block; */
-     /*  margin: auto; */
-    }
-    #top-box {
-        left: -2048px;
-        width: 4096px;
-        height: 10px;
-        position: fixed;
-        z-index: 2;
-        background-color: #ffd04d;
-        border-style: solid;
-        border-color: #ffd04d;
-    }
+html,
+body { 
+    width: 1182px !important;
+    margin: 0 auto !important;
     
+}
+#main-header header{
+     box-sizing: content-box !important;
+}
 
-#top-container {
-        height: 140px;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
+#top-box {
+    width: 100vw;
+    height: 15px;
+    position: fixed;
+    z-index: 2;
+    background-color: #ffd04d;
+    border-style: solid;
+    border-color: #ffd04d;
+    right: 0px;
+}   
+
+#main-header #top-container {
+    height: 120px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
     
-#logo {
+#main-header #logo {
     display: flex;
 	/* ; */
 	cursor: pointer;
@@ -39,7 +47,7 @@
         height: 60px;
 } 
 
-#search {
+#main-header #search {
 
 	display: flex;
 	position: relative;
@@ -51,9 +59,7 @@
 	float: left;	font-size: 16pt;
 }
 
-
-
-#searchBar {
+#main-header #searchBar {
 	/* position: relative; */
 	display: inline-flex;
 	/* width: 200px; */
@@ -63,19 +69,21 @@
 	/* left: 100px; */
 	/* top: 15px; */
 }
+#searchField {
+ font-size: 16px;
+}
     
 
     
  
-    
-    #searchBar #searchBox input[type="submit"] {
+#main-header    #searchBar #searchBox input[type="submit"] {
 	display: flex;
 	flex: 0 0 40px;
 	position: relative;
 	width: 100%;
 	min-height: 1px;
-	padding-right: 22px;
-	padding-left: 22px;
+	padding-right: 24px;
+	padding-left: 24px;
 	background-color: #ffd04d;
 	height: 60px;
 
@@ -84,40 +92,49 @@
 	background-image: url("magnifier.png");
 	background-repeat: no-repeat;
 	background-position: center center;
-	background-size: 18px;
+	background-size: 19px;
 	border-style: solid;
-	border-width: 1px;
+	border-width: 2px;
 	border-color: #ffd04d;
 	border-radius: 0 3px 3px 0;
         margin-left: -2px;
+	font-size: 0;
     }
     
-#account-checkbox, .myAccount {
-
-	top: 30px;
+#main-header #account-checkbox, .myAccount {
+        left: 3%;
+	top: 20px;
 	position: relative;
         height: 50px;
         
 	padding-bottom: 5px;
 	background-color: white;
 	border: none;
-	border-bottom: 3px solid gold;
+	border-bottom: 3px solid #2794ad;
 	font-size: 14pt;
 }
-    .myAccount-modal {
+
+.myAccount p {
+    font-family: "Georgia", serif;
+    font-style: oblique;
+    font-size: 12pt;
+    border: none;
+    top: 10px
+}
+#main-header    .myAccount-modal {
         position: relative;
         display: inline-block;
         left: 350px;
         top: 20px;
     }
     
-    #my-account-menu li {
+#main-header    #my-account-menu li {
         color: #2794ad;
         font-size: 14pt;
         text-decoration: none;
     }
     
-    #login-modal {
+#main-header    #login-modal {
 	position: absolute;
 	font-family: Helvetica, Arial, sans-serif;
 	z-index: 10;
@@ -134,64 +151,40 @@
         text-decoration: none;
 }      
 
-    #cart {
+#main-header #cart {
 	position: relative;
 	display: block;
-	/* left: 400px; */
-	top: 50px;
+	color: black;
+	top: 22px;
 	cursor: pointer;
-        /*! margin-left: 40px; */
-	height: 100px;
-	width: 100px;
-    }
- 
+	/* margin-left: 40px; */
+	/* height: 120px; */
+	/* width: 120px; */
+}
 
-#cart-img {
-	background-image: url("basket.png");
-	background-size: 42px 40px;
+#main-header #cart-img {
+	background-image: url("basket.optimized.svg");
+	background-size: 130px 110px;
 	background-repeat: no-repeat;
-	width: 42px;
-	height: 42px;
-	top: 10px;
+	width: 130px;
+	height: 110px;
+	top: 20px;
 	position: relative;
 }
 
-#cart-ammount {        
-	display: inline-block;
-	position: relative;
-	bottom: 15px;
-	left: 50px;
-	background-color: gold;
-	z-index: -1;
-	width: 28px;
-	height: 35px;
-	border-color: gold;
-	border: 24px;
-	border-radius: 15px;
-	background-position-x: -10px;
-	padding-left: 5px;
-	padding-top: 6px;
-	text-align: left;
-	padding-top: 5px;
-}
-#items-number {
-	display: block;
-	position: relative;
-	bottom: 50px;
-	left: 50px;
-	width: 30px;
-	height: 30px;
-	border: 30px gold;
-	border-radius: 30px;
-	background-color: gold;
-	margin-right: 0;
-        
+#main-header #cart-amount {        
+    position: relative;
+    top: -74px;
+    left: 79px;
 }
         
-#cart p {
-	bottom: 30px;
+#main-header #cart a {
+	top: 10px;
+        left: 36px;
 	position: relative;
-}     
+        text-decoration: none;
+        color: black;
+}   
     
     
     
@@ -199,7 +192,7 @@
 </style>
 
 
-<header>
+<header id="main-header">
     <div id="top-box"></div>
     
     <div id="top-container">   
@@ -219,31 +212,95 @@
             </div>
         </div>
         
-        <div class="myAccount">       
-            <input type="button"  onclick="toggleModal()" id="account-checkbox" value="Μy Account"/>       
+
+        <div class="myAccount"> 
+            <sec:authorize access="!isAuthenticated()">
+                <!-- if user is not authenticated, show this link. Otherwise, it stays hidden.--> 
+
+                <a id="account-checkbox" href="${pageContext.request.contextPath}/login">Login / Register</a>
+            </sec:authorize> 
+            <sec:authorize access="hasRole('ADMIN')">
+                 <p>Welcome, <sec:authentication property="principal.username"/>!</p>
+                <input type="button"  onclick="toggleModal()" id="account-checkbox" value="Μy Account"/>       
+            </sec:authorize>
+            <sec:authorize access="hasRole('CUSTOMER')">
+                <p>Welcome, <sec:authentication property="principal.username" />!</p>
+                <input type="button"  onclick="toggleModal()" id="account-checkbox" value="Μy Account"/>
+            </sec:authorize>
+            <sec:authorize access="hasRole('SERVICEAGENT')">
+                <p>Welcome, <sec:authentication property="principal.username" />!</p>
+                <input type="button"  onclick="toggleModal()" id="account-checkbox" value="Μy Account"/>            
+            </sec:authorize>   
+            <sec:authorize access="hasRole('STOCKMANAGER')">   
+                <p>Welcome, <sec:authentication property="principal.username" />!</p>
+                <input type="button"  onclick="toggleModal()" id="account-checkbox" value="Μy Account"/>
+            </sec:authorize>
         </div>
-        
+    
         <div id="login-modal" >
             <div >
                 <ul id="my-account-menu">
-                    <li><a href="#">My Account</a></li>
-                    <li><a href="#">Sign In or Register</a></li>
-                    <li><a href="#">Order History</a></li>
-                    <li><a href="#">Wishlist</a></li>
+                    <sec:authorize access="hasRole('ADMIN')">
+                        <li>
+                            Role(s):<sec:authentication property="principal.authorities"/>
+                        </li>
+                        <li>
+                            <a href="${pageContext.request.contextPath}/admin">Administrator Management Page</a>
+                    `   </li>
+                        <li>
+                            <form:form action="${pageContext.request.contextPath}/logout" method="POST">
+                                <input type="submit" value="Logout">
+                            </form:form>
+                        </li>
+                    </sec:authorize>
+                    <sec:authorize access="hasRole('CUSTOMER')">
+                        <li>
+                            <a href="${pageContext.request.contextPath}/customer">Account Details</a>
+                        </li>
+                        <li>
+                            <form:form action="${pageContext.request.contextPath}/logout" method="POST">
+                                <input type="submit" value="Logout">
+                            </form:form>
+                        </li>
+                    </sec:authorize>
+                    <sec:authorize access="hasRole('SERVICEAGENT')">
+                        <li>
+                            <a href="${pageContext.request.contextPath}/service">Go to Customer Service Agent Management Page</a>        
+                        </li>
+                        <li>
+                            <form:form action="${pageContext.request.contextPath}/logout" method="POST">
+                                <input type="submit" value="Logout">
+                            </form:form>
+                        </li>
+                    </sec:authorize>
+                    <sec:authorize access="hasRole('STOCKMANAGER')">
+                        <li>
+                            Role(s):<sec:authentication property="principal.authorities"/>
+                        </li>
+                        <li>
+                            <a href="${pageContext.request.contextPath}/stock">Go to Stock Management Page</a>
+                        </li>
+                        <li>
+                            <form:form action="${pageContext.request.contextPath}/logout" method="POST">
+                                <input type="submit" value="Logout">
+                            </form:form>                            
+                        </li>
+                    </sec:authorize>
                 </ul>
             </div>
         </div>   
 
-            
-        
+  
+                  
         <div id="cart">
             <div id="cart-img">
             </div>
-            <div id="items-number">0</div>
-            <p>Cart</p>
-        </div>           
+            <div id="cart-amount">${sessionScope.cart.size()}​​​​​​​</div>
+            <a href="${pageContext.request.contextPath}/cart/index">Cart</a>
+        </div></div>           
     </div>
-    
+
+
     <hr style="height: 1px; border-width: 0; color: #e0e0e0; background-color: #e0e0e0;"/>
 </header>
 

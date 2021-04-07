@@ -59,7 +59,7 @@ public class HomeController {
 //        model.addAttribute("bookOfMonth", bookOfMonth);
 //        model.addAttribute("monthAuthorMap", monthAuthorDetails);
 
-        return "home";
+        return "main";
 
     }
 
