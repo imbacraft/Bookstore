@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <!DOCTYPE html>
 <html>
@@ -29,256 +30,78 @@
   
   <body>
       
-    <nav class="navbar navbar-expand-lg navbar-dark bg-info">
-      <!-- bazw brand an thelw -->
-      <span id="topSpan">
-        <a class="navbar-brand" href="">Supporting your high street</a>
-        <a class="navbar-brand" href="http://www.google.com" target="_blank"
-          >Find out how</a
-        >
-      </span>
 
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarTogglerDemo02"
-        aria-controls="navbarTogglerDemo02"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-        <!-- an thelw to menu st aristera arkei na metaferw to ul
-      opote prosthetw mia klash=ml-auto -->
-
-        <!-- toggler, an thelw na mikrainei h othoni kai na sumparasurei to menu -->
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="">Welcome,user</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="">Account</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="">Reviews</a>
-          </li>
-          <li class="nav-item">
-            <a href="" class="nav-link">Συχνές ερωτήσεις</a>
-          </li>
-          <li class="nav-item">
-            <a href="" class="nav-link">Contact</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
-    <!-- Logo-Login-Basket -->
-    <section id="partWithLogo">
-     
-
-      <div class="row">
-        <!-- 3 sthles/row sto megalo viewport, 2 sto mikrotero, kai 1 otan mikrunei teleiws -->
-        <div class="col-lg-4 col-md-6">
-          <!-- bazw sto 1/3 ths sthlhs 2 boxes->ara div, ara to ena katw ap to allo
-          titlos +logia -->
-          <div class="col-6">
-            <img src="./images/bookLogo1.jpg" alt="bookLogo" id="bookLogo" />
-          </div>
-          <div class="col-6 TitleText">
-            <a href=""><span>Books are Treasure</span></a>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6">
-          <form action="" id="form">
-            <input type="text" placeholder="Search..." id="searchText" />
-            <select id="searchSelect">
-              <option value="1">Medicine</option>
-              <option value="2">Sports</option>
-            </select>
-            <input type="button" value="" id="searchButton" />
-          </form>
-        </div>
-        <div class="col-lg-4 col-md-6">
-          <div class="row LoginRow">
-            <div class="col-lg-6 Login">
-              <div class="col-6">
-                <h6 id="LoginText">Click Here to Login</h6>
-              </div>
-              <div class="col-6">
-                <a href="http://www.google.com">Login</a>
-              </div>
-              <div class="col-6">
-                <hr id="hr" />
-              </div>
-            </div>
-<<<<<<< HEAD
-       <table border="1">
-            <tr>
-                <th>BookID</th>
-                <th>Title</th>
-                <th>BookType</th>
-                <th>Category 1</th>
-                <th>Price</th>
-                <th>Publisher</th>
-                <th>Publication Date</th>
-                <th>Edition</th>
-                <th>Pages</th>
-                <th>Language</th>
-                <th>Front Cover</th>
-                <th>Back Cover</th>
-                <th>Count</th>
-                <th>ISBN-10</th>
-                <th>ISBN-13</th>
-                <th>Buy</th>
-               
-            </tr>   
-
-            <c:forEach items="${booksPerCategory}" var="book"> 
-
-                <c:forEach begin="0" end="${books.length}" var="counter">
-
-                    <tr>
-
-                        <td>${book.bookid}</td>
-                        <td>${book.title}</td>
-                        <td>${book.booktype.name}</td>
-                        <td>${book.categoryList[pageContext.getAttribute("counter")].name}</td>
-                        <td>${book.price}</td>
-                        <td>${book.publisher}</td>
-                        <td>${book.publicationdate}</td>
-                        <td>${book.edition}</td>
-                        <td>${book.pages}</td>
-                        <td>${book.language}</td>
-                        <td>${book.frontcover}</td>
-                        <td>${book.backcover}</td>
-                        <td>${book.count}</td>
-                        <td>${book.isbn10}</td>
-                        <td>${book.isbn13}</td>
-                        <td>
-                            <a href="${pageContext.request.contextPath}/cart/buy/${book.bookid}">Buy now</a>
-                        </td>
-
-
-                    </tr>
-                </c:forEach>
-
-            </c:forEach>
-
-
-        </table>
- 
-        <a href="${pageContext.request.contextPath}/cart/index">Show cart</a>
-        
-    </body>
-=======
-            <div class="col-lg-6">
-              <img
-                src="./images/shoppingIcon.png"
-                alt="basket"
-                id="basketIcon"
-              />
-              <span id="number">0</span>
-              <div class="col-6">
-                <a href="">Basket</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-<hr>
- <!-- Menu -->
-
-    <section class="section" >
-      
-         <nav onchange="location=this.value">
-      <header><b>Books</b></header>
-     
-      <c:forEach items="${categories}" var="category">
-     <div>   <b><a href="${pageContext.request.contextPath}/books/${category.name}">${category.name}</a></b>
-
-     </div> </c:forEach>
-    </nav>
-      
-        
-         <nav onchange="location=this.value">
-      <header><b>Authors</b></header>
-      <c:forEach items="${authors}" var="author">
-      <div>
-        <b><a href="${pageContext.request.contextPath}/authors/${author.lastname}">${author.lastname}</a></b>
-      </div>
-      </c:forEach>
-      
-    </nav>
-
-       
-          <nav onchange="location=this.value">
-      <header><b>Bestsellers</b></header>
-      <c:forEach items="${bestSellers}" var="book">
-      <div>
-        <b><a href="${pageContext.request.contextPath}/books/search/${book.bookid}">${book.title}</a></b>
-     </div>
-       </c:forEach>
-          </nav>
-             
-     
-  </section>
  
   <hr>
 
-  <div id="path"><a href="">Home/</a><a href="">Books/</a><a href="">Medicine</a></div>
+  
 
-  <section id="booksPerCategory">
+ <section id="booksPerCategory">
     <div class="container">
-        <c:forEach items="${booksPerCategory}" var="book">  
-                  <div class="row specific-row" >
+        <c:forEach items="${booksPerCategory}" var="book">
+      <div class="row specific-row">
         
-        <div class="col-3"  >
-            <img class="image" src="${book.frontcover}" alt="image"  onclick="location='${pageContext.request.contextPath}/books/search/${book.bookid}'" >
+        
+        <div class="col-3">
+            <img class="image" src="${book.bookdetailsList.toArray()[0].frontcover}" alt="bookImage" ><!--to frontcover tha nai se kathe biblio to idio, opote pairnw to [0] -->
         </div>
-        <div class="col-7 ">
-         
+        <div class="col-5">
+ 
           <h5 class="mainContent"><a href="${pageContext.request.contextPath}/books/search/${book.bookid}">${book.title}</a></h5>
-          <c:forEach items="${authorPerBook.keySet().toArray()}"  var="i">
-          <c:if test="${i==book.bookid}">
-          <h5 ><a style="color:black;" href="${pageContext.request.contextPath}/authors/${authorPerBook[i].lastname}"> ${authorPerBook[i].firstname}${" "}${authorPerBook[i].lastname}  </a> </h5>
-          </c:if>
+          <c:forEach items="${book.authorList}" var="author">
+          <h5> by <a href="${pageContext.request.contextPath}/authors/${author.lastname}"> ${author.firstname}${" "}${author.lastname}</a></h5>
         </c:forEach>
+          <br>
           
-          <c:choose>
-              <c:when test="${book.count>20}">
-          <h3> <span id="inStock"> ✔️ In Stock </span><span class="despatched">  Usually despatched in 4 days</span>  </h3>
-              </c:when>
-              <c:when test="${book.count<5}">
-              <h3> <span id="OutOfStock">${book.count}${" "} more available</span><span class="despatched"> Get it now  </span>  </h3>
-              </c:when>
-              <c:otherwise>
-              <h3> <span id="RunningOut">${book.count}${" "} left</span><span class="despatched"> Get it now  </span>  </h3>
-              </c:otherwise>    
-          </c:choose>
-              <c:forEach items="${bookBooktypes.keySet().toArray()}" var="i">
-                  <c:if test="${i.bookid==book.bookid}">
-                      <c:forEach items="${bookBooktypes[i]}" var="j">
-                          <span>${j.name}</span>
-                      </c:forEach>
-                  </c:if>
-          </c:forEach>
-        </div>
-        <div class="col-2">
-          <div class="addToBasket">
-            <h4 class="addToBasketPrice">${book.price}$</h4>
-            <button class="addCartBtn" >Add To Cart </button>
+            <c:forEach items="${book.bookdetailsList}"  var="bookDetail">   
+                <h5>${bookDetail.format.name}</h5>
+                <h5>$ ${bookDetail.price}</h5>
+           <c:choose>
+	<c:when test="${bookDetail.count<30}">
+	 <h6>⚠ Only  ${bookDetail.count} left in stock! </h6>
+	</c:when>
+	<c:otherwise>
+            <h6> ✔ In Stock - Usually despatched within 48 hours  </h6>
+	</c:otherwise>
+</c:choose>        
+          
+              <hr class="hr">
+            </c:forEach>
           </div>
-        </div>
+          
+          <div class="col-4" >
+              <div class="row add-basket">
+                  
+                  <form:form action="${pageContext.request.contextPath}/cart/buy/${book.bookid}" method="GET">
+                      <c:forEach items="${book.bookdetailsList}"  var="bookDetail">
+                      <div class="formatsBasket">
+                          <input type="radio" id="format" name="format" required value="${bookDetail.format.formatid}">
+                      <label for="format">${bookDetail.format.name}</label>
+                      </div>
+                  </c:forEach>
+                
+              
+                  
+                  
+                      
+     <input class="addCartBtn" type="submit" value="Add to Cart" class="addToBasketBtn">
+                      
+                      
+                  </form:form>  
+              
+              </div>
       </div>
-            <hr>
-        </c:forEach>
-    
-      </div>
+   </div>
+          </c:forEach>
+            
+       
+    </div>
+
   </section>
+  
+  
+      
+      
   
    <style>
           #partWithLogo {
@@ -498,7 +321,7 @@ nav:nth-child(2) > div > header {
 }
 
 #booksPerCategory {
-  margin: 0 20%;
+  margin: 0 15%;
   height: auto;
   
 }
@@ -508,9 +331,9 @@ nav:nth-child(2) > div > header {
 }
 
 .image {
-  height: 160px;
-  width: 140px;
-  margin: 10% 0 10% 13%;
+  height: 310px;
+  width: 200px;
+  margin: 10% 0 10% 0;
 }
 
 .despatched {
@@ -521,7 +344,7 @@ nav:nth-child(2) > div > header {
 
 .addToBasket {
   position: absolute;
-  top: 24%;
+  top: 38%;
   right: 20px;
 }
 .mainContent {
@@ -556,9 +379,10 @@ nav:nth-child(2) > div > header {
   51% { background-color: grey; }
   100% { background-color: grey; }
 }
-#OutOfStock{
+.OutOfStock{
      border-radius:10%; 
-    height: 100px;
+    height: auto;
+    width: auto;
     background-color: grey;
   -webkit-animation-name: blackWhite;
   /* -webkit-animation-name: blackWhiteFade; */
@@ -566,11 +390,27 @@ nav:nth-child(2) > div > header {
   -webkit-animation-duration: 1s; 
 }
 
+.formats{
+    position:absolute;
+}
+
+.add-basket{
+    margin-top: 40%;
+}
+
+.hr{
+    margin-right: 30%;
+
+
+
 
       </style>
   
   
-  
+      <script>
+        const addBtn=document.querySelectorAll("addToBasketBtn");  
+        
+      </script>
   </body>
->>>>>>> stathis-branch
+
 </html>

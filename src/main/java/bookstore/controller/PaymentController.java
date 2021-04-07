@@ -80,7 +80,7 @@ public class PaymentController {
         // You may want to store charge id along with order information
         redirectAttributes.addAttribute("message", "Success your charge id is " + chargeId);
         
-        return "redirect:/";
+        return "redirect:/order-completed";
     }
     
     

@@ -15,7 +15,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Shopping Cart</h1>
+        <h1>Delivery Options</h1>
 
         <hr/>
 
@@ -29,49 +29,61 @@
 
         <br>
 
-        Cart  Details
-        <table cellpadding="2" cellspacing="2" border="1">
-
-            <% double total = 0.0; %>
+        <form:form action= "${pageContext.request.contextPath}/cart/address" method="post">
             
-            <c:forEach var="bookpercart" items="${sessionScope.cart}">
-                <c:set var="subtotal" value="${bookpercart.book.price * bookpercart.quantity}"></c:set>
-              
-                <% total = total + (double) pageContext.getAttribute("subtotal");  %>
-                
-                <tr>
-                    <td><a href="${pageContext.request.contextPath}/books/search/${bookpercart.book.bookid}"><img src="${bookpercart.book.frontcover}" width="100"></a>
-                        
-                    ${bookpercart.book.title}
-                    
-                    ${bookpercart.book.booktype.name}
+            Choose delivery option:
+            <br>
+            
+            <input type="radio" id="standard" name="delivery" value="standard">
+            <label for="standard">Standard delivery</label>
+            
+            <input type="radio" id="express" name="delivery" value="express">
+            <label for="express">Express delivery</label>
+            <br>
+            
+            First Name:
+            <input type="text" name="firstname">
+            
+            <br>
+            
+            Last Name:
+            <input type="text" name="lastname">
+            
+            <br>
+            
+            Country:
+            <select name="country">
 
-                    <br>
-                    
-                    Quantity: ${bookpercart.quantity }
+                <option value=""> --Select Country--</option>
 
-                            </td>
-                    <td>${subtotal} &euro;</td>
-                     
-                   
-                    
-                </tr>
-            </c:forEach>
-                
-                <tr>
-                    <td colspan="6">
-                        Total: <%=total%> &euro;
-                    </td>
-                    
-                </tr>
-     
-                
-        </table>
-           
+                <c:forEach var = "country" items = "${countries}">
+                    <option value="${country.countryid}"> ${country.name}</option>                 
+                </c:forEach>
+
+            </select>
+
+            <br>
+            
+            City:
+             <input type="text" name="city">
+            
+            <br>
+            
+            Street:
+            <input type="text" name="street">
+            
+            Streetnumber:
+            <input type="number" min="1" name="streetnumber">
+            
+            Postal Code:
+            <input type="number" min="1" name="postalcode">
+            
+            <button type="submit">Submit and procceed to Payment via Stripe</button>
+            
+            </form:form>
 
         <a href="${pageContext.request.contextPath}/cart/index">Back to Basket</a>
-        
-        <a href="${pageContext.request.contextPath}/cart/payment">Procceed to Payment</a>
+
         
         
     </body>
