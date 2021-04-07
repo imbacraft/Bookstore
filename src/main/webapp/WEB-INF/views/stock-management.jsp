@@ -78,15 +78,15 @@
 
                         <td>${book.bookid}</td>
                         <td>${book.title}</td>
-                        <td>${book.booktype.name}</td>
+                        <td>${book.bookdetailsList[pageContext.getAttribute("counter")].format.name}  </td>
                         <td>${book.categoryList[pageContext.getAttribute("counter")].name}</td>
                         <td>${book.categoryList[pageContext.getAttribute("counter")+1].name}</td>
                         <td>${book.price}</td>
                         <td>${book.publisher}</td>
                         <td>${book.publicationdate}</td>
                         <td>${book.edition}</td>
-                        <td>${book.pages}</td>
-                        <td>${book.language}</td>
+                        <td>${book.bookdetails.pages}</td>
+                        <td>${book.bookdetails.language}</td>
                         <td>${book.frontcover}</td>
                         <td>${book.backcover}</td>
                         <td>${book.count}</td>

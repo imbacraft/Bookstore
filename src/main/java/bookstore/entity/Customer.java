@@ -7,6 +7,7 @@ package bookstore.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -20,6 +21,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -62,7 +65,6 @@ public class Customer implements Serializable {
     @Column(name = "lastname")
     private String lastname;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 80)
@@ -86,7 +88,12 @@ public class Customer implements Serializable {
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+    @Size(min = 1, max = 200)
+    @Column(name = "city")
+    private String city;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 200)
     @Column(name = "street")
     private String street;
     @Basic(optional = false)
@@ -94,11 +101,11 @@ public class Customer implements Serializable {
     @Column(name = "streetnumber")
     private int streetnumber;
     @Basic(optional = false)
-    @NotNull
+    @NotNull()
     @Column(name = "postalcode")
     private int postalcode;
     @Column(name = "dateofbirth")
-    @DateTimeFormat(pattern= "yyyy-MM-dd")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate dateofbirth;
     @Size(max = 60)
     @Column(name = "paypalaccount")
@@ -264,6 +271,14 @@ public class Customer implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getStreet() {

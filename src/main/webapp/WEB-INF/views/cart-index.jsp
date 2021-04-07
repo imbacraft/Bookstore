@@ -41,24 +41,26 @@
             
             <% double total = 0.0; %>
             
-            <c:forEach var="bookpercart" items="${sessionScope.cart}">
-                <c:set var="subtotal" value="${bookpercart.book.price * bookpercart.quantity}"></c:set>
+            <c:forEach var="cartitem" items="${sessionScope.cart}">
+                
+                
+                <c:set var="subtotal" value="${cartitem.bookdetails.book.price * cartitem.quantity}"></c:set>
               
                 <% total = total + (double) pageContext.getAttribute("subtotal");  %>
                 
                 <tr>
-                    <td><a href="${pageContext.request.contextPath}/books/search/${bookpercart.book.bookid}"><img src="${bookpercart.book.frontcover}" width="100"></a></td>
-                    <td>${bookpercart.book.title}</td>
-                    <td>${bookpercart.book.booktype.name}</td>
+                    <td><a href="${pageContext.request.contextPath}/books/search/${cartitem.book.bookid}"><img src="${cartitem.bookdetails.book.frontcover}" width="100"></a></td>
+                    <td>${cartitem.bookdetails.book.title}</td>
+                    <td>${cartitem.bookdetails.book.format.name}</td>
                             <td>
                                 <form:form action = "${pageContext.request.contextPath}/cart/index" method="post">
-                                    <input name="bookid" id="bookid" value="${bookpercart.book.bookid}" hidden>
-                                    <input type= "number" id="quantity" name ="quantity" value = ${bookpercart.quantity } min=1 placeholder = "${bookpercart.quantity }">
+                                    <input name="bookid" id="bookid" value="${cartitem.bookdetails.book.bookid}" hidden>
+                                    <input type= "number" id="quantity" name ="quantity" value = ${cartitem.quantity } min=1 placeholder = "${cartitem.quantity }">
                                     <button type="submit">Update </button>
                                 </form:form>
                             </td>
                     <td>${subtotal} &euro;</td>
-                    <td><a href="${pageContext.request.contextPath}/cart/remove/${bookpercart.book.bookid}">Remove</a></td>
+                    <td><a href="${pageContext.request.contextPath}/cart/remove/${cartitem.bookdetails.book.bookid}">Remove</a></td>
                      
                    
                     

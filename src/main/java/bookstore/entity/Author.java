@@ -48,12 +48,12 @@ public class Author implements Serializable {
     private Integer authorid;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 60)
+    @Size(min = 1, max = 100)
     @Column(name = "firstname")
     private String firstname;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 60)
+    @Size(min = 1, max = 100)
     @Column(name = "lastname")
     private String lastname;
     @Basic(optional = false)
@@ -61,7 +61,7 @@ public class Author implements Serializable {
     @Size(min = 1, max = 2500)
     @Column(name = "biography")
     private String biography;
-    @Size(max = 200)
+    @Size(max = 250)
     @Column(name = "portrait")
     private String portrait;
     @JoinTable(name = "joinedbookauthor", joinColumns = {

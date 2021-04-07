@@ -1,6 +1,7 @@
 package bookstore.controller;
 
-import bookstore.entity.Bookpercart;
+import bookstore.entity.Bookdetails;
+import bookstore.entity.Cartitem;
 import bookstore.service.StripeService;
 import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -31,16 +32,22 @@ public class PaymentController {
     @GetMapping
     public String showchargePage(Model model, HttpSession session) {
 
-        List<Bookpercart> cart = (List<Bookpercart>) session.getAttribute("cart");
+        List<Cartitem> cart = (List<Cartitem>) session.getAttribute("cart");
         
         
         int amount = 0;
-        for (Bookpercart bpc : cart) {
         
-            amount += bpc.getBook().getPrice();
+        for (Cartitem item : cart) {
         
+                
+            
+                amount += item.getBookdetails().getPrice();
+            
         }
 
+        System.out.println(">>>Amount to be payed: "+ amount);
+        
+        
         model.addAttribute("stripePublicKey", API_PUBLIC_KEY);
         model.addAttribute("amount", amount * 100);
 

@@ -40,11 +40,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 @NamedQueries({
     @NamedQuery(name = "Cart.findAll", query = "SELECT c FROM Cart c")
     , @NamedQuery(name = "Cart.findByCartid", query = "SELECT c FROM Cart c WHERE c.cartid = :cartid")
-    , @NamedQuery(name = "Cart.findByDatetime", query = "SELECT c FROM Cart c WHERE c.datetime = :datetime")
+    , @NamedQuery(name = "Cart.findByLocalDateTimetime", query = "SELECT c FROM Cart c WHERE c.datetime = :datetime")
     , @NamedQuery(name = "Cart.findByPayment", query = "SELECT c FROM Cart c WHERE c.payment = :payment")
-    , @NamedQuery(name = "Cart.findByPricebeforetax", query = "SELECT c FROM Cart c WHERE c.pricebeforetax = :pricebeforetax")
     , @NamedQuery(name = "Cart.findByShippingcost", query = "SELECT c FROM Cart c WHERE c.shippingcost = :shippingcost")
-    , @NamedQuery(name = "Cart.findByTax", query = "SELECT c FROM Cart c WHERE c.tax = :tax")
     , @NamedQuery(name = "Cart.findByTotalprice", query = "SELECT c FROM Cart c WHERE c.totalprice = :totalprice")})
 public class Cart implements Serializable {
 
@@ -54,43 +52,38 @@ public class Cart implements Serializable {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime datetime;
     @Basic(optional = false)
-    @NotNull()
-    @Size(min = 1, max = 60)
+    @NotNull
+    @Size(min = 1, max = 160)
     @Column(name = "payment")
     private String payment;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
-    @Column(name = "pricebeforetax")
-    private double pricebeforetax;
+    @Column(name = "bookprice")
+    private double bookprice;
     @Basic(optional = false)
     @NotNull
     @Column(name = "shippingcost")
     private double shippingcost;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "tax")
-    private double tax;
     @Basic(optional = false)
     @NotNull
     @Column(name = "totalprice")
     private double totalprice;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "cartid")
     private Integer cartid;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cart")
-    private List<Bookpercart> bookpercartList;
     @JoinColumn(name = "customerid", referencedColumnName = "customerid")
     @ManyToOne
     private Customer customer;
     @JoinColumn(name = "visitorid", referencedColumnName = "visitorid")
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Visitor visitor;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cart")
+    private List<Cartitem> cartitemList;
 
     public Cart() {
     }
@@ -99,13 +92,11 @@ public class Cart implements Serializable {
         this.cartid = cartid;
     }
 
-    public Cart(Integer cartid, LocalDateTime datetime, String payment, double pricebeforetax, double shippingcost, double tax, double totalprice) {
+    public Cart(Integer cartid, LocalDateTime datetime, String payment, double shippingcost, double totalprice) {
         this.cartid = cartid;
         this.datetime = datetime;
         this.payment = payment;
-        this.pricebeforetax = pricebeforetax;
         this.shippingcost = shippingcost;
-        this.tax = tax;
         this.totalprice = totalprice;
     }
 
@@ -118,20 +109,11 @@ public class Cart implements Serializable {
     }
 
 
-    @XmlTransient
-    public List<Bookpercart> getBookpercartList() {
-        return bookpercartList;
-    }
-
-    public void setBookpercartList(List<Bookpercart> bookpercartList) {
-        this.bookpercartList = bookpercartList;
-    }
-
-    public Customer getCustomer() {
+    public Customer getCustomerid() {
         return customer;
     }
 
-    public void setCustomer(Customer customer) {
+    public void setCustomerid(Customer customer) {
         this.customer = customer;
     }
 
@@ -139,8 +121,17 @@ public class Cart implements Serializable {
         return visitor;
     }
 
-    public void setVisitor(Visitor visitor) {
+    public void setVisitorid(Visitor visitor) {
         this.visitor = visitor;
+    }
+
+    @XmlTransient
+    public List<Cartitem> getCartitemList() {
+        return cartitemList;
+    }
+
+    public void setCartitemList(List<Cartitem> cartitemList) {
+        this.cartitemList = cartitemList;
     }
 
     @Override
@@ -184,12 +175,12 @@ public class Cart implements Serializable {
         this.payment = payment;
     }
 
-    public double getPricebeforetax() {
-        return pricebeforetax;
+    public double getBookprice() {
+        return bookprice;
     }
 
-    public void setPricebeforetax(double pricebeforetax) {
-        this.pricebeforetax = pricebeforetax;
+    public void setBookprice(double bookprice) {
+        this.bookprice = bookprice;
     }
 
     public double getShippingcost() {
@@ -198,14 +189,6 @@ public class Cart implements Serializable {
 
     public void setShippingcost(double shippingcost) {
         this.shippingcost = shippingcost;
-    }
-
-    public double getTax() {
-        return tax;
-    }
-
-    public void setTax(double tax) {
-        this.tax = tax;
     }
 
     public double getTotalprice() {

@@ -11,7 +11,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,13 +28,13 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Dell
  */
 @Entity
-@Table(name = "booktype")
+@Table(name = "format")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Booktype.findAll", query = "SELECT b FROM Booktype b")
-    , @NamedQuery(name = "Booktype.findByBooktypeid", query = "SELECT b FROM Booktype b WHERE b.booktypeid = :booktypeid")
-    , @NamedQuery(name = "Booktype.findByName", query = "SELECT b FROM Booktype b WHERE b.name = :name")})
-public class Booktype implements Serializable {
+    @NamedQuery(name = "Format.findAll", query = "SELECT f FROM Format f")
+    , @NamedQuery(name = "Format.findByFormatid", query = "SELECT f FROM Format f WHERE f.formatid = :formatid")
+    , @NamedQuery(name = "Format.findByName", query = "SELECT f FROM Format f WHERE f.name = :name")})
+public class Format implements Serializable {
 
     @Basic(optional = false)
     @NotNull
@@ -47,56 +46,56 @@ public class Booktype implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "booktypeid")
-    private Integer booktypeid;
-    @OneToMany(mappedBy = "booktype")
-    private List<Book> bookList;
+    @Column(name = "formatid")
+    private Integer formatid;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "format")
+    private List<Bookdetails> bookdetailsList;
 
-    public Booktype() {
+    public Format() {
     }
 
-    public Booktype(Integer booktypeid) {
-        this.booktypeid = booktypeid;
+    public Format(Integer formatid) {
+        this.formatid = formatid;
     }
 
-    public Booktype(Integer booktypeid, String name) {
-        this.booktypeid = booktypeid;
+    public Format(Integer formatid, String name) {
+        this.formatid = formatid;
         this.name = name;
     }
 
-    public Integer getBooktypeid() {
-        return booktypeid;
+    public Integer getFormatid() {
+        return formatid;
     }
 
-    public void setBooktypeid(Integer booktypeid) {
-        this.booktypeid = booktypeid;
+    public void setFormatid(Integer formatid) {
+        this.formatid = formatid;
     }
 
 
     @XmlTransient
-    public List<Book> getBookList() {
-        return bookList;
+    public List<Bookdetails> getBookdetailsList() {
+        return bookdetailsList;
     }
 
-    public void setBookList(List<Book> bookList) {
-        this.bookList = bookList;
+    public void setBookdetailsList(List<Bookdetails> bookdetailsList) {
+        this.bookdetailsList = bookdetailsList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (booktypeid != null ? booktypeid.hashCode() : 0);
+        hash += (formatid != null ? formatid.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Booktype)) {
+        if (!(object instanceof Format)) {
             return false;
         }
-        Booktype other = (Booktype) object;
-        if ((this.booktypeid == null && other.booktypeid != null) || (this.booktypeid != null && !this.booktypeid.equals(other.booktypeid))) {
+        Format other = (Format) object;
+        if ((this.formatid == null && other.formatid != null) || (this.formatid != null && !this.formatid.equals(other.formatid))) {
             return false;
         }
         return true;
@@ -104,7 +103,7 @@ public class Booktype implements Serializable {
 
     @Override
     public String toString() {
-        return "bookstore.entity.Booktype[ booktypeid=" + booktypeid + " ]";
+        return "bookstore.entity.Format[ formatid=" + formatid + " ]";
     }
 
     public String getName() {

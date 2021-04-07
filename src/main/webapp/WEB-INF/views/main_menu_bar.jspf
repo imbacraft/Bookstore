@@ -11,9 +11,9 @@
 .main-menu-entry {
     display: flex;
     height : 40px;
-    // width: auto;
+    /*// width: auto;*/
     /*! text-align: center; */
-    // margin: 0 80px;
+    /*// margin: 0 80px;*/
     justify-content: space-evenly;
  }
  
@@ -46,7 +46,7 @@
      position: absolute;
      background-color: white;
      border-radius: 5px;
-     // margin: 0 auto;
+     /*// margin: 0 auto;*/
      border: 1px solid #f0ecec;
      flex-flow: column wrap;
      box-shadow: grey 5px 5px 6px;
@@ -56,7 +56,7 @@
 .main-menu-item-modal a {
     text-decoration: none;
     color: black;
-    // margin: 7px;
+    /*// margin: 7px;*/
     padding-left: 25px;
 }
 

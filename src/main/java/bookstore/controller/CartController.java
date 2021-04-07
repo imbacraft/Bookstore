@@ -6,8 +6,10 @@
 package bookstore.controller;
 
 import bookstore.entity.Book;
-import bookstore.entity.Bookpercart;
+import bookstore.entity.Bookdetails;
+import bookstore.entity.Cartitem;
 import bookstore.repo.BookRepo;
+import bookstore.repo.BookdetailsRepo;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -29,6 +31,9 @@ public class CartController {
 
     @Autowired
     BookRepo bookRepo;
+    
+    @Autowired
+    BookdetailsRepo bookdetailsRepo;
 
     @GetMapping("/index")
     public String showCart() {
@@ -43,7 +48,7 @@ public class CartController {
         int updatedquantity = Integer.parseInt(quantity);
         int id = Integer.parseInt(bookid);
         
-        List<Bookpercart> cart = (List<Bookpercart>) session.getAttribute("cart");
+        List<Cartitem> cart = (List<Cartitem>) session.getAttribute("cart");
         
         int index = this.getBookIndex(id, cart);
         
@@ -56,44 +61,44 @@ public class CartController {
     @GetMapping("/buy/{id}")
     public String buyBook(@PathVariable("id") Integer id, HttpSession session) {
         //get book from db by id
-        Book book = bookRepo.getOne(id);
+        Bookdetails book = bookdetailsRepo.getOne(id);
 
         System.out.println(book);
         
         if (session.getAttribute("cart") == null) {
 
             //Create cart
-            List<Bookpercart> cart = new ArrayList<>();
+            List<Cartitem> cart = new ArrayList<>();
 
-            //create bookpercart
-            Bookpercart bookpercart = new Bookpercart();
-            bookpercart.setBook(book);
-            bookpercart.setQuantity(1);
+            //create cartitem
+            Cartitem cartitem = new Cartitem();
+            cartitem.setBookdetails(book);
+            cartitem.setQuantity(1);
             
-            System.out.println("BookperCart to be added is :"+ bookpercart.toString());
+            System.out.println("Cartitem to be added is :"+ cartitem.toString());
             
-            //add bookpercart to cart
-            cart.add(bookpercart);
+            //add cartitem to cart
+            cart.add(cartitem);
             
             //set cart as session attribute
             session.setAttribute("cart", cart);
 
         } else {
 
-            List<Bookpercart> cart = (List<Bookpercart>) session.getAttribute("cart");
+            List<Cartitem> cart = (List<Cartitem>) session.getAttribute("cart");
 
             int index = this.getBookIndex(id, cart);
 
             if (index == -1) {
 
-                //create bookpercart
-                Bookpercart bookpercart = new Bookpercart();
-                bookpercart.setBook(book);
-                bookpercart.setQuantity(1);
+                //create cartitem
+                Cartitem cartitem = new Cartitem();
+                cartitem.setBookdetails(book);
+                cartitem.setQuantity(1);
                 
-                System.out.println("BookperCart to be added is :"+ bookpercart.toString());
+                System.out.println("BookperCart to be added is :"+ cartitem.toString());
 
-                cart.add(bookpercart);
+                cart.add(cartitem);
                 
 
 
@@ -114,7 +119,7 @@ public class CartController {
     @GetMapping("/remove/{id}")
     public String remove(@PathVariable("id") int id, HttpSession session) {
         
-        List<Bookpercart> cart = (List<Bookpercart>) session.getAttribute("cart");
+        List<Cartitem> cart = (List<Cartitem>) session.getAttribute("cart");
         int index = this.getBookIndex(id, cart);
         cart.remove(index);
         
@@ -126,11 +131,11 @@ public class CartController {
     
     //This method gets a Bookid and finds at which index position the book stands in Cart list.
     //If the book doesnt exist in the cart, returns -1.
-    private int getBookIndex(int id, List<Bookpercart> cart) {
+    private int getBookIndex(int id, List<Cartitem> cart) {
         
         for (int i = 0; i < cart.size(); i++) {
             
-            if (id == cart.get(i).getBook().getBookid()) {
+            if (id == cart.get(i).getBookdetails().getBook().getBookid()) {
                 return i;
             }
         }
