@@ -211,8 +211,8 @@
                   <form:form action="${pageContext.request.contextPath}/cart/buy/${book.bookid}" method="GET">
                       <c:forEach items="${book.bookdetailsList}"  var="bookDetail">
                       <div class="formatsBasket">
-                          <input type="radio" id="formats" name="formats"  value="${bookDetail.format.formatid}">
-                      <label for="formats">${bookDetail.format.name}</label>
+                          <input type="radio" id="format" name="format"  value="${bookDetail.format.formatid}">
+                      <label for="format">${bookDetail.format.name}</label>
                       </div>
                   </c:forEach>
                 

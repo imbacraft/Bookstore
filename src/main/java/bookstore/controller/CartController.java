@@ -66,11 +66,17 @@ public class CartController {
         return "redirect:/cart/index";
     }
 
-    @GetMapping("/buy/{id}/{format}")
-    public String buyBook(@PathVariable("id") Integer id, @PathVariable("format") Integer format, HttpSession session) {
-        //get book from db by id
-      
-        Bookdetails book = bookdetailsRepo.findByBookidandFormatid(id, format);
+    @GetMapping("/buy/{id}")
+    public String buyBook(@PathVariable("id") Integer id, @RequestParam("format") String format, HttpSession session) {
+        
+        System.out.println("Format is : "+ format);
+        
+        int formatid = Integer.parseInt(format);
+        
+        
+        
+        //get book from db by id and format
+        Bookdetails book = bookdetailsRepo.findByBookidandFormatid(id, formatid);
         
 
         System.out.println(book);
@@ -97,7 +103,7 @@ public class CartController {
 
             List<Cartitem> cart = (List<Cartitem>) session.getAttribute("cart");
 
-            int index = this.getBookIndex(id, format, cart);
+            int index = this.getBookIndex(id, formatid, cart);
 
             if (index == -1) {
 
