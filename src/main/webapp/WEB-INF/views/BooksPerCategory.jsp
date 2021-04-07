@@ -34,7 +34,7 @@
  
   <hr>
 
-  <div id="path"><a href="">Home/</a><a href="">Books/</a><a href="">Medicine</a></div>
+  
 
  <section id="booksPerCategory">
     <div class="container">
@@ -56,10 +56,16 @@
             <c:forEach items="${book.bookdetailsList}"  var="bookDetail">   
                 <h5>${bookDetail.format.name}</h5>
                 <h5>$ ${bookDetail.price}</h5>
-                <hr style="margin-right: 30%;">
-          <c:if test="${bookDetail.count<5}">
-              <h5> ${bookDetail.count}left<a href="${pageContext.request.contextPath}/books/search/${book.bookid}">Get it now</a> </h5>
-          </c:if>
+           <c:choose>
+	<c:when test="${bookDetail.count<30}">
+	 <h6>⚠ Only  ${bookDetail.count} left in stock! </h6>
+	</c:when>
+	<c:otherwise>
+            <h6> ✔ In Stock - Usually despatched within 48 hours  </h6>
+	</c:otherwise>
+</c:choose>        
+          
+              <hr class="hr">
             </c:forEach>
           </div>
           
@@ -78,7 +84,7 @@
                   
                   
                       
-                          <input type="submit" value="AddToCart" class="addToBasketBtn">
+     <input class="addCartBtn" type="submit" value="Add to Cart" class="addToBasketBtn">
                       
                       
                   </form:form>  
@@ -373,9 +379,10 @@ nav:nth-child(2) > div > header {
   51% { background-color: grey; }
   100% { background-color: grey; }
 }
-#OutOfStock{
+.OutOfStock{
      border-radius:10%; 
-    height: 100px;
+    height: auto;
+    width: auto;
     background-color: grey;
   -webkit-animation-name: blackWhite;
   /* -webkit-animation-name: blackWhiteFade; */
@@ -390,6 +397,10 @@ nav:nth-child(2) > div > header {
 .add-basket{
     margin-top: 40%;
 }
+
+.hr{
+    margin-right: 30%;
+
 
 
 
