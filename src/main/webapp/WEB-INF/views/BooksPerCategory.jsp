@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <!DOCTYPE html>
 <html>
@@ -114,66 +115,11 @@
                 <hr id="hr" />
               </div>
             </div>
-<<<<<<< HEAD
-       <table border="1">
-            <tr>
-                <th>BookID</th>
-                <th>Title</th>
-                <th>BookType</th>
-                <th>Category 1</th>
-                <th>Price</th>
-                <th>Publisher</th>
-                <th>Publication Date</th>
-                <th>Edition</th>
-                <th>Pages</th>
-                <th>Language</th>
-                <th>Front Cover</th>
-                <th>Back Cover</th>
-                <th>Count</th>
-                <th>ISBN-10</th>
-                <th>ISBN-13</th>
-                <th>Buy</th>
-               
-            </tr>   
 
-            <c:forEach items="${booksPerCategory}" var="book"> 
-
-                <c:forEach begin="0" end="${books.length}" var="counter">
-
-                    <tr>
-
-                        <td>${book.bookid}</td>
-                        <td>${book.title}</td>
-                        <td>${book.booktype.name}</td>
-                        <td>${book.categoryList[pageContext.getAttribute("counter")].name}</td>
-                        <td>${book.price}</td>
-                        <td>${book.publisher}</td>
-                        <td>${book.publicationdate}</td>
-                        <td>${book.edition}</td>
-                        <td>${book.pages}</td>
-                        <td>${book.language}</td>
-                        <td>${book.frontcover}</td>
-                        <td>${book.backcover}</td>
-                        <td>${book.count}</td>
-                        <td>${book.isbn10}</td>
-                        <td>${book.isbn13}</td>
-                        <td>
-                            <a href="${pageContext.request.contextPath}/cart/buy/${book.bookid}">Buy now</a>
-                        </td>
-
-
-                    </tr>
-                </c:forEach>
-
-            </c:forEach>
-
-
-        </table>
- 
-        <a href="${pageContext.request.contextPath}/cart/index">Show cart</a>
+      
         
     </body>
-=======
+
             <div class="col-lg-6">
               <img
                 src="./images/shoppingIcon.png"
@@ -231,54 +177,67 @@
 
   <div id="path"><a href="">Home/</a><a href="">Books/</a><a href="">Medicine</a></div>
 
-  <section id="booksPerCategory">
+ <section id="booksPerCategory">
     <div class="container">
-        <c:forEach items="${booksPerCategory}" var="book">  
-                  <div class="row specific-row" >
+        <c:forEach items="${booksPerCategory}" var="book">
+      <div class="row specific-row">
         
-        <div class="col-3"  >
-            <img class="image" src="${book.frontcover}" alt="image"  onclick="location='${pageContext.request.contextPath}/books/search/${book.bookid}'" >
+        
+        <div class="col-3">
+            <img class="image" src="${book.bookdetailsList.toArray()[0].frontcover}" alt="bookImage" ><!--to frontcover tha nai se kathe biblio to idio, opote pairnw to [0] -->
         </div>
-        <div class="col-7 ">
-         
-          <h5 class="mainContent"><a href="${pageContext.request.contextPath}/books/search/${book.bookid}">${book.title}</a></h5>
-          <c:forEach items="${authorPerBook.keySet().toArray()}"  var="i">
-          <c:if test="${i==book.bookid}">
-          <h5 ><a style="color:black;" href="${pageContext.request.contextPath}/authors/${authorPerBook[i].lastname}"> ${authorPerBook[i].firstname}${" "}${authorPerBook[i].lastname}  </a> </h5>
-          </c:if>
-        </c:forEach>
+        <div class="col-5">
+          <!-- <p id="bookTitle"><a href="">The Wolf Half Trilogy</a></p> -->
           
-          <c:choose>
-              <c:when test="${book.count>20}">
-          <h3> <span id="inStock"> ✔️ In Stock </span><span class="despatched">  Usually despatched in 4 days</span>  </h3>
-              </c:when>
-              <c:when test="${book.count<5}">
-              <h3> <span id="OutOfStock">${book.count}${" "} more available</span><span class="despatched"> Get it now  </span>  </h3>
-              </c:when>
-              <c:otherwise>
-              <h3> <span id="RunningOut">${book.count}${" "} left</span><span class="despatched"> Get it now  </span>  </h3>
-              </c:otherwise>    
-          </c:choose>
-              <c:forEach items="${bookBooktypes.keySet().toArray()}" var="i">
-                  <c:if test="${i.bookid==book.bookid}">
-                      <c:forEach items="${bookBooktypes[i]}" var="j">
-                          <span>${j.name}</span>
-                      </c:forEach>
-                  </c:if>
-          </c:forEach>
-        </div>
-        <div class="col-2">
-          <div class="addToBasket">
-            <h4 class="addToBasketPrice">${book.price}$</h4>
-            <button class="addCartBtn" >Add To Cart </button>
-          </div>
-        </div>
-      </div>
-            <hr>
+          <h5 class="mainContent"><a href="${pageContext.request.contextPath}/books/search/${book.bookid}">${book.title}</a></h5>
+          <c:forEach items="${book.authorList}" var="author">
+          <h5><a href="${pageContext.request.contextPath}/authors/${author.lastname}"> ${author.firstname}${" "}${author.lastname}</a></h5>
         </c:forEach>
-    
+        
+          
+            <c:forEach items="${book.bookdetailsList}"  var="bookDetail">   
+                <h5><a href="${pageContext.request.contextPath}.books/search/${book.bookid}">${bookDetail.format.name}</a> </h5>
+                <h5>$ ${bookDetail.price}</h5>
+                <hr style="margin-right: 30%;">
+          <c:if test="${bookDetail.count<5}">
+              <h5> ${bookDetail.count}left<a href="${pageContext.request.contextPath}/books/search/${book.bookid}">Get it now</a> </h5>
+          </c:if>
+            </c:forEach>
+          </div>
+          
+          <div class="col-4" >
+              <div class="row add-basket">
+                  
+                  <form:form action="${pageContext.request.contextPath}/cart/buy/${book.bookid}" method="GET">
+                      <c:forEach items="${book.bookdetailsList}"  var="bookDetail">
+                      <div class="formatsBasket">
+                      <input type="radio" id="formats" name="formats" value="${bookDetail.format.formatid}">
+                      <label for="formats">${bookDetail.format.name}</label>
+                      </div>
+                  </c:forEach>
+                
+              
+                  
+                  
+                      
+                          <input type="submit" value="AddToCart" class="addToBasketBtn">
+                      
+                      
+                  </form:form>  
+              
+              </div>
       </div>
+   </div>
+          </c:forEach>
+            
+       
+    </div>
+
   </section>
+  
+  
+      
+      
   
    <style>
           #partWithLogo {
@@ -498,7 +457,7 @@ nav:nth-child(2) > div > header {
 }
 
 #booksPerCategory {
-  margin: 0 20%;
+  margin: 0 15%;
   height: auto;
   
 }
@@ -508,9 +467,9 @@ nav:nth-child(2) > div > header {
 }
 
 .image {
-  height: 160px;
-  width: 140px;
-  margin: 10% 0 10% 13%;
+  height: 260px;
+  width: 200px;
+  margin: 10% 0 10% 0;
 }
 
 .despatched {
@@ -521,7 +480,7 @@ nav:nth-child(2) > div > header {
 
 .addToBasket {
   position: absolute;
-  top: 24%;
+  top: 38%;
   right: 20px;
 }
 .mainContent {
@@ -566,11 +525,23 @@ nav:nth-child(2) > div > header {
   -webkit-animation-duration: 1s; 
 }
 
+.formats{
+    position:absolute;
+}
+
+.add-basket{
+    margin-top: 40%;
+}
+
+
 
       </style>
   
   
-  
+      <script>
+        const addBtn=document.querySelectorAll("addToBasketBtn");  
+        
+      </script>
   </body>
->>>>>>> stathis-branch
+
 </html>
