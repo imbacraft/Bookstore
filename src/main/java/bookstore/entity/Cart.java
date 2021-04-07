@@ -109,11 +109,11 @@ public class Cart implements Serializable {
     }
 
 
-    public Customer getCustomerid() {
+    public Customer getCustomer() {
         return customer;
     }
 
-    public void setCustomerid(Customer customer) {
+    public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 
@@ -121,7 +121,7 @@ public class Cart implements Serializable {
         return visitor;
     }
 
-    public void setVisitorid(Visitor visitor) {
+    public void setVisitor(Visitor visitor) {
         this.visitor = visitor;
     }
 

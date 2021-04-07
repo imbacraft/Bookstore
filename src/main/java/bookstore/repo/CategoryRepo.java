@@ -22,7 +22,7 @@ public interface CategoryRepo extends JpaRepository<Category,Integer> {
    public List<Category> findAll();
    
    @Query(value="select category.* from category,book,joinedbookcategory where joinedbookcategory.bookid=?1"
-            + " and joinedbookcategory.category=category.categid;",nativeQuery = true)
+            + " and joinedbookcategory.category=category.categoryid;",nativeQuery = true)
     List<Category>findByBook(int bookid);
 } 
     

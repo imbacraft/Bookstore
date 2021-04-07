@@ -50,7 +50,6 @@ import org.springframework.format.annotation.DateTimeFormat;
     , @NamedQuery(name = "Customer.findByStreetnumber", query = "SELECT c FROM Customer c WHERE c.streetnumber = :streetnumber")
     , @NamedQuery(name = "Customer.findByPostalcode", query = "SELECT c FROM Customer c WHERE c.postalcode = :postalcode")
     , @NamedQuery(name = "Customer.findByDateofbirth", query = "SELECT c FROM Customer c WHERE c.dateofbirth = :dateofbirth")
-    , @NamedQuery(name = "Customer.findByPaypalaccount", query = "SELECT c FROM Customer c WHERE c.paypalaccount = :paypalaccount")
     , @NamedQuery(name = "Customer.findByDiscountcoupon", query = "SELECT c FROM Customer c WHERE c.discountcoupon = :discountcoupon")})
 public class Customer implements Serializable {
 
@@ -107,9 +106,6 @@ public class Customer implements Serializable {
     @Column(name = "dateofbirth")
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate dateofbirth;
-    @Size(max = 60)
-    @Column(name = "paypalaccount")
-    private String paypalaccount;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -222,8 +218,9 @@ public class Customer implements Serializable {
 
     @Override
     public String toString() {
-        return "Customer{" + "customerid=" + customerid + ", firstname=" + firstname + ", lastname=" + lastname + ", email=" + email + ", phone=" + phone + ", username=" + username + ", password=" + password + ", country=" + country + ", street=" + street + ", streetnumber=" + streetnumber + ", postalcode=" + postalcode + ", dateofbirth=" + dateofbirth + ", paypalaccount=" + paypalaccount + ", discountcoupon=" + discountcoupon + ", cartList=" + cartList + ", role=" + role + '}';
+        return "Customer{" + "firstname=" + firstname + ", lastname=" + lastname + ", email=" + email + ", phone=" + phone + ", username=" + username + ", password=" + password + ", city=" + city + ", street=" + street + ", streetnumber=" + streetnumber + ", postalcode=" + postalcode + ", dateofbirth=" + dateofbirth + ", customerid=" + customerid + ", country=" + country + ", discountcoupon=" + discountcoupon + ", cartList=" + cartList + ", role=" + role + '}';
     }
+
 
     public String getFirstname() {
         return firstname;
@@ -313,12 +310,5 @@ public class Customer implements Serializable {
         this.dateofbirth = dateofbirth;
     }
 
-    public String getPaypalaccount() {
-        return paypalaccount;
-    }
-
-    public void setPaypalaccount(String paypalaccount) {
-        this.paypalaccount = paypalaccount;
-    }
 
 }

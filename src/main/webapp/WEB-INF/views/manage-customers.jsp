@@ -57,8 +57,7 @@
                 <th>Street</th>
                 <th>Streetnumber</th>
                 <th>Date of Birth</th>
-                <th>PayPal Account</th>
-                <th>discountcoupon</th>
+                <th>Discount Coupon</th>
 
                 <sec:authorize access="hasRole('ADMIN')">
                     <th>Update</th>
@@ -96,7 +95,6 @@
                         <td>${customer.street}</td>
                         <td>${customer.streetnumber}</td>
                         <td>${customer.dateofbirth}</td>
-                        <td>${customer.paypalaccount}</td>
                         <td>${customer.discountcoupon}</td>
 
 

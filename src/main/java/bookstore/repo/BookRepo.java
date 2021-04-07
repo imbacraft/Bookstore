@@ -21,7 +21,7 @@ public interface BookRepo extends JpaRepository<Book, Integer> {
     Optional<Book> findById(int bookId);
     
     @Query(value="select book.* from book,category,joinedbookcategory where book.bookid=joinedbookcategory.bookid"
-            + " and category.categid=joinedbookcategory.category and category.name=?1 "
+            + " and category.categoryid=joinedbookcategory.categoryid and category.name=?1 "
             + "and book.booktype=1",nativeQuery = true)
     List<Book> findByCategory(String categoryName);
     

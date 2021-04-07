@@ -46,10 +46,8 @@
                 <th>Visitor Last Name</th>
                 <th>Datetime</th>
                 <th>Payment</th>
-                <th>Quantity</th>
-                <th>pricebeforetax</th>
+                <th>Bookprice</th>
                 <th>shippingcost</th>
-                <th>tax</th>
                 <th>totalprice</th>
                 <th>Delete</th>
             </tr>   
@@ -68,10 +66,8 @@
                     <td>${cart.visitor.lastname}</td>
                     <td>${cart.datetime}</td>
                     <td>${cart.payment}</td>
-                    <td>${cart.quantity}</td>
-                    <td>${cart.pricebeforetax}</td>
+                    <td>${cart.bookprice}</td>
                     <td>${cart.shippingcost}</td>
-                    <td>${cart.tax}</td>
                     <td>${cart.totalprice}</td>
 
                     <td>

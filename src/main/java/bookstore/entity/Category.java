@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Category.findAll", query = "SELECT c FROM Category c")
-    , @NamedQuery(name = "Category.findByCategid", query = "SELECT c FROM Category c WHERE c.categid = :categid")
+    , @NamedQuery(name = "Category.findByCategoryid", query = "SELECT c FROM Category c WHERE c.categoryid = :categoryid")
     , @NamedQuery(name = "Category.findByName", query = "SELECT c FROM Category c WHERE c.name = :name")})
 public class Category implements Serializable {
 
@@ -39,8 +39,8 @@ public class Category implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "categid")
-    private Integer categid;
+    @Column(name = "categoryid")
+    private Integer categoryid;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -52,21 +52,21 @@ public class Category implements Serializable {
     public Category() {
     }
 
-    public Category(Integer categid) {
-        this.categid = categid;
+    public Category(Integer categoryid) {
+        this.categoryid = categoryid;
     }
 
-    public Category(Integer categid, String name) {
-        this.categid = categid;
+    public Category(Integer categoryid, String name) {
+        this.categoryid = categoryid;
         this.name = name;
     }
 
-    public Integer getCategid() {
-        return categid;
+    public Integer getCategoryid() {
+        return categoryid;
     }
 
-    public void setCategid(Integer categid) {
-        this.categid = categid;
+    public void setCategoryid(Integer categoryid) {
+        this.categoryid = categoryid;
     }
 
     public String getName() {
@@ -89,7 +89,7 @@ public class Category implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (categid != null ? categid.hashCode() : 0);
+        hash += (categoryid != null ? categoryid.hashCode() : 0);
         return hash;
     }
 
@@ -100,7 +100,7 @@ public class Category implements Serializable {
             return false;
         }
         Category other = (Category) object;
-        if ((this.categid == null && other.categid != null) || (this.categid != null && !this.categid.equals(other.categid))) {
+        if ((this.categoryid == null && other.categoryid != null) || (this.categoryid != null && !this.categoryid.equals(other.categoryid))) {
             return false;
         }
         return true;
@@ -108,7 +108,7 @@ public class Category implements Serializable {
 
     @Override
     public String toString() {
-        return "bookstore.entity.Category[ categid=" + categid + " ]";
+        return "bookstore.entity.Category[ categoryid=" + categoryid + " ]";
     }
     
 }
