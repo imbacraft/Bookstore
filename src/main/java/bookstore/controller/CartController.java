@@ -44,13 +44,14 @@ public class CartController {
     
     
     @PostMapping("/index")
-    public String increaseQuantity(@RequestParam("bookid") String bookid, @RequestParam("quantity") String quantity, HttpSession session) {
+    public String increaseQuantity(@RequestParam("bookid") String bookid, @RequestParam("formatid") String formatid, @RequestParam("quantity") String quantity, HttpSession session) {
         int updatedquantity = Integer.parseInt(quantity);
         int id = Integer.parseInt(bookid);
+        int format = Integer.parseInt(formatid);
         
         List<Cartitem> cart = (List<Cartitem>) session.getAttribute("cart");
         
-        int index = this.getBookIndex(id, cart);
+        int index = this.getBookIndex(id, format, cart);
         
         cart.get(index).setQuantity(updatedquantity);
         
@@ -58,10 +59,12 @@ public class CartController {
         return "redirect:/cart/index";
     }
 
-    @GetMapping("/buy/{id}")
-    public String buyBook(@PathVariable("id") Integer id, HttpSession session) {
+    @GetMapping("/buy/{id}/{format}")
+    public String buyBook(@PathVariable("id") Integer id, @PathVariable("format") Integer format, HttpSession session) {
         //get book from db by id
-        Bookdetails book = bookdetailsRepo.getOne(id);
+      
+        Bookdetails book = bookdetailsRepo.findByBookidandFormatid(id, format);
+        
 
         System.out.println(book);
         
@@ -87,7 +90,7 @@ public class CartController {
 
             List<Cartitem> cart = (List<Cartitem>) session.getAttribute("cart");
 
-            int index = this.getBookIndex(id, cart);
+            int index = this.getBookIndex(id, format, cart);
 
             if (index == -1) {
 
@@ -116,11 +119,11 @@ public class CartController {
         return "redirect:/cart/index";
     }
 
-    @GetMapping("/remove/{id}")
-    public String remove(@PathVariable("id") int id, HttpSession session) {
+    @GetMapping("/remove/{id}/{format}")
+    public String remove(@PathVariable("id") int id, @PathVariable("format") int format, HttpSession session) {
         
         List<Cartitem> cart = (List<Cartitem>) session.getAttribute("cart");
-        int index = this.getBookIndex(id, cart);
+        int index = this.getBookIndex(id, format, cart);
         cart.remove(index);
         
         session.setAttribute("cart", cart);
@@ -131,14 +134,18 @@ public class CartController {
     
     //This method gets a Bookid and finds at which index position the book stands in Cart list.
     //If the book doesnt exist in the cart, returns -1.
-    private int getBookIndex(int id, List<Cartitem> cart) {
+    private int getBookIndex(int id, int format, List<Cartitem> cart) {
         
         for (int i = 0; i < cart.size(); i++) {
             
-            if (id == cart.get(i).getBookdetails().getBook().getBookid()) {
+            if (id == cart.get(i).getBookdetails().getBook().getBookid()
+                    
+                    && format == cart.get(i).getBookdetails().getFormat().getFormatid()
+                    ) {
                 return i;
             }
         }
+        
         return -1;
     }
 

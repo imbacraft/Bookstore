@@ -3,6 +3,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <head>
     <title>Charge</title>
@@ -36,49 +37,62 @@
         
      
         Cart  Details
-        <table cellpadding="2" cellspacing="2" border="1">
+         <table cellpadding="2" cellspacing="2" border="1">
+            <tr>
+                <th>Book</th>
+                <th>Title</th>
+                <th>Format</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+            </tr>
 
             <% double total = 0.0; %>
-            
-            <c:forEach var="bookpercart" items="${sessionScope.cart}">
-                <c:set var="subtotal" value="${bookpercart.book.price * bookpercart.quantity}"></c:set>
+
+            <c:forEach var="cartitem" items="${sessionScope.cart}">
+
+
+                <c:set var="subtotal" value="${cartitem.bookdetails.price * cartitem.quantity}"></c:set>
+
               
+
                 <% total = total + (double) pageContext.getAttribute("subtotal");  %>
-                
+
                 <tr>
-                    <td><a href="${pageContext.request.contextPath}/books/search/${bookpercart.book.bookid}"><img src="${bookpercart.book.frontcover}" width="100"></a>
-                        
-                    ${bookpercart.book.title}
-                    
-                    ${bookpercart.book.booktype.name}
-
-                    <br>
-                    
-                    Quantity: ${bookpercart.quantity }
-
-                            </td>
-                    <td>Book Price ${subtotal} &euro;</td>
-                     
+                    <td><a href="${pageContext.request.contextPath}/books/search/${cartitem.bookdetails.book.bookid}"><img src="${cartitem.bookdetails.frontcover}" width="100"></a></td>
+                    <td>${cartitem.bookdetails.book.title}</td>
+                    <td>${cartitem.bookdetails.format.name}</td>
+                    <td> ${cartitem.quantity } </td>
+                    <td> <fmt:formatNumber value="${subtotal}" maxFractionDigits="3"/>&euro;</td>
                    
-                    
                 </tr>
             </c:forEach>
-                
-                <tr>
-                    <td colspan="6">
-                        Shipping Cost: <%=total%> &euro;
-                    </td>
-                
-                
-                <tr>
-                    <td colspan="6">
-                        Total: <%=total%> &euro;
-                    </td>
-                    
-                </tr>
-     
-                
+
+                <% pageContext.setAttribute("total", total); %>
+            <tr>
+                <td colspan="6">
+                    Total: <fmt:formatNumber value="${total}" maxFractionDigits="3"/>&euro;
+                </td>
+
+            </tr>
+
+
         </table>
+                
+        Delivery Address
+        <table cellpadding="2" cellspacing="2" border="1">
+             <tr>
+                <th>Country</th>
+                <th>City</th>
+                <th>Street</th>
+                <th>Street number</th>
+                <th>Postal Code</th>
+            </tr>
+            
+            
+            
+        </table>
+                
+                
                         </div>
                     </div>
 
