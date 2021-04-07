@@ -22,16 +22,19 @@ public interface BookRepo extends JpaRepository<Book, Integer> {
     
     @Query(value="select book.* from book,category,joinedbookcategory where book.bookid=joinedbookcategory.bookid"
             + " and category.categoryid=joinedbookcategory.categoryid and category.name=?1 "
-            + "and book.booktype=1",nativeQuery = true)
-    List<Book> findByCategory(String categoryName);
+            ,nativeQuery = true)
+    List<Book> findByCategory(String categoryName);//paizei, den thelei ta booktype
     
     @Query(value="select book.* from book,author,joinedbookauthor where book.bookid=joinedbookauthor.bookid \n" +
 "and author.authorid=joinedbookauthor.authorid  and author.lastname=?1 and book.booktype=1;",nativeQuery=true)
     List<Book> findByAuthorLastName(String lastName);
     
     
-    @Query(value="Select book.* from book order by book.price desc limit 0,5",nativeQuery=true)
-    List<Book> findTop5();
+    @Query(value="select book.*,bookdetails.price from bookdetails,book,format\n" +
+    "where book.bookid=bookdetails.bookid and format.formatid=bookdetails.formatid\n" +
+    "order by bookdetails.price\n" +
+    "desc limit 0,5;",nativeQuery=true)
+    List<Book> findTop5();//tha paizei
     
     @Query(value="select book.* from book where book.bookid !=?1 and book.title=?2", nativeQuery = true)
     List<Book> findSameBooksDifFormat( int bookid, String booktitle);  
