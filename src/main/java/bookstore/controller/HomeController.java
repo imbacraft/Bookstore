@@ -2,11 +2,11 @@ package bookstore.controller;
 
 import bookstore.entity.Author;
 import bookstore.entity.Book;
-import bookstore.entity.Booktype;
+import bookstore.entity.Format;
 import bookstore.entity.Category;
 import bookstore.repo.AuthorRepo;
 import bookstore.repo.BookRepo;
-import bookstore.repo.BooktypeRepo;
+import bookstore.repo.FormatRepo;
 import bookstore.repo.CategoryRepo;
 import bookstore.service.BookService;
 import java.util.List;
@@ -31,7 +31,7 @@ public class HomeController {
     AuthorRepo authorRepo;
     
     @Autowired
-    BooktypeRepo booktypeRepo;
+    FormatRepo formatRepo;
     
     @Autowired
     BookService bookService;
