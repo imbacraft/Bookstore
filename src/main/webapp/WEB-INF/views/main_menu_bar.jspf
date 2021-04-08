@@ -3,6 +3,12 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <style>
+section,
+.main-menu-bar {
+    height:auto;
+    width: 1182px ;
+    margin: 0 auto ;   
+}
 .frontpage {
     display: block;
     position: relative;
@@ -70,7 +76,7 @@
 .dropdown {
   position: relative;
   display: inline-block;
-  flex:center;
+  flex: center;
   
   
 }
@@ -107,7 +113,7 @@
 
 </style>
 
-<section class="main-menu-bar" style="height:auto;">    
+<section>    
     <div class="container" >
   <div class="row" >
       
