@@ -46,18 +46,31 @@ public class HomeController {
     //*****all categories in homepage as options in select tag in 
     @RequestMapping
     public String showHome(Model model) {
-        
+        //all categories--for menu
         List<Category> categories = categoryRepo.findAll();
+        
+        //all authors-- for menu
         List<Author> allAuthors = authorRepo.findAll();
-//        Book bookOfMonth = bookService.getRandomBookOfTheMonth();
-//        HashMap<Author, List<Book>> monthAuthorDetails = bookService.authorPerMonthDetails();
-//        
+        
+        //upcoming books--for multiple itemsPerSlide carousel
+        List<Book> upcomingBooks=bookRepo.findUpcomingBooks();
+
+        //authorOfTheMonth-->pairnw karfwta enan pou exei polla biblia gia tis anagkes tou front
+        Author authorOfTheMonth=authorRepo.findById(17).get();
+        System.out.println(authorOfTheMonth.getBookList().get(0).getTitle());
+        
+        
+        Book bookOfTheMonth=bookRepo.findMostExpensiveBook();
+        
+        
+        //add BookOfTheMonth--dialeksa to pio akrivo
         
         model.addAttribute("categories", categories);
         model.addAttribute("authors", allAuthors);
-//        model.addAttribute("bestSellers", bestSellers);
-//        model.addAttribute("bookOfMonth", bookOfMonth);
-//        model.addAttribute("monthAuthorMap", monthAuthorDetails);
+        model.addAttribute("upcomingBooks",upcomingBooks);
+        model.addAttribute("authorOfTheMonth",authorOfTheMonth);
+        model.addAttribute("bookOfTheMonth", bookOfTheMonth);
+
 
         return "main";
 
@@ -96,7 +109,7 @@ public class HomeController {
 
 //       List<Book> booksFromSameAuthor= bookService.findBooksFromSameAuthor(id);
 //       model.addAttribute("booksFromSameAuthor",booksFromSameAuthor);
-        String bookTitle = book.getTitle();
+        
         
 
 
@@ -119,7 +132,7 @@ public class HomeController {
         
         List<Book> bestsellers=bookRepo.findTop5();//agiogdutes, ta piasame  me thn timh
         
-        System.out.println(bestsellers);
+        
         //send through model to the right jsp
         model.addAttribute("bestsellers",bestsellers);
         return "bestsellers";

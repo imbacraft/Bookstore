@@ -44,14 +44,16 @@ public interface BookRepo extends JpaRepository<Book, Integer> {
    @Query(value="select book.* from book,bookdetails,format where format.formatid=bookdetails.formatid and book.bookid=bookdetails.bookid \n" +
 "order by bookdetails.price desc limit 0,5",nativeQuery=true)
     List<Book> findTop5();//tha paizei
+    
+    
+    @Query(value="Select * from book where book.upcoming=1;",nativeQuery=true)
+    List<Book> findUpcomingBooks();
 
     
-
-    
-
-    
-    @Query(value="select book.* from book,joinedbookauthor where joinedbookauthor.authorid=?1 and joinedbookauthor.bookid !=book.bookid", nativeQuery= true)
-    List<Book> findBooksFromSameAuthor(int authorid,int bookid);
+    @Query(value="select book.* from book,bookdetails,format where format.formatid=bookdetails.formatid and book.bookid=bookdetails.bookid \n" +
+"order by bookdetails.price\n" +
+"desc limit 0,1;",nativeQuery=true)
+    public Book findMostExpensiveBook();
     
     
 }

@@ -12,29 +12,16 @@
       crossorigin="anonymous"
     />
         
-         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-      <!-- Latest compiled and minified CSS -->
-      <link
-        rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-        crossorigin="anonymous"
-      />
-
-      <!-- Optional theme -->
-      <link
-        rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-        crossorigin="anonymous"
-      />
-
-      <!-- Latest compiled and minified JavaScript -->
-      <script
-        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"
-      ></script>
+        <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    />
+        
+       
 
         
          <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -49,7 +36,7 @@
     
     
     
-    
+  
     
     
     <!-- Carousel with 3 categories -->
@@ -80,23 +67,26 @@
       </a>
     </div> 
     <hr>
+       
+   </section>
     
      <!-- book of the month -->
  <section id="bookOfTheMonth">
    <div id="bookMonthDiv">
     <div class="row">
       <div class="col-4">
-        <img id="monthBookImage" src="" alt="aaa">
+        <img id="monthBookImage" src="${bookOfTheMonth.bookdetailsList.toArray()[0].frontcover}" alt="bookOfTheMonthImage">
       </div>
       <div class="col-7 bookMonthCol">
-        <h2>book of the month</h2>
+        <h2>${bookOfTheMonth.title}</h2>
         <h6></h6>
 
         <p id="bookMonthColText"> 
+            ${bookOfTheMonth.description}
         </p>
 
         <div>
-            <a href="/bookstore/books/search/">Find Out More&gt;&gt;</a>
+            <a href="${pageContext.request.contextPath}/books/search/${bookOfTheMonth.bookid}">Find Out More >></a>
         </div>
       </div>
     </div>
@@ -124,86 +114,49 @@
      
      <!-- new books and upcoming -->
      <section id="upcomingBooks">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="carousel slide multi-item-carousel" id="theCarousel">
-          <div class="carousel-inner">
-            <div class="item active">
-              <div class="col-xs-4">
-                <a href="#1"><img src="./images/MentalHealth.jpg" class="img-responsive"></a>
-              </div>
-            <div class="col-xs-4">
-                <a href="#1"><img src="./images/NewBooks.jpg" class="img-responsive"></a>
-              </div><div class="col-xs-4">
-                <a href="#1"><img src="./images/SportsAndOutdoor.jpg" class="img-responsive"></a>
-              </div></div>
-            <div class="item">
-              <div class="col-xs-4">
-                <a href="#1"><img src="./images/NewBooks.jpg" class="img-responsive"></a>
-              </div>
-            <div class="col-xs-4">
-                <a href="#1"><img src="./images/SportsAndOutdoor.jpg" class="img-responsive"></a>
-              </div><div class="col-xs-4">
-                <a href="#1"><img src="http://placehold.it/300/673ab7/000000" class="img-responsive"></a>
-              </div></div>
-            <div class="item">
-              <div class="col-xs-4">
-                <a href="#1"><img src="./images/SportsAndOutdoor.jpg" class="img-responsive"></a>
-              </div>
-            <div class="col-xs-4">
-                <a href="#1"><img src="http://placehold.it/300/673ab7/000000" class="img-responsive"></a>
-              </div><div class="col-xs-4">
-                <a href="#1"><img src="http://placehold.it/300/4caf50/000000" class="img-responsive"></a>
-              </div></div>
-            <div class="item">
-              <div class="col-xs-4">
-                <a href="#1"><img src="http://placehold.it/300/673ab7/000000" class="img-responsive"></a>
-              </div>
-            <div class="col-xs-4">
-                <a href="#1"><img src="http://placehold.it/300/4caf50/000000" class="img-responsive"></a>
-              </div><div class="col-xs-4">
-                <a href="#1"><img src="http://placehold.it/300/8bc34a/000000" class="img-responsive"></a>
-              </div></div>
-            <div class="item">
-              <div class="col-xs-4">
-                <a href="#1"><img src="http://placehold.it/300/4caf50/000000" class="img-responsive"></a>
-              </div>
-            <div class="col-xs-4">
-                <a href="#1"><img src="http://placehold.it/300/8bc34a/000000" class="img-responsive"></a>
-              </div><div class="col-xs-4">
-                <a href="#1"><img src="http://placehold.it/300/8bc34a/000000" class="img-responsive"></a>
-              </div></div>
-            <div class="item">
-              <div class="col-xs-4">
-                <a href="#1"><img src="http://placehold.it/300/8bc34a/000000" class="img-responsive"></a>
-              </div>
-            <div class="col-xs-4">
-                <a href="#1"><img src="http://placehold.it/300/8bc34a/000000" class="img-responsive"></a>
-              </div><div class="col-xs-4">
-                <a href="#1"><img src="./images/MentalHealth.jpg" class="img-responsive"></a>
-              </div></div>
-            <!-- add  more items here -->
-            <!-- Example item start:  -->
-
-            <div class="item">
-              <div class="col-xs-4">
-                <a href="#1"><img src="http://placehold.it/300/8bc34a/000000" class="img-responsive"></a>
-              </div>
-            <div class="col-xs-4">
-                <a href="#1"><img src="./images/MentalHealth.jpg" class="img-responsive"></a>
-              </div><div class="col-xs-4">
-                <a href="#1"><img src="./images/NewBooks.jpg" class="img-responsive"></a>
-              </div></div>
-
-            <!--  Example item end -->
+   <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="carousel slide multi-item-carousel" id="theCarousel">
+            <div class="carousel-inner">
+              <div class="item active">
+                <div class="col-xs-4">
+                  <a href="#1"
+                    ><img
+                      src="${upcomingBooks.toArray()[0].bookdetailsList.toArray()[0].frontcover}"
+                      class="img-responsive"
+                  /></a>
+                </div>
+              </div><!--εδώ κλείνει το item active  -->  
+             <c:forEach items="${upcomingBooks}" var="book" begin="1" end="${upcomingBooks.size()-1}">
+                 <div class="item">
+                 <div class="col-xs-4">
+                     <a href="#1">
+                         <img src="${book.bookdetailsList.toArray()[0].frontcover}" class="img-responsive"/>
+                     </a>
+                 </div>
+                 </div>
+             </c:forEach>
+              
+            </div>
+            <a
+              class="left carousel-control"
+              href="#theCarousel"
+              data-slide="prev"
+              ><i class="glyphicon glyphicon-chevron-left"></i
+            ></a>
+            <a
+              class="right carousel-control"
+              href="#theCarousel"
+              data-slide="next"
+              ><i class="glyphicon glyphicon-chevron-right"></i
+            ></a>
           </div>
-          <a class="left carousel-control" href="#theCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
-          <a class="right carousel-control" href="#theCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
         </div>
       </div>
     </div>
-  </div>
+         
+         
      </section>
 
     
@@ -214,18 +167,57 @@
   <div id="authorMonthDiv">
    <div class="row">
      <div class="col-4">
-       <img id="monthauthorImage" src="./images/bookLogo.png" alt="aaa">
+       <img  id="monthauthorImage" src="${authorOfTheMonth.portrait}" alt="aaa">
      </div>
      <div class="col-7 authorMonthCol">
-       <h2>author of the month</h2>
+         <h2><a href="${pageContext.request.contextPath}/authors/${authorOfTheMonth.lastname}">${authorOfTheMonth.firstname} ${authorOfTheMonth.lastname}</a></h2>
        <h6>  </h6>
 
-       <p id="authorMonthColText">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-         It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-       </p>
+       <p id="authorMonthColText">${authorOfTheMonth.biography}</p>
         <div>
-            <a href="/bookstore/authors/">Find Out More about &gt;&gt;</a>
+            <a href="${pageContext.request.contextPath}/authors/${authorOfTheMonth.lastname}">Find Out More about ${authorOfTheMonth.firstname} >></a>
         </div>
+        <div class="container" >
+      <div class="row" >
+        <div class="col-md-12">
+          <div class="carousel slide multi-item-carousel" id="theCarousel2" style="width:500px;">
+            <div class="carousel-inner" style="margin-left: 13px; ">
+              <div class="item active">
+                <div class="col-xs-4">
+                  <a href="${pageContext.request.contextPath}/books/search/${authorOfTheMonth.bookList.toArray()[0].bookid}"
+                    ><img
+                      src="${authorOfTheMonth.bookList.toArray()[0].bookdetailsList.toArray()[0].frontcover}"
+                      class="img-responsive"
+                  /></a>
+                </div>
+              </div><!--εδώ κλείνει το item active  -->  
+             <c:forEach items="${authorOfTheMonth.bookList}" var="book" begin="1" end="${authorOfTheMonth.bookList.size()-1}">
+                 <div class="item">
+                 <div class="col-xs-4">
+                     <a href="${pageContext.request.contextPath}/books/search/${book.bookid}">
+                         <img src="${book.bookdetailsList.toArray()[0].frontcover}" class="img-responsive"/>
+                     </a>
+                 </div>
+                 </div>
+             </c:forEach>
+              
+            </div>
+            <a
+              class="left carousel-control"
+              href="#theCarousel2"
+              data-slide="prev"
+              ><i class="glyphicon glyphicon-chevron-left"></i
+            ></a>
+            <a
+              class="right carousel-control"
+              href="#theCarousel2"
+              data-slide="next"
+              ><i class="glyphicon glyphicon-chevron-right"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </div>
      
       
 
@@ -248,9 +240,12 @@
  
            
  
+
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
       
         <script src="./javascript/javascript1.js"></script>
- 
+        
     
       
        
@@ -259,7 +254,5 @@
         
     
               
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 

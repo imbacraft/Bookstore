@@ -314,12 +314,4 @@ body {
 </header>
 
 
-<script>
-    let loginModal = document.getElementById("login-modal");
-    function toggleModal()
-    {
-        if (loginModal.style.display !== "inline-block") loginModal.style.display = "inline-block";
-        else loginModal.style.display = "none";
-    } 
-</script>    
 
