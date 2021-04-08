@@ -44,13 +44,14 @@ public class PaymentController {
             
         }
         
-        double roundedamount = this.round(amount, 2);
-
+        
+        //Amount is rounded and multiplied by 100 because Stripe.com requires amount in cents (Ex. 48,51 Euro = 4851 cents).
+        double roundedamount = this.round(amount, 2) * 100;
         System.out.println(">>>Amount to be payed: "+ roundedamount + " Euros");
         
         
         model.addAttribute("stripePublicKey", API_PUBLIC_KEY);
-        model.addAttribute("amount", amount * 100);
+        model.addAttribute("amount", roundedamount);
 
         
         return "charge";
@@ -59,10 +60,13 @@ public class PaymentController {
     @PostMapping
     public String createCharge(@RequestParam String email, String token, String amount, RedirectAttributes redirectAttributes) {
         
-        int totalamount = Integer.parseInt(amount);
-        String stripeCustomerID = stripeService.createCustomer(email, token);
-
+        double totalamount = Double.parseDouble(amount) / 100;
         
+        
+        //First create Customer account in Stripe.com (Optional).
+        String stripeCustomerID = stripeService.createCustomer(email, token);
+        
+        //Second, charge that account.
         String chargeId = stripeService.createCharge(email, totalamount, stripeCustomerID);
         
         System.out.println("email: " + email + " Token: " + token);
@@ -76,11 +80,22 @@ public class PaymentController {
         }
         
         
-        
         // You may want to store charge id along with order information
-        redirectAttributes.addAttribute("message", "Success your charge id is " + chargeId);
+        redirectAttributes.addAttribute("message", "Successfully paid amount: "+totalamount+" \u20ac. <br> Your charge id in Stripe.com is: " + chargeId);
         
-        return "redirect:/order-completed";
+        return "redirect:/payment/complete";
+    }
+    
+    @GetMapping("/complete")
+    public String showOrderCompletedPage(@RequestParam("message") String message, Model model){
+    
+   model.addAttribute("message", message);
+   
+   //need to add order details
+   
+   //need to add link to ebook, if ordered book is ebook.
+        
+    return "order-completed";
     }
     
     

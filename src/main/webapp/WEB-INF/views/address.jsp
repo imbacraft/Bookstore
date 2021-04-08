@@ -30,63 +30,118 @@
         <br>
 
         <form:form action= "${pageContext.request.contextPath}/cart/address" method="post">
-            
-            Choose delivery option:
+
+
+            <c:if test = "${containsOnlyEbook == false}">
+                <h3>Choose delivery option:
+                    <br>
+                    (Applies to non ebook items)
+                </h3> 
+
+                <input type="radio" id="standard" name="delivery" value="standard" required>
+                <label for="standard">Standard delivery
+                    <br>
+                    Ships within 4-8 working days after dispatching
+                    <br>
+                    Price: 15 &euro;
+                </label> 
+
+                <br>
+
+                <input type="radio" id="express" name="delivery" value="express" required>
+                <label for="express">Express delivery
+                    <br>
+                    Ships within 1-3 working days after dispatching
+                    <br>
+                    Price: 35 &euro;</label>
+                </c:if>
+
             <br>
-            
-            <input type="radio" id="standard" name="delivery" value="standard">
-            <label for="standard">Standard delivery</label>
-            
-            <input type="radio" id="express" name="delivery" value="express">
-            <label for="express">Express delivery</label>
-            <br>
-            
+
+
+ 
+
+
+                <sec:authorize access="hasRole('SERVICEAGENT')">
+            <a href="${pageContext.request.contextPath}/service">Service Agent Home</a>
+        </sec:authorize>
+            <h3>Personal details</h3> 
+
             First Name:
-            <input type="text" name="firstname">
-            
+            <input type="text" name="firstname" value="${customer.firstname}"required />
+
             <br>
-            
+
             Last Name:
-            <input type="text" name="lastname">
-            
+            <input type="text" name="lastname" value="${customer.lastname}" required />
+
             <br>
-            
+
+            Email:
+            <input type="email" name="email" value="${customer.email}" required />
+
+            <br>
+
+            Phone:
+            <input type="text" name="phone" value="${customer.phone}" required />
+
+            <br>
+
+
+            <h3>Delivery address</h3> 
+
             Country:
-            <select name="country">
+            <select name="country" required/>
 
-                <option value=""> --Select Country--</option>
+            <c:choose>
+                <c:when test="${customer.firstname != null}">
+                <option value="${customer.country.countryid}">  ${customer.country.name}</option>
+            </c:when>
 
+            <c:otherwise>
                 <c:forEach var = "country" items = "${countries}">
-                    <option value="${country.countryid}"> ${country.name}</option>                 
+                    <option value=""> Select</option>                 
                 </c:forEach>
+            </c:otherwise>
+        </c:choose>
 
-            </select>
+        <c:forEach var = "country" items = "${countries}">
+            <option value="${country.countryid}"> ${country.name}</option>                 
+        </c:forEach>
 
-            <br>
-            
-            City:
-             <input type="text" name="city">
-            
-            <br>
-            
-            Street:
-            <input type="text" name="street">
-            
-            Streetnumber:
-            <input type="number" min="1" name="streetnumber">
-            
-            Postal Code:
-            <input type="number" min="1" name="postalcode">
-            
-            <button type="submit">Submit and procceed to Payment via Stripe</button>
-            
-            </form:form>
+    </select>
 
-        <a href="${pageContext.request.contextPath}/cart/index">Back to Basket</a>
+    <br>
 
-        
-        
-    </body>
+    City:
+    <input type="text" name="city" value="${customer.city}" required/>
+
+    <br>
+
+    Street:
+    <input type="text" name="street" value="${customer.street}" required/>
+
+    Streetnumber:
+    <input type="number" min="1" name="streetnumber" value="${customer.streetnumber}" required/>
+
+    Postal Code:
+    <input type="number" min="1" name="postalcode" value="${customer.postalcode}" required/>
+
+    <br>
+    <br>
+
+    <button type="submit">Submit and Proceed to Payment via Stripe </button
+
+</form:form>
+
+
+<br>
+
+<a href="${pageContext.request.contextPath}/cart/index">Back to Basket</a>
+
+
+
+</body>
 
 
 </html>

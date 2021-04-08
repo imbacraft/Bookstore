@@ -68,17 +68,20 @@ public class StripeService {
         return id;
     }
 
-    public String createCharge(String email, int amount, String customerID) {
+    public String createCharge(String email, double amount, String customerID) {
 
         String chargeId = null;
-
+        
+        int finalAmount = (int) (amount * 100);
+        
+        
         try {
             Stripe.apiKey = API_SECRET_KEY;
 
             Map<String, Object> chargeParams = new HashMap<>();
             chargeParams.put("description", "Charge for " + email);
             chargeParams.put("currency", "EUR");
-            chargeParams.put("amount", amount);
+            chargeParams.put("amount", finalAmount);
 //			chargeParams.put("source",token);
             chargeParams.put("customer", customerID);
 
