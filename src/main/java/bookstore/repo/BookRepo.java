@@ -41,17 +41,10 @@ public interface BookRepo extends JpaRepository<Book, Integer> {
 
 
 
-    @Query(value="select book.*,bookdetails.price from bookdetails,book,format\n" +
-    "where book.bookid=bookdetails.bookid and format.formatid=bookdetails.formatid\n" +
-    "order by bookdetails.price\n" +
-    "desc limit 0,5;",nativeQuery=true)
+   @Query(value="select book.* from book,bookdetails,format where format.formatid=bookdetails.formatid and book.bookid=bookdetails.bookid \n" +
+"order by bookdetails.price desc limit 0,5",nativeQuery=true)
     List<Book> findTop5();//tha paizei
 
-
-
-
-//    @Query(value="Select book.* from book order by book.price desc limit 0,5",nativeQuery=true)
-//    List<Book> findTop5();
     
 
     
