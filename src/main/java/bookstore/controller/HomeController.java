@@ -113,12 +113,13 @@ public class HomeController {
         return "bookPerAuthor";
     }
     
-    @GetMapping("bestsellers")
+    @GetMapping("/bestsellers")
     public String getBestsellers(Model model){
         //find bestsellers
+        
         List<Book> bestsellers=bookRepo.findTop5();//agiogdutes, ta piasame  me thn timh
         
-        
+        System.out.println(bestsellers);
         //send through model to the right jsp
         model.addAttribute("bestsellers",bestsellers);
         return "bestsellers";

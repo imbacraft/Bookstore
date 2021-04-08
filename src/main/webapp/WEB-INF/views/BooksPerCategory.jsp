@@ -407,10 +407,7 @@ nav:nth-child(2) > div > header {
       </style>
   
   
-      <script>
-        const addBtn=document.querySelectorAll("addToBasketBtn");  
-        
-      </script>
+      
   </body>
 
 </html>
