@@ -108,18 +108,36 @@ public class Visitor implements Serializable {
         this.visitorid = visitorid;
     }
 
-    public Visitor(Integer visitorid, String firstname, String lastname, String email, Country country, String street, int streetnumber, int postalcode, int phone) {
-        this.visitorid = visitorid;
+    public Visitor(String firstname, String lastname, String email, Country country, String city, String street, int streetnumber, int postalcode, int phone, Role role) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.country = country;
+        this.city = city;
         this.street = street;
         this.streetnumber = streetnumber;
         this.postalcode = postalcode;
         this.phone = phone;
+        this.role = role;
     }
 
+    public Visitor(String firstname, String lastname, String email, String city, String street, int streetnumber, int postalcode, int phone, List<Cart> cartList, Integer visitorid, Country country, Role role) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.city = city;
+        this.street = street;
+        this.streetnumber = streetnumber;
+        this.postalcode = postalcode;
+        this.phone = phone;
+        this.cartList = cartList;
+        this.visitorid = visitorid;
+        this.country = country;
+        this.role = role;
+    }
+
+    
+    
     public Integer getVisitorid() {
         return visitorid;
     }
@@ -168,8 +186,9 @@ public class Visitor implements Serializable {
 
     @Override
     public String toString() {
-        return "bookstore.entity.Visitor[ visitorid=" + visitorid + " ]";
+        return "Visitor{" + "firstname=" + firstname + ", lastname=" + lastname + ", email=" + email + ", city=" + city + ", street=" + street + ", streetnumber=" + streetnumber + ", postalcode=" + postalcode + ", phone=" + phone + ", cartList=" + cartList + ", visitorid=" + visitorid + ", country=" + country + ", role=" + role + '}';
     }
+
     @XmlTransient
     public List<Cart> getCartList() {
         return cartList;

@@ -17,6 +17,9 @@
     <body>
         <h1>Delivery Options</h1>
 
+          <sec:authorize access="!isAuthenticated()">
+              <h4>Recommendation: Order with a registered Customer Account to track your Order and receive Discount Coupons! </h4> <a href="${pageContext.request.contextPath}/register">Login/Register</a>
+          </sec:authorize>
         <hr/>
 
         <sec:authorize access="hasRole('ADMIN')">
@@ -60,10 +63,11 @@
 
 
  
-            <c:if test = "${customer == null}">
+       <sec:authorize access="!isAuthenticated()">
+        <!-- if user is not authenticated-->
 
-
-            <h3>Personal details</h3> 
+       
+          <h3>Personal details</h3> 
 
             First Name:
             <input type="text" name="firstname" value="${customer.firstname}"required />
@@ -127,8 +131,9 @@
 
     <br>
     <br>
+       
+       </sec:authorize>
 
-    </c:if>
     
     <button type="submit">Submit and Proceed to Payment via Stripe </button
 

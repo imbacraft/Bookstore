@@ -5,7 +5,7 @@
  */
 package bookstore.repo;
 
-import bookstore.entity.Cart;
+import bookstore.entity.Cartitem;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +14,6 @@ import org.springframework.stereotype.Repository;
  * @author Dell
  */
 @Repository
-public interface CartRepo extends JpaRepository<Cart, Integer> {
+public interface CartitemRepo extends JpaRepository<Cartitem, Integer> {
     
-
 }

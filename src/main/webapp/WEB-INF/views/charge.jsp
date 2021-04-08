@@ -33,66 +33,141 @@
                     <!-- Cart contents here -->
                     <div class="card mb-4">
                         <div class="card-body">
-                          
-        
-     
-        Cart  Details
-         <table cellpadding="2" cellspacing="2" border="1">
-            <tr>
-                <th>Book</th>
-                <th>Title</th>
-                <th>Format</th>
-                <th>Quantity</th>
-                <th>Subtotal</th>
-            </tr>
-
-            <% double total = 0.0; %>
-
-            <c:forEach var="cartitem" items="${sessionScope.cart}">
 
 
-                <c:set var="subtotal" value="${cartitem.bookdetails.price * cartitem.quantity}"></c:set>
 
-              
+                            Cart  Details
+                            <table cellpadding="2" cellspacing="2" border="1">
+                                <tr>
+                                    <th>Book</th>
+                                    <th>Title</th>
+                                    <th>Format</th>
+                                    <th>Quantity</th>
+                                    <th>Subtotal</th>
+                                </tr>
 
-                <% total = total + (double) pageContext.getAttribute("subtotal");  %>
+                                <% double total = 0.0; %>
 
-                <tr>
-                    <td><a href="${pageContext.request.contextPath}/books/search/${cartitem.bookdetails.book.bookid}"><img src="${cartitem.bookdetails.frontcover}" width="100"></a></td>
-                    <td>${cartitem.bookdetails.book.title}</td>
-                    <td>${cartitem.bookdetails.format.name}</td>
-                    <td> ${cartitem.quantity } </td>
-                    <td> <fmt:formatNumber value="${subtotal}" maxFractionDigits="3"/>&euro;</td>
-                   
-                </tr>
-            </c:forEach>
-
-                <% pageContext.setAttribute("total", total); %>
-            <tr>
-                <td colspan="6">
-                    Total: <fmt:formatNumber value="${total}" maxFractionDigits="3"/>&euro;
-                </td>
-
-            </tr>
+                                <c:forEach var="cartitem" items="${sessionScope.cart}">
 
 
-        </table>
-                
-        Delivery Address
-        <table cellpadding="2" cellspacing="2" border="1">
-             <tr>
-                <th>Country</th>
-                <th>City</th>
-                <th>Street</th>
-                <th>Street number</th>
-                <th>Postal Code</th>
-            </tr>
-            
-            
-            
-        </table>
-                
-                
+                                    <c:set var="subtotal" value="${cartitem.bookdetails.price * cartitem.quantity}"></c:set>
+
+
+                                        <tr>
+                                            <td><a href="${pageContext.request.contextPath}/books/search/${cartitem.bookdetails.book.bookid}"><img src="${cartitem.bookdetails.frontcover}" width="100"></a></td>
+                                        <td>${cartitem.bookdetails.book.title}</td>
+                                        <td>${cartitem.bookdetails.format.name}</td>
+                                        <td> ${cartitem.quantity } </td>
+                                        <td> <fmt:formatNumber value="${subtotal}" maxFractionDigits="3"/>&euro;</td>
+                                        
+                                        <% total = total + (double) pageContext.getAttribute("subtotal"); %>
+                                    </tr>
+                                </c:forEach>
+
+
+
+                                    
+                                <tr>
+                                    <td colspan="6">
+                                        Shipping cost: <fmt:formatNumber value="${shippingCost}" maxFractionDigits="3"/>&euro;
+                                    </td>
+
+                                    <% total = total + (double) request.getAttribute("shippingCost"); %>
+                                    <% pageContext.setAttribute("total", total); %>
+
+                                <tr>
+                                    <td colspan="6">
+                                        Total: <fmt:formatNumber value="${total}" maxFractionDigits="3"/>&euro;
+                                    </td>
+
+                                </tr>
+
+
+                            </table>
+
+                            <br>
+
+                            <table cellpadding="2" cellspacing="2" border="1">
+                                <tr>
+                                    <th>First name</th>
+                                    <th>Last name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+
+                                </tr>
+
+                                <tr>
+                                    <td>${customer.firstname} ${visitor.firstname}</td>
+                                    <td>${customer.lastname} ${visitor.lastname}</td>
+                                    <td>${customer.email} ${visitor.email}</td>
+                                    <td>
+                                        <c:choose>
+
+                                            <c:when test = "${customer.firstname==null}">
+                                                ${visitor.phone}
+                                            </c:when>
+
+                                            <c:otherwise>
+                                                ${customer.phone}
+                                            </c:otherwise>
+                                        </c:choose>
+
+
+                                    </td>
+
+                                </tr>
+
+                            </table>
+
+                            <br>
+
+                            Delivery Address
+                            <table cellpadding="2" cellspacing="2" border="1">
+                                <tr>
+                                    <th>Country</th>
+                                    <th>City</th>
+                                    <th>Street</th>
+                                    <th>Street number</th>
+                                    <th>Postal Code</th>
+                                </tr>
+
+                                <tr>
+                                    <td>${customer.country.name} ${visitor.country.name}</td>
+                                    <td>${customer.city} ${visitor.city}</td>
+                                    <td>${customer.street} ${visitor.street}</td>
+                                    <td>
+                                        <c:choose>
+
+                                            <c:when test = "${customer.firstname==null}">
+                                               ${visitor.streetnumber}
+                                            </c:when>
+
+                                            <c:otherwise>
+                                                 ${customer.streetnumber}
+                                            </c:otherwise>
+                                        </c:choose>
+
+                                    </td>
+                                    <td>
+                                        <c:choose>
+
+                                            <c:when test = "${customer.firstname==null}">
+                                                ${visitor.postalcode}
+                                            </c:when>
+
+                                            <c:otherwise>
+                                             ${customer.postalcode}    
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </td>
+
+                                </tr>
+
+
+                            </table>
+
+
                         </div>
                     </div>
 
@@ -102,7 +177,10 @@
                         <input id="api-key" name="api-key" value="${stripePublicKey}" hidden>
                         <input id="token" name="token" value="" hidden>
                         <input id="amount" name="amount" value="${amount}" hidden>
-                        <input id="customerid" name="customerid" value="${customer.customerid}"/>
+                        <input id="total" name="total" value="${total}" hidden>
+                        <input id="customer" name="customer" value="${customer.customerid}" hidden/>
+                        <input id="visitor" name="visitor" value="${visitor.visitorid}" hidden/>
+                        <input id="shippingcost" name="shippingcost" value="${shippingCost}" hidden/>
 
                         <div class="form-group">
                             <label class="font-weight-medium" for="card-element">
@@ -114,10 +192,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <input class="form-control" id="email" name="email"
-                                   placeholder="Email Address" type="email" required>
-                        </div>
 
                         <!-- Used to display Element errors. -->
                         <div class="text-danger w-100" id="card-errors" role="alert"></div>
@@ -183,7 +257,7 @@
                 function stripeTokenHandler(token) {
                     // Insert the token ID into the form so it gets submitted to the server
                     var formvalue = document.getElementById('token');
-                    formvalue.setAttribute ('value', token.id);
+                    formvalue.setAttribute('value', token.id);
 
 
                     // Submit the form

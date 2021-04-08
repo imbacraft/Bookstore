@@ -7,6 +7,7 @@ package bookstore.repo;
 
 import bookstore.entity.Visitor;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -15,5 +16,8 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface VisitorRepo extends JpaRepository<Visitor,Integer> {
+    
+    @Query(value="select * from bookstore.visitor where email =?1" ,nativeQuery = true)
+    Visitor findVisitorByEmail(String email);
     
 }

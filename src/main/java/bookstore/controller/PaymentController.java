@@ -1,10 +1,17 @@
 package bookstore.controller;
 
 import bookstore.entity.Bookdetails;
+import bookstore.entity.Cart;
 import bookstore.entity.Cartitem;
 import bookstore.entity.Customer;
+import bookstore.entity.Visitor;
+import bookstore.repo.CartRepo;
+import bookstore.repo.CartitemRepo;
 import bookstore.repo.CustomerRepo;
+import bookstore.repo.VisitorRepo;
 import bookstore.service.StripeService;
+import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,13 +38,23 @@ public class PaymentController {
     @Autowired
     CustomerRepo customerRepo;
 
+    @Autowired
+    VisitorRepo visitorRepo;
+    
+    @Autowired
+    CartRepo cartRepo;
+    
+    @Autowired
+    CartitemRepo cartitemRepo;
+
     public PaymentController(StripeService stripeService) {
         this.stripeService = stripeService;
     }
 
     @GetMapping
-    public String showchargePage(@ModelAttribute Customer customer, Model model, HttpSession session) {
+    public String showchargePage(@RequestParam("shippingCost") String shippingCost, @ModelAttribute Customer customer, @ModelAttribute Visitor visitor, Model model, HttpSession session) {
 
+        double shippingCostNumber = Double.parseDouble(shippingCost);
         List<Cartitem> cart = (List<Cartitem>) session.getAttribute("cart");
 
         double amount = 0;
@@ -51,30 +68,73 @@ public class PaymentController {
         //Amount is rounded and multiplied by 100 because Stripe.com requires amount in cents (Ex. 48,51 Euro = 4851 cents).
         double roundedamount = this.round(amount, 2) * 100;
 
-        System.out.println(">>>Amount to be payed: " + this.round(roundedamount, 0) + " Cents");
+        System.out.println(">>>>>>>>>>>>>>>Bookprice is: " + this.round(roundedamount, 0) + " Cents");
 
         model.addAttribute("stripePublicKey", API_PUBLIC_KEY);
         model.addAttribute("amount", this.round(roundedamount, 0));
         model.addAttribute("customer", customer);
+        model.addAttribute("visitor", visitor);
+        
+        System.out.println("Shippingcost to be sent to JSP: "+ shippingCostNumber);
+        model.addAttribute("shippingCost", shippingCostNumber);
 
         return "charge";
     }
 
     @PostMapping
-    public String createCharge(@RequestParam String customerid, @RequestParam String email, String token, String amount, RedirectAttributes redirectAttributes) {
+    public String createCharge(@RequestParam(required=false, name="shippingcost") String shipping, @RequestParam(required = false, name="customer") String customerstring, @RequestParam(required = false, name="visitor") String visitorstring, 
+            @RequestParam String token, String amount, String total, RedirectAttributes redirectAttributes, HttpSession session) {
+        
+        System.out.println(">>>>>>>>>>>>Total is: "+ total + "Bookprice is: "+ amount + " Shipping cost is: "+ shipping);
+        List<Cartitem> shoppingCart = (List<Cartitem>) session.getAttribute("cart");
+        double bookprice = Double.parseDouble(amount) /100;
+        double totalamount = Double.parseDouble(total);
+        double shippingcost = Double.parseDouble(shipping);
+        String stripeCustomerID;
+        String chargeId;
+        Customer customer = null;
+         Visitor visitor = null;
+         LocalDateTime orderdatetime = LocalDateTime.now();
+         
+         Cart cart = new Cart();
+         
+         cart.setDatetime(orderdatetime);
+         cart.setBookprice(bookprice);
+         cart.setShippingcost(shippingcost);
+         cart.setTotalprice(totalamount);
+         
+         
+         //Setting CartItemList for db insertion
+         cart.setCartitemList(shoppingCart); 
 
-        int intcustomerid = Integer.parseInt(customerid);
-        double totalamount = Double.parseDouble(amount) / 100;
+        
 
-        Customer customer = customerRepo.findById(intcustomerid).get();
+        if (visitorstring == "") {
+            int customerid = Integer.parseInt(customerstring);
+            customer = customerRepo.findById(customerid).get();
 
-        //First create Customer account in Stripe.com (Optional).
-        String stripeCustomerID = stripeService.createCustomer(email, token);
+            //First create Customer account in Stripe.com (Optional).
+            stripeCustomerID = stripeService.createCustomer(customer.getEmail(), token);
 
-        //Second, charge that account.
-        String chargeId = stripeService.createCharge(email, totalamount, stripeCustomerID);
+            //Second, charge that account.
+            chargeId = stripeService.createCharge(customer.getEmail(), totalamount, stripeCustomerID);
+            
+            cart.setCustomer(customer);
+            cart.setPayment(chargeId);
+            
+        } else {
 
-        System.out.println("email: " + email + " Token: " + token);
+            int visitorid = Integer.parseInt(visitorstring);
+            visitor = visitorRepo.findById(visitorid).get();
+             //First create Customer account in Stripe.com (Optional).
+            stripeCustomerID = stripeService.createCustomer(visitor.getEmail(), token);
+
+            //Second, charge that account.
+            chargeId = stripeService.createCharge(visitor.getEmail(), totalamount, stripeCustomerID);
+            cart.setVisitor(visitor);
+            cart.setPayment(chargeId);
+            
+        }
 
         if (token == null) {
             redirectAttributes.addAttribute("message", "Stripe payment token is missing. please try again later.");
@@ -84,17 +144,56 @@ public class PaymentController {
             redirectAttributes.addAttribute("message", "An error accurred while trying to charge.");
         }
 
-        // You may want to store charge id along with order information
-        redirectAttributes.addAttribute("message", "Successfully paid amount: " + totalamount + " \u20ac. <br> Your charge id in Stripe.com is: " + chargeId);
+       
+        
+        //Save order to db
+        cartRepo.save(cart);
+        
+
+       //save cartitem to db
+        for (Cartitem item : cart.getCartitemList()){
+            
+            item.setCart(cart);
+             cartitemRepo.save(item);
+        }
+        
+       
+        redirectAttributes.addAttribute("message", "Successfully paid amount: " + this.round(totalamount,2) + " \u20ac. <br> Your charge id in Stripe.com is: " + chargeId);
         redirectAttributes.addAttribute("customer", customer);
+        redirectAttributes.addAttribute("visitor", visitor);
+        redirectAttributes.addAttribute("shippingCost", cart.getShippingcost());
 
         return "redirect:/payment/complete";
     }
 
     @GetMapping("/complete")
-    public String showOrderCompletedPage(@ModelAttribute Customer customer, @RequestParam("message") String message, Model model) {
-
+    public String showOrderCompletedPage(@ModelAttribute Customer customer, @ModelAttribute Visitor visitor, @RequestParam("message") String message,@RequestParam("shippingCost") String shipping, Model model, HttpSession session) {
+        double shippingCost = Double.parseDouble(shipping);
+        String downloadURL = "https://peoplecertproject.s3.eu-central-1.amazonaws.com/git.txt";
+        
+        //check if there are ebooks in the shopping cart, so that I pass the links to download them to the JSP.
+        List<Cartitem> shoppingCart = (List<Cartitem>) session.getAttribute("cart");
+        HashMap<Cartitem,String> ebooks = new HashMap();
+        
+        //  (4) is the number of ebook format in the DB.
+        // for every ebook, put it with its download link in a new map.
+        for (Cartitem item : shoppingCart){
+        
+        if (item.getBookdetails().getFormat().getFormatid()==4){
+        
+            ebooks.put(item, downloadURL);
+        
+        }
+        
+        }
+        
+        System.out.println(">>>>>>>>>>>>>>>Customer is: "+ customer+ "Visitor is : "+ visitor + " Shipping cost is: "+ shippingCost);
+        
         model.addAttribute("message", message);
+        model.addAttribute("customer", customer);
+        model.addAttribute("visitor", visitor);
+        model.addAttribute("shippingCost", shippingCost);
+        model.addAttribute("ebooks", ebooks );
 
         //need to add order details
         //need to add link to ebook, if ordered book is ebook.

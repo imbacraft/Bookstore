@@ -10,10 +10,14 @@ import bookstore.entity.Bookdetails;
 import bookstore.entity.Cartitem;
 import bookstore.entity.Country;
 import bookstore.entity.Customer;
+import bookstore.entity.Role;
+import bookstore.entity.Visitor;
 import bookstore.repo.BookRepo;
 import bookstore.repo.BookdetailsRepo;
 import bookstore.repo.CountryRepo;
 import bookstore.repo.CustomerRepo;
+import bookstore.repo.RoleRepo;
+import bookstore.repo.VisitorRepo;
 import bookstore.service.UserService;
 import java.security.Principal;
 import java.util.ArrayList;
@@ -48,6 +52,12 @@ public class CartController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    VisitorRepo visitorRepo;
+
+    @Autowired
+    RoleRepo roleRepo;
 
     @GetMapping("/index")
     public String showCart() {
@@ -147,6 +157,8 @@ public class CartController {
     @GetMapping("/address")
     public String showAddressPage(Model model, Principal principal, HttpSession session, RedirectAttributes redirectAttributes) {
 
+        Customer customer = null;
+
         //check if cart contains only ebook, in order to judge if delivery options are required info.
         boolean containsOnlyEbook = false;
         List<Cartitem> cart = (List<Cartitem>) session.getAttribute("cart");
@@ -160,15 +172,18 @@ public class CartController {
 
         }
 
-        //Get customer details from db
-        Customer customer = userService.findCustomerByUsername(principal.getName());
+        if (principal != null) {
+
+            customer = userService.findCustomerByUsername(principal.getName());
+        }
+
         List<Country> countries = countryRepo.findAll();
 
         model.addAttribute("countries", countries);
 
         model.addAttribute("customer", customer);
         model.addAttribute("containsOnlyEbook", containsOnlyEbook);
-        
+
         if (containsOnlyEbook == true && customer != null) {
 
             redirectAttributes.addAttribute("customer", customer);
@@ -183,20 +198,62 @@ public class CartController {
 
     @PostMapping("/address")
     public String getAddressDetails(@RequestParam("delivery") String delivery,
-            @RequestParam("firstname") String firstname,
-            @RequestParam("lastname") String lastname,
-            @RequestParam("email") String email,
-            @RequestParam("phone") String phone,
-            @RequestParam("country") String country,
-            @RequestParam("city") String city,
-            @RequestParam("street") String street,
-            @RequestParam("streetnumber") String streetnr,
-            @RequestParam("postalcode") String postal,
+            @RequestParam(required = false, name = "firstname") String firstname,
+            @RequestParam(required = false, name = "lastname") String lastname,
+            @RequestParam(required = false, name = "email") String email,
+            @RequestParam(required = false, name = "phone") String phone,
+            @RequestParam(required = false, name = "country") String country,
+            @RequestParam(required = false, name = "city") String city,
+            @RequestParam(required = false, name = "street") String street,
+            @RequestParam(required = false, name = "streetnumber") String streetnr,
+            @RequestParam(required = false, name = "postalcode") String postal,
             RedirectAttributes redirectAttributes, Principal principal) {
 
-        Customer customer = userService.findCustomerByUsername(principal.getName());
+        double shippingCost;
+        Visitor visitor = null;
 
-//        redirectAttributes.addAttribute("address", address);
+        //Check if user is Customer or Visitor
+        if (principal != null) {
+
+            Customer customer = userService.findCustomerByUsername(principal.getName());
+            redirectAttributes.addAttribute("customer", customer);
+
+        } else {
+            visitor = visitorRepo.findVisitorByEmail(email);
+            
+            if (visitor == null) {
+
+                int countryid = Integer.parseInt(country);
+                int streetnumber = Integer.parseInt(streetnr);
+                int postalcode = Integer.parseInt(postal);
+                int phonenumber = Integer.parseInt(phone);
+                Country visitorCountry = countryRepo.findById(countryid).get();
+                Role role = roleRepo.findById(5).get();
+                visitor = new Visitor(firstname, lastname, email, visitorCountry, city, street, streetnumber, postalcode, phonenumber, role);
+                
+                visitorRepo.save(visitor);
+            }
+
+            System.out.println(">>>>>>Visitor to be added to DB: " + visitor);
+
+            //save visitor to DB before passing to JSP
+            
+            redirectAttributes.addAttribute("visitor", visitor);
+
+        }
+
+        //set shipping cost
+        if (delivery.equals("standard")) {
+
+            shippingCost = 15.00;
+
+        } else {
+
+            shippingCost = 35.00;
+
+        }
+        redirectAttributes.addAttribute("shippingCost", shippingCost);
+
         return "redirect:/payment";
     }
 
@@ -214,6 +271,5 @@ public class CartController {
 
         return -1;
     }
-
 
 }

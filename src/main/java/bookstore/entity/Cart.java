@@ -82,7 +82,7 @@ public class Cart implements Serializable {
     @JoinColumn(name = "visitorid", referencedColumnName = "visitorid")
     @ManyToOne
     private Visitor visitor;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cart")
+    @OneToMany(mappedBy = "cart")
     private List<Cartitem> cartitemList;
 
     public Cart() {
@@ -100,6 +100,28 @@ public class Cart implements Serializable {
         this.totalprice = totalprice;
     }
 
+    public Cart(LocalDateTime datetime, String payment, double bookprice, double shippingcost, double totalprice, Customer customer, List<Cartitem> cartitemList) {
+        this.datetime = datetime;
+        this.payment = payment;
+        this.bookprice = bookprice;
+        this.shippingcost = shippingcost;
+        this.totalprice = totalprice;
+        this.customer = customer;
+        this.cartitemList = cartitemList;
+    }
+
+    public Cart(LocalDateTime datetime, String payment, double bookprice, double shippingcost, double totalprice, Visitor visitor, List<Cartitem> cartitemList) {
+        this.datetime = datetime;
+        this.payment = payment;
+        this.bookprice = bookprice;
+        this.shippingcost = shippingcost;
+        this.totalprice = totalprice;
+        this.visitor = visitor;
+        this.cartitemList = cartitemList;
+    }
+
+    
+    
     public Integer getCartid() {
         return cartid;
     }
