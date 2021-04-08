@@ -33,32 +33,27 @@ public interface BookRepo extends JpaRepository<Book, Integer> {
 
         
 
-    @Query(value="select book.* from book,author,joinedbookauthor where book.bookid=joinedbookauthor.bookid \n" +
-"and author.authorid=joinedbookauthor.authorid  and author.lastname=?1;",nativeQuery=true)
+     @Query(value="select book.* from book,author,joinedbookauthor where book.bookid=joinedbookauthor.bookid \n" +
+"and author.authorid=joinedbookauthor.authorid  and author.lastname=?1",nativeQuery=true)
     List<Book> findByAuthorLastName(String lastName);
     
     
 
 
 
-    @Query(value="select book.*,bookdetails.price from bookdetails,book,format\n" +
-    "where book.bookid=bookdetails.bookid and format.formatid=bookdetails.formatid\n" +
-    "order by bookdetails.price\n" +
-    "desc limit 0,5;",nativeQuery=true)
+   @Query(value="select book.* from book,bookdetails,format where format.formatid=bookdetails.formatid and book.bookid=bookdetails.bookid \n" +
+"order by bookdetails.price desc limit 0,5",nativeQuery=true)
     List<Book> findTop5();//tha paizei
-
-
-
-
-//    @Query(value="Select book.* from book order by book.price desc limit 0,5",nativeQuery=true)
-//    List<Book> findTop5();
     
+    
+    @Query(value="Select * from book where book.upcoming=1;",nativeQuery=true)
+    List<Book> findUpcomingBooks();
 
     
-
-    
-    @Query(value="select book.* from book,joinedbookauthor where joinedbookauthor.authorid=?1 and joinedbookauthor.bookid !=book.bookid", nativeQuery= true)
-    List<Book> findBooksFromSameAuthor(int authorid,int bookid);
+    @Query(value="select book.* from book,bookdetails,format where format.formatid=bookdetails.formatid and book.bookid=bookdetails.bookid \n" +
+"order by bookdetails.price\n" +
+"desc limit 0,1;",nativeQuery=true)
+    public Book findMostExpensiveBook();
     
     
 }

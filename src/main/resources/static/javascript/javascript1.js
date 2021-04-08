@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+// Instantiate the Bootstrap carousel
 $(".multi-item-carousel").carousel({
   interval: false,
 });

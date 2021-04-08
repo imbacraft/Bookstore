@@ -3,6 +3,12 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <style>
+section,
+.main-menu-bar {
+    height:auto;
+    width: 1182px ;
+    margin: 0 auto ;   
+}
 .frontpage {
     display: block;
     position: relative;
@@ -58,42 +64,117 @@
     color: black;
     /*// margin: 7px;*/
     padding-left: 25px;
+}/* Dropdown Button */
+.dropbtn {
+  color: black;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
 }
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  flex: center;
+  
+  
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  text-align:center;
+  width:300px;
+  background-color: #f1f1f1;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {sbackground-color: #ddd;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+/*.dropdown:hover .dropbtn {background-color: #3e8e41;}*/
 
 </style>
 
-<section class="main-menu-bar">    
-   
-   <div class="main-menu-entry">
-       <input type="button"  onclick="popMenuModal('main-menu-item-books')"  onmouseleave="popMenuModal('main-menu-item-books')"value="Books"/>
-       <input type="button"  onclick="popMenuModal('main-menu-item-best-sellers')"  value="Best Sellers"/>
-       <input type="button"  onclick="popMenuModal('main-menu-item-authors')"  value="Authors"/>
-       <input type="button"  onclick="popMenuModal('offers')"  value="Offers"/>
-        
-   </div>
+<section>    
+    <div class="container" >
+  <div class="row" >
+      
+    <div class="col-4" >
+        <div class="dropdown">
     
-
-
-        <div class="main-menu-item-modal" id="main-menu-item-books" style="display: none;" onchange="location=this.value">
-
-            <c:forEach items="${categories}" var="category">
-                <a href="${pageContext.request.contextPath}/books/${category.name}">${category.name}</a>
-            </c:forEach>
+  <button class="dropbtn">BOOKS</button>
+  <div class="dropdown-content">
+    
+         <div class="row ">
+            
+             <div class="col-6">
+          <c:forEach items="${categories}" var="category" begin="0" end="4" ><!--edw mpainei karfwto -->
+            <a href="${pageContext.request.contextPath}/books/${category.name}">${category.name}</a>
+          </c:forEach>  
+             </div>
+      <div class="col-6">
+           <c:forEach items="${categories}" var="category" begin="5" end="9" ><!--edw mpainei karfwto -->
+               <a href="${pageContext.request.contextPath}/books/${category.name}">${category.name}</a>
+          </c:forEach>
+      </div> 
+         </div><!--edw kleinei to endiameso row -->
+  </div>
         </div>
         
-        <div class="main-menu-item-modal" id="main-menu-item-authors" style="display: none;" onchange="location=this.value">>
-     
-                <c:forEach items="${authors}" var="author">
-                    <a href="${pageContext.request.contextPath}/authors/${author.lastname}">${author.lastname}</a>
-                </c:forEach>           
-        </div>
         
-        <div  class="main-menu-item-modal" id="main-menu-item-best-sellers" style="display: none;" onchange="location=this.value">
-        
-            <c:forEach items="${bestSellers}" var="book">
-                <a href="${pageContext.request.contextPath}/books/search/${book.bookid}">${book.title}</a>
-            </c:forEach>
+    </div>
+    <div class="col-4">
+       <div class="dropdown">
+    
+  <button class="dropbtn">Authors</button>
+  <div class="dropdown-content">
+    
+         <div class="row ">
+            
+             <div class="col-4">
+          <c:forEach items="${authors}" var="author" begin="0" end="6" ><!--edw mpainei karfwto -->
+            <a href="${pageContext.request.contextPath}/authors/${author.lastname}">${author.lastname}</a>
+          </c:forEach>  
+             </div>
+      <div class="col-4">
+           <c:forEach items="${authors}" var="author" begin="7" end="13" ><!--edw mpainei karfwto -->
+               <a href="${pageContext.request.contextPath}/authors/${author.lastname}">${author.lastname}</a>
+          </c:forEach>
+      </div> 
+          <div class="col-4">
+           <c:forEach items="${authors}" var="author" begin="14" end="20" ><!--edw mpainei karfwto -->
+               <a href="${pageContext.request.contextPath}/authors/${author.lastname}">${author.lastname}</a>
+          </c:forEach>
+      </div> 
+         </div><!--edw kleinei to endiameso row -->
+  </div>
         </div>
+    </div>
+    <div class="col-2">
+        <button class="dropbtn"><a href="${pageContext.request.contextPath}/bestsellers">BESTSELLERS</a></button>
+    </div>
+      <div class="col-2"></div>
+  </div>
+</div>
+  
         
         
     <hr style="height: 1px; border-width: 0; color: #e0e0e0; background-color: #e0e0e0;"/>      
