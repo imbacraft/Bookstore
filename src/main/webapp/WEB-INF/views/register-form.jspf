@@ -62,20 +62,24 @@ registration h3 {
             <br/>
 
 
-            <label for="lname">Last Name</label>
+            <label for="lastname">Last Name</label>
 
             <form:input  path="lastname" id="lastname"  placeholder="Enter your Name" required="true"/>
 
       
             <br/>
 
-            <label for="email" >Your Email</label>
+            <label for="email" >Email</label>
 
             <form:input type="email"  path="email" id="email"  placeholder="Enter your Email" required="true"/>
 
             <br/>
 
-       
+            <label for="phone" > Phone </label>
+
+            <form:input type="number" min="1"  path="phone" id="phone"  placeholder="Enter your Phone number" required="true"/>
+            
+            <br>
         
             <label for="username" >Username</label>
 
@@ -88,13 +92,11 @@ registration h3 {
 
             <form:password path="password" id="password"  placeholder="Enter your Password" required="true"/>
 
-            <input type="password" onkeyup="validatePassword();" placeholder="Re-enter your password" id="confirm-password" required/>
-            <br/>
-            <p id="password-feedback" style="font-family: 'Arial', sans; margin: 10px"></p>
-            <br/>
-
-          <!--  <label for="country">Country</label> -->
-
+            <br>
+            
+            <!--<label for="country">Country</label>--> 
+            
+            <br>
              <form:select path = "country.countryid">
 
                 <form:option value=""> --Select Country--</form:option>
@@ -107,9 +109,14 @@ registration h3 {
 
             <br/>
 
-          
+            <label for="city">City</label>
+
+            <form:input  path="city" id="city"  placeholder="Enter your City" required="true"/>
+            
+            <br>
+            
             <label for="street">Address</label>
-         <br/>
+
             <form:input class="form-control" path="street" id="street"  placeholder="Enter Street name" required="true"/>
            <br/> 
             <label for="streetnumber">Street number</label>
@@ -128,9 +135,6 @@ registration h3 {
             
              <br>
 
-            <label for="paypalaccount">PayPal Account</label>
-            <form:input path="paypalaccount" id="paypalaccount"  placeholder="Enter PayPal Account" />
-
             <br>
 
             <input id="button" type="submit"  value="Register"/>
@@ -139,28 +143,9 @@ registration h3 {
         </form:form>
 
         </div>
+        
+ 
     </body>
 </html>
 
 
-<script>
-let passOK = false;
-
-const pass1 = document.getElementById("password");
-const pass2 = document.getElementById("confirm-password");
-const passwdFeedback = document.getElementById("password-feedback");
-
-function validatePassword()
-{
-    if (pass1.value === pass2.value) {
-
-        passwdFeedback.innerHTML=" ";
-
-    }
-    else {
-        passwdFeedback.innerHTML="The passwords don't match";
-    }
-}
-pass1.value.onkeyup=validatePassword();
-
-</script>
