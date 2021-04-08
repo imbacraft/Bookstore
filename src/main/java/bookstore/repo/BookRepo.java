@@ -33,8 +33,8 @@ public interface BookRepo extends JpaRepository<Book, Integer> {
 
         
 
-    @Query(value="select book.* from book,author,joinedbookauthor where book.bookid=joinedbookauthor.bookid \n" +
-"and author.authorid=joinedbookauthor.authorid  and author.lastname=?1;",nativeQuery=true)
+     @Query(value="select book.* from book,author,joinedbookauthor where book.bookid=joinedbookauthor.bookid \n" +
+"and author.authorid=joinedbookauthor.authorid  and author.lastname=?1",nativeQuery=true)
     List<Book> findByAuthorLastName(String lastName);
     
     
