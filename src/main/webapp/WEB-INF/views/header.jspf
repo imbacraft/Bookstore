@@ -150,7 +150,7 @@ header{
 	width: 200px;
 	background-color: white;
 	color: #2794ad;
-	/*! display: none; */
+	display: none;
 	border-radius: 5px;
 	border: 1px solid #cccccc;
 	right: 120px;
@@ -337,7 +337,11 @@ header{
                   
               </c:forEach>
               
+<<<<<<< HEAD
+             <div id="cart-amount"><%=cartAmount%>​​​​​​​</div>
+=======
              <div id="cart-amount"><%=cartAmount%></div>
+>>>>>>> 51b90d1000b37677b8b7f0734db8110c413e7334
              <div class="clickable">
             <a id="cart-img" href="${pageContext.request.contextPath}/cart/index"></a>
             <p>Cart</p>
