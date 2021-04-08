@@ -145,7 +145,7 @@ public class CartController {
     }
 
     @GetMapping("/address")
-    public String showAddressPage(Model model, Principal principal, HttpSession session) {
+    public String showAddressPage(Model model, Principal principal, HttpSession session, RedirectAttributes redirectAttributes) {
 
         //check if cart contains only ebook, in order to judge if delivery options are required info.
         boolean containsOnlyEbook = false;
@@ -162,18 +162,27 @@ public class CartController {
 
         //Get customer details from db
         Customer customer = userService.findCustomerByUsername(principal.getName());
-
         List<Country> countries = countryRepo.findAll();
 
         model.addAttribute("countries", countries);
+
         model.addAttribute("customer", customer);
         model.addAttribute("containsOnlyEbook", containsOnlyEbook);
+        
+        if (containsOnlyEbook == true && customer != null) {
 
-        return "address";
+            redirectAttributes.addAttribute("customer", customer);
+            return "redirect:/payment";
+
+        } else {
+
+            return "address";
+        }
+
     }
 
     @PostMapping("/address")
-    public String getAddressDetails(@RequestParam("delivery") String delivery, 
+    public String getAddressDetails(@RequestParam("delivery") String delivery,
             @RequestParam("firstname") String firstname,
             @RequestParam("lastname") String lastname,
             @RequestParam("email") String email,
@@ -182,14 +191,12 @@ public class CartController {
             @RequestParam("city") String city,
             @RequestParam("street") String street,
             @RequestParam("streetnumber") String streetnr,
-            @RequestParam("postalcode") String postal,      
+            @RequestParam("postalcode") String postal,
             RedirectAttributes redirectAttributes, Principal principal) {
-        
-        
-         Customer customer = userService.findCustomerByUsername(principal.getName());
 
-        redirectAttributes.addAttribute("address", address);
+        Customer customer = userService.findCustomerByUsername(principal.getName());
 
+//        redirectAttributes.addAttribute("address", address);
         return "redirect:/payment";
     }
 
@@ -207,17 +214,6 @@ public class CartController {
 
         return -1;
     }
-    
-    private boolean matchParamsWithCustomer (Customer customer, String firstname, String lastname, String email, int phone, int countryid, String city, String street, int streetnumber, int postalcode){
-      
-        boolean check = customer.getFirstname().e
-        
-        
-        
-        return false;
-    
-    
-    
-    }
+
 
 }

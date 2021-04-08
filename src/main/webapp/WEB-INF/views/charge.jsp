@@ -102,6 +102,7 @@
                         <input id="api-key" name="api-key" value="${stripePublicKey}" hidden>
                         <input id="token" name="token" value="" hidden>
                         <input id="amount" name="amount" value="${amount}" hidden>
+                        <input id="customerid" name="customerid" value="${customer.customerid}"/>
 
                         <div class="form-group">
                             <label class="font-weight-medium" for="card-element">

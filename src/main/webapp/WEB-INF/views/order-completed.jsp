@@ -22,7 +22,8 @@
             <h4>Your order details: </h4>
             </c:if>
         
-
+            <h3>Customer name: ${customer.firstname} ${customer.lastname}</h3>
+            
 
 
 

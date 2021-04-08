@@ -60,11 +60,9 @@
 
 
  
+            <c:if test = "${customer == null}">
 
 
-                <sec:authorize access="hasRole('SERVICEAGENT')">
-            <a href="${pageContext.request.contextPath}/service">Service Agent Home</a>
-        </sec:authorize>
             <h3>Personal details</h3> 
 
             First Name:
@@ -130,6 +128,8 @@
     <br>
     <br>
 
+    </c:if>
+    
     <button type="submit">Submit and Proceed to Payment via Stripe </button
 
 </form:form>
