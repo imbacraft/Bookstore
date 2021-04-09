@@ -337,7 +337,7 @@ header{
                   
               </c:forEach>
               
-             <div id="cart-amount"><%=cartAmount%>0​​​​​​​</div>
+             <div id="cart-amount"><%=cartAmount%>​​​​​​​</div>
              <div class="clickable">
             <a id="cart-img" href="${pageContext.request.contextPath}/cart/index"></a>
             <p>Cart</p>
