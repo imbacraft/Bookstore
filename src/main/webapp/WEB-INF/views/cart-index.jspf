@@ -10,16 +10,87 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Shopping Cart</h1>
+<style>
+.cart-books table {
+	background-color: #f7f6ff;
+	border-radius: 10px;
+	/*! border: 5px; */
+	padding: 10px;
+	/*! max-width: 2000px; */
+	flex: 1 1 1000px;
+}
+    td {
+        
+
+        
+        
+    }
+    
+    section.cart-section  {
+        width: 1182px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+
+    }
+    
+    div.title {}
+    
+    
+    div.shopping-cart {
+               display: flex;
+        flex-flow: column ;
+  
+        position: relative;
+    }
+.next-step {
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+    }
+div.cart-books {
+        display: flex;
+            flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+a#continue-shopping {
+	height: 30px;
+	background-color: gold;
+	padding: 8px 8px 1px 8px;
+	border-radius: 12px;
+	color: black;
+	text-decoration: none;
+}
+a#proceed-checkout {
+	height: 30px;
+	background-color: 2794ad;
+	padding: 8px 0px 15px 18px;
+	border-radius: 12px;
+	color: black;
+	text-decoration: none;
+}
+
+.next-step > img:nth-child(2) {
+ margin: 30px;
+ position: relative;
+ left: 55px;
+}
+
+</style>
+<section class="cart-section"> 
+   
+    <div class="title">
+            <h1>Shopping Cart</h1>
 
         <hr/>
+    </div>
+ <div style="display: flex; flex-direction: row;">
+<div class="shopping-cart">   
+    
 
+    <div class="cart-books">
         <sec:authorize access="hasRole('ADMIN')">
             <a href="${pageContext.request.contextPath}/admin">Administrator Home</a>
         </sec:authorize>
@@ -30,9 +101,13 @@
 
         <br>
 
-        <table cellpadding="2" cellspacing="2" border="1">
+        <% double total = 0.0; %>
+        
+        <c:forEach var="cartitem" items="${sessionScope.cart}">
+           
+        <table style="">
             <tr>
-                <th>Book</th>
+                <th></th>
                 <th>Title</th>
                 <th>Format</th>
                 <th>Quantity</th>
@@ -40,10 +115,7 @@
                 <th>Remove</th>
             </tr>
 
-            <% double total = 0.0; %>
-
-            <c:forEach var="cartitem" items="${sessionScope.cart}">
-
+            
 
                 <c:set var="subtotal" value="${cartitem.bookdetails.price * cartitem.quantity}"></c:set>
 
@@ -53,7 +125,8 @@
 
                 <tr>
                     <td><a href="${pageContext.request.contextPath}/books/search/${cartitem.bookdetails.book.bookid}"><img src="${cartitem.bookdetails.frontcover}" width="100"></a></td>
-                    <td>${cartitem.bookdetails.book.title}</td>
+                    <td><p>${cartitem.bookdetails.book.title}</p>
+                       <p> ${cartitem.bookdetails.format.name}</p></td>
                     <td>${cartitem.bookdetails.format.name}</td>
                     <td>
                         <c:choose>
@@ -77,30 +150,32 @@
 
 
 
-                </tr>
+                </tr> 
+        </table>
+                    <p></p>
+
             </c:forEach>
 
             <% pageContext.setAttribute("total", total); %>
-            <tr>
-                <td colspan="6">
+
                     Total: <fmt:formatNumber value="${total}" maxFractionDigits="3"/>&euro;
-                </td>
-
-            </tr>
-
-
-        </table>
-
-
-        <a href="${pageContext.request.contextPath}/home">Continue shopping</a>
-
-        <a href="${pageContext.request.contextPath}/cart/address">Proceed to Delivery Options or Payment</a>
-      
+ 
 
 
 
+    </div>
+              
 
-    </body>
-
-
-</html>
+    <div class="cart-books">
+        <p></p>
+    </div>
+</div>
+    
+    <div class="next-step">
+        <a id="continue-shopping" href="${pageContext.request.contextPath}/home">Continue shopping</a>
+     
+        <img src="./images/basket.png" width="100" height="100" alt=""/>
+        <a id="proceed-checkout"  href="${pageContext.request.contextPath}/cart/address">Proceed to Delivery Options or Payment</a>
+    </div>   
+ </div>
+</section>
