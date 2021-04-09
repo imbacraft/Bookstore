@@ -78,8 +78,8 @@
         <ul>
             <li><a href="/bookstore/login">Sign in / Register</a></li>
             <li><a href="#">My Account</a></li>
-            <li><a href="#">Contact us</a></li>
-            <li><a href="#">FAQs</a></li>
+            <li><a href="${pageContext.request.contextPath}/contact">Contact us</a></li>
+            <li><a href="${pageContext.request.contextPath}/faqs">FAQs</a></li>
             <li><a href="#">Log out</a></li>
         </ul>
     </div>

@@ -74,6 +74,12 @@
             <artifactId>stripe-java</artifactId>
             <version>20.46.0</version>
         </dependency>
+       
+        <!--Dependency for web socket --> 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
 
     </dependencies>
 
