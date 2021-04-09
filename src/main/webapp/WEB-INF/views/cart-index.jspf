@@ -11,23 +11,25 @@
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <style>
+    * {
+        font-family: "Arial", "Helvetica", sans-serif;
+    }
 .cart-books table {
 	background-color: #f7f6ff;
 	border-radius: 10px;
 	/*! border: 5px; */
 	padding: 10px;
 	/*! max-width: 2000px; */
-	flex: 1 1 1000px;
+	margin: 10px;
+        /*! max-width: 800px; */
+	flex: 2 2 auto;
 }
-    td {
-        
-
-        
-        
-    }
+th {
+    text-align: justify;
+}
     
-    section.cart-section  {
-        width: 1182px;
+section.cart-section {
+        /*! width: 1182px; */
         margin: 0 auto;
         display: flex;
         flex-direction: column;
@@ -35,27 +37,37 @@
 
     }
     
-    div.title {}
+div.title {}
+button[type="submit"] {
+       width: 61px;
+       height: 28px;
+       background-color: #2794ad;
+       color: white;
+       border-bottom-left-radius: 5px;
+       border-bottom-right-radius: 5px;
+       border: 0;
+       margin-top: -2px;
+       padding-bottom: 3px
+}
     
-    
-    div.shopping-cart {
-               display: flex;
-        flex-flow: column ;
-  
-        position: relative;
-    }
-.next-step {
-        display: flex;
-        flex-flow: column;
-        justify-content: center;
-    }
+div.shopping-cart {
+
+    display: flex;
+    flex-flow: column wrap; 
+    position: relative;
+    flex: 2 2 500px;
+}
+
 div.cart-books {
         display: flex;
             flex-direction: row;
         flex-wrap: wrap;
+        flex: 1 1;
+        height: 211px;
     }
     
 a#continue-shopping {
+    bottom: 30px;
 	height: 30px;
 	background-color: gold;
 	padding: 8px 8px 1px 8px;
@@ -64,18 +76,56 @@ a#continue-shopping {
 	text-decoration: none;
 }
 a#proceed-checkout {
-	height: 30px;
-	background-color: 2794ad;
-	padding: 8px 0px 15px 18px;
-	border-radius: 12px;
-	color: black;
+	height: 40px;
+	background-color: #2794ad;
+	/* padding: 8px 0px 15px 18px;  */
+	/*! border-radius: 12px; */
+	color: white;
 	text-decoration: none;
+	width: 250px;
+        border-radius: 0 0 12px 12px;
+	/* border-end-start-radius: 12px;
+	border-end-end-radius: 12px; */
 }
 
-.next-step > img:nth-child(2) {
- margin: 30px;
- position: relative;
- left: 55px;
+.next-step {
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: center;
+        flex: 0 1 200px;
+        text-align: center;
+    }
+
+#table-title {
+    
+}
+#table-format {
+    font-size: 10pt;
+    font-style: oblique
+}
+
+#total-box {
+
+    height: 30px;
+    width: auto;
+    border: 3px solid gray;
+    /* padding-bottom: 50px;  */
+    border-radius: 12px 12px 0 0;
+    /*border-start-start-radius: 12px;
+    border-start-end-radius: 12px; */
+    border-bottom: 0; 
+}
+
+#quantity {
+    max-width: 60px;
+}
+
+table.group-a {
+    
+}
+
+table.group-b {
+    
 }
 
 </style>
@@ -90,7 +140,7 @@ a#proceed-checkout {
 <div class="shopping-cart">   
     
 
-    <div class="cart-books">
+   
         <sec:authorize access="hasRole('ADMIN')">
             <a href="${pageContext.request.contextPath}/admin">Administrator Home</a>
         </sec:authorize>
@@ -104,15 +154,12 @@ a#proceed-checkout {
         <% double total = 0.0; %>
         
         <c:forEach var="cartitem" items="${sessionScope.cart}">
-           
-        <table style="">
+     <div class="cart-books">       
+        <table class="group-a">
             <tr>
-                <th>Book</th>
+                <th></th>
                 <th>Title</th>
-                <th>Format</th>
-                <th>Quantity</th>
-                <th>Subtotal</th>
-                <th>Remove</th>
+
             </tr>
 
             
@@ -125,8 +172,26 @@ a#proceed-checkout {
 
                 <tr>
                     <td><a href="${pageContext.request.contextPath}/books/search/${cartitem.bookdetails.book.bookid}"><img src="${cartitem.bookdetails.frontcover}" width="100"></a></td>
-                    <td>${cartitem.bookdetails.book.title}</td>
-                    <td>${cartitem.bookdetails.format.name}</td>
+                    <td><p id="table-title">${cartitem.bookdetails.book.title}</p>
+                        <p id="table-format">${cartitem.bookdetails.format.name}</p>
+                    </td>
+                    
+ 
+                </tr> 
+        </table>                   
+                    
+                    
+                    
+                    
+                    
+            <table class="group-b">
+            <tr>
+
+                <th>Quantity</th>
+                <th>Subtotal</th>
+                <th></th>
+            </tr>                
+                    
                     <td>
                         <c:choose>
                             <c:when test = "${cartitem.bookdetails.format.formatid != 4}">
@@ -134,7 +199,9 @@ a#proceed-checkout {
                                     <input name="bookid" id="bookid" value="${cartitem.bookdetails.book.bookid}" hidden>
                                     <input name="formatid" id="formatid" value="${cartitem.bookdetails.format.formatid}" hidden>
                                     <input type= "number" id="quantity" name ="quantity" value = ${cartitem.quantity } min="1" placeholder = "${cartitem.quantity }">
-                                    <button type="submit">Update </button>
+                             
+                                    <button type="submit">Update</button>
+                     
                                 </form:form>
                             </c:when>
 
@@ -152,29 +219,28 @@ a#proceed-checkout {
                 </tr> 
         </table>
                     <p></p>
-
+</div>
             </c:forEach>
 
             <% pageContext.setAttribute("total", total); %>
-
-                    Total: <fmt:formatNumber value="${total}" maxFractionDigits="3"/>&euro;
- 
-
-
-
-    </div>
-              
-
-    <div class="cart-books">
-        <p></p>
-    </div>
-</div>
     
+         
+</div>
+
+
     <div class="next-step">
-        <a id="continue-shopping" href="${pageContext.request.contextPath}/home">Continue shopping</a>
-     
-        <img src="./images/basket.png" width="100" height="100" alt=""/>
+    <div id="total-box">
+        Total:<fmt:formatNumber value="${total}" maxFractionDigits="3"/>&euro; 
+        </div>
         <a id="proceed-checkout"  href="${pageContext.request.contextPath}/cart/address">Proceed to Delivery Options or Payment</a>
+    
+        <p>OR</p>
+        <a id="continue-shopping" href="${pageContext.request.contextPath}/home">Continue shopping</a>
     </div>   
  </div>
 </section>
+    
+<script>
+    console.log("#####" + document.getElementById("quantity").value);
+    
+</script>
