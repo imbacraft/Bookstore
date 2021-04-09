@@ -59,7 +59,7 @@ public class CartController {
     @GetMapping("/index")
     public String showCart() {
 
-        return "cart-index";
+        return "cart";
 
     }
 
@@ -133,12 +133,15 @@ public class CartController {
             redirectAttributes.addAttribute("customer", customer);
             return "redirect:/payment";
 
-        } else {
-
-            return "address";
         }
+        
+        if (cart.size()==0){
 
-    }
+            return "redirect:/cart/index";
+        } 
+            
+           return "address"; 
+        }
 
     @PostMapping("/address")
     public String proccessAddressDetails(@RequestParam(required = false, name="delivery") String delivery,

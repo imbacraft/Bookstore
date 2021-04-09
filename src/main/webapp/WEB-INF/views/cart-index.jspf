@@ -107,7 +107,7 @@ a#proceed-checkout {
            
         <table style="">
             <tr>
-                <th></th>
+                <th>Book</th>
                 <th>Title</th>
                 <th>Format</th>
                 <th>Quantity</th>
@@ -125,8 +125,7 @@ a#proceed-checkout {
 
                 <tr>
                     <td><a href="${pageContext.request.contextPath}/books/search/${cartitem.bookdetails.book.bookid}"><img src="${cartitem.bookdetails.frontcover}" width="100"></a></td>
-                    <td><p>${cartitem.bookdetails.book.title}</p>
-                       <p> ${cartitem.bookdetails.format.name}</p></td>
+                    <td>${cartitem.bookdetails.book.title}</td>
                     <td>${cartitem.bookdetails.format.name}</td>
                     <td>
                         <c:choose>
@@ -134,7 +133,7 @@ a#proceed-checkout {
                                 <form:form action = "${pageContext.request.contextPath}/cart/index" method="post">
                                     <input name="bookid" id="bookid" value="${cartitem.bookdetails.book.bookid}" hidden>
                                     <input name="formatid" id="formatid" value="${cartitem.bookdetails.format.formatid}" hidden>
-                                    <input type= "number" id="quantity" name ="quantity" value = ${cartitem.quantity } min=1 placeholder = "${cartitem.quantity }">
+                                    <input type= "number" id="quantity" name ="quantity" value = ${cartitem.quantity } min="1" placeholder = "${cartitem.quantity }">
                                     <button type="submit">Update </button>
                                 </form:form>
                             </c:when>
