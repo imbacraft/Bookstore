@@ -47,7 +47,7 @@
 
                 <c:set var="subtotal" value="${cartitem.bookdetails.price * cartitem.quantity}"></c:set>
 
-              
+
 
                 <% total = total + (double) pageContext.getAttribute("subtotal");  %>
 
@@ -56,12 +56,21 @@
                     <td>${cartitem.bookdetails.book.title}</td>
                     <td>${cartitem.bookdetails.format.name}</td>
                     <td>
-                        <form:form action = "${pageContext.request.contextPath}/cart/index" method="post">
-                            <input name="bookid" id="bookid" value="${cartitem.bookdetails.book.bookid}" hidden>
-                            <input name="formatid" id="formatid" value="${cartitem.bookdetails.format.formatid}" hidden>
-                            <input type= "number" id="quantity" name ="quantity" value = ${cartitem.quantity } min=1 placeholder = "${cartitem.quantity }">
-                            <button type="submit">Update </button>
-                        </form:form>
+                        <c:choose>
+                            <c:when test = "${cartitem.bookdetails.format.formatid != 4}">
+                                <form:form action = "${pageContext.request.contextPath}/cart/index" method="post">
+                                    <input name="bookid" id="bookid" value="${cartitem.bookdetails.book.bookid}" hidden>
+                                    <input name="formatid" id="formatid" value="${cartitem.bookdetails.format.formatid}" hidden>
+                                    <input type= "number" id="quantity" name ="quantity" value = ${cartitem.quantity } min=1 placeholder = "${cartitem.quantity }">
+                                    <button type="submit">Update </button>
+                                </form:form>
+                            </c:when>
+
+                            <c:otherwise>
+                                ${cartitem.quantity }
+                            </c:otherwise>
+                        </c:choose>
+
                     </td>
                     <td> <fmt:formatNumber value="${subtotal}" maxFractionDigits="3"/>&euro;</td>
                     <td><a href="${pageContext.request.contextPath}/cart/remove/${cartitem.bookdetails.book.bookid}/${cartitem.bookdetails.format.formatid}">Remove</a></td>
@@ -71,7 +80,7 @@
                 </tr>
             </c:forEach>
 
-                <% pageContext.setAttribute("total", total); %>
+            <% pageContext.setAttribute("total", total); %>
             <tr>
                 <td colspan="6">
                     Total: <fmt:formatNumber value="${total}" maxFractionDigits="3"/>&euro;
@@ -84,7 +93,11 @@
 
 
         <a href="${pageContext.request.contextPath}/home">Continue shopping</a>
-        <a href="${pageContext.request.contextPath}/cart/address">Proceed to Delivery Options</a>
+
+        <a href="${pageContext.request.contextPath}/cart/address">Proceed to Delivery Options or Payment</a>
+      
+
+
 
 
     </body>

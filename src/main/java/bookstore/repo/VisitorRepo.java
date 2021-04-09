@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface VisitorRepo extends JpaRepository<Visitor,Integer> {
     
-    @Query(value="select * from bookstore.visitor where email =?1" ,nativeQuery = true)
+    @Query(value="select visitor.* from bookstore.visitor where email = ?1" ,nativeQuery = true)
     Visitor findVisitorByEmail(String email);
     
 }

@@ -107,6 +107,7 @@
 
             <br>
 
+            Personal details
             <table cellpadding="2" cellspacing="2" border="1">
                 <tr>
                     <th>First name</th>
@@ -141,7 +142,7 @@
 
             <br>
 
-            Delivery Address
+            Delivery Address (Applies to non ebooks)
             <table cellpadding="2" cellspacing="2" border="1">
                 <tr>
                     <th>Country</th>

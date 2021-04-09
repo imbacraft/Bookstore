@@ -18,7 +18,7 @@
         <h1>Delivery Options</h1>
 
           <sec:authorize access="!isAuthenticated()">
-              <h4>Recommendation: Order with a registered Customer Account to track your Order and receive Discount Coupons! </h4> <a href="${pageContext.request.contextPath}/register">Login/Register</a>
+              <h4>Recommendation: Order with a registered Customer Account to track your Order and receive Discount Coupons! </h4> <a href="${pageContext.request.contextPath}/login">Login/Register</a>
           </sec:authorize>
         <hr/>
 
@@ -89,7 +89,10 @@
 
             <br>
 
-
+             </sec:authorize>
+            
+               <sec:authorize access="!isAuthenticated()">
+             <c:if test = "${containsOnlyEbook == false}">
             <h3>Delivery address</h3> 
 
             Country:
@@ -101,9 +104,9 @@
             </c:when>
 
             <c:otherwise>
-                <c:forEach var = "country" items = "${countries}">
-                    <option value=""> Select</option>                 
-                </c:forEach>
+             
+                    <option value=""> Select Country </option>                 
+
             </c:otherwise>
         </c:choose>
 
@@ -131,9 +134,10 @@
 
     <br>
     <br>
-       
+       </c:if>
        </sec:authorize>
 
+    
     
     <button type="submit">Submit and Proceed to Payment via Stripe </button
 
@@ -142,7 +146,7 @@
 
 <br>
 
-<a href="${pageContext.request.contextPath}/cart/index">Back to Basket</a>
+<a href="${pageContext.request.contextPath}/cart/index">Back to Cart</a>
 
 
 
