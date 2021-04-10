@@ -90,7 +90,7 @@ public class Visitor implements Serializable {
     @Column(name = "visitorid")
     private Integer visitorid;
     @JoinColumn(name = "country", referencedColumnName = "countryid")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Country country;
     @JoinColumn(name = "roleid", referencedColumnName = "roleid")
     @ManyToOne(optional = false)
