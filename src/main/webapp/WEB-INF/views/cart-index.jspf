@@ -14,6 +14,12 @@
     * {
         font-family: "Arial", "Helvetica", sans-serif;
     }
+    #empty-error-page {
+        display :none;
+        position: relative;
+
+        margin: 200px;
+    }
 .cart-books table {
 	background-color: #f7f6ff;
 	border-radius: 10px;
@@ -28,7 +34,7 @@ th {
     text-align: justify;
 }
     
-section.cart-section {
+section#cart-section {
         /*! width: 1182px; */
         margin: 0 auto;
         display: flex;
@@ -129,8 +135,14 @@ table.group-b {
 }
 
 </style>
-<section class="cart-section"> 
-   
+<div id="empty-error-page">
+    <h1>Your cart is currently empty.</h1>
+    <a id="continue-shopping" style="padding-bottom: 7px; font-size: 22pt;" href="${pageContext.request.contextPath}/home">Buy yourself something first!</a>
+</div>
+<section id="cart-section"> 
+    
+    <%=cartAmount%>
+    
     <div class="title">
             <h1>Shopping Cart</h1>
 
@@ -241,6 +253,8 @@ table.group-b {
 </section>
     
 <script>
-    console.log("#####" + document.getElementById("quantity").value);
-    
+    if (<%=cartAmount%> === 0 ) {
+        document.getElementById("cart-section").style.display = "none";
+        document.getElementById("empty-error-page").style.display = "block";
+    };
 </script>
