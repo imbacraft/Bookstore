@@ -131,11 +131,12 @@ public class Visitor implements Serializable {
         this.role = role;
     }
 
-    public Visitor(String firstname, String lastname, String email, Role role) {
+    public Visitor(String firstname, String lastname, String email, int phone, Role role) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.role = role;
+        this.phone = phone;
     }
 
     

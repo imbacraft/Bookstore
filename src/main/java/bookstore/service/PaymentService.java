@@ -82,8 +82,11 @@ public class PaymentService {
         Visitor visitor;
         String stripeCustomerID = "";
         String chargeId;
+        System.out.println("Visitorstring is: "+ visitorstring);
         int visitorid = Integer.parseInt(visitorstring);
-        visitor = visitorRepo.findById(visitorid).get();
+        
+        System.out.println("Visitor INTEGER is :" + visitorid);
+        visitor = visitorRepo.getOne(visitorid);
 
         //First create Customer account in Stripe.com (Optional).
         //Check if email contains ".", as in hotmail.com, gmail.com, because Stripe rejects customer accountemails without .com, .gr etc endings.

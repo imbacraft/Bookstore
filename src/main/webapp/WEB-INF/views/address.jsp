@@ -9,19 +9,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 
-<style>
 
-.address label,
-.address input {
-    margin: 13px;
-
-    font-family: "Helvetica", "Arial", sans-serif;
-}
-.address input {
-    position: absolute;
-    left: 200px;
-}
-</style>
 <!DOCTYPE html>
 <html>
     <head>

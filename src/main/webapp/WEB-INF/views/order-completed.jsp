@@ -30,8 +30,9 @@
                     <th>Download URL</th>
                 </tr>
 
-                <tr>
+                
                     <c:forEach var="ebook" items="${ebooks}">
+                        <tr>
                         <td>
                             <img src="${ebook.key.bookdetails.frontcover}" width="100" alt="ebookimg" />            
                         </td>
@@ -41,10 +42,10 @@
                         <td>
                            <a href="${ebook.value}" download="${ebook.key.bookdetails.book.title}" >Download link</a>
                         </td>
-                        
+                         </tr>
                     </c:forEach>
 
-                </tr>
+               
 
             </table>
 
