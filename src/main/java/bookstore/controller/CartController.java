@@ -193,7 +193,7 @@ public class CartController {
 
             //save visitor to DB before passing to JSP
             
-            redirectAttributes.addAttribute("visitor", visitor);
+            redirectAttributes.addFlashAttribute("visitor", visitor);
 
         }
 

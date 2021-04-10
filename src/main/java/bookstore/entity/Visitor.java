@@ -64,25 +64,20 @@ public class Visitor implements Serializable {
     @Column(name = "email")
     private String email;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 200)
     @Column(name = "city")
     private String city;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 200)
     @Column(name = "street")
     private String street;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "streetnumber")
     private int streetnumber;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "postalcode")
     private int postalcode;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "phone")
     private int phone;
     @OneToMany(mappedBy = "visitor")
