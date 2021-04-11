@@ -49,7 +49,10 @@
                 <th>Bookprice</th>
                 <th>shippingcost</th>
                 <th>totalprice</th>
+                
+                 <sec:authorize access="hasRole('ADMIN')">
                 <th>Delete</th>
+                </sec:authorize>
             </tr>   
 
 
@@ -70,9 +73,11 @@
                     <td>${cart.shippingcost}</td>
                     <td>${cart.totalprice}</td>
 
+                    <sec:authorize access="hasRole('ADMIN')">
                     <td>
                         <a href="${pageContext.request.contextPath}/service/carts/delete?id=${cart.cartid}">Delete</a>
                     </td>
+                    </sec:authorize>
 
 
                 </tr>

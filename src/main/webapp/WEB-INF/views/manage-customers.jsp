@@ -25,6 +25,8 @@
 
         <sec:authorize access="hasRole('ADMIN')">
             <a href="${pageContext.request.contextPath}/admin">Administrator Home</a>
+            
+            <a href="${pageContext.request.contextPath}/admin/customers/create">Create customer</a>
         </sec:authorize>
 
         <sec:authorize access="hasRole('SERVICEAGENT')">
@@ -35,7 +37,7 @@
         
         <br>
         
-        <a href="${pageContext.request.contextPath}/admin/customers/create">Create customer</a>
+        
         
         <h2> Customer account details list </h2>
         <table border="1">

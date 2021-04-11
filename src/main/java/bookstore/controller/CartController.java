@@ -52,14 +52,14 @@ public class CartController {
 
     @Autowired
     RoleRepo roleRepo;
-    
+
     @Autowired
     CartService cartService;
 
     @GetMapping("/index")
     public String showCart() {
 
-        return "cart-index";
+        return "cart";
 
     }
 
@@ -90,9 +90,9 @@ public class CartController {
 
         //create or update cart, based on the book added to cart.
         List<Cartitem> cart = cartService.createOrUpdateCart(session, book, id, formatid);
-        
+
         session.setAttribute("cart", cart);
-        
+
         return "redirect:/cart/index";
     }
 
@@ -110,12 +110,12 @@ public class CartController {
     @GetMapping("/address")
     public String showAddressPage(Model model, Principal principal, HttpSession session, RedirectAttributes redirectAttributes) {
 
-        Customer customer = null;    
+        Customer customer = null;
         List<Cartitem> cart = (List<Cartitem>) session.getAttribute("cart");
-        
+
         //check if cart contains only ebook, in order to judge if delivery options are required info.
         boolean containsOnlyEbook = cartService.cartContainsOnlyEbooks(cart);
-     
+
         if (principal != null) {
 
             customer = userService.findCustomerByUsername(principal.getName());
@@ -133,15 +133,18 @@ public class CartController {
             redirectAttributes.addAttribute("customer", customer);
             return "redirect:/payment";
 
-        } else {
-
-            return "address";
         }
 
+        if (cart.size() == 0) {
+
+            return "redirect:/cart/index";
+        }
+
+        return "address";
     }
 
     @PostMapping("/address")
-    public String proccessAddressDetails(@RequestParam(required = false, name="delivery") String delivery,
+    public String proccessAddressDetails(@RequestParam(required = false, name = "delivery") String delivery,
             @RequestParam(required = false, name = "firstname") String firstname,
             @RequestParam(required = false, name = "lastname") String lastname,
             @RequestParam(required = false, name = "email") String email,
@@ -164,47 +167,43 @@ public class CartController {
             redirectAttributes.addAttribute("customer", customer);
 
         } else {
-            
+
             //this query has denied access for some reason
 //            visitor = visitorRepo.findVisitorByEmail(email);
-
-             Role role = roleRepo.findById(5).get();
-             
+            Role role = roleRepo.findById(5).get();
+            int phonenumber = Integer.parseInt(phone);
+            
             if (cartService.cartContainsOnlyEbooks(cart) == false) {
 
                 int countryid = Integer.parseInt(country);
                 int streetnumber = Integer.parseInt(streetnr);
                 int postalcode = Integer.parseInt(postal);
-                int phonenumber = Integer.parseInt(phone);
+
                 Country visitorCountry = countryRepo.findById(countryid).get();
-               
+
                 visitor = new Visitor(firstname, lastname, email, visitorCountry, city, street, streetnumber, postalcode, phonenumber, role);
-                
-                
+
             } else {
-            
-                visitor = new Visitor(firstname, lastname, email, role);
+
+                visitor = new Visitor(firstname, lastname, email, phonenumber, role);
             }
             visitorRepo.save(visitor);
             System.out.println(">>>>>>Visitor to be added to DB: " + visitor);
 
             //save visitor to DB before passing to JSP
-            
-            redirectAttributes.addAttribute("visitor", visitor);
+            redirectAttributes.addFlashAttribute("visitor", visitor);
 
         }
 
         //set shipping cost
-        if (delivery != null){
-        
-        shippingCost = cartService.calculateShippingCost(delivery);
-        
+        if (delivery != null) {
+
+            shippingCost = cartService.calculateShippingCost(delivery);
+
         }
         redirectAttributes.addAttribute("shippingCost", shippingCost);
 
         return "redirect:/payment";
     }
-
-   
 
 }

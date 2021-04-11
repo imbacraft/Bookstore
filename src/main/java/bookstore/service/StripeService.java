@@ -68,7 +68,7 @@ public class StripeService {
         return id;
     }
 
-    public String createCharge(String email, double amount, String customerID) {
+    public String createChargeForStripeCustomer(String email, double amount, String customerID) {
 
         String chargeId = null;
         
@@ -84,6 +84,32 @@ public class StripeService {
             chargeParams.put("amount", finalAmount);
 //			chargeParams.put("source",token);
             chargeParams.put("customer", customerID);
+
+            Charge charge = Charge.create(chargeParams);
+
+            chargeId = charge.getId();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return chargeId;
+    }
+    
+     public String createChargeForSimpleEmail(String email, double amount, String token) {
+
+        String chargeId = null;
+        
+        int finalAmount = (int) (amount * 100);
+        
+        
+        try {
+            Stripe.apiKey = API_SECRET_KEY;
+
+            Map<String, Object> chargeParams = new HashMap<>();
+            chargeParams.put("description", "Charge for " + email);
+            chargeParams.put("currency", "EUR");
+            chargeParams.put("amount", finalAmount);
+//			chargeParams.put("source",token);
+            chargeParams.put("source",token);
 
             Charge charge = Charge.create(chargeParams);
 

@@ -54,7 +54,7 @@ public class PaymentController {
         shippingCostNumber = Double.parseDouble(shippingCost);
         
         }
-        
+        System.out.println(">>>>>>>Visitor to be sent to JSP="+ visitor);
         model.addAttribute("stripePublicKey", API_PUBLIC_KEY);
         model.addAttribute("amount", bookprice);
         model.addAttribute("customer", customer);

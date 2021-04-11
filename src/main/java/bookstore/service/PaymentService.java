@@ -11,8 +11,6 @@ import bookstore.entity.Customer;
 import bookstore.entity.Visitor;
 import bookstore.repo.CustomerRepo;
 import bookstore.repo.VisitorRepo;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,17 +55,22 @@ public class PaymentService {
 
     public Customer chargeCustomer(String customerstring, double totalamount, Cart cart, String token) {
         Customer customer;
-        String stripeCustomerID;
+        String stripeCustomerID = "";
         String chargeId;
 
         int customerid = Integer.parseInt(customerstring);
         customer = customerRepo.findById(customerid).get();
 
         //First create Customer account in Stripe.com (Optional).
-        stripeCustomerID = stripeService.createCustomer(customer.getEmail(), token);
-
-        //Second, charge that account.
-        chargeId = stripeService.createCharge(customer.getEmail(), totalamount, stripeCustomerID);
+        //Check if email contains ".", as in hotmail.com, gmail.com, because Stripe rejects customer accountemails without .com, .gr etc endings.
+        if (customer.getEmail().contains(".") == true) {
+            stripeCustomerID = stripeService.createCustomer(customer.getEmail(), token);
+            //Second, charge that account.
+            chargeId = stripeService.createChargeForStripeCustomer(customer.getEmail(), totalamount, stripeCustomerID);
+        }
+        
+        //if email is not a valid email, charge anyway
+        chargeId = stripeService.createChargeForSimpleEmail(customer.getEmail(), totalamount, token);
 
         cart.setCustomer(customer);
         cart.setPayment(chargeId);
@@ -77,24 +80,30 @@ public class PaymentService {
 
     public Visitor chargeVisitor(String visitorstring, double totalamount, Cart cart, String token) {
         Visitor visitor;
-        String stripeCustomerID;
+        String stripeCustomerID = "";
         String chargeId;
+        System.out.println("Visitorstring is: "+ visitorstring);
         int visitorid = Integer.parseInt(visitorstring);
-        visitor = visitorRepo.findById(visitorid).get();
+        
+        System.out.println("Visitor INTEGER is :" + visitorid);
+        visitor = visitorRepo.getOne(visitorid);
 
         //First create Customer account in Stripe.com (Optional).
-        stripeCustomerID = stripeService.createCustomer(visitor.getEmail(), token);
+        //Check if email contains ".", as in hotmail.com, gmail.com, because Stripe rejects customer accountemails without .com, .gr etc endings.
+        if (visitor.getEmail().contains(".") == true) {
+            stripeCustomerID = stripeService.createCustomer(visitor.getEmail(), token);
+            //Second, charge that account.
+            chargeId = stripeService.createChargeForStripeCustomer(visitor.getEmail(), totalamount, stripeCustomerID);
+        }
 
-        //Second, charge that account.
-        chargeId = stripeService.createCharge(visitor.getEmail(), totalamount, stripeCustomerID);
+        //if email is not a valid email, charge anyway
+        chargeId = stripeService.createChargeForSimpleEmail(visitor.getEmail(), totalamount, token);
+        
         cart.setVisitor(visitor);
         cart.setPayment(chargeId);
 
         return visitor;
     }
-    
-    
-  
 
 //This method rounds a double, to max digits of places parameter.
     public double roundDouble(double value, int places) {
