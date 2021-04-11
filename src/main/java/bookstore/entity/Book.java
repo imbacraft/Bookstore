@@ -68,7 +68,7 @@ public class Book implements Serializable {
     private List<Category> categoryList;
     @ManyToMany(mappedBy = "bookList")
     private List<Author> authorList;
-    @OneToMany(mappedBy = "book")
+    @OneToMany(mappedBy = "book") 
     private List<Bookdetails> bookdetailsList;
 
 

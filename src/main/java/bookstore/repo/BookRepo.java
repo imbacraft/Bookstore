@@ -20,12 +20,17 @@ import org.springframework.stereotype.Repository;
 public interface BookRepo extends JpaRepository<Book, Integer> {
     Optional<Book> findById(int bookId);
     
+    @Query(value="select book.* from book where book.bookid=?1", nativeQuery=true)
+    public Book findByBookid(int bookid);
+    
     @Query(value="select book.* from book,category,joinedbookcategory where book.bookid=joinedbookcategory.bookid"
 
 
             + " and category.categoryid=joinedbookcategory.categoryid and category.name=?1 "
             ,nativeQuery = true)
     List<Book> findByCategory(String categoryName);//paizei, den thelei ta booktype
+    
+    
 
      
 
@@ -55,5 +60,7 @@ public interface BookRepo extends JpaRepository<Book, Integer> {
 "desc limit 0,1;",nativeQuery=true)
     public Book findMostExpensiveBook();
     
+    @Query(value="select book.* from book,joinedbookauthor where joinedbookauthor.authorid=?1 and joinedbookauthor.bookid !=book.bookid", nativeQuery= true)
+    List<Book> findBooksFromSameAuthor(int authorid,int bookid);
     
 }

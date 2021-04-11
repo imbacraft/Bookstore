@@ -1,4 +1,7 @@
-
+* {
+        font-size: 14px;
+        font-family: Arial, Helvetica, sans-serif;
+}
 body {
         margin: 0 8%; 
         }
@@ -92,15 +95,5 @@ body {
         font-style: italic;
     }
     
-    .description {
-        font-family: arial,sans-serif;
-    }
-    
-    .stock {
-            font-color: green;
-    }
+   
 
-    p { 
-        font-size: 14px;
-        font-family: Arial, Helvetica, sans-serif;
-    }
