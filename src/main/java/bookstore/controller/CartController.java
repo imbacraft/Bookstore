@@ -5,13 +5,17 @@
  */
 package bookstore.controller;
 
+import bookstore.entity.Author;
 import bookstore.entity.Bookdetails;
 import bookstore.entity.Cartitem;
+import bookstore.entity.Category;
 import bookstore.entity.Country;
 import bookstore.entity.Customer;
 import bookstore.entity.Role;
 import bookstore.entity.Visitor;
+import bookstore.repo.AuthorRepo;
 import bookstore.repo.BookdetailsRepo;
+import bookstore.repo.CategoryRepo;
 import bookstore.repo.CountryRepo;
 import bookstore.repo.RoleRepo;
 import bookstore.repo.VisitorRepo;
@@ -55,10 +59,24 @@ public class CartController {
 
     @Autowired
     CartService cartService;
+    
+    @Autowired
+    CategoryRepo categoryRepo;
+    
+    @Autowired
+    AuthorRepo authorRepo;
 
     @GetMapping("/index")
-    public String showCart() {
-
+    public String showCart(Model model) {
+        //all categories--for menu
+        List<Category> categories = categoryRepo.findAll();
+        
+        //all authors-- for menu
+        List<Author> allAuthors = authorRepo.findAll();
+        
+        model.addAttribute("categories", categories);
+        model.addAttribute("authors", allAuthors);
+        
         return "cart";
 
     }
