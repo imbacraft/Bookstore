@@ -57,16 +57,18 @@
         <div class="col-lg-4">
           <!-- bazw sto 1/3 ths sthlhs 2 boxes->ara div, ara to ena katw ap to allo
           titlos +logia -->
-          
-            <img src="bookaporta-logo.png" alt="bookLogo" id="bookLogo" />
+          <a href="${pageContext.request.contextPath}">
+              <img src="bookaporta-logo.png" alt="bookLogo" id="bookLogo" />
+          </a>
+            
         
         </div>
         <div class="col-lg-1"></div>
         <div class="col-lg-3">
-          <form:form action="/search" id="form">
+            <form:form action="${pageContext.request.contextPath}/search/" id="form" method="POST">
                
-            <input type="text" placeholder="Search..." id="searchText" value="" />
-            <input type="button" value="" id="searchButton" />
+            <input type="text" placeholder="Search..." id="searchText" value="" name="title"/>
+            <input type="submit" value="" id="searchButton" />
           </form:form>
             <div id="suggestions" hidden="false">${suggestions} aaaa</div>
         </div>

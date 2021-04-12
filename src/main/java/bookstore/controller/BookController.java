@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -66,4 +67,18 @@ public class BookController {
         model.addAttribute("authors", allAuthors);
          return "specificBook";
     }
+    
+    @PostMapping("/search")
+    public String searchByTerm(@RequestParam("title")String title){
+        Book book;
+    
+       try{
+           book=bookRepo.findByTitleIgnoreCase(title);
+       }catch(Exception exc){
+           exc.printStackTrace();
+           return "redirect:/home";
+       }
+        return "redirect:/books/search/"+book.getBookid();
+}
+    
 }

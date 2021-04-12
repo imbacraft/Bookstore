@@ -290,7 +290,9 @@ html,body{
           <!-- bazw sto 1/3 ths sthlhs 2 boxes->ara div, ara to ena katw ap to allo
           titlos +logia -->
           
-            <img src="bookaporta-logo.png" alt="bookLogo" id="bookLogo" />
+             <a href="${pageContext.request.contextPath}">
+            <img src="https://peoplecertproject.s3.eu-central-1.amazonaws.com/UI/bookaporta-logo.png" alt="bookLogo" id="bookLogo" />
+        </a>
         
         </div>
        

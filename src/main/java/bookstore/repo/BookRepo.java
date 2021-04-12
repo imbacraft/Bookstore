@@ -59,7 +59,7 @@ public interface BookRepo extends JpaRepository<Book, Integer> {
     
     
     
-    
+    public Book  findByTitleIgnoreCase(String term);
     
     
     
@@ -71,8 +71,7 @@ public interface BookRepo extends JpaRepository<Book, Integer> {
   
     
     
-    @Query(value="select * from book, author, joinedbookauthor where book.bookid=joinedbookauthor.bookid and author.authorid=joinedbookauthor.authorid and author.lastname='?1';", nativeQuery= true)
-    List<Book> findBooksFromSameAuthor(String authorLastname);
+   
     
 //    @Query(value="select book.* from book,author,joinedbookauthor \n" +
 //" where book.bookid=joinedbookauthor.bookid and author.authorid=joinedbookauthor.authorid\n" +
