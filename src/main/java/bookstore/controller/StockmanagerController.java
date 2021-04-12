@@ -116,12 +116,16 @@ public class StockmanagerController {
     }
     
     @PostMapping(value="/books/update")
-    public String update(@RequestParam("id")String id, @RequestParam("title")String title,@RequestParam("description")String description, @RequestParam("category")String category, 
+    public String update(@RequestParam(required=false, name="id")String id, @RequestParam("title")String title,@RequestParam("description")String description, @RequestParam("category")String category, 
             @RequestParam("format")String format, @RequestParam("publisher")String publisher, @RequestParam("publicationdate")String publicationdate, @RequestParam("edition")String edition, 
             @RequestParam("isbn10")String isbn10, @RequestParam("isbn13")String isbn13, @RequestParam("count")String count,  @RequestParam("pages")String pages, @RequestParam("price")String price, @RequestParam("language")String language,
              @RequestParam("frontcover")String frontcover, RedirectAttributes attributes){
+        int bookid =0;
+        Book book;
         
-        int bookid= Integer.parseInt(id);
+        if (id != ""){
+        bookid= Integer.parseInt(id);
+        }
         int categoryid = Integer.parseInt(category);
         Category categoryAdd = categoryRepo.getOne(categoryid);
         List<Category> categoryList = new ArrayList<>();
@@ -134,7 +138,12 @@ public class StockmanagerController {
         double bookprice = Double.parseDouble(price);
         int pagesAdd = Integer.parseInt(pages);
 
-        Book book = new Book(title, description, bookid, categoryList);
+        if (bookid == 0){
+        
+        book = new Book(title, description);
+        } else {
+        book = new Book(title, description, bookid, categoryList);
+        }
         Bookdetails bookdetails = new Bookdetails(bookprice, publisher, publicdate, language, frontcover, isbn10, isbn13, editionid, pagesAdd, countid, book, formatAdd);
         
         bookRepo.save(book);
