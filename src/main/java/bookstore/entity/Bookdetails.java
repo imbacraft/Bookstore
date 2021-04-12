@@ -51,6 +51,14 @@ import org.springframework.format.annotation.DateTimeFormat;
     , @NamedQuery(name = "Bookdetails.findByIsbn13", query = "SELECT b FROM Bookdetails b WHERE b.isbn13 = :isbn13")})
 public class Bookdetails implements Serializable {
 
+      private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "bookdetailsid")
+    private Integer bookdetailsid;
+    
+    
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "price")
     private double price;
@@ -75,12 +83,7 @@ public class Bookdetails implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookdetails")
     private List<Cartitem> cartitemList;
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "bookdetailsid")
-    private Integer bookdetailsid;
+  
     @Column(name = "edition")
     private Integer edition;
     @Column(name = "pages")
@@ -96,6 +99,23 @@ public class Bookdetails implements Serializable {
 
     public Bookdetails() {
     }
+
+    public Bookdetails(double price, String publisher, LocalDate publicationdate, String language, String frontcover, String isbn10, String isbn13, Integer edition, Integer pages, Integer count, Book book, Format format) {
+        this.price = price;
+        this.publisher = publisher;
+        this.publicationdate = publicationdate;
+        this.language = language;
+        this.frontcover = frontcover;
+        this.isbn10 = isbn10;
+        this.isbn13 = isbn13;
+        this.edition = edition;
+        this.pages = pages;
+        this.count = count;
+        this.book = book;
+        this.format = format;
+    }
+
+    
 
     public Bookdetails(Integer bookdetailsid) {
         this.bookdetailsid = bookdetailsid;

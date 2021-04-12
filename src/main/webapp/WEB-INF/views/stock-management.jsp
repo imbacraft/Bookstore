@@ -88,7 +88,7 @@
                         <td>${book.bookdetailsList[pageContext.getAttribute("counter")].isbn13}</td>
 
                         <td>      
-                            <a href="${pageContext.request.contextPath}/stock/books/update/${book.bookid}">Update</a>
+                            <a href="${pageContext.request.contextPath}/stock/books/update/${book.bookid}/${book.bookdetailsList[pageContext.getAttribute("counter")].format.formatid} ">Update</a>
                         </td>
                         <td>
                             <a href="${pageContext.request.contextPath}/stock/books/delete?id=${book.bookid}">Delete</a>

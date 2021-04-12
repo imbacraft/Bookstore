@@ -18,87 +18,74 @@
         <h1>Create/Update Book Form</h1>
 
 
-        <form:form  action="${pageContext.request.contextPath}/stock/books/update" method="POST" modelAttribute = "bookToEdit">
-            Code: <form:input path="bookid" name="id" readonly="true" value="${bookToEdit.bookid}"/>
+        <form:form  action="${pageContext.request.contextPath}/stock/books/update" method="POST">
+            Code: <input  name="id" readonly value="${bookToEdit.bookid}"/>
             <br/>
 
-            title:<form:input path="title" name="title" value="${bookToEdit.title}"/>
+            title:<input  name="title" value="${bookToEdit.title}"/>
             <br/>
 
-            description: <form:input path="description" name="description" value="${bookToEdit.description}"/>
+            description: <input name="description" value="${bookToEdit.description}"/>
 
             <br/>
 
-            Booktype:
-            <form:select path = "booktype.booktypeid">
+            Format:
+            <select name="format">
 
-                <form:option value=""> --Select Booktype--</form:option>
+                <option value=""> ${bookdetails.format.name}--</option>
 
-                <c:forEach var = "booktype" items = "${booktypes}">
-                    <form:option value="${booktype.booktypeid}"> ${booktype.name}</form:option>                 
+                <c:forEach var = "format" items = "${formats}">
+                    <option value="${format.formatid}"> ${format.name}</option>                 
                 </c:forEach>
 
-            </form:select>
+            </select>
 
 
             <br/>
 
-            Category 1:
-            <form:select path = "categoryList">
+            Category:
+            <select name="category">
 
-                <form:option value=""> --Select Category 1--</form:option>
+                <option value=""> ${bookToEdit.categoryList[0].name}--</option>
 
                 <c:forEach var = "category" items = "${categories}">
-                    <form:option value="${category.categid}"> ${category.name}</form:option>                 
+                    <option value="${category.categoryid}"> ${category.name}</option>                 
                 </c:forEach>
 
-            </form:select>
+            </select>
 
             <br>
 
-            Category 2:
-            <form:select path = "categoryList">
-
-                <form:option value=""> --Select Category 2--</form:option>
-
-                <c:forEach var = "category" items = "${categories}">
-                    <form:option value="${category.categid}"> ${category.name}</form:option>                 
-                </c:forEach>
-
-            </form:select>
-            <br>
-
-            price: <form:input path="price" name="price" value="${bookToEdit.price}"/>
+ 
+            price: <input name="price" value="${bookdetails.price}"/>
             <br/>
 
-            publisher : <form:input path="publisher"  name="publisher" value="${bookToEdit.publisher}"   />
+            publisher : <input   name="publisher" value="${bookdetails.publisher}"   />
             <br/>
 
-            publication date:<form:input path="publicationdate" name="publicationdate" value="${bookToEdit.publicationdate}"/>
+            publication date:<input  name="publicationdate" value="${bookdetails.publicationdate}"/>
             <br/>
 
-            edition: <form:input path="edition" name="edition" value="${bookToEdit.edition}"/>
+            edition: <input  name="edition" value="${bookdetails.edition}"/>
             <br/>
 
-            pages: <form:input path="pages" name="pages" value="${bookToEdit.pages}"/>
+            pages: <input name="pages" value="${bookdetails.pages}"/>
             <br/>
 
-            language: <form:input path="language" name="language" value="${bookToEdit.language}"/>
+            language: <input name="language" value="${bookdetails.language}"/>
             <br/>
 
-            frontCover: <form:input path="frontcover" name="frontCover" value="${bookToEdit.frontcover}"/>
+            frontCover: <input name="frontcover" value="${bookdetails.frontcover}"/>
+            <br/>
+ 
+
+            count:<input name="count" value="${bookdetails.count}"/>
             <br/>
 
-            backCover : <form:input path="backcover"   name="backCover" value="${bookToEdit.backcover}"   />
+            isbn10 <input  name="isbn10" value="${bookdetails.isbn10}"/>
             <br/>
 
-            count:<form:input path="count" name="count" value="${bookToEdit.count}"/>
-            <br/>
-
-            isbn10 <form:input path="isbn10"  name="isbn10" value="${bookToEdit.isbn10}"/>
-            <br/>
-
-            isbn13: <form:input path="isbn13"  name="isbn13" value="${bookToEdit.isbn13}"/>
+            isbn13: <input  name="isbn13" value="${bookdetails.isbn13}"/>
             <br/>
 
 
