@@ -69,6 +69,14 @@ h3::before, h3::after {
 
  <h3 style="position: relative; text-align: center; font-family:  Georgia, serif; font-size: 16pt;">Account login & registration</h3>  
  <div class="login-area">
+       <div>         
+        <c:if test="${param.error != null}">
+                    <div class="login-error">
+                        <em style="color: red">Bad username or password.</em>
+                        <em>Please try again.</em>
+                    </div>
+        </c:if> 
+            </div>
      <div class="log-reg-box" >
         <!-- Login Form --> 
         <form:form action="${pageContext.request.contextPath}/authenticate" method="post">
@@ -86,14 +94,7 @@ h3::before, h3::after {
                 <input type="submit" value="Log In">
             </div>
         </form:form>
-            <div>         
-        <c:if test="${param.error != null}">
-                    <div class="login-error">
-                        <em style="color: red">Bad username or password.</em>
-                        <em>Please try again.</em>
-                    </div>
-        </c:if> 
-            </div>
+          
      </div>
             
     

@@ -9,6 +9,8 @@ section,
     width: 1182px ;
     margin: 0 auto ;   
 }
+
+
 .frontpage {
     display: block;
     position: relative;
@@ -76,7 +78,7 @@ section,
 .dropdown {
   position: relative;
   display: inline-block;
-  flex: center;
+ 
   
   
 }
@@ -110,14 +112,16 @@ section,
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
 /*.dropdown:hover .dropbtn {background-color: #3e8e41;}*/
-
+.section{
+    height:auto;
+}
 </style>
 
-<section>    
+<section class="section">    
     <div class="container" >
   <div class="row" >
       
-    <div class="col-4" >
+    <div class="col-3" >
         <div class="dropdown">
     
   <button class="dropbtn">BOOKS</button>
@@ -141,7 +145,7 @@ section,
         
         
     </div>
-    <div class="col-4">
+    <div class="col-3">
        <div class="dropdown">
     
   <button class="dropbtn">Authors</button>
@@ -168,16 +172,17 @@ section,
   </div>
         </div>
     </div>
-    <div class="col-2">
+    <div class="col-1">
         <button class="dropbtn"><a href="${pageContext.request.contextPath}/bestsellers">BESTSELLERS</a></button>
     </div>
       <div class="col-2"></div>
+      <div class="col-3" style="background-color:aqua; ">
+          <h4 id="AmazonErxomaste" style="justify-content: center; text-align: center;">First is first, Second is nothing</h4>
+      </div>
   </div>
 </div>
   
-        
-        
-    <hr style="height: 1px; border-width: 0; color: #e0e0e0; background-color: #e0e0e0;"/>      
+    
  
 
 </section>

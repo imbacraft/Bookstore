@@ -1,9 +1,8 @@
 package bookstore.controller;
 
+import bookstore.ResponseTag;
 import bookstore.entity.Author;
 import bookstore.entity.Book;
-import bookstore.entity.Bookdetails;
-import bookstore.entity.Format;
 import bookstore.entity.Category;
 import bookstore.repo.AuthorRepo;
 import bookstore.repo.BookRepo;
@@ -11,15 +10,17 @@ import bookstore.repo.BookdetailsRepo;
 import bookstore.repo.FormatRepo;
 import bookstore.repo.CategoryRepo;
 import bookstore.service.BookService;
-import bookstore.service.BookService;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping({"/home", "/"})
@@ -57,10 +58,11 @@ public class HomeController {
 
         //authorOfTheMonth-->pairnw karfwta enan pou exei polla biblia gia tis anagkes tou front
         Author authorOfTheMonth=authorRepo.findById(17).get();
-        System.out.println(authorOfTheMonth.getBookList().get(0).getTitle());
         
         
-        Book bookOfTheMonth=bookRepo.findMostExpensiveBook();
+        
+        
+        Book bookOfTheMonth=bookRepo.findBookOfTheMonth();
         
         
         //add BookOfTheMonth--dialeksa to pio akrivo
@@ -70,9 +72,10 @@ public class HomeController {
         model.addAttribute("upcomingBooks",upcomingBooks);
         model.addAttribute("authorOfTheMonth",authorOfTheMonth);
         model.addAttribute("bookOfTheMonth", bookOfTheMonth);
+      
 
 
-        return "main";
+        return "home";
 
     }
 
@@ -136,6 +139,49 @@ public class HomeController {
         //send through model to the right jsp
         model.addAttribute("bestsellers",bestsellers);
         return "bestsellers";
+    }
+    @GetMapping("/booksAutocomplete")
+   @ResponseBody 
+    public List<ResponseTag> booksAutocomplete(@RequestParam( value="term",required=false,defaultValue="")String term){
+         
+        //books autocompleted depends on bookDetails
+      List<Book> autoBooks_BookDetails=bookRepo.findFirst5ByTitleContainingIgnoreCase(term);
+        
+//      
+//      List<Author> authorsAutoComplete=authorRepo.findByLastnameContainingIgnoreCase(term);
+//      
+//     // List<Author> authorsAutoCompleteFirstName=authorRepo.findByFirstnameContainingIgnoreCase(term);
+//      
+//      Format format=formatRepo.findByNameContainingIgnoreCase(term);
+//      
+//      List<Category> categoryAutoComplete=categoryRepo.findByNameContainingIgnoreCase(term);
+//  
+//         for(Author author:authorsAutoComplete){
+//            
+//            suggestions.put("author",);
+//        }
+//         
+////         for(Author author:authorsAutoCompleteFirstName){
+////             suggestions.put("author"author.getFirstname()+" "+author.getLastname());
+////         }
+//         
+//       suggestions.put("format",format.getName());
+//         
+//         for(Category category:categoryAutoComplete){
+//             suggestions.put("category",category.getName());     
+//         }
+            List<ResponseTag> responseTags=new ArrayList();
+           for(int i=0;i<autoBooks_BookDetails.size();i++ ){
+               ResponseTag tagi=new ResponseTag();
+               tagi.setBookName(autoBooks_BookDetails.get(i).getTitle());
+               tagi.setUrl("/books/search/"+autoBooks_BookDetails.get(i).getBookid());
+               responseTags.add(tagi);
+           }
+           System.out.println(responseTags.toString());
+        //h metatroph se json ginetai automata ap to spring 
+       
+        return responseTags;//twra tha paw sto front page kai tha looparw ta values tou map, analogws me to an einai
+        //book, format h category key, kai tha parapempei sta antistoixa link
     }
 
     

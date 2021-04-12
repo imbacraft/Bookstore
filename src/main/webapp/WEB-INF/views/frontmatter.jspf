@@ -48,13 +48,19 @@
       </ol>
       <div class="carousel-inner">
         <div class="carousel-item active">
+            <a href="${pageContext.request.contextPath}/books/Medicine">
           <img class="d-block w-100" src="./images/Batman-etc.jpg" alt="First slide">
+            </a>
         </div>
         <div class="carousel-item">
+            <a href="${pageContext.request.contextPath}/books/Comic">
           <img class="d-block w-100" src="./images/MentalHealth.jpg" alt="Second slide">
+          </a>
         </div>
-        <div class="carousel-item">
+          <div class="carousel-item">
+              <a href="${pageContext.request.contextPath}/books/Sports&Outdoors">
           <img class="d-block w-100" src="./images/SportsAndOutdoor.jpg" alt="Third slide">
+          </a>
         </div>
       </div>
       <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -132,7 +138,7 @@
                  <div class="item">
                  <div class="col-xs-4">
                      <a href="#1">
-                         <img src="${book.bookdetailsList.toArray()[0].frontcover}" class="img-responsive"/>
+                         <img src="${book.bookdetailsList.toArray()[0].frontcover}" class="img-responsive1"/>
                      </a>
                  </div>
                  </div>

@@ -16,7 +16,7 @@
     </head>
 
     <body >
-        <%@include file="banner_greece.jspf" %>
+       
         <%@include file="header.jspf" %>
         <%@include file="main_menu_bar.jspf" %>
         <%@include file="frontmatter.jspf" %>

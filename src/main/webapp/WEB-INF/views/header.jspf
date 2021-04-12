@@ -71,6 +71,10 @@ header{
 	/* left: 100px; */
 	/* top: 15px; */
 }
+#bookLogo{
+    height:180px;
+    width:300px;
+}
 
 #searchField {
  font-size: 16px;
@@ -114,13 +118,12 @@ header{
         height: 30px;
 }
 
-.myAccount {
+#Myaccount {
     /*! display: flex; */
     /*! position: absolute; */
     /*! height: 50px; */
-    top: 70px;
-    left: 70%;
-    flex: 1 1 max-content;
+    margin-top: 50%;
+   
 }
 .myAccount p {
     font-family: "Georgia", serif;
@@ -178,6 +181,7 @@ header{
 	flex: 1 1 max-content;
 	left: 30px;
 	bottom: 20px;
+        margin-top:30%;
 }
 
 #cart-img {
@@ -227,32 +231,32 @@ header{
 </style>
 
 
-<header id="main-header">
-    <div id="top-box"></div>
     
-    <div id="top-container">   
+          
         
-        <div id="logo">
-            <a href="/bookstore/">
-                <img src="bookaporta-logo.png"  width=300  alt="Bookaporta logo"/>   
-            </a>
+ <section id="partWithLogo">
+ <div class="row">
+        <!-- 3 sthles/row sto megalo viewport, 2 sto mikrotero, kai 1 otan mikrunei teleiws -->
+        <div class="col-lg-4">
+          <!-- bazw sto 1/3 ths sthlhs 2 boxes->ara div, ara to ena katw ap to allo
+          titlos +logia -->
+          
+            <img src="bookaporta-logo.png" alt="bookLogo" id="bookLogo" />
+        
         </div>
-        
-        <div id="search">    
-            <div id="searchBar">
-                    <input id="searchField" type="text" placeholder="Search"  size="40"/>
-                <div id="searchBox">
-                    <input  type="submit" value="Search"/>
-                </div>
-            </div>
+        <div class="col-lg-1"></div>
+        <div class="col-lg-3">
+          <form action="" id="form">
+            <input type="text" placeholder="Search..." id="searchText" />
+            <input type="button" value="" id="searchButton" />
+          </form>
         </div>
-        
-
-        <div class="myAccount"> 
-            <sec:authorize access="!isAuthenticated()">
+        <div class="col-lg-2">
+      
+            <div id="Myaccount"><sec:authorize access="!isAuthenticated()">
                 <!-- if user is not authenticated, show this link. Otherwise, it stays hidden.--> 
 
-                <a id="account-checkbox" href="${pageContext.request.contextPath}/login">Login / Register</a>
+                <h3><a class="nav-link" href="${pageContext.request.contextPath}/login">Account</a></h3>
             </sec:authorize> 
             <sec:authorize access="hasRole('ADMIN')">
                  <p>Welcome, <sec:authentication property="principal.username"/>!</p>
@@ -269,8 +273,36 @@ header{
             <sec:authorize access="hasRole('STOCKMANAGER')">   
                 <p>Welcome, <sec:authentication property="principal.username" />!</p>
                 <input type="button"  onclick="toggleModal()" id="account-checkbox" value="Μy Account"/>
-            </sec:authorize>
+            </sec:authorize>    </div>
+            
+            
         </div>
+        <div class="col-lg-2">
+            <div id="cart" style="margin-top:40%;">
+             <% int cartAmount = 0; %>
+              <c:forEach var="cartitem" items="${sessionScope.cart}">
+                  
+                       <c:set var="item" value="${cartitem.quantity}"></c:set>
+
+                <% cartAmount = cartAmount + (int) pageContext.getAttribute("item");  %>
+                  
+              </c:forEach>
+              
+             <div id="cart-amount"><%=cartAmount%>0​​​​​​​</div>
+             <div class="clickable">
+            <a id="cart-img" href="${pageContext.request.contextPath}/cart/index"></a>
+            <p>Cart</p>
+            </div>  
+        </div> 
+        </div>
+            
+             
+            
+          
+        </div>
+      </div>
+
+        
     
         <div id="login-modal" >
             <div >
@@ -327,27 +359,12 @@ header{
 
   
                   
-        <div id="cart">
-             <% int cartAmount = 0; %>
-              <c:forEach var="cartitem" items="${sessionScope.cart}">
-                  
-                       <c:set var="item" value="${cartitem.quantity}"></c:set>
-
-                <% cartAmount = cartAmount + (int) pageContext.getAttribute("item");  %>
-                  
-              </c:forEach>
-              
-             <div id="cart-amount"><%=cartAmount%>0​​​​​​​</div>
-             <div class="clickable">
-            <a id="cart-img" href="${pageContext.request.contextPath}/cart/index"></a>
-            <p>Cart</p>
-            </div>  
-        </div>         
-    </div>
-
+               
+    
 
     <hr style="height: 1px; border-width: 0; color: #e0e0e0; background-color: #e0e0e0;"/>
-</header>
+     </section>
+
 
 
 <script>

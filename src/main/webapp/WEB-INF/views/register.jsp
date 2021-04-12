@@ -13,8 +13,15 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <title>BookaPorta bookstore user registration</title>
         <%@include file="styles.jspf" %>
+           <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+        
     </head>
-    <body style="max-width: 1182px; margin: 0 auto;">
+    <body>
         <%@include file="header.jspf" %>
         <%@include file="register-form.jspf" %>
         <%@include file="footer.jspf" %>

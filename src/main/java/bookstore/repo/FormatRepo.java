@@ -7,7 +7,9 @@ package bookstore.repo;
 
 import bookstore.entity.Format;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface FormatRepo extends JpaRepository<Format, Integer> {
-    
-     
+   
+
+    public Format findByNameContainingIgnoreCase(String term); 
 }

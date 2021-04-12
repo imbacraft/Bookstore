@@ -25,29 +25,16 @@
       crossorigin="anonymous"
     />
         
-         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-      <!-- Latest compiled and minified CSS -->
-      <link
-        rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-        crossorigin="anonymous"
-      />
-
-      <!-- Optional theme -->
-      <link
-        rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-        crossorigin="anonymous"
-      />
-
-      <!-- Latest compiled and minified JavaScript -->
-      <script
-        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"
-      ></script>
+           
+        <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    />
+        
 
         
          <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -59,166 +46,242 @@
     </head>
     <body>
         
+        
    
-    <nav class="navbar navbar-expand-lg navbar-dark bg-info">
-      <!-- bazw brand an thelw -->
-      <span id="topSpan">
-        <a class="navbar-brand" href="">Supporting your high street</a>
-        <a class="navbar-brand" href="http://www.google.com" target="_blank"
-          >Find out how</a
-        >
-      </span>
-
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarTogglerDemo02"
-        aria-controls="navbarTogglerDemo02"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-        <!-- an thelw to menu st aristera arkei na metaferw to ul
-      opote prosthetw mia klash=ml-auto -->
-        <!-- toggler, an thelw na mikrainei h othoni kai na sumparasurei to menu -->
-        <ul class="navbar-nav navbar-right">
-          <li class="nav-item">
-            <a class="nav-link" href="">Welcome,user</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="">Account</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="">Reviews</a>
-          </li>
-          <li class="nav-item">
-            <a href="" class="nav-link">Συχνές ερωτήσεις</a>
-          </li>
-          <li class="nav-item">
-            <a href="" class="nav-link">Contact</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
-    <!-- Logo-Login-Basket -->
-    <section id="partWithLogo">
+       
+          
+        
+ <section id="partWithLogo">
  <div class="row">
         <!-- 3 sthles/row sto megalo viewport, 2 sto mikrotero, kai 1 otan mikrunei teleiws -->
-        <div class="col-lg-4 col-md-6">
+        <div class="col-lg-4">
           <!-- bazw sto 1/3 ths sthlhs 2 boxes->ara div, ara to ena katw ap to allo
           titlos +logia -->
-          <div class="col-6">
-            <img src="" alt="bookLogo" id="bookLogo" />
-          </div>
-          <div class="col-6 TitleText">
-            <a href="">BOOKS ARE TREASURE</a>
-          </div>
+          
+            <img src="bookaporta-logo.png" alt="bookLogo" id="bookLogo" />
+        
         </div>
-        <div class="col-lg-4 col-md-6">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-3">
           <form action="" id="form">
+               
             <input type="text" placeholder="Search..." id="searchText" />
-            <select id="searchSelect">
-              <option value="1">Medicine</option>
-              <option value="2">Sports</option>
-            </select>
             <input type="button" value="" id="searchButton" />
           </form>
+            <div id="suggestions" hidden="false">${suggestions} aaaa</div>
         </div>
-        <div class="col-lg-4 col-md-6">
-          <div class="row LoginRow">
-            <div class="col-lg-6 Login">
-              <div class="col-6">
-                <h6 id="LoginText">Click Here to Login</h6>
-              </div>
-              <div class="col-6">
-                <a href="http://www.google.com">Login</a>
-              </div>
-              <div class="col-6">
-                <hr id="hr" />
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <img
-                src="./images/shoppingIcon.png"
-                alt="basket"
-                id="basketIcon"
-              />
-              <span id="number">0</span>
-              <div class="col-6">
-                <a href="">Basket</a>
-              </div>
-            </div>
-          </div>
+        <div class="col-lg-2">
+      
+            <div id="Myaccount"><sec:authorize access="!isAuthenticated()">
+                <!-- if user is not authenticated, show this link. Otherwise, it stays hidden.--> 
+
+                <h3><a class="nav-link" href="${pageContext.request.contextPath}/login">Account</a></h3>
+            </sec:authorize> 
+            <sec:authorize access="hasRole('ADMIN')">
+                 <p>Welcome, <sec:authentication property="principal.username"/>!</p>
+                <input type="button"  onclick="toggleModal()" id="account-checkbox" value="Μy Account"/>       
+            </sec:authorize>
+            <sec:authorize access="hasRole('CUSTOMER')">
+                <p>Welcome, <sec:authentication property="principal.username" />!</p>
+                <input type="button"  onclick="toggleModal()" id="account-checkbox" value="Μy Account"/>
+            </sec:authorize>
+            <sec:authorize access="hasRole('SERVICEAGENT')">
+                <p>Welcome, <sec:authentication property="principal.username" />!</p>
+                <input type="button"  onclick="toggleModal()" id="account-checkbox" value="Μy Account"/>            
+            </sec:authorize>   
+            <sec:authorize access="hasRole('STOCKMANAGER')">   
+                <p>Welcome, <sec:authentication property="principal.username" />!</p>
+                <input type="button"  onclick="toggleModal()" id="account-checkbox" value="Μy Account"/>
+            </sec:authorize>    </div>
+            
+            
         </div>
-      </div>
-    </section>
+        <div class="col-lg-2">
+            <div id="cart" style="margin-top:40%;">
+             <% int cartAmount = 0; %>
+              <c:forEach var="cartitem" items="${sessionScope.cart}">
+                  
+                       <c:set var="item" value="${cartitem.quantity}"></c:set>
+
+                <% cartAmount = cartAmount + (int) pageContext.getAttribute("item");  %>
+                  
+              </c:forEach>
+              
+             <div id="number"><%=cartAmount%></div>
+             <div class="clickable">
+            <a id="cart-img" href="${pageContext.request.contextPath}/cart/index">
+                <img  id="basketIcon" src="basket.png" alt="basketIcon">
+            </a>
+            </div>  
+        </div> 
+        </div>
+            
+             
+            
+          
+        </div>
+                
+      
+
+        <!--autes einai oi epiloges pou tha exei o user/admin klp otan kanei login ,sxetika me to profile tou-->
+    
+        <div id="login-modal" style="background-color:white;   width:200px; margin-left:65%; ">
+            <div >
+                <ul id="my-account-menu"   >
+                    <sec:authorize access="hasRole('ADMIN')">
+                        <li>
+                            Role(s):<sec:authentication property="principal.authorities"/>
+                        </li>
+                        <li>
+                            <a href="${pageContext.request.contextPath}/admin">Administrator Management Page</a>
+                        </li>
+                        <li>
+                            <form:form action="${pageContext.request.contextPath}/logout" method="POST">
+                                <input type="submit" value="Logout">
+                            </form:form>
+                        </li>
+                    </sec:authorize>
+                    <sec:authorize access="hasRole('CUSTOMER')">
+                        <li>
+                            <a href="${pageContext.request.contextPath}/customer">Account Details</a>
+                        </li>
+                        <li>
+                            <form:form action="${pageContext.request.contextPath}/logout" method="POST">
+                                <input type="submit" value="Logout">
+                            </form:form>
+                        </li>
+                    </sec:authorize>
+                    <sec:authorize access="hasRole('SERVICEAGENT')">
+                        <li>
+                            <a href="${pageContext.request.contextPath}/service">Go to Customer Service Agent Management Page</a>        
+                        </li>
+                        <li>
+                            <form:form action="${pageContext.request.contextPath}/logout" method="POST">
+                                <input type="submit" value="Logout">
+                            </form:form>
+                        </li>
+                    </sec:authorize>
+                    <sec:authorize access="hasRole('STOCKMANAGER')">
+                        <li>
+                            Role(s):<sec:authentication property="principal.authorities"/>
+                        </li>
+                        <li>
+                            <a href="${pageContext.request.contextPath}/stock">Go to Stock Management Page</a>
+                        </li>
+                        <li>
+                            <form:form action="${pageContext.request.contextPath}/logout" method="POST">
+                                <input type="submit" value="Logout">
+                            </form:form>                            
+                        </li>
+                    </sec:authorize>
+                </ul>
+            </div>
+        </div> 
+        </section>
+               
+ 
+                 <hr>
+                
+                <!--edw teleiwnei to basiko header -->
+
+
+  <!--edw ksekinaei to menu -->
+  
     
     <section class="section">
+        <div class="container" >
+  <div class="row" >
+      
+    <div class="col-3" >
+        <div class="dropdown">
+    
+  <a class="dropbtn" style="color:black;  font-size: 1.5em">BOOKS</a>
+  <div class="dropdown-content">
+    
+         <div class="row ">
+            
+             <div class="col-6">
+          <c:forEach items="${categories}" var="category" begin="0" end="4" ><!--edw mpainei karfwto -->
+            <a href="${pageContext.request.contextPath}/books/${category.name}">${category.name}</a>
+          </c:forEach>  
+             </div>
+      <div class="col-6">
+           <c:forEach items="${categories}" var="category" begin="5" end="9" ><!--edw mpainei karfwto -->
+               <a href="${pageContext.request.contextPath}/books/${category.name}">${category.name}</a>
+          </c:forEach>
+      </div> 
+         </div><!--edw kleinei to endiameso row -->
+  </div>
+        </div>
+        
+        
+    </div>
+    <div class="col-3">
+       <div class="dropdown">
+    
+   <a class="dropbtn" style="color:black; font-size: 1.5em">AUTHORS</a>
+  <div class="dropdown-content">
+    
+         <div class="row ">
+            
+             <div class="col-4">
+          <c:forEach items="${authors}" var="author" begin="0" end="6" ><!--edw mpainei karfwto -->
+            <a href="${pageContext.request.contextPath}/authors/${author.lastname}">${author.lastname}</a>
+          </c:forEach>  
+             </div>
+      <div class="col-4">
+           <c:forEach items="${authors}" var="author" begin="7" end="13" ><!--edw mpainei karfwto -->
+               <a href="${pageContext.request.contextPath}/authors/${author.lastname}">${author.lastname}</a>
+          </c:forEach>
+      </div> 
+          <div class="col-4">
+           <c:forEach items="${authors}" var="author" begin="14" end="20" ><!--edw mpainei karfwto -->
+               <a href="${pageContext.request.contextPath}/authors/${author.lastname}">${author.lastname}</a>
+          </c:forEach>
+      </div> 
+         </div><!--edw kleinei to endiameso row -->
+  </div>
+        </div>
+    </div>
+    <div class="col-1">
+        <a class="dropbtn" style="color:black; font-size: 1.5em" href="${pageContext.request.contextPath}/bestsellers">BESTSELLERS</a>
+    </div>
+      <div class="col-2"></div>
+      <div class="col-3" id="freeHomeDelivery">
+          <h5 id="freeHomeDeliveryText">JEFF BEZOS ΓΑΤΑΚΙ,ΕΡΧΟΜΑΣΤΕ</h5>
+      </div>
+  </div>
+</div>
 
     
-        <nav onchange="location=this.value">
-      <header><b>Books</b></header>
-     
-      <c:forEach items="${categories}" var="category">
-     <div>   <b><a href="${pageContext.request.contextPath}/books/${category.name}">${category.name}</a></b>
-
-     </div> </c:forEach>
-    </nav>
-      
-        <a href="${pageContext.request.contextPath}/cart/index">Cart</a>
-        ${sessionScope.cart.size()}
-        
-        <br>
-        
-
-        <button>Books</button>
-        
-=======
-         <nav onchange="location=this.value">
-      <header><b>Authors</b></header>
-      <c:forEach items="${authors}" var="author">
-      <div>
-        <b><a href="${pageContext.request.contextPath}/authors/${author.lastname}">${author.lastname}</a></b>
-      </div>
-      </c:forEach>
-      
-    </nav>
-
-       
-          <nav onchange="location=this.value">
-      <header><b>Bestsellers</b></header>
-      <c:forEach items="${bestSellers}" var="book">
-      <div>
-        <b><a href="${pageContext.request.contextPath}/books/search/${book.bookid}">${book.title}</a></b>
-     </div>
-       </c:forEach>
-          </nav>
          
         </section>
     
     
     
+    <section style="margin-top:20px;" >
     <!-- Carousel with 3 categories -->
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1" class=""></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2" class=""></li>
       </ol>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img class="d-block w-100" src="./images/Batman-etc.jpg" alt="First slide">
+            <a href="${pageContext.request.contextPath}/books/Medicine">
+          <img class="d-block w-100" src="./images/Batman-etc.jpg" style="height:550px;" alt="First slide">
+            </a>
         </div>
         <div class="carousel-item">
-          <img class="d-block w-100" src="./images/MentalHealth.jpg" alt="Second slide">
+            <a href="${pageContext.request.contextPath}/books/Comic">
+          <img class="d-block w-100" src="./images/MentalHealth.jpg" style="height:550px;" alt="Second slide">
+          </a>
         </div>
-        <div class="carousel-item">
-          <img class="d-block w-100" src="./images/SportsAndOutdoor.jpg" alt="Third slide">
+          <div class="carousel-item">
+              <a href="${pageContext.request.contextPath}/books/Sports&Outdoors">
+          <img class="d-block w-100" src="./images/SportsAndOutdoor.jpg" style="height:550px;" alt="Third slide">
+          </a>
         </div>
       </div>
       <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -230,42 +293,20 @@
         <span class="sr-only">Next</span>
       </a>
     </div> 
-    <hr>
     
-     <!-- book of the month -->
- <section id="bookOfTheMonth">
-   <div id="bookMonthDiv">
-    <div class="row">
-      <div class="col-4">
-        <img id="monthBookImage" src="${bookOfMonth.frontcover}" alt="aaa">
-      </div>
-      <div class="col-7 bookMonthCol">
-        <h2>book of the month</h2>
-        <h6>${bookOfMonth.title}</h6>
-
-        <p id="bookMonthColText"> ${bookOfMonth.description}
-        </p>
-
-        <div>
-            <a href="${pageContext.request.contextPath}/books/search/${bookOfMonth.bookid}">Find Out More>></a>
-        </div>
-      </div>
-    </div>
-   </div>
-     </section>
-     
-     
-     <!-- Readers choice New and Upcoming -->
+    </section>
+          
+             <!-- Readers choice New and Upcoming -->
 <section id="ReadersChoice">
   <div class="row">
     <div class="col-4">
-      <hr>
+      <hr style="border: 1px solid grey">
+    </div>
+    <div class="col-4 UpcomingText">
+     <span style="font-size:1.2em;">Reader's choice: New and Upcoming</span><span id="verticalLine"></span> <a href="">See all</a>
     </div>
     <div class="col-4">
-      <span>Reader's choice:New and Upcoming</span><span id="verticalLine"></span> <a href="" >See all</a>
-    </div>
-    <div class="col-4">
-      <hr>
+      <hr style="border: 1px solid grey">
     </div>
   </div>
 
@@ -273,129 +314,160 @@
      
      
      
+    
+  
+     
+     
+     
      <!-- new books and upcoming -->
-     <section id="upcomingBooks">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="carousel slide multi-item-carousel" id="theCarousel">
-          <div class="carousel-inner">
-            <div class="item active">
-              <div class="col-xs-4">
-                <a href="#1"
-                  ><img
-                    src="./images/MentalHealth.jpg"
-                    class="img-responsive"
-                /></a>
-              </div>
+  <section id="upcomingBooks">   
+   <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="carousel slide multi-item-carousel" id="theCarousel">
+            <div class="carousel-inner">
+              <div class="item active">
+                <div class="col-xs-4">
+                  <a href="#1"
+                    ><img
+                      src="${upcomingBooks.toArray()[0].bookdetailsList.toArray()[0].frontcover}"
+                      class="img-responsive1"
+                  /></a>
+                </div>
+              </div><!--εδώ κλείνει το item active  -->  
+             <c:forEach items="${upcomingBooks}" var="book" begin="1" end="${upcomingBooks.size()-1}">
+                 <div class="item">
+                 <div class="col-xs-4">
+                     <a href="#1">
+                         <img src="${book.bookdetailsList.toArray()[0].frontcover}" class="img-responsive1"/>
+                     </a>
+                 </div>
+                 </div>
+             </c:forEach>
+              
             </div>
-            <div class="item">
-              <div class="col-xs-4">
-                <a href="#1"
-                  ><img
-                    src="./images/NewBooks.jpg"
-                    class="img-responsive"
-                /></a>
-              </div>
-            </div>
-            <div class="item">
-              <div class="col-xs-4">
-                <a href="#1"
-                  ><img
-                    src="./images/SportsAndOutdoor.jpg"
-                    class="img-responsive"
-                /></a>
-              </div>
-            </div>
-            <div class="item">
-              <div class="col-xs-4">
-                <a href="#1"
-                  ><img
-                    src="http://placehold.it/300/673ab7/000000"
-                    class="img-responsive"
-                /></a>
-              </div>
-            </div>
-            <div class="item">
-              <div class="col-xs-4">
-                <a href="#1"
-                  ><img
-                    src="http://placehold.it/300/4caf50/000000"
-                    class="img-responsive"
-                /></a>
-              </div>
-            </div>
-            <div class="item">
-              <div class="col-xs-4">
-                <a href="#1"
-                  ><img
-                    src="http://placehold.it/300/8bc34a/000000"
-                    class="img-responsive"
-                /></a>
-              </div>
-            </div>
-            <!-- add  more items here -->
-            <!-- Example item start:  -->
-
-            <div class="item">
-              <div class="col-xs-4">
-                <a href="#1"
-                  ><img
-                    src="http://placehold.it/300/8bc34a/000000"
-                    class="img-responsive"
-                /></a>
-              </div>
-            </div>
-
-            <!--  Example item end -->
+            <a
+              class="left carousel-control"
+              href="#theCarousel"
+              data-slide="prev"
+              ><i class="glyphicon glyphicon-chevron-left"></i
+            ></a>
+            <a
+              class="right carousel-control" style="margin-right:30px;"
+              href="#theCarousel"
+              data-slide="next"
+              ><i class="glyphicon glyphicon-chevron-right"></i
+            ></a>
           </div>
-          <a
-            class="left carousel-control"
-            href="#theCarousel"
-            data-slide="prev"
-            ><i class="glyphicon glyphicon-chevron-left"></i
-          ></a>
-          <a
-            class="right carousel-control"
-            href="#theCarousel"
-            data-slide="next"
-            ><i class="glyphicon glyphicon-chevron-right"></i
-          ></a>
         </div>
       </div>
     </div>
-  </div>
+                      
+  </section>
+                      
+          
+          
+  
+    
+     <!-- book of the month -->
+     <section style="background-color:lightblue;">
+ <section id="bookOfTheMonth" style="margin-top:20px;">
+   <div id="bookMonthDiv">
+    <div class="row">
+        <div class="col-4"><a href="${pageContext.request.contextPath}/books/search/${bookOfTheMonth.bookid}">
+        <img id="monthBookImage" src="${bookOfTheMonth.bookdetailsList.toArray()[0].frontcover}" alt="bookOfTheMonthImage">
+            </a>
+        </div>
+      <div class="col-7 bookMonthCol" >
+          <h1>Book Of The Month</h1>  
+        <h2>${bookOfTheMonth.title}</h2>
+        <h3><a href="${pageContext.request.contextPath}/authors/${bookOfTheMonth.authorList.toArray()[0].lastname}">${bookOfTheMonth.authorList.toArray()[0].firstname} ${bookOfTheMonth.authorList.toArray()[0].lastname}</a>
+        </h3>
+
+        <p id="bookMonthColText" style="text-align:left; line-height:32px; letter-spacing: -1px; "> 
+            ${bookOfTheMonth.description}
+        </p>
+
+        <div>
+            <a href="${pageContext.request.contextPath}/books/search/${bookOfTheMonth.bookid}">Find Out More >></a>
+        </div>
+      </div>
+    </div>
+   </div>
      </section>
+        
+    </section>
+     
+     
+     
+
+         
+    
 
     
     
     
-    <!--author of the month-->
+    
+  <!--author of the month-->
    <section id="authorOfTheMonth">
   <div id="authorMonthDiv">
    <div class="row">
      <div class="col-4">
-       <img id="monthauthorImage" src="./images/bookLogo.png" alt="aaa">
+       <img  id="monthauthorImage" src="${authorOfTheMonth.portrait}" alt="aaa">
      </div>
      <div class="col-7 authorMonthCol">
-       <h2>author of the month</h2>
-       <h6>${monthAuthorMap.keySet().toArray()[0].firstname}${" "} ${monthAuthorMap.keySet().toArray()[0].lastname}</h6>
+         <h2><a href="${pageContext.request.contextPath}/authors/${authorOfTheMonth.lastname}">${authorOfTheMonth.firstname} ${authorOfTheMonth.lastname}</a></h2>
+       <h6>  </h6>
 
-       <p id="authorMonthColText">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-         It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-       </p>
+       <p id="authorMonthColText" style="text-align:left; line-height:32px; letter-spacing: -1px; ">${authorOfTheMonth.biography}</p>
         <div>
-            <a href="${pageContext.request.contextPath}/authors/${monthAuthorMap.keySet().toArray()[0].lastname}">Find Out More about ${monthAuthorMap.keySet().toArray()[0].firstname}>></a>
+            <a href="${pageContext.request.contextPath}/authors/${authorOfTheMonth.lastname}">Find Out More about ${authorOfTheMonth.firstname} >></a>
         </div>
+        <div class="container" >
+      <div class="row" >
+        <div class="col-md-12">
+          <div class="carousel slide multi-item-carousel" id="theCarousel2" style="width:500px;">
+            <div class="carousel-inner" style="margin-left: 13px; ">
+              <div class="item active">
+                <div class="col-xs-4">
+                  <a href="${pageContext.request.contextPath}/books/search/${authorOfTheMonth.bookList.toArray()[0].bookid}"
+                    ><img
+                      src="${authorOfTheMonth.bookList.toArray()[0].bookdetailsList.toArray()[0].frontcover}"
+                      class="img-responsive"
+                  /></a>
+                </div>
+              </div><!--εδώ κλείνει το item active  -->  
+             <c:forEach items="${authorOfTheMonth.bookList}" var="book" begin="1" end="${authorOfTheMonth.bookList.size()-1}">
+                 <div class="item">
+                 <div class="col-xs-4">
+                     <a href="${pageContext.request.contextPath}/books/search/${book.bookid}">
+                         <img src="${book.bookdetailsList.toArray()[0].frontcover}" class="img-responsive"/>
+                     </a>
+                 </div>
+                 </div>
+             </c:forEach>
+              
+            </div>
+            <a
+              class="left carousel-control" style="margin-left:23px;"
+              href="#theCarousel2"
+              data-slide="prev"
+              ><i class="glyphicon glyphicon-chevron-left"></i
+            ></a>
+            <a
+              class="right carousel-control"
+              href="#theCarousel2"
+              data-slide="next"
+              ><i class="glyphicon glyphicon-chevron-right"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </div>
      
       
 
-<c:forEach items="${monthAuthorMap}" var="entry">
-    <c:forEach items="${entry.value}" var="bookElement">
-        <img class="monthAuthorBooksImages" src="${bookElement.frontcover}">
-    </c:forEach>
-    
-</c:forEach>
+
        
      </div>
    </div>
@@ -420,7 +492,7 @@
           <div id="helpfulLinks" class="footerBlock">
               <span style="text-align: center;">Helpful links</span>
               <ul>
-                  <li href="#">Sign in / Register</li>
+                  <li><a href="${pageContext.request.contextPath}/login">Sign in / Register</a></li>
                   <li href="#">My Account</li>
                   <li href="#">Contact us</li>
                   <li href="#">FAQs</li>
@@ -430,12 +502,16 @@
           <div id="socialLinks" class="footerBlock">
               <ul         style="float: left;
               left: 17%;">
-                  <li><img src="f_logo_RGB-Blue_128.png" width="24" height="24" alt="Facebook logo"/><span style="margin-bottom:  150px">Facebook</span></li>
+                  <li>
+                      <a href="http://www.facebook.com"><img src="f_logo_RGB-Blue_128.png" width="24" height="24" alt="Facebook logo"/><span style="margin-bottom:  150px">Facebook</span></a></li>
                   
-                  <li><img src="2021 Twitter logo - blue-128.png" width="24" height="24" alt="Twitter logo"/>Twitter</li>
+                  <li><a href="http://www.twitter.com">
+                          <img src="2021 Twitter logo - blue-128.png" width="24" height="24" alt="Twitter logo"/>Twitter</a></li>
                   
-                  <li><img src="pinterest-logo-128.png" alt="Pinterest logo" width="24" height="24"/>Pinterest</li>
-                  <li><img src="yt_logo_rgb_light-128.png" alt="YouTube logo"  height="16"/></li>
+                          <li><a href="http://www.pinterest.com">
+                                  <img src="pinterest-logo-128.png" alt="Pinterest logo" width="24" height="24"/>Pinterest</a></li>
+                                  <li><a href="http://www.youtube.coms">
+                                          <img src="yt_logo_rgb_light-128.png" alt="YouTube logo"  height="16"/></a></li>
                   
                   
               </ul>
@@ -446,106 +522,24 @@
                   
       </footer>
  
-      
-        <script src="./javascript/javascript1.js"></script>
- 
-    
-      
+
        
+<script src="./javascript/javascript1.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
       
-    
-        
-    
-        <sec:authorize access="!isAuthenticated()">
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
+       <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
-            <!-- if user is not authenticated, show this link. Otherwise, it stays hidden.--> 
-            <a href="${pageContext.request.contextPath}/login">Login with your customer acccount</a>
-
-            <br>
-            
-            Don't have an account? <a class="underlineHover" href="${pageContext.request.contextPath}/register"> Register</a>
-
-        </sec:authorize>
-
-
-        <h3>Bestseller books</h3>
-
-
-
-        <sec:authorize access="hasRole('ADMIN')">
-            <div>
-                <a href="${pageContext.request.contextPath}/admin">Administrator Management Page</a>
-            </div>
-
-            <p>
-                User: <sec:authentication property="principal.username"/>
-                <br/>
-                Role(s):<sec:authentication property="principal.authorities"/>
-            </p>
-
-            <form:form action="${pageContext.request.contextPath}/logout" method="POST">
-                <input type="submit" value="Logout">
-            </form:form>
-
-        </sec:authorize>
-
-        <br/>
-
-        <sec:authorize access="hasRole('CUSTOMER')">
-
-            <div>
-                <h3>Welcome, <sec:authentication property="principal.username" /> !</h3>
-            </div>
-
-            <div>
-                <a href="${pageContext.request.contextPath}/customer">Account Details</a>
-            </div>
-
-            <br>
-
-            <form:form action="${pageContext.request.contextPath}/logout" method="POST">
-                <input type="submit" value="Logout">
-            </form:form>
-
-        </sec:authorize>
-
-
-
-        <sec:authorize access="hasRole('SERVICEAGENT')">
-            <div>
-                <a href="${pageContext.request.contextPath}/service">Go to Customer Service Agent Management Page</a>
-            </div>
-
-            <form:form action="${pageContext.request.contextPath}/logout" method="POST">
-                <input type="submit" value="Logout">
-            </form:form>
-
-        </sec:authorize>
-
-
-        <sec:authorize access="hasRole('STOCKMANAGER')">
-            <div>
-                <a href="${pageContext.request.contextPath}/stock">Go to Stock Management Page</a>
-            </div>
-            
-            <p>
-                User: <sec:authentication property="principal.username"/>
-                <br/>
-                Role(s):<sec:authentication property="principal.authorities"/>
-            </p>
-
-            <form:form action="${pageContext.request.contextPath}/logout" method="POST">
-                <input type="submit" value="Logout">
-            </form:form>
-
-        </sec:authorize>
-
-
-                
-         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+        <script>
+    let loginModal = document.getElementById("login-modal");
+    function toggleModal()
+    {
+        if (loginModal.style.display !== "inline-block") loginModal.style.display = "inline-block";
+        else loginModal.style.display = "none";
+    } 
+</script>  4
 
     </body>
 

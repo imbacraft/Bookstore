@@ -1,0 +1,74 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 9, 2021, 2:28:26 PM
+    Author     : Σταθης Καράμπελας
+*/
+
+h3::before, h3::after {
+    border-top: 1px solid #cbe8f0;
+    content: '';
+    display: table-cell;
+    position: relative;
+    top: 0.5em;
+    width: 47%;
+}
+    
+.login-area {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: space-between;
+}
+.log-reg-box {
+    border: 1px solid #2794ad;
+    height: 450px;
+    display: flex;
+    flex: 1 1 400px;
+    
+    text-align: center;
+     align-content: center;
+     justify-content: center;
+     margin: 10px;
+     flex-basis: 200px;
+}
+
+.credentials {
+     
+    position: relative;
+    
+    margin: 70px;
+    height: 50px;
+    display: flex;
+
+}
+.credentials input {
+    font-family: serif;
+    font-size: 14pt;
+    
+}
+
+.login-button input, 
+.register-button  button {
+    font-family: "Georgia", serif;
+    
+    right: 30px;
+    bottom: 40px;
+    text-align: center; 
+    width: 80px; 
+    height: 40px; 
+    background-color: #2794ad; 
+    color: white; 
+    cursor: pointer;
+    border: 2px solid #2794ad; 
+    border-radius: 3px;
+}
+
+.log-reg-box p {
+    font-size: 16pt;
+        
+}
+
+

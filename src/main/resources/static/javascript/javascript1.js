@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+
+
 // Instantiate the Bootstrap carousel
 $(".multi-item-carousel").carousel({
   interval: false,
@@ -28,5 +30,30 @@ $(".multi-item-carousel .item").each(function () {
       .appendTo($(this));
   }
 });
+
+    //jqueryui, autocomplete
+  
+ 
+   
+   //list .....data
+   //ara ousiastika tha steiloume request("/source..name") ston controller,
+   //tha epistrepsoume mia lista ap ton Controller, (booksAutocomplete)
+  
+   
+        
+             
+           
+            
+  
+  
+       
+       
+
+          
+      
+      
+  
+    
+ 
 
 
