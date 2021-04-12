@@ -126,11 +126,15 @@ public class HomeController {
     }
     @GetMapping("/booksAutocomplete")
    @ResponseBody 
-    public List<ResponseTag> booksAutocomplete(@RequestParam( value="term",required=false,defaultValue="")String term){
+    public List<String> booksAutocomplete(@RequestParam( value="term",required=false,defaultValue="")String term){
          
         //books autocompleted depends on bookDetails
       List<Book> autoBooks_BookDetails=bookRepo.findFirst5ByTitleContainingIgnoreCase(term);
-        
+      List<String> suggestions=new ArrayList(); 
+      
+      for(Book b:autoBooks_BookDetails){
+          suggestions.add(b.getTitle());
+      }
 //      
 //      List<Author> authorsAutoComplete=authorRepo.findByLastnameContainingIgnoreCase(term);
 //      
@@ -154,17 +158,17 @@ public class HomeController {
 //         for(Category category:categoryAutoComplete){
 //             suggestions.put("category",category.getName());     
 //         }
-            List<ResponseTag> responseTags=new ArrayList();
-           for(int i=0;i<autoBooks_BookDetails.size();i++ ){
-               ResponseTag tagi=new ResponseTag();
-               tagi.setBookName(autoBooks_BookDetails.get(i).getTitle());
-               tagi.setUrl("/books/search/"+autoBooks_BookDetails.get(i).getBookid());
-               responseTags.add(tagi);
-           }
-           System.out.println(responseTags.toString());
-        //h metatroph se json ginetai automata ap to spring 
+//            List<ResponseTag> responseTags=new ArrayList();
+//           for(int i=0;i<autoBooks_BookDetails.size();i++ ){
+//               ResponseTag tagi=new ResponseTag();
+//               tagi.setBookName(autoBooks_BookDetails.get(i).getTitle());
+//               tagi.setUrl("/books/search/"+autoBooks_BookDetails.get(i).getBookid());
+//               responseTags.add(tagi);
+//           }
+//           System.out.println(responseTags.toString());
+//        //h metatroph se json ginetai automata ap to spring 
        
-        return responseTags;//twra tha paw sto front page kai tha looparw ta values tou map, analogws me to an einai
+        return suggestions;//twra tha paw sto front page kai tha looparw ta values tou map, analogws me to an einai
         //book, format h category key, kai tha parapempei sta antistoixa link
     }
 

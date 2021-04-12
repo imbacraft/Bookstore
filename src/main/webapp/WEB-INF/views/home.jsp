@@ -63,11 +63,11 @@
         </div>
         <div class="col-lg-1"></div>
         <div class="col-lg-3">
-          <form action="" id="form">
+          <form:form action="/search" id="form">
                
-            <input type="text" placeholder="Search..." id="searchText" />
+            <input type="text" placeholder="Search..." id="searchText" value="" />
             <input type="button" value="" id="searchButton" />
-          </form>
+          </form:form>
             <div id="suggestions" hidden="false">${suggestions} aaaa</div>
         </div>
         <div class="col-lg-2">
