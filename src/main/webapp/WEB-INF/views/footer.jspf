@@ -82,19 +82,19 @@
             <li><a href="#">My Account</a></li>
             <li><a href="${pageContext.request.contextPath}/contact">Contact us</a></li>
             <li><a href="${pageContext.request.contextPath}/faqs">FAQs</a></li>
-            <li><a href="#">Log out</a></li>
+            <li><a href="${pageContext.request.contextPath}/logout">Log out</a></li>
         </ul>
     </div>
     
     <div id="socialLinks" class="footerBlock">
         <ul         style="float: left;
         left: 17%;">
-            <li><span class="social-rendering"><img src="f_logo_RGB-Blue_128.png" width="24" height="24" alt="Facebook logo"/>Facebook</span></li>
+            <li><span class="social-rendering"><img src="https://peoplecertproject.s3.eu-central-1.amazonaws.com/UI/f_logo_RGB-Blue_128.png" width="24" height="24" alt="Facebook logo"/>Facebook</span></li>
             
-            <li><span class="social-rendering"><img src="2021 Twitter logo - blue-128.png" width="24" height="24" alt="Twitter logo"/>Twitter</span></li>
+            <li><span class="social-rendering"><img src="https://peoplecertproject.s3.eu-central-1.amazonaws.com/UI/2021+Twitter+logo+-+blue-128.png" width="24" height="24" alt="Twitter logo"/>Twitter</span></li>
             
-            <li><span class="social-rendering"><img src="pinterest-logo-128.png" alt="Pinterest logo" width="24" height="24"/>Pinterest</span></li>
-            <li><span class="social-rendering"><img src="yt_logo_rgb_light-128.png" alt="YouTube logo"  height="16"/></span></li>
+            <li><span class="social-rendering"><img src="https://peoplecertproject.s3.eu-central-1.amazonaws.com/UI/pinterest-logo-128.png" alt="Pinterest logo" width="24" height="24"/>Pinterest</span></li>
+            <li><span class="social-rendering"><img src="https://peoplecertproject.s3.eu-central-1.amazonaws.com/UI/yt_logo_rgb_light-128.png" alt="YouTube logo"  height="16"/></span></li>
             
             
         </ul>

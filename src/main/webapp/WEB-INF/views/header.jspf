@@ -247,38 +247,17 @@ header{
         <div class="col-lg-1"></div>
         <div class="col-lg-3">
           <form action="" id="form">
+               
             <input type="text" placeholder="Search..." id="searchText" />
             <input type="button" value="" id="searchButton" />
           </form>
+            <div id="suggestions" hidden="false">${suggestions} aaaa</div>
         </div>
         <div class="col-lg-2">
       
-            <div id="Myaccount"><sec:authorize access="!isAuthenticated()">
-                <!-- if user is not authenticated, show this link. Otherwise, it stays hidden.--> 
-
-                <h3><a class="nav-link" href="${pageContext.request.contextPath}/login">Account</a></h3>
-            </sec:authorize> 
-            <sec:authorize access="hasRole('ADMIN')">
-                 <p>Welcome, <sec:authentication property="principal.username"/>!</p>
-                <input type="button"  onclick="toggleModal()" id="account-checkbox" value="Μy Account"/>       
-            </sec:authorize>
-            <sec:authorize access="hasRole('CUSTOMER')">
-                <p>Welcome, <sec:authentication property="principal.username" />!</p>
-                <input type="button"  onclick="toggleModal()" id="account-checkbox" value="Μy Account"/>
-            </sec:authorize>
-            <sec:authorize access="hasRole('SERVICEAGENT')">
-                <p>Welcome, <sec:authentication property="principal.username" />!</p>
-                <input type="button"  onclick="toggleModal()" id="account-checkbox" value="Μy Account"/>            
-            </sec:authorize>   
-            <sec:authorize access="hasRole('STOCKMANAGER')">   
-                <p>Welcome, <sec:authentication property="principal.username" />!</p>
-                <input type="button"  onclick="toggleModal()" id="account-checkbox" value="Μy Account"/>
-            </sec:authorize>    </div>
-            
-            
         </div>
         <div class="col-lg-2">
-            <div id="cart" style="margin-top:40%;">
+           <div id="cart" style="margin-top:40%;">
              <% int cartAmount = 0; %>
               <c:forEach var="cartitem" items="${sessionScope.cart}">
                   
@@ -288,25 +267,27 @@ header{
                   
               </c:forEach>
               
-             <div id="cart-amount"><%=cartAmount%>0​​​​​​​</div>
+             <div id="number"><%=cartAmount%></div>
              <div class="clickable">
-            <a id="cart-img" href="${pageContext.request.contextPath}/cart/index"></a>
-            <p>Cart</p>
-            </div>  
-        </div> 
-        </div>
+            <a id="cart-img" href="${pageContext.request.contextPath}/cart/index">
+                <img  id="basketIcon" src="https://peoplecertproject.s3.eu-central-1.amazonaws.com/UI/basket.optimized.svg" alt="basketIcon">
+            </a>
+            </div> 
+        </div>    
+    </div>
             
              
             
           
         </div>
-      </div>
+                
+      
 
-        
+        <!--autes einai oi epiloges pou tha exei o user/admin klp otan kanei login ,sxetika me to profile tou-->
     
-        <div id="login-modal" >
+        <div id="login-modal" style="background-color:white;   width:200px; margin-left:65%; ">
             <div >
-                <ul id="my-account-menu">
+                <ul id="my-account-menu"   >
                     <sec:authorize access="hasRole('ADMIN')">
                         <li>
                             Role(s):<sec:authentication property="principal.authorities"/>
@@ -355,28 +336,90 @@ header{
                     </sec:authorize>
                 </ul>
             </div>
-        </div>   
+        </div> 
+        </section>
+               
+ 
+                 <hr>
+                
+                <!--edw teleiwnei to basiko header -->
 
+
+  <!--edw ksekinaei to menu -->
+  
+    
+    <section class="section">
+        <div class="container" >
+  <div class="row" >
+      
+    <div class="col-3" >
+        <div class="dropdown">
+    
+  <a class="dropbtn" style="color:black;  font-size: 1.5em">BOOKS</a>
+  <div class="dropdown-content">
+    
+         <div class="row ">
+            
+             <div class="col-6">
+          <c:forEach items="${categories}" var="category" begin="0" end="4" ><!--edw mpainei karfwto -->
+            <a href="${pageContext.request.contextPath}/books/${category.name}">${category.name}</a>
+          </c:forEach>  
+             </div>
+      <div class="col-6">
+           <c:forEach items="${categories}" var="category" begin="5" end="9" ><!--edw mpainei karfwto -->
+               <a href="${pageContext.request.contextPath}/books/${category.name}">${category.name}</a>
+          </c:forEach>
+      </div> 
+         </div><!--edw kleinei to endiameso row -->
+  </div>
+        </div>
+        
+        
+    </div>
+    <div class="col-3">
+       <div class="dropdown">
+    
+   <a class="dropbtn" style="color:black; font-size: 1.5em">AUTHORS</a>
+  <div class="dropdown-content">
+    
+         <div class="row ">
+            
+             <div class="col-4">
+          <c:forEach items="${authors}" var="author" begin="0" end="6" ><!--edw mpainei karfwto -->
+            <a href="${pageContext.request.contextPath}/authors/${author.lastname}">${author.lastname}</a>
+          </c:forEach>  
+             </div>
+      <div class="col-4">
+           <c:forEach items="${authors}" var="author" begin="7" end="13" ><!--edw mpainei karfwto -->
+               <a href="${pageContext.request.contextPath}/authors/${author.lastname}">${author.lastname}</a>
+          </c:forEach>
+      </div> 
+          <div class="col-4">
+           <c:forEach items="${authors}" var="author" begin="14" end="20" ><!--edw mpainei karfwto -->
+               <a href="${pageContext.request.contextPath}/authors/${author.lastname}">${author.lastname}</a>
+          </c:forEach>
+      </div> 
+         </div><!--edw kleinei to endiameso row -->
+  </div>
+        </div>
+    </div>
+    <div class="col-1">
+        <a class="dropbtn" style="color:black; font-size: 1.5em" href="${pageContext.request.contextPath}/bestsellers">BESTSELLERS</a>
+    </div>
+      <div class="col-2"></div>
+      <div class="col-3" id="freeHomeDelivery">
+          <h5 id="freeHomeDeliveryText">JEFF BEZOS ΓΑΤΑΚΙ,ΕΡΧΟΜΑΣΤΕ</h5>
+      </div>
+  </div>
+</div>
+
+    
+         
+        </section>
   
                   
 
-        <div id="cart">
-             <% int cartAmount = 0; %>
-              <c:forEach var="cartitem" items="${sessionScope.cart}">
-                  
-                       <c:set var="item" value="${cartitem.quantity}"></c:set>
-
-                <% cartAmount = cartAmount + (int) pageContext.getAttribute("item");  %>
-                  
-              </c:forEach>
-              
-             <div id="cart-amount"><%=cartAmount%>​​​​​​​</div>
-             <div class="clickable">
-            <a id="cart-img" href="${pageContext.request.contextPath}/cart/index"></a>
-            <p>Cart</p>
-            </div>  
-        </div>         
-    </div>
+       
 
 
 

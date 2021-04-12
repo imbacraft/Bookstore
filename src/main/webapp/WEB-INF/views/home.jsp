@@ -110,9 +110,9 @@
              <div id="number"><%=cartAmount%></div>
              <div class="clickable">
             <a id="cart-img" href="${pageContext.request.contextPath}/cart/index">
-                <img  id="basketIcon" src="basket.png" alt="basketIcon">
+                <img  id="basketIcon" src="https://peoplecertproject.s3.eu-central-1.amazonaws.com/UI/basket.optimized.svg" alt="basketIcon">
             </a>
-            </div>  
+            </div> 
         </div> 
         </div>
             
@@ -476,51 +476,7 @@
 
 </section>
 
-    
-    
-    
-    
-    
-    
- 
- 
-           <footer>
-      <div id="footer">
-          <div style="text-align: center;" id="whoWeAre" class="footerBlock">
-              <p   >Who we are</p>
-          </div>
-          <div id="helpfulLinks" class="footerBlock">
-              <span style="text-align: center;">Helpful links</span>
-              <ul>
-                  <li><a href="${pageContext.request.contextPath}/login">Sign in / Register</a></li>
-                  <li href="#">My Account</li>
-                  <li href="#">Contact us</li>
-                  <li href="#">FAQs</li>
-                  <li href="#">Log out</li>
-              </ul>
-          </div>
-          <div id="socialLinks" class="footerBlock">
-              <ul         style="float: left;
-              left: 17%;">
-                  <li>
-                      <a href="http://www.facebook.com"><img src="f_logo_RGB-Blue_128.png" width="24" height="24" alt="Facebook logo"/><span style="margin-bottom:  150px">Facebook</span></a></li>
-                  
-                  <li><a href="http://www.twitter.com">
-                          <img src="2021 Twitter logo - blue-128.png" width="24" height="24" alt="Twitter logo"/>Twitter</a></li>
-                  
-                          <li><a href="http://www.pinterest.com">
-                                  <img src="pinterest-logo-128.png" alt="Pinterest logo" width="24" height="24"/>Pinterest</a></li>
-                                  <li><a href="http://www.youtube.coms">
-                                          <img src="yt_logo_rgb_light-128.png" alt="YouTube logo"  height="16"/></a></li>
-                  
-                  
-              </ul>
-          </div>
-               
-          
-      </div>
-                  
-      </footer>
+   <%@include file="footer.jspf" %>
  
 
        
@@ -539,7 +495,7 @@
         if (loginModal.style.display !== "inline-block") loginModal.style.display = "inline-block";
         else loginModal.style.display = "none";
     } 
-</script>  4
+</script>  
 
     </body>
 

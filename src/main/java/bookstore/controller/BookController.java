@@ -46,15 +46,24 @@ public class BookController {
         formatid=bookService.findAFormatOfABook(bookid, formatid);
         Bookdetails detailsByBookAndFormatId=bookdetailsRepo.findByBookidandFormatid(bookid,formatid);
         model.addAttribute("detailsByBookAndFormatId", detailsByBookAndFormatId);
-        ;
+        
         Book book= bookRepo.findByBookid(bookid);
         model.addAttribute("book", book);
 
-         List<Book> booksFromSameAuthor= bookService.findBooksFromSameAuthor(bookid);
-         model.addAttribute("booksFromSameAuthor",booksFromSameAuthor);
+//         List<Book> booksFromSameAuthor= bookService.findBooksFromSameAuthor(bookid);
+//         model.addAttribute("booksFromSameAuthor",booksFromSameAuthor);
          
          List<Category> categByBook=categoryRepo.findByBook(bookid);
          model.addAttribute("categByBook",categByBook);
+         
+          List<Category> categories = categoryRepo.findAll();
+        
+        //all authors-- for menu
+        List<Author> allAuthors = authorRepo.findAll();
+        
+        
+        model.addAttribute("categories", categories);
+        model.addAttribute("authors", allAuthors);
          return "specificBook";
     }
 }

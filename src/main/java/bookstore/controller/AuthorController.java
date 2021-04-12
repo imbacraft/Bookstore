@@ -4,6 +4,7 @@ package bookstore.controller;
 import bookstore.entity.Author;
 import bookstore.entity.Book;
 import bookstore.repo.AuthorRepo;
+import bookstore.repo.BookRepo;
 import bookstore.service.BookService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class AuthorController {
     AuthorRepo authorRepo;
     
     @Autowired
+    BookRepo bookRepo;
+    
+    @Autowired
     BookService bookService;
     
      @GetMapping("/authors/{lastname}")
@@ -26,9 +30,10 @@ public class AuthorController {
          Author author=authorRepo.findByLastname(lastname);
          model.addAttribute("author",author);
          
-         List <Book> booksFromSameAuthor=authorRepo.findBooksFromSameAuthor(author.getAuthorid());
+     //    List <Book> booksFromSameAuthor=authorRepo.findBooksFromSameAuthor(author.getAuthorid());
+     List<Book> booksFromSameAuthor=bookRepo.findByAuthorLastName(lastname);
          model.addAttribute("booksFromSameAuthor",booksFromSameAuthor);
          
-         return "specificAuthor";  
+         return "bookPerAuthor";  
    }
 }

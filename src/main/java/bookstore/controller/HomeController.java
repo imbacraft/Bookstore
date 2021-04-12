@@ -56,7 +56,7 @@ public class HomeController {
         //upcoming books--for multiple itemsPerSlide carousel
         List<Book> upcomingBooks=bookRepo.findUpcomingBooks();
 
- 
+        Author authorOfTheMOnth=authorRepo.findById(17);//thelw specifically ton slott, g auto to bazw etsi
         
         
         
@@ -69,7 +69,7 @@ public class HomeController {
         model.addAttribute("categories", categories);
         model.addAttribute("authors", allAuthors);
         model.addAttribute("upcomingBooks",upcomingBooks);
-       
+       model.addAttribute("authorOfTheMonth", authorOfTheMOnth);
         model.addAttribute("bookOfTheMonth", bookOfTheMonth);
       
 

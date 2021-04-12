@@ -71,8 +71,8 @@ public interface BookRepo extends JpaRepository<Book, Integer> {
   
     
     
-    @Query(value="select book.* from book,joinedbookauthor where joinedbookauthor.authorid=?1 and joinedbookauthor.bookid !=book.bookid", nativeQuery= true)
-    List<Book> findBooksFromSameAuthor(int authorid,int bookid);
+    @Query(value="select * from book, author, joinedbookauthor where book.bookid=joinedbookauthor.bookid and author.authorid=joinedbookauthor.authorid and author.lastname='?1';", nativeQuery= true)
+    List<Book> findBooksFromSameAuthor(String authorLastname);
     
 //    @Query(value="select book.* from book,author,joinedbookauthor \n" +
 //" where book.bookid=joinedbookauthor.bookid and author.authorid=joinedbookauthor.authorid\n" +
