@@ -50,9 +50,7 @@
             <tr>
                 <th>BookID</th>
                 <th>Title</th>
-                <th>BookType</th>
-                <th>Category 1</th>
-                <th>Category 2</th>
+                <th>Format</th>
                 <th>Price</th>
                 <th>Publisher</th>
                 <th>Publication Date</th>
@@ -60,7 +58,6 @@
                 <th>Pages</th>
                 <th>Language</th>
                 <th>Front Cover</th>
-                <th>Back Cover</th>
                 <th>Count</th>
                 <th>ISBN-10</th>
                 <th>ISBN-13</th>
@@ -79,19 +76,16 @@
                         <td>${book.bookid}</td>
                         <td>${book.title}</td>
                         <td>${book.bookdetailsList[pageContext.getAttribute("counter")].format.name}  </td>
-                        <td>${book.categoryList[pageContext.getAttribute("counter")].name}</td>
-                        <td>${book.categoryList[pageContext.getAttribute("counter")+1].name}</td>
-                        <td>${book.price}</td>
-                        <td>${book.publisher}</td>
-                        <td>${book.publicationdate}</td>
-                        <td>${book.edition}</td>
-                        <td>${book.bookdetails.pages}</td>
-                        <td>${book.bookdetails.language}</td>
-                        <td>${book.frontcover}</td>
-                        <td>${book.backcover}</td>
-                        <td>${book.count}</td>
-                        <td>${book.isbn10}</td>
-                        <td>${book.isbn13}</td>
+                        <td>${book.bookdetailsList[pageContext.getAttribute("counter")].price}</td>
+                        <td>${book.bookdetailsList[pageContext.getAttribute("counter")].publisher}</td>
+                        <td>${book.bookdetailsList[pageContext.getAttribute("counter")].publicationdate}</td>
+                        <td>${book.bookdetailsList[pageContext.getAttribute("counter")].edition}</td>
+                        <td>${book.bookdetailsList[pageContext.getAttribute("counter")].pages}</td>
+                        <td>${book.bookdetailsList[pageContext.getAttribute("counter")].language}</td>
+                        <td>${book.bookdetailsList[pageContext.getAttribute("counter")].frontcover}</td>
+                        <td>${book.bookdetailsList[pageContext.getAttribute("counter")].count}</td>
+                        <td>${book.bookdetailsList[pageContext.getAttribute("counter")].isbn10}</td>
+                        <td>${book.bookdetailsList[pageContext.getAttribute("counter")].isbn13}</td>
 
                         <td>      
                             <a href="${pageContext.request.contextPath}/stock/books/update/${book.bookid}">Update</a>

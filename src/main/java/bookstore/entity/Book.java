@@ -64,7 +64,7 @@ public class Book implements Serializable {
     private Integer bookid;
     @JoinTable(name = "joinedbookcategory", joinColumns = {
         @JoinColumn(name = "bookid", referencedColumnName = "bookid")}, inverseJoinColumns = {
-        @JoinColumn(name = "category", referencedColumnName = "categoryid")})
+        @JoinColumn(name = "categoryid", referencedColumnName = "categoryid")})
     @ManyToMany
     private List<Category> categoryList;
     @ManyToMany(mappedBy = "bookList")

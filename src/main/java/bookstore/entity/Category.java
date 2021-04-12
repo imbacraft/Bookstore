@@ -8,6 +8,7 @@ package bookstore.entity;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -46,7 +47,7 @@ public class Category implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "name")
     private String name;
-    @ManyToMany(mappedBy = "categoryList")
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "categoryList")
     private List<Book> bookList;
 
     public Category() {
