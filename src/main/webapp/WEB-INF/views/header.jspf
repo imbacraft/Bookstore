@@ -359,8 +359,26 @@ header{
 
   
                   
-               
-    
+
+        <div id="cart">
+             <% int cartAmount = 0; %>
+              <c:forEach var="cartitem" items="${sessionScope.cart}">
+                  
+                       <c:set var="item" value="${cartitem.quantity}"></c:set>
+
+                <% cartAmount = cartAmount + (int) pageContext.getAttribute("item");  %>
+                  
+              </c:forEach>
+              
+             <div id="cart-amount"><%=cartAmount%>​​​​​​​</div>
+             <div class="clickable">
+            <a id="cart-img" href="${pageContext.request.contextPath}/cart/index"></a>
+            <p>Cart</p>
+            </div>  
+        </div>         
+    </div>
+
+
 
     <hr style="height: 1px; border-width: 0; color: #e0e0e0; background-color: #e0e0e0;"/>
      </section>

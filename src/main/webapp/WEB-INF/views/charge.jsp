@@ -28,8 +28,6 @@
                         Pay with Stripe
                     </h1>
 
-
-
                     <!-- Cart contents here -->
                     <div class="card mb-4">
                         <div class="card-body">
@@ -88,6 +86,7 @@
 
                             <br>
 
+                            Personal Details
                             <table cellpadding="2" cellspacing="2" border="1">
                                 <tr>
                                     <th>First name</th>
@@ -121,7 +120,8 @@
                             </table>
 
                             <br>
-
+                            
+                             <c:if test = "${containsOnlyEbook == false}">
                             Delivery Address
                             <table cellpadding="2" cellspacing="2" border="1">
                                 <tr>
@@ -166,7 +166,7 @@
 
 
                             </table>
-
+                             </c:if>
 
                         </div>
                     </div>

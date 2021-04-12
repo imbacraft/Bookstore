@@ -64,25 +64,20 @@ public class Visitor implements Serializable {
     @Column(name = "email")
     private String email;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 200)
     @Column(name = "city")
     private String city;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 200)
     @Column(name = "street")
     private String street;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "streetnumber")
     private int streetnumber;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "postalcode")
     private int postalcode;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "phone")
     private int phone;
     @OneToMany(mappedBy = "visitor")
@@ -95,7 +90,7 @@ public class Visitor implements Serializable {
     @Column(name = "visitorid")
     private Integer visitorid;
     @JoinColumn(name = "country", referencedColumnName = "countryid")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Country country;
     @JoinColumn(name = "roleid", referencedColumnName = "roleid")
     @ManyToOne(optional = false)
@@ -134,6 +129,14 @@ public class Visitor implements Serializable {
         this.visitorid = visitorid;
         this.country = country;
         this.role = role;
+    }
+
+    public Visitor(String firstname, String lastname, String email, int phone, Role role) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.role = role;
+        this.phone = phone;
     }
 
     

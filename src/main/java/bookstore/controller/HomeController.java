@@ -56,8 +56,7 @@ public class HomeController {
         //upcoming books--for multiple itemsPerSlide carousel
         List<Book> upcomingBooks=bookRepo.findUpcomingBooks();
 
-        //authorOfTheMonth-->pairnw karfwta enan pou exei polla biblia gia tis anagkes tou front
-        Author authorOfTheMonth=authorRepo.findById(17).get();
+ 
         
         
         
@@ -70,7 +69,7 @@ public class HomeController {
         model.addAttribute("categories", categories);
         model.addAttribute("authors", allAuthors);
         model.addAttribute("upcomingBooks",upcomingBooks);
-        model.addAttribute("authorOfTheMonth",authorOfTheMonth);
+       
         model.addAttribute("bookOfTheMonth", bookOfTheMonth);
       
 
@@ -83,7 +82,7 @@ public class HomeController {
     //  ****Books PerCategory --in model --sent in jsp select --as options
     @GetMapping("/books/{categoryName}")
     public String showBooksPerCategory(@PathVariable("categoryName") String categoryName, Model model) {
-        
+
         //menu tabs
         List<Category> categories = categoryRepo.findAll();
         List<Author> allAuthors = authorRepo.findAll();
@@ -102,32 +101,17 @@ public class HomeController {
     }
     //****Get the specific book of one category****
 
-    @GetMapping("books/search/{bookid}")
-    public String getSpecificBook(@PathVariable("bookid") int id, Model model) {
-        Book book = bookRepo.findById(id).get();
-        model.addAttribute("book", book);
-
-        List<Author> authorsByBook = authorRepo.findByBook(id);
-        model.addAttribute("authorsByBook", authorsByBook);
-
-//       List<Book> booksFromSameAuthor= bookService.findBooksFromSameAuthor(id);
-//       model.addAttribute("booksFromSameAuthor",booksFromSameAuthor);
-        
-        
-
-
-        return "specificBook";
-    }
+  
 
     //*******BooksPerAuthor--in model--sent in jsp select --as options
-    @GetMapping("authors/{authorName}")
-    public String showBooksPerAuthor(@PathVariable("authorName") String authorLastName, Model model) {
-        //bring all books with a specific lastname-->sugkekrimenopoeitai sto BookRepo
-        List<Book> booksPerAuthor = bookRepo.findByAuthorLastName(authorLastName);
-        //sent it to model as attribute
-        model.addAttribute("booksPerAuthor", booksPerAuthor);
-        return "bookPerAuthor";
-    }
+//    @GetMapping("authors/{authorName}")
+//    public String showBooksPerAuthor(@PathVariable("authorName") String authorLastName, Model model) {
+//        //bring all books with a specific lastname-->sugkekrimenopoeitai sto BookRepo
+//        List<Book> booksPerAuthor = bookRepo.findByAuthorLastName(authorLastName);
+//        //sent it to model as attribute
+//        model.addAttribute("booksPerAuthor", booksPerAuthor);
+//        return "bookPerAuthor";
+//    }
     
     @GetMapping("/bestsellers")
     public String getBestsellers(Model model){

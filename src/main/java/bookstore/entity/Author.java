@@ -8,8 +8,10 @@ package bookstore.entity;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -64,9 +66,10 @@ public class Author implements Serializable {
     @Size(max = 250)
     @Column(name = "portrait")
     private String portrait;
+   
     @JoinTable(name = "joinedbookauthor", joinColumns = {
         @JoinColumn(name = "authorid", referencedColumnName = "authorid")}, inverseJoinColumns = {
-        @JoinColumn(name = "bookid", referencedColumnName = "bookid")})
+        @JoinColumn(name = "bookid", referencedColumnName = "bookid")}) 
     @ManyToMany
     private List<Book> bookList;
 

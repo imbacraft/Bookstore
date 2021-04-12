@@ -13,7 +13,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>No access baby. Welcome to Spring Security!!!</h1>
+        <h1>You do not have the right to view this page.</h1>
         
     </body>
     

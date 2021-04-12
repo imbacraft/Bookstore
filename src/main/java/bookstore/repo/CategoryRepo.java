@@ -12,18 +12,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestParam;
 
-/**
- *
- * @author Σταθης Καράμπελας
- */
+
 @Repository
 public interface CategoryRepo extends JpaRepository<Category,Integer> {
 
    @Override
    public List<Category> findAll();
    
-   @Query(value="select category.* from category,book,joinedbookcategory where joinedbookcategory.bookid=?1"
-            + " and joinedbookcategory.category=category.categoryid;",nativeQuery = true)
+ @Query(value="select category.* from category,joinedbookcategory where joinedbookcategory.bookid=?1"
+            + " and joinedbookcategory.categoryid=category.categoryid;",nativeQuery = true)
     List<Category>findByBook(int bookid);
     
 //     @Query(value="select * from category where Upper(category.name) LIKE Upper('%?1%');",nativeQuery=true)
@@ -32,5 +29,7 @@ public interface CategoryRepo extends JpaRepository<Category,Integer> {
     
     List<Category> findByNameContainingIgnoreCase(String term);
 } 
+    
+   
     
 

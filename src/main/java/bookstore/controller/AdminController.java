@@ -72,11 +72,9 @@ public class AdminController {
     
     @GetMapping("/customers")
     public String showCustomers(Model model){
-    List<Customer> customers = customerRepo.findAll();
-   
-    model.addAttribute("listOfCustomers", customers);
+    
         
-    return "manage-customers";
+    return "redirect:/service/customers";
     }
     
     
@@ -109,30 +107,24 @@ public class AdminController {
     @GetMapping("/customers/update")
     public String showUpdateCustomerForm(@RequestParam("id") int id, Model model){
         
-        Customer customer = customerRepo.findById(id).get();
-        List<Country> countries = countryRepo.findAll();
         
-        model.addAttribute("countries", countries);
-        
-        model.addAttribute("customerToEdit", customer);
-        
-        return "create-customer";
+        return "redirect:/service/customers/update";
     }
- 
-    @PostMapping("/customers/update")
-    public String updateCustomer(Customer customer, RedirectAttributes attributes){
-        
-        
-        System.out.println("Customer to be updated"+customer);
-        
-        userService.saveCustomer(customer);
-        
-        String successMessage = "Customer "+ customer.getFirstname()+" "+customer.getLastname()+" successfully updated!!";
-        attributes.addFlashAttribute("successMessage", successMessage);
-       
-        return "redirect:/admin/customers";
-    
-    }
+// 
+//    @PostMapping("/customers/update")
+//    public String updateCustomer(Customer customer, RedirectAttributes attributes){
+//        
+//        
+//        System.out.println("Customer to be updated"+customer);
+//        
+//        userService.saveCustomer(customer);
+//        
+//        String successMessage = "Customer "+ customer.getFirstname()+" "+customer.getLastname()+" successfully updated!!";
+//        attributes.addFlashAttribute("successMessage", successMessage);
+//       
+//        return "redirect:/admin/customers";
+//    
+//    }
     
      ////////////////////
     //CARTS
