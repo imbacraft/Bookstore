@@ -119,9 +119,18 @@ public class HomeController {
         
         List<Book> bestsellers=bookRepo.findTop5();//agiogdutes, ta piasame  me thn timh
         
+        //all categories--for menu
+        List<Category> categories = categoryRepo.findAll();
+        
+        //all authors-- for menu
+        List<Author> allAuthors = authorRepo.findAll();
+        
         
         //send through model to the right jsp
         model.addAttribute("bestsellers",bestsellers);
+        model.addAttribute("categories", categories);
+        model.addAttribute("authors", allAuthors);
+       
         return "bestsellers";
     }
     @GetMapping("/booksAutocomplete")
