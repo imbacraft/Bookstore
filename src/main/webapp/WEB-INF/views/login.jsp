@@ -89,7 +89,7 @@ h3::before, h3::after {
 
 html,body{
     margin:0;
-    background-color: #f2f4f7; 
+    
 }
 
 

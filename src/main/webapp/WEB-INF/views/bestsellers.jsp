@@ -27,7 +27,7 @@
     </head>
     <body>
         <style>
-            #partWithLogo {
+  #partWithLogo {
   /* background-color: cornsilk; */
   height: auto;
   margin-top:1%;
@@ -44,7 +44,7 @@
 
 #searchText {
   position: relative;
-  width: 300px;
+  width: 320px;
   top: 25px;
   height: 40px;
   right: 50px;
@@ -60,7 +60,7 @@
 
 #searchButton {
   top: 25px;
-  right: 0px;
+  right: 54px;
   background-color: yellow;
   color: #ffd04d;
   background-image: url(https://www.hive.co.uk//Content/StoreFront/assets/CSS/images/search.png);
@@ -106,7 +106,7 @@
 }
 
 #cart-img {
-	background-image: url("basket.optimized.svg");
+	
 	background-size: 130px 110px;
 	background-repeat: no-repeat;
 	width: 130px;
@@ -214,53 +214,25 @@
 /* Change the background color of the dropdown button when the dropdown content is shown */
 /*.dropdown:hover .dropbtn {background-color: #3e8e41;}*/
 
-
-
-
-/* inherit property, tha klhronomhsei to property tou section, tou parent element */
-#freeHomeDelivery {
-  height:inherit ;
-  width: auto;
-  /* me ton sunduasmo position absolute kai margin-right(right)=0, mou phgainei to element terma deksia */
-  position: relative;
-  
-  
- 
-  border: solid 1px grey;
-  background-color: aquamarine;
-}
-
-#freeHomeDeliveryText {
-  margin: 0;
-  position: absolute;
-  font-size:1em ;
-  left:30px;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-}
-
         </style>
         
-        <section id="partWithLogo">
+         <section id="partWithLogo">
  <div class="row">
         <!-- 3 sthles/row sto megalo viewport, 2 sto mikrotero, kai 1 otan mikrunei teleiws -->
         <div class="col-lg-4">
           <!-- bazw sto 1/3 ths sthlhs 2 boxes->ara div, ara to ena katw ap to allo
           titlos +logia -->
           <a href="${pageContext.request.contextPath}">
-              <img src="bookaporta-logo.png" alt="bookLogo" id="bookLogo" />
-          </a>
-            
-        
+            <img src="https://peoplecertproject.s3.eu-central-1.amazonaws.com/UI/bookaporta-logo.png" alt="bookLogo" id="bookLogo" />
+        </a>
         </div>
         <div class="col-lg-1"></div>
         <div class="col-lg-3">
-            <form:form action="${pageContext.request.contextPath}/search/" id="form" method="POST">
+          <form action="" id="form">
                
-            <input type="text" placeholder="Search..." id="searchText" value="" name="title"/>
-            <input type="submit" value="" id="searchButton" />
-          </form:form>
+            <input type="text" placeholder="Search..." id="searchText" />
+            <input type="button" value="" id="searchButton" />
+          </form>
             <div id="suggestions" hidden="false">${suggestions} aaaa</div>
         </div>
         <div class="col-lg-2">
@@ -371,85 +343,7 @@
             </div>
         </div> 
         </section>
-               
- 
-                 <hr>
-                
-                <!--edw teleiwnei to basiko header -->
-
-
-  <!--edw ksekinaei to menu -->
-  
-    
-    <section class="section">
-        <div class="container" >
-  <div class="row" >
-      
-    <div class="col-3" >
-        <div class="dropdown">
-    
-  <a class="dropbtn" style="color:black;  font-size: 1.5em">BOOKS</a>
-  <div class="dropdown-content">
-    
-         <div class="row ">
-            
-             <div class="col-6">
-          <c:forEach items="${categories}" var="category" begin="0" end="4" ><!--edw mpainei karfwto -->
-            <a href="${pageContext.request.contextPath}/books/${category.name}">${category.name}</a>
-          </c:forEach>  
-             </div>
-      <div class="col-6">
-           <c:forEach items="${categories}" var="category" begin="5" end="9" ><!--edw mpainei karfwto -->
-               <a href="${pageContext.request.contextPath}/books/${category.name}">${category.name}</a>
-          </c:forEach>
-      </div> 
-         </div><!--edw kleinei to endiameso row -->
-  </div>
-        </div>
-        
-        
-    </div>
-    <div class="col-3">
-       <div class="dropdown">
-    
-   <a class="dropbtn" style="color:black; font-size: 1.5em">AUTHORS</a>
-  <div class="dropdown-content">
-    
-         <div class="row ">
-            
-             <div class="col-4">
-          <c:forEach items="${authors}" var="author" begin="0" end="6" ><!--edw mpainei karfwto -->
-            <a href="${pageContext.request.contextPath}/authors/${author.lastname}">${author.lastname}</a>
-          </c:forEach>  
-             </div>
-      <div class="col-4">
-           <c:forEach items="${authors}" var="author" begin="7" end="13" ><!--edw mpainei karfwto -->
-               <a href="${pageContext.request.contextPath}/authors/${author.lastname}">${author.lastname}</a>
-          </c:forEach>
-      </div> 
-          <div class="col-4">
-           <c:forEach items="${authors}" var="author" begin="14" end="20" ><!--edw mpainei karfwto -->
-               <a href="${pageContext.request.contextPath}/authors/${author.lastname}">${author.lastname}</a>
-          </c:forEach>
-      </div> 
-         </div><!--edw kleinei to endiameso row -->
-  </div>
-        </div>
-    </div>
-    <div class="col-1">
-        <a class="dropbtn" style="color:black; font-size: 1.5em" href="${pageContext.request.contextPath}/bestsellers">BESTSELLERS</a>
-    </div>
-      <div class="col-2"></div>
-      <div class="col-3" id="freeHomeDelivery">
-          <h5 id="freeHomeDeliveryText">JEFF BEZOS ΓΑΤΑΚΙ,ΕΡΧΟΜΑΣΤΕ</h5>
-      </div>
-  </div>
-</div>
-
-    
-         
-        </section>
-    
+     
         
         
          <section id="booksPerCategory">
