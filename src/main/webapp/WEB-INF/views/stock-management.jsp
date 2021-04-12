@@ -75,17 +75,17 @@
 
                         <td>${book.bookid}</td>
                         <td>${book.title}</td>
-                        <td>${book.bookdetailsList[pageContext.getAttribute("counter")].format.name}  </td>
-                        <td>${book.bookdetailsList[pageContext.getAttribute("counter")].price}</td>
-                        <td>${book.bookdetailsList[pageContext.getAttribute("counter")].publisher}</td>
-                        <td>${book.bookdetailsList[pageContext.getAttribute("counter")].publicationdate}</td>
-                        <td>${book.bookdetailsList[pageContext.getAttribute("counter")].edition}</td>
-                        <td>${book.bookdetailsList[pageContext.getAttribute("counter")].pages}</td>
-                        <td>${book.bookdetailsList[pageContext.getAttribute("counter")].language}</td>
-                        <td>${book.bookdetailsList[pageContext.getAttribute("counter")].frontcover}</td>
-                        <td>${book.bookdetailsList[pageContext.getAttribute("counter")].count}</td>
-                        <td>${book.bookdetailsList[pageContext.getAttribute("counter")].isbn10}</td>
-                        <td>${book.bookdetailsList[pageContext.getAttribute("counter")].isbn13}</td>
+                        <td>${book.bookdetailsList[0].format.name}  </td>
+                        <td>${book.bookdetailsList[0].price}</td>
+                        <td>${book.bookdetailsList[0].publisher}</td>
+                        <td>${book.bookdetailsList[0].publicationdate}</td>
+                        <td>${book.bookdetailsList[0].edition}</td>
+                        <td>${book.bookdetailsList[0].pages}</td>
+                        <td>${book.bookdetailsList[0].language}</td>
+                        <td>${book.bookdetailsList[0].frontcover}</td>
+                        <td>${book.bookdetailsList[0].count}</td>
+                        <td>${book.bookdetailsList[0].isbn10}</td>
+                        <td>${book.bookdetailsList[0].isbn13}</td>
 
                         <td>      
                             <a href="${pageContext.request.contextPath}/stock/books/update/${book.bookid}/${book.bookdetailsList[pageContext.getAttribute("counter")].format.formatid} ">Update</a>

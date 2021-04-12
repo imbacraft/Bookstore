@@ -32,7 +32,7 @@
             Format:
             <select name="format">
 
-                <option value=""> ${bookdetails.format.name}--</option>
+                <option value="${bookdetails.format.formatid}"> ${bookdetails.format.name}</option>
 
                 <c:forEach var = "format" items = "${formats}">
                     <option value="${format.formatid}"> ${format.name}</option>                 
@@ -46,7 +46,7 @@
             Category:
             <select name="category">
 
-                <option value=""> ${bookToEdit.categoryList[0].name}--</option>
+                <option value="${bookToEdit.categoryList[0].categoryid}"> ${bookToEdit.categoryList[0].name}--</option>
 
                 <c:forEach var = "category" items = "${categories}">
                     <option value="${category.categoryid}"> ${category.name}</option>                 
