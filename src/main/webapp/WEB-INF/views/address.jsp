@@ -150,8 +150,8 @@
     margin-top:14%;
  margin-left: 50px;
   color: #ffd04d;
-  height: 40px;
-  width: 40px;
+  height: 70px;
+  width: 70px;
 }
 
 #number {
@@ -228,9 +228,6 @@
   width: auto;
   /* me ton sunduasmo position absolute kai margin-right(right)=0, mou phgainei to element terma deksia */
   position: relative;
-  
-  
- 
   border: solid 1px grey;
   background-color: aquamarine;
 }

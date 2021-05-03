@@ -36,7 +36,7 @@
 }
 
 #bookLogo{
-    height:110px;
+    height:90px;
     width:320px;
 }
 
@@ -208,6 +208,77 @@
 /* Change the background color of the dropdown button when the dropdown content is shown */
 /*.dropdown:hover .dropbtn {background-color: #3e8e41;}*/
 
+/*edw ksekinaei to hovermenu  kai to  text*/
+/* The container <div> - needed to position the dropdown content */
+.section{
+    margin-top:0;
+    height:auto;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+  
+ }
+ .dropbtn{
+     width:8em;
+ }
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  text-align:center;
+  width:300px;
+  background-color: #f1f1f1;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {sbackground-color: #ddd;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+/*.dropdown:hover .dropbtn {background-color: #3e8e41;}*/
+
+
+
+
+/* inherit property, tha klhronomhsei to property tou section, tou parent element */
+#freeHomeDelivery {
+  height:inherit ;
+  width: auto;
+  /* me ton sunduasmo position absolute kai margin-right(right)=0, mou phgainei to element terma deksia */
+  position: relative;
+  
+  
+ 
+  border: solid 1px grey;
+  background-color: aquamarine;
+}
+
+#freeHomeDeliveryText {
+  margin: 0;
+  position: absolute;
+  font-size:1em ;
+  left:30px;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
         </style>
         
          <section id="partWithLogo">
@@ -337,6 +408,75 @@
             </div>
         </div> 
         </section>
+                
+      <section class="section">
+        <div class="container" >
+  <div class="row" >
+      
+    <div class="col-3" >
+        <div class="dropdown">
+    
+  <a class="dropbtn" style="color:black;  font-size: 1.5em">BOOKS</a>
+  <div class="dropdown-content">
+    
+         <div class="row ">
+            
+             <div class="col-6">
+          <c:forEach items="${categories}" var="category" begin="0" end="4" ><!--edw mpainei karfwto -->
+            <a href="${pageContext.request.contextPath}/books/${category.name}">${category.name}</a>
+          </c:forEach>  
+             </div>
+      <div class="col-6">
+           <c:forEach items="${categories}" var="category" begin="5" end="9" ><!--edw mpainei karfwto -->
+               <a href="${pageContext.request.contextPath}/books/${category.name}">${category.name}</a>
+          </c:forEach>
+      </div> 
+         </div><!--edw kleinei to endiameso row -->
+  </div>
+        </div>
+        
+        
+    </div>
+    <div class="col-3">
+       <div class="dropdown">
+    
+   <a class="dropbtn" style="color:black; font-size: 1.5em">AUTHORS</a>
+  <div class="dropdown-content">
+    
+         <div class="row ">
+            
+             <div class="col-4">
+          <c:forEach items="${authors}" var="author" begin="0" end="6" ><!--edw mpainei karfwto -->
+            <a href="${pageContext.request.contextPath}/authors/${author.lastname}">${author.lastname}</a>
+          </c:forEach>  
+             </div>
+      <div class="col-4">
+           <c:forEach items="${authors}" var="author" begin="7" end="13" ><!--edw mpainei karfwto -->
+               <a href="${pageContext.request.contextPath}/authors/${author.lastname}">${author.lastname}</a>
+          </c:forEach>
+      </div> 
+          <div class="col-4">
+           <c:forEach items="${authors}" var="author" begin="14" end="20" ><!--edw mpainei karfwto -->
+               <a href="${pageContext.request.contextPath}/authors/${author.lastname}">${author.lastname}</a>
+          </c:forEach>
+      </div> 
+         </div><!--edw kleinei to endiameso row -->
+  </div>
+        </div>
+    </div>
+    <div class="col-1">
+        <a class="dropbtn" style="color:black; font-size: 1.5em" href="${pageContext.request.contextPath}/bestsellers">BESTSELLERS</a>
+    </div>
+      <div class="col-2"></div>
+      <div class="col-3" id="freeHomeDelivery">
+          <h5 id="freeHomeDeliveryText">JEFF BEZOS ΓΑΤΑΚΙ,ΕΡΧΟΜΑΣΤΕ</h5>
+      </div>
+  </div>
+</div>
+
+    
+         
+        </section>
      
         
         
@@ -406,97 +546,7 @@
     <%@include file="footer.jspf" %>
         
           <style>
-          #partWithLogo {
-  /* background-color: cornsilk; */
-  height: 200px;
-  margin-left: 90px;
-  margin-right: 90px;
-}
 
-
-#bookLogo {
-  position: relative;
- 
-  height: 180px;
-  margin-left: 50px;
-}
-
-.TitleText {
-  font-family: sans-serif;
-  justify-content: center;
-  width: inherit;
-  margin-left: 4rem;
-}
-#searchText {
-  position: relative;
-  width: 300px;
-  top: 50px;
-  height: 30px;
-  right: 30px;
-}
-#form {
-  position: relative;
-  top: 40px;
-  right: 60px;
-}
-
-#searchSelect {
-  position: relative;
-  top: 50px;
-  right: 4px;
-  height: 30px;
-  right: 36px;
-  width: 120px;
-}
-#searchButton {
-  top: 50px;
-  right: 14px;
-  background-color: yellow;
-  color: #ffd04d;
-  background-image: url(https://www.hive.co.uk//Content/StoreFront/assets/CSS/images/search.png);
-  /* to xeraki */
-  cursor: pointer;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: 18px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #ffd04d;
-  border-radius: 0 3px 3px 0;
-  display: flex;
-  height: 30px;
-  width: 30px;
-  position: absolute;
-}
-.LoginRow {
-  position: relative;
-  top: 50px;
-}
-
-#LoginText {
-  font-size: x-small;
-}
-
-
-
-/* inherit property, tha klhronomhsei to property tou section, tou parent element */
-#freeHomeDelivery {
-  height: inherit;
-  width: 200px;
-  /* me ton sunduasmo position absolute kai margin-right(right)=0, mou phgainei to element terma deksia */
-  position: absolute;
-  right: 70px;
-  border: solid 1px grey;
-  background-color: aquamarine;
-}
-
-#freeHomeDeliveryText {
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-}
 
 @keyframes item-fade-in {
   0% {
