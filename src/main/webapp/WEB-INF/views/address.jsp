@@ -41,7 +41,8 @@
 }
 
 #bookLogo{
-    height:110px;
+    margin-top:20px;
+    height:90px;
     width:320px;
 }
 

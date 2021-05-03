@@ -102,7 +102,7 @@ html,body{
 }
 
 #bookLogo{
-    height:110px;
+    height:90px;
     width:320px;
 }
 
@@ -211,8 +211,8 @@ html,body{
     margin-top:14%;
  margin-left: 50px;
   color: #ffd04d;
-  height: 40px;
-  width: 40px;
+  height: 70px;
+  width: 70px;
 }
 
 #number {
@@ -318,7 +318,7 @@ html,body{
              <div id="number"><%=cartAmount%></div>
              <div class="clickable">
             <a id="cart-img" href="${pageContext.request.contextPath}/cart/index">
-                <img  id="basketIcon" src="basket.png" alt="basketIcon">
+                <img  id="basketIcon" src="https://peoplecertproject.s3.eu-central-1.amazonaws.com/UI/basket.optimized.svg" alt="basketIcon">
             </a>
             </div>  
         </div> 

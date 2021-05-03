@@ -130,6 +130,10 @@ public class CartController {
 
         Customer customer = null;
         List<Cartitem> cart = (List<Cartitem>) session.getAttribute("cart");
+        
+        //menu tabs
+        List<Category> categories = categoryRepo.findAll();
+        List<Author> allAuthors = authorRepo.findAll();
 
         //check if cart contains only ebook, in order to judge if delivery options are required info.
         boolean containsOnlyEbook = cartService.cartContainsOnlyEbooks(cart);
@@ -142,6 +146,8 @@ public class CartController {
         List<Country> countries = countryRepo.findAll();
 
         model.addAttribute("countries", countries);
+         model.addAttribute("categories", categories);
+        model.addAttribute("authors", allAuthors);
 
         model.addAttribute("customer", customer);
         model.addAttribute("containsOnlyEbook", containsOnlyEbook);
