@@ -103,16 +103,7 @@ public class HomeController {
 
   
 
-    //*******BooksPerAuthor--in model--sent in jsp select --as options
-//    @GetMapping("authors/{authorName}")
-//    public String showBooksPerAuthor(@PathVariable("authorName") String authorLastName, Model model) {
-//        //bring all books with a specific lastname-->sugkekrimenopoeitai sto BookRepo
-//        List<Book> booksPerAuthor = bookRepo.findByAuthorLastName(authorLastName);
-//        //sent it to model as attribute
-//        model.addAttribute("booksPerAuthor", booksPerAuthor);
-//        return "bookPerAuthor";
-//    }
-    
+   
     @GetMapping("/bestsellers")
     public String getBestsellers(Model model){
         //find bestsellers

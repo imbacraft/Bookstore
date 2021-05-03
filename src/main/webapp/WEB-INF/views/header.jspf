@@ -9,7 +9,7 @@
 
 header{
      box-sizing: content-box ;    
-     width: 1182px ; 
+     
      margin: 0 auto ;
 }
 
@@ -253,7 +253,7 @@ header{
             <input type="text" placeholder="Search..." id="searchText" />
             <input type="button" value="" id="searchButton" />
           </form>
-            <div id="suggestions" hidden="false">${suggestions} aaaa</div>
+            <div id="suggestions" hidden="false">${suggestions}</div>
         </div>
         <div class="col-lg-2">
       

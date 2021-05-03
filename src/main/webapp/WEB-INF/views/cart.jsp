@@ -22,8 +22,7 @@
       crossorigin="anonymous"
     />
     </head>
-    <body style="max-width: 1182px; margin: 0 auto;">
-        <%@include file="header.jspf" %>
+    <body>
         <%@include file="cart-index.jspf" %>
         <%@include file="footer.jspf" %>
     </body>

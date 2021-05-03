@@ -15,7 +15,8 @@ html,body{
 }
 
 #bookLogo{
-    height:110px;
+    margin-top:20px;
+    height:90px;
     width:320px;
 }
 
@@ -121,11 +122,11 @@ html,body{
 }
 
 #basketIcon {
-    margin-top:14%;
+    margin-top:10%;
  margin-left: 50px;
   color: #ffd04d;
-  height: 40px;
-  width: 40px;
+  height: 90px;
+  width: 70px;
 }
 
 #number {
@@ -140,9 +141,9 @@ html,body{
   border-radius: 100%;
   padding-top: 1px;
   text-align: center;
-  left: 40px;
+  left: 45px;
 
-  top: 10%;
+  top: 8%;
   font-family: proxima-nova, arial, sans-serif;
 }
 

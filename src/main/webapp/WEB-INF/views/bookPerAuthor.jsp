@@ -31,7 +31,8 @@
 }
 
 #bookLogo{
-    height:110px;
+    margin-top:20px;
+    height:90px;
     width:320px;
 }
 
@@ -137,11 +138,11 @@
 }
 
 #basketIcon {
-    margin-top:14%;
+    margin-top:11%;
  margin-left: 50px;
   color: #ffd04d;
-  height: 40px;
-  width: 40px;
+  height: 70px;
+  width: 70px;
 }
 
 #number {
@@ -316,7 +317,7 @@
           
              <a href="${pageContext.request.contextPath}">
             <img src="https://peoplecertproject.s3.eu-central-1.amazonaws.com/UI/bookaporta-logo.png" alt="bookLogo" id="bookLogo" />
-        </a>s
+        </a>
         
         </div>
         <div class="col-lg-1"></div>

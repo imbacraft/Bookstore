@@ -100,6 +100,75 @@
           
         </div>
                 
+         <section class="section">
+        <div class="container" >
+  <div class="row" >
+      
+    <div class="col-3" >
+        <div class="dropdown">
+    
+  <a class="dropbtn" style="color:black;  font-size: 1.5em">BOOKS</a>
+  <div class="dropdown-content">
+    
+         <div class="row ">
+            
+             <div class="col-6">
+          <c:forEach items="${categories}" var="category" begin="0" end="4" ><!--edw mpainei karfwto -->
+            <a href="${pageContext.request.contextPath}/books/${category.name}">${category.name}</a>
+          </c:forEach>  
+             </div>
+      <div class="col-6">
+           <c:forEach items="${categories}" var="category" begin="5" end="9" ><!--edw mpainei karfwto -->
+               <a href="${pageContext.request.contextPath}/books/${category.name}">${category.name}</a>
+          </c:forEach>
+      </div> 
+         </div><!--edw kleinei to endiameso row -->
+  </div>
+        </div>
+        
+        
+    </div>
+    <div class="col-3">
+       <div class="dropdown">
+    
+   <a class="dropbtn" style="color:black; font-size: 1.5em">AUTHORS</a>
+  <div class="dropdown-content">
+    
+         <div class="row ">
+            
+             <div class="col-4">
+          <c:forEach items="${authors}" var="author" begin="0" end="6" ><!--edw mpainei karfwto -->
+            <a href="${pageContext.request.contextPath}/authors/${author.lastname}">${author.lastname}</a>
+          </c:forEach>  
+             </div>
+      <div class="col-4">
+           <c:forEach items="${authors}" var="author" begin="7" end="13" ><!--edw mpainei karfwto -->
+               <a href="${pageContext.request.contextPath}/authors/${author.lastname}">${author.lastname}</a>
+          </c:forEach>
+      </div> 
+          <div class="col-4">
+           <c:forEach items="${authors}" var="author" begin="14" end="20" ><!--edw mpainei karfwto -->
+               <a href="${pageContext.request.contextPath}/authors/${author.lastname}">${author.lastname}</a>
+          </c:forEach>
+      </div> 
+         </div><!--edw kleinei to endiameso row -->
+  </div>
+        </div>
+    </div>
+    <div class="col-1">
+        <a class="dropbtn" style="color:black; font-size: 1.5em" href="${pageContext.request.contextPath}/bestsellers">BESTSELLERS</a>
+    </div>
+      <div class="col-2"></div>
+      <div class="col-3" id="freeHomeDelivery">
+          <h5 id="freeHomeDeliveryText">JEFF BEZOS ΓΑΤΑΚΙ,ΕΡΧΟΜΑΣΤΕ</h5>
+      </div>
+  </div>
+</div>
+
+    
+         
+        </section>
+                
       
 
         <!--autes einai oi epiloges pou tha exei o user/admin klp otan kanei login ,sxetika me to profile tou-->
@@ -225,44 +294,7 @@
 
   </section>
   
-         <footer>
-      <div id="footer">
-          <div style="text-align: center;" id="whoWeAre" class="footerBlock">
-              <p>Who we are</p>
-          </div>
-          <div id="helpfulLinks" class="footerBlock">
-              <span style="text-align: center;">Helpful links</span>
-              <ul>
-                  <li><a href="${pageContext.request.contextPath}/login">Sign in / Register</a></li>
-                  <li href="#">My Account</li>
-                  <li href="#">Contact us</li>
-                  <li href="#">FAQs</li>
-                  <li href="#">Log out</li>
-              </ul>
-          </div>
-          <div id="socialLinks" class="footerBlock">
-              <ul         style="float: left;
-              left: 17%;">
-                  <li>
-                      <a href="http://www.facebook.com"><img src="https://peoplecertproject.s3.eu-central-1.amazonaws.com/UI/f_logo_RGB-Blue_128.png" width="24" height="24" alt="Facebook logo"/><span style="margin-bottom:  150px">Facebook</span></a></li>
-                  
-                  <li><a href="http://www.twitter.com">
-                          <img src="https://peoplecertproject.s3.eu-central-1.amazonaws.com/UI/2021+Twitter+logo+-+blue-128.png" width="24" height="24" alt="Twitter logo"/>Twitter</a></li>
-                  
-                          <li><a href="http://www.pinterest.com">
-                                  <img src="https://peoplecertproject.s3.eu-central-1.amazonaws.com/UI/pinterest-logo-128.png" alt="Pinterest logo" width="24" height="24"/>Pinterest</a></li>
-                                  <li><a href="http://www.youtube.coms">
-                                          <img src="https://peoplecertproject.s3.eu-central-1.amazonaws.com/UI/yt_logo_rgb_light-128.png" alt="YouTube logo"  height="16"/></a></li>
-                  
-                  
-              </ul>
-          </div>
-               
-          
-      </div>
-                  
-      </footer>
-  
+     <%@include file="footer.jspf" %>
   
       
       
@@ -277,7 +309,8 @@
 }
 
 #bookLogo{
-    height:110px;
+    margin-top: 20px;
+    height:90px;
     width:320px;
 }
 
@@ -347,8 +380,6 @@
 }
 
 #cart-img {
-	
-	background-size: 130px 110px;
 	background-repeat: no-repeat;
 	width: 130px;
 	height: 110px;
@@ -386,18 +417,10 @@
     margin-top:14%;
  margin-left: 50px;
   color: #ffd04d;
-  height: 40px;
-  width: 40px;
+  height: 70px;
+  width: 90px;
 }
-#cart-img {
-	background-image: url("basket.optimized.svg");
-	background-size: 130px 110px;
-	background-repeat: no-repeat;
-	width: 130px;
-	height: 110px;
-	/*! top: 20px; */
-	position: relative;
-}
+
 
 #number {
   background-color: #ffd04d;

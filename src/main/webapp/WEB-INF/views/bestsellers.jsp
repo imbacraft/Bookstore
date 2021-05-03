@@ -115,13 +115,7 @@
 	position: relative;
 }
 
-#cart-amount {        
-    position: relative;
-    top: 34px;
-    left: 31px;
-    width: min-content;
-    z-index: 2;
-}
+
         
 #cart a {
 	/*! bottom: 200px; */
@@ -145,8 +139,8 @@
     margin-top:14%;
  margin-left: 50px;
   color: #ffd04d;
-  height: 40px;
-  width: 40px;
+  height: 70px;
+  width: 70px;
 }
 
 #number {
@@ -418,9 +412,8 @@
   margin-left: 90px;
   margin-right: 90px;
 }
-.col-lg-3 {
-  background-color: red;
-}
+
+
 #bookLogo {
   position: relative;
  
@@ -484,30 +477,7 @@
   font-size: x-small;
 }
 
-#basketIcon {
-  border-radius: 50%;
-  background-color: yellow;
-  color: #ffd04d;
-  height: 40px;
-  width: 40px;
-}
 
-#number {
-  background-color: #ffd04d;
-  color: #3a3a3a;
-  padding-top: 3px;
-  position: absolute;
-
-  color: #fff;
-  width: 20px;
-  height: 20px;
-  border-radius: 100%;
-  padding-top: 1px;
-  text-align: center;
-
-  top: 0px;
-  font-family: proxima-nova, arial, sans-serif;
-}
 
 /* inherit property, tha klhronomhsei to property tou section, tou parent element */
 #freeHomeDelivery {
