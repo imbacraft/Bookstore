@@ -16,7 +16,7 @@
 
         <br>
         
-        <form:form  action="${pageContext.request.contextPath}/admin/customers/update" method="POST" modelAttribute = "customerToEdit">
+        <form:form  action="${pageContext.request.contextPath}/service/customers/update" method="POST" modelAttribute = "customerToEdit">
 
             <label for="customerid">Customer ID</label>
             <form:input path="customerid" id="customerid"  value="${customerToEdit.customerid}" readonly="true"/>
@@ -73,7 +73,10 @@
 
 
             <br>
+            <label for="city">City</label>
+            <form:input path="city" id="city" placeholder="Enter City" value="${customerToEdit.city}"/>
 
+            <br>
 
             <label for="street">Address</label>
 
@@ -89,10 +92,7 @@
 
             <br>
 
-            <label for="paypalaccount">PayPal Account</label>
-            <form:input path="paypalaccount" id="paypalaccount"  placeholder="Enter PayPal Account" value="${customerToEdit.paypalaccount}"/>
 
-            <br>
 
             <label for="discountcoupon">Discount Coupon</label>
             <form:input path="discountcoupon" id="discountcoupon"  placeholder="Enter Discount Coupon" value="${customerToEdit.discountcoupon}"/>

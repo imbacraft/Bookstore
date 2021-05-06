@@ -110,20 +110,20 @@ public class AdminController {
         
         return "redirect:/service/customers/update";
     }
-// 
+
 //    @PostMapping("/customers/update")
 //    public String updateCustomer(Customer customer, RedirectAttributes attributes){
-//        
-//        
+//
+//
 //        System.out.println("Customer to be updated"+customer);
-//        
+//
 //        userService.saveCustomer(customer);
-//        
+//
 //        String successMessage = "Customer "+ customer.getFirstname()+" "+customer.getLastname()+" successfully updated!!";
 //        attributes.addFlashAttribute("successMessage", successMessage);
-//       
+//
 //        return "redirect:/admin/customers";
-//    
+//
 //    }
     
      ////////////////////

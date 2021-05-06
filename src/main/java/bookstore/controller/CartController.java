@@ -195,8 +195,9 @@ public class CartController {
             //this query has denied access for some reason
 //            visitor = visitorRepo.findVisitorByEmail(email);
             Role role = roleRepo.findById(5).get();
-            int phonenumber = Integer.parseInt(phone);
-            
+            long phonenumber = Long.parseLong(phone);
+
+
             if (cartService.cartContainsOnlyEbooks(cart) == false) {
 
                 int countryid = Integer.parseInt(country);

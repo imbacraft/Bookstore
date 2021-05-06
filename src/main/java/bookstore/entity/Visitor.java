@@ -79,7 +79,7 @@ public class Visitor implements Serializable {
     private int postalcode;
     @Basic(optional = false)
     @Column(name = "phone")
-    private int phone;
+    private long phone;
     @OneToMany(mappedBy = "visitor")
     private List<Cart> cartList;
 
@@ -103,7 +103,7 @@ public class Visitor implements Serializable {
         this.visitorid = visitorid;
     }
 
-    public Visitor(String firstname, String lastname, String email, Country country, String city, String street, int streetnumber, int postalcode, int phone, Role role) {
+    public Visitor(String firstname, String lastname, String email, Country country, String city, String street, int streetnumber, int postalcode, long phone, Role role) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
@@ -116,7 +116,7 @@ public class Visitor implements Serializable {
         this.role = role;
     }
 
-    public Visitor(String firstname, String lastname, String email, String city, String street, int streetnumber, int postalcode, int phone, List<Cart> cartList, Integer visitorid, Country country, Role role) {
+    public Visitor(String firstname, String lastname, String email, String city, String street, int streetnumber, int postalcode, long phone, List<Cart> cartList, Integer visitorid, Country country, Role role) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
@@ -131,7 +131,7 @@ public class Visitor implements Serializable {
         this.role = role;
     }
 
-    public Visitor(String firstname, String lastname, String email, int phone, Role role) {
+    public Visitor(String firstname, String lastname, String email, long phone, Role role) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
@@ -256,11 +256,11 @@ public class Visitor implements Serializable {
         this.postalcode = postalcode;
     }
 
-    public int getPhone() {
+    public long getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(long phone) {
         this.phone = phone;
     }
     
