@@ -101,7 +101,7 @@
 }
 
 #cart-img {
-	background-image: url("basket.optimized.svg");
+	background-image: url("../resources/static/images/basket.optimized.svg");
 	background-size: 130px 110px;
 	background-repeat: no-repeat;
 	width: 130px;

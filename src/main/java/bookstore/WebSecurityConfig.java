@@ -41,6 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/stock/**").hasAnyRole("STOCKMANAGER", "ADMIN")
                           
                 .and()
+                
                 .formLogin()//We are changing the default Spring security process of login
                 .loginPage("/login")//Show my form at this URL
                 .loginProcessingUrl("/authenticate")//When submit button is pressed the request will be sent to this URL

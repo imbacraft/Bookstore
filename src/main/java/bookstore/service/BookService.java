@@ -14,11 +14,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class BookService {
     
-
-    
-   
-    
-
     @Autowired
     BookRepo bookRepo;
     
@@ -35,6 +30,7 @@ public class BookService {
 //        return books;
 //    }
 // 
+
  public Integer findAFormatOfABook(int bookid,int formatid) {
      if (formatid==0) {
         Book book= bookRepo.findByBookid(bookid);

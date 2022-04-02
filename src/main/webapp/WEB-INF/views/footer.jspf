@@ -1,82 +1,20 @@
-<%-- 
-    Document   : footer
-    Created on : 29 Μαρ 2021, 1:23:58 π.μ.
-    Author     : george
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<style>
-#footer {
-    display: flex;
-    position: relative;
-    width: auto;
-    flex-flow:  wrap;
-}
-
-.footerBlock {
-    position: relative;
-    flex: 1 1 200px;
-    width: auto;
-    line-height: 2;
-}
-
-#whoweare {
-    position: relative;
-    background-color: #ededed;
-    display: block;
-
-}
-    
-#helpfulLinks {
-    /*! text-align: center; */
-    
-    background-color: #ededed;
-    border-left: 1px solid #cccccc;
-    border-right: 1px solid #cccccc;
-}
-
-#helpfulLinks ul {
-    text-align: start;
-    padding-left: 25%;
-    margin-top: 0;
-}
-
-#helpfulLinks a {
-    text-decoration: none;
-    color: black;
-}
-
-#socialLinks {
-    display: flex;
-    background-color: #e0e0e0;
-    justify-content: center;
-}
-#socialLinks img {
-    padding-top: 5px;
-    margin-right: 10px;
-} 
-
-#socialLinks ul {        
-    left: 25%;
-    position: initial;
-    padding-left: 0px;
-}
-</style>
+<link rel="stylesheet" href="./css/footer.css">
 
 <footer>
 <hr style="height: 1px; border-width: 0; color: #2794ad; background-color: #2794ad;"/>  
 
 <div id="footer">
     
-    <div style="text-align: center; padding-bottom: 20px; margin: 0;" id="whoweare" class="footerBlock">
+    <div id="whoweare" class="footerBlock">
         <p>Who we are</p>
         <p> At BookaPorta, we love high street shopping. From browsing to buying, finding new shops to meeting passionate staff. If we could live in a bookshop, we’d probably do it. Therefore, we decided to open a bookshop ourselves.
             We're working hard to keep that fun and sociable shopping experience alive for 15 years. </p>
     </div>
     
     <div id="helpfulLinks" class="footerBlock">
-        <p style="text-align: center;  padding-bottom: 20px;">Helpful links</p>
+        <p>Helpful links</p>
         <ul>
             <li><a href="/bookstore/login">Sign in / Register</a></li>
             <li><a href="#">My Account</a></li>
@@ -87,8 +25,7 @@
     </div>
     
     <div id="socialLinks" class="footerBlock">
-        <ul         style="float: left;
-        left: 17%;">
+        <ul>
             <li><span class="social-rendering"><img src="https://peoplecertproject.s3.eu-central-1.amazonaws.com/UI/f_logo_RGB-Blue_128.png" width="24" height="24" alt="Facebook logo"/>Facebook</span></li>
             
             <li><span class="social-rendering"><img src="https://peoplecertproject.s3.eu-central-1.amazonaws.com/UI/2021+Twitter+logo+-+blue-128.png" width="24" height="24" alt="Twitter logo"/>Twitter</span></li>
