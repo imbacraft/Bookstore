@@ -22,6 +22,7 @@
     <%-- What is this line ?--%>
     <div id="suggestions" hidden="false">${suggestions}</div>
 
+    <%-- My account menu after login --%>
     <div id="Myaccount"><sec:authorize access="!isAuthenticated()">
                 <!-- if user is not authenticated, show this link. Otherwise, it stays hidden.--> 
 
@@ -69,7 +70,7 @@
 
     <!--autes einai oi epiloges pou tha exei o user/admin klp otan kanei login ,sxetika me to profile tou-->
     <div id="login-modal">
-            <div >
+            <div>
                 <ul id="my-account-menu"   >
                     <sec:authorize access="hasRole('ADMIN')">
                         <li>
@@ -119,7 +120,7 @@
                     </sec:authorize>
                 </ul>
             </div>
-        </div> 
+    </div> 
     
 </div>
                
@@ -130,90 +131,103 @@
                 
 
 
-<!--edw ksekinaei to menu -->
-<section class="section">
-    <div class="container" >
+<!-- CATEGORY MENU -->
+<div id="categoryMenuContainer" >
+    
+    <div class="col-3" >
         <div class="row" >
-      
-            <div class="col-3" >
                 <div class="dropdown">
     
-                    <a class="dropbtn">BOOKS</a>
+                    <a class="dropbtn">Books</a>
 
                     <div class="dropdown-content">
     
-         <div class="row ">
+                        <div class="row ">
             
-             <div class="col-6">
-          <c:forEach items="${categories}" var="category" begin="0" end="4" ><!--edw mpainei karfwto -->
-            <a href="${pageContext.request.contextPath}/books/${category.name}">${category.name}</a>
-          </c:forEach>  
-             </div>
-      <div class="col-6">
-           <c:forEach items="${categories}" var="category" begin="5" end="9" ><!--edw mpainei karfwto -->
-               <a href="${pageContext.request.contextPath}/books/${category.name}">${category.name}</a>
-          </c:forEach>
-      </div> 
-         </div><!--edw kleinei to endiameso row -->
-  </div>
-        </div>
-        
-        
-    </div>
-    <div class="col-3">
-       <div class="dropdown">
-    
-    <a class="dropbtn">AUTHORS</a>
-  <div class="dropdown-content">
-    
-         <div class="row ">
-            
-             <div class="col-4">
-          <c:forEach items="${authors}" var="author" begin="0" end="6" ><!--edw mpainei karfwto -->
-            <a href="${pageContext.request.contextPath}/authors/${author.lastname}">${author.lastname}</a>
-          </c:forEach>  
-             </div>
-      <div class="col-4">
-           <c:forEach items="${authors}" var="author" begin="7" end="13" ><!--edw mpainei karfwto -->
-               <a href="${pageContext.request.contextPath}/authors/${author.lastname}">${author.lastname}</a>
-          </c:forEach>
-      </div> 
-          <div class="col-4">
-           <c:forEach items="${authors}" var="author" begin="14" end="20" ><!--edw mpainei karfwto -->
-               <a href="${pageContext.request.contextPath}/authors/${author.lastname}">${author.lastname}</a>
-          </c:forEach>
-      </div> 
-         </div><!--edw kleinei to endiameso row -->
-  </div>
+                                <div class="col-6">
+                                    <c:forEach items="${categories}" var="category" begin="0" end="4" ><!--edw mpainei karfwto -->
+                                        <a href="${pageContext.request.contextPath}/books/${category.name}">${category.name}</a>
+                                    </c:forEach>  
+                                </div>
+
+                                <div class="col-6">
+                                    <c:forEach items="${categories}" var="category" begin="5" end="9" ><!--edw mpainei karfwto -->
+                                        <a href="${pageContext.request.contextPath}/books/${category.name}">${category.name}</a>
+                                    </c:forEach>
+                                </div> 
+
+                        </div><!--edw kleinei to endiameso row -->
+                    </div>
+                </div>
         </div>
     </div>
-    <div class="col-1">
-        <a class="dropbtn" href="${pageContext.request.contextPath}/bestsellers">BESTSELLERS</a>
-    </div>
-      <div class="col-2"></div>
-  </div>
+
+
+        <!-- Authors Category -->
+        <div class="col-3">
+            <div class="dropdown">
+    
+                <a class="dropbtn">Authors</a>
+
+                    <div class="dropdown-content">
+    
+                        <div class="row ">
+            
+                            <div class="col-4">
+                                <c:forEach items="${authors}" var="author" begin="0" end="6" ><!--edw mpainei karfwto -->
+                                    <a href="${pageContext.request.contextPath}/authors/${author.lastname}">${author.firstname} ${author.lastname}</a>
+                                </c:forEach>  
+                            </div>
+                            <div class="col-4">
+                                <c:forEach items="${authors}" var="author" begin="7" end="13" ><!--edw mpainei karfwto -->
+                                    <a href="${pageContext.request.contextPath}/authors/${author.lastname}">${author.firstname} ${author.lastname}</a>
+                                </c:forEach>
+                            </div> 
+
+                            <div class="col-4">
+                                <c:forEach items="${authors}" var="author" begin="14" end="20" ><!--edw mpainei karfwto -->
+                                    <a href="${pageContext.request.contextPath}/authors/${author.lastname}">${author.firstname} ${author.lastname}</a>
+                                </c:forEach>
+                            </div> 
+                        
+                        </div><!--edw kleinei to endiameso row -->
+
+                    </div>
+                
+                  
+
+                </div>
+            </div>
+          
+
+
+          <!-- Bestsellers -->
+          <div class="col-3">
+            <div class="dropdown">
+    
+                <a class="dropbtn" id="bestSellersLink" href="${pageContext.request.contextPath}/bestsellers">Bestsellers</a>
+
+            </div>
+          </div>
+    
+
+
+
 </div>
 
     
-</section>
-  
-                  
-
-       
+<hr style="height: 1px; border-width: 0; color: #e0e0e0; background-color: #e0e0e0;"/>
 
 
 
-    <hr style="height: 1px; border-width: 0; color: #e0e0e0; background-color: #e0e0e0;"/>
-</section>
 
 
-
-<%-- <script>
+<script>
     let loginModal = document.getElementById("login-modal");
     function toggleModal()
     {
         if (loginModal.style.display !== "inline-block") loginModal.style.display = "inline-block";
         else loginModal.style.display = "none";
     } 
-</script>     --%>
+</script>    
 

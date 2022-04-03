@@ -2,15 +2,11 @@
 /*    footer*/
 #footer {
   display: flex;
-  position: relative;
-  width: auto;
-  flex-flow:  wrap;
 }
 
 .footerBlock {
   position: relative;
   flex: 1 1 200px;
-  width: auto;
   line-height: 2;
 }
 
@@ -22,7 +18,7 @@
 }
   
 #helpfulLinks {
-  /*! text-align: center; */
+  text-align: center;
   
   background-color: #ededed;
   border-left: 1px solid #cccccc;
@@ -51,7 +47,5 @@
 } 
 
 #socialLinks ul {        
-  left: 25%;
-  position: initial;
   padding-left: 0px;
 }

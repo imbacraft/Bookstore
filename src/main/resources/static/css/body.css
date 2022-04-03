@@ -1,24 +1,32 @@
-html, body{
-    background-color: #f2f4f7; 
-}
 
-#bodyContainer {
+/* Center content */
+#bodyContainer,footer {
   margin-left: auto;
   margin-right: auto;
   box-sizing:border-box;
   width: 60%;
 }
 
-/* Carousel section css */
+/* Carousel section */
 #carousel {
-  background-color: orange;
-  height: 800px;
+
+
+}
+
+#authorMonthContainer{
+  display: flex;
+}
+
+
+#authorOfTheMonthImage {
+
+  height: 300px;
+  width: 300px;
 }
 
 #theCarousel2 {
 
 
-  max-width: fit-content;
 }
 
 
