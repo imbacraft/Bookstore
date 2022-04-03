@@ -10,23 +10,23 @@
 
 <div id="logoContainer">
 
-    <%-- Logo --%>
-    <a href="${pageContext.request.contextPath}"><img src="https://peoplecertproject.s3.eu-central-1.amazonaws.com/UI/bookaporta-logo.png" alt="bookLogo" id="bookaportaLogo" /></a>
+    <!-- Logo -->
+    <a id= "bookaPortaLink" href="${pageContext.request.contextPath}"><img src="https://peoplecertproject.s3.eu-central-1.amazonaws.com/UI/bookaporta-logo.png" alt="bookLogo" id="bookaportaLogo" /></a>
 
-    <%-- Search bar --%>
-    <form action="" id="form">
-        <input type="text" placeholder="Search..." id="searchText" />
-        <input type="button" value="" id="searchButton" />
+    <!-- Search bar -->
+    <form action="" id="searchBar">
+        <input type="text" placeholder="Search books or authors..." id="searchText" />
+        <input type="submit" value="" id="searchButton" />
     </form>
     
-    <%-- What is this line ?--%>
-    <div id="suggestions" hidden="false">${suggestions}</div>
+    <!-- MyAccount menu after login -->
+    <div id="myAccount">
+            
+            <!-- if user is not authenticated, show this link. Otherwise, it stays hidden.--> 
+            <sec:authorize access="!isAuthenticated()">
 
-    <%-- My account menu after login --%>
-    <div id="Myaccount"><sec:authorize access="!isAuthenticated()">
-                <!-- if user is not authenticated, show this link. Otherwise, it stays hidden.--> 
+                <a id="myAccountLogin"class="nav-link" href="${pageContext.request.contextPath}/login">Login</a>
 
-                <h3><a class="nav-link" href="${pageContext.request.contextPath}/login">Account</a></h3>
             </sec:authorize> 
             <sec:authorize access="hasRole('ADMIN')">
                  <p>Welcome, <sec:authentication property="principal.username"/>!</p>
@@ -43,12 +43,15 @@
             <sec:authorize access="hasRole('STOCKMANAGER')">   
                 <p>Welcome, <sec:authentication property="principal.username" />!</p>
                 <input type="button"  onclick="toggleModal()" id="account-checkbox" value="Μy Account"/>
-            </sec:authorize>    </div>
+            </sec:authorize>    
+    
+    </div>
 
-    <%-- Cart --%>
+    <!-- Cart -->
     <div id="cart">
 
-        <% int cartAmount = 0; %>
+            <!-- Scriptlet to get cart index amount -->
+            <% int cartAmount = 0; %>
             <c:forEach var="cartitem" items="${sessionScope.cart}">
                   
                 <c:set var="item" value="${cartitem.quantity}"></c:set>
@@ -57,13 +60,13 @@
                   
             </c:forEach>
               
-             <div id="number"><%=cartAmount%></div>
 
-             <div class="clickable">
-                <a id="cart-img" href="${pageContext.request.contextPath}/cart/index">
-                    <img  id="basketIcon" src="./images/basket.optimized.svg" alt="basketIcon">
-                </a>
-            </div> 
+            <a id="basketIconLink" href="${pageContext.request.contextPath}/cart/index">
+                    <img  id="basketIcon" src="./images/basket.png" alt="basketIcon">
+            </a>
+
+            <div id="number"><%=cartAmount%></div>
+            
     </div>
             
              
@@ -73,9 +76,6 @@
             <div>
                 <ul id="my-account-menu"   >
                     <sec:authorize access="hasRole('ADMIN')">
-                        <li>
-                            Role(s):<sec:authentication property="principal.authorities"/>
-                        </li>
                         <li>
                             <a href="${pageContext.request.contextPath}/admin">Administrator Management Page</a>
                         </li>
@@ -97,7 +97,7 @@
                     </sec:authorize>
                     <sec:authorize access="hasRole('SERVICEAGENT')">
                         <li>
-                            <a href="${pageContext.request.contextPath}/service">Go to Customer Service Agent Management Page</a>        
+                            <a href="${pageContext.request.contextPath}/service">Customer Service Agent Management Page</a>        
                         </li>
                         <li>
                             <form:form action="${pageContext.request.contextPath}/logout" method="POST">
@@ -110,7 +110,7 @@
                             Role(s):<sec:authentication property="principal.authorities"/>
                         </li>
                         <li>
-                            <a href="${pageContext.request.contextPath}/stock">Go to Stock Management Page</a>
+                            <a href="${pageContext.request.contextPath}/stock">Stock Management Page</a>
                         </li>
                         <li>
                             <form:form action="${pageContext.request.contextPath}/logout" method="POST">

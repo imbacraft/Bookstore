@@ -4,19 +4,52 @@
 /********************/
 
 #logoContainer{
+
    padding-top: 5%;
    display: flex;
-   justify-content: center;
-   gap: 100px;
+   justify-content:space-evenly;
+   align-items: flex-end;
 }
 
-#bookaportaLogo{
-   height:65px;
-   width:250px;
+#bookaPortaLink, #bookaportaLogo {
+   height: 65px;
+   width: 250px;
 }
 
-#searchField {
-   font-size: 16px;
+#searchBar{
+   display: flex;
+   width: 280px;
+
+}
+
+#searchText{
+
+   width: 280px;
+
+}
+
+#searchButton {
+   background-color: yellow;
+   background-image: url(https://www.hive.co.uk//Content/StoreFront/assets/CSS/images/search.png);
+   background-repeat: no-repeat;
+   background-position: center center;
+   background-size: 18px;
+   border-style: solid;
+   border-width: 1px;
+   border-color: gray;
+   border-radius: 0 3px 3px 0;
+   height: 32px;
+   width: 40px;
+  } 
+  
+
+#myAccountLogin{
+
+   color:black;
+   font-size: 20px;
+
+   
+
 }
    
 #account-checkbox {
@@ -29,76 +62,51 @@
    height: 30px;
 }
 
-.myAccount p {
+#myAccount p {
    font-family: "Georgia", serif;
    font-style: oblique;
    font-size: 12pt;
    border: none;
-   bottom: 39px;
-}
-.myAccount-modal {
-       top: 20px;
-   }
-   
-#my-account-menu {
-padding: 15px;
+   padding-left: 5px;
 }
 
+
+   
 #login-modal {
+
    font-family: Helvetica, Arial, sans-serif;
-   z-index: 10;
-   height: auto;
-   width: 200px;
+   width: 150px;
    background-color: white;
-   color: #2794ad;
+   color: black;
    display: none;
    border-radius: 5px;
    border: 1px solid #cccccc;
    right: 120px;
    top: 120px;
-   /* width: min-content; */        font-size: 14pt;
-       text-decoration: none;
+   font-size: 14px;
    box-shadow: 3px 3px 12px lightgrey;
 }     
        
-#searchButton {
+#login-modal ul {
 
- background-color: yellow;
- color: #ffd04d;
- background-image: url(https://www.hive.co.uk//Content/StoreFront/assets/CSS/images/search.png);
- /* to xeraki */
- background-repeat: no-repeat;
- background-position: center center;
- background-size: 18px;
- border-style: solid;
- border-width: 1px;
- border-color: #ffd04d;
- border-radius: 0 3px 3px 0;
- height: 40px;
- width: 30px;
+   list-style-type: none;
+
 }
 
-
-.clickable {
-height: 80px;
-width: 80px;
-right: 50px;
-position: relative;
+#cart {
+  display: flex;
 }
 
 #basketIcon {
-   margin-top:10%;
-margin-left: 50px;
- color: #ffd04d;
- height: 90px;
- width: 70px;
+   color: #ffd04d;
+   height: 40px;
+   width: 50px;
 }
 
 #number {
  background-color: #ffd04d;
  color: #3a3a3a;
  padding-top: 3px;
-
  color: #fff;
  width: 20px;
  height: 20px;
@@ -109,12 +117,14 @@ margin-left: 50px;
  font-family: proxima-nova, arial, sans-serif;
 }
 
+
+
 /*********************/
 /* Category MENU BAR
 /*********************/
 
 #categoryMenuContainer{
-   margin-left: 15%;
+   margin-left: 10%;
    display: flex;
    justify-content: space-evenly;
    gap: 100px;
@@ -137,7 +147,7 @@ margin-left: 50px;
  
 }
 .dropbtn{
-   font-size: large;
+   font-size: 20px;
    font-weight: bold;
    width:8em;
 }
@@ -167,6 +177,3 @@ margin-left: 50px;
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {display: block;}
-
-/* Change the background color of the dropdown button when the dropdown content is shown */
-/*.dropdown:hover .dropbtn {background-color: #3e8e41;}*/

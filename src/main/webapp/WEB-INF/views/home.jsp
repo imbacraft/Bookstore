@@ -79,10 +79,11 @@
 
           <div class="row">
 
-            <div class="col-4"><a href="${pageContext.request.contextPath}/books/search/${bookOfTheMonth.bookid}">
-
-              <img id="monthBookImage" src="${bookOfTheMonth.bookdetailsList.toArray()[0].frontcover}" alt="bookOfTheMonthImage">
-                  </a>
+            <div class="col-4">
+              
+                <a href="${pageContext.request.contextPath}/books/search/${bookOfTheMonth.bookid}">
+                    <img id="monthBookImage" src="${bookOfTheMonth.bookdetailsList.toArray()[0].frontcover}" alt="bookOfTheMonthImage">
+                </a>
             </div>
 
             <div class="col-7 bookMonthCol" >
