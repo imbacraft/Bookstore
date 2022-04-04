@@ -13,15 +13,17 @@
 
         <link rel="stylesheet" href="./css/footer.css" />
         <link rel="stylesheet" href="./css/body.css" />
-
-        <!-- Libraries -->
+        <link href="//cdn.jsdelivr.net/jquery.slick/1.5.9/slick.css" rel="stylesheet"/>
+        <link rel="stylesheet" type="text/css" href="http://kenwheeler.github.io/slick/slick/slick-theme.css"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
         
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 </head>
 
@@ -30,7 +32,7 @@
 
 <div id="bodyContainer">
 
-      <%-- Include header --%>
+      <!-- Header -->
       <%@include file="header.jspf"%>
 
       
@@ -123,80 +125,69 @@
           <a href="${pageContext.request.contextPath}/authors/${authorOfTheMonth.lastname}"><img  id="authorOfTheMonthImage" src="${authorOfTheMonth.portrait}" alt="authorOfTheMonth"></a>
 
           <div id="authorOfTheMonthNameAndBio">
-            <h2><a href="${pageContext.request.contextPath}/authors/${authorOfTheMonth.lastname}">${authorOfTheMonth.firstname} ${authorOfTheMonth.lastname}</a></h2>
-            <p id="authorMonthColText">${authorOfTheMonth.biography}</p>
-          <a id="authorOfTheMonthFindMore" href="${pageContext.request.contextPath}/authors/${authorOfTheMonth.lastname}">Explore books from ${authorOfTheMonth.firstname} >></a>
+              <h2><a href="${pageContext.request.contextPath}/authors/${authorOfTheMonth.lastname}">${authorOfTheMonth.firstname} ${authorOfTheMonth.lastname}</a></h2>
+              <p id="authorMonthColText">${authorOfTheMonth.biography}</p>
+              <a id="authorOfTheMonthFindMore" href="${pageContext.request.contextPath}/authors/${authorOfTheMonth.lastname}">Explore books from ${authorOfTheMonth.firstname} >></a>
+          </div>
 
         </div>
-
-      </div>
            
         
         <hr style="height: 1px; border-width: 0; color: #e0e0e0; background-color: #e0e0e0;"/>
         <h1 id="authorOfTheMonthTitle">Books from ${authorOfTheMonth.firstname} ${authorOfTheMonth.lastname}</h1>
         <hr style="height: 1px; border-width: 0; color: #e0e0e0; background-color: #e0e0e0;"/>
 
-              <div class="carousel slide multi-item-carousel" id="theCarousel2">
-                <div class="carousel-inner">
-
-
-                  <div class="item active">
-                    <div class="col-xs-4">
-                      <a href="${pageContext.request.contextPath}/books/search/${authorOfTheMonth.bookList.toArray()[0].bookid}"
-                        ><img
-                          src="${authorOfTheMonth.bookList.toArray()[0].bookdetailsList.toArray()[0].frontcover}"
-                          class="img-responsive"
-                      /></a>
-                    </div>
-                  </div><!--εδώ κλείνει το item active  -->
-
-                <c:forEach items="${authorOfTheMonth.bookList}" var="book" begin="1" end="${authorOfTheMonth.bookList.size()-1}">
-                    <div class="item">
-                          <div class="col-xs-4">
-                              <a href="${pageContext.request.contextPath}/books/search/${book.bookid}">
-                                  <img src="${book.bookdetailsList.toArray()[0].frontcover}" class="img-responsive"/>
-                              </a>
-                          </div>
-                    </div>
-                </c:forEach>
-                  
-              </div>
-                <a
-                  class="left carousel-control"
-                  href="#theCarousel2"
-                  data-slide="prev"
-                  ><i class="glyphicon glyphicon-chevron-left"></i
-                ></a>
-                <a
-                  class="right carousel-control"
-                  href="#theCarousel2"
-                  data-slide="next"
-                  ><i class="glyphicon glyphicon-chevron-right"></i
-                ></a>
-              </div>
-            </div>
-          
-              </div>
+       
+        <div class="bookCarousel">
+          <div>
+            <a href="${pageContext.request.contextPath}/books/search/${authorOfTheMonth.bookList.toArray()[0].bookid}"
+                    ><img
+                      src="${authorOfTheMonth.bookList.toArray()[0].bookdetailsList.toArray()[0].frontcover}"
+                      class="img-responsive"
+                  /></a>
           </div>
+          <c:forEach items="${authorOfTheMonth.bookList}" var="book" begin="1" end="${authorOfTheMonth.bookList.size()-1}">
+                <div>
+                          <a href="${pageContext.request.contextPath}/books/search/${book.bookid}">
+                              <img src="${book.bookdetailsList.toArray()[0].frontcover}" class="img-responsive"/>
+                          </a>
+                </div>
+            </c:forEach>
+            
         </div>
-        </div>
-        </div>
+       
+        
+    
     </section>
      
       
 
-  
-    <%-- Footer --%>
-    <%@include file="footer.jspf" %>
- 
-
-
-    
- 
-
 
 </div>
 
+
+
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <script type="text/javascript" src="./slick/slick.min.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('.bookCarousel').slick({
+        dots: true,
+        infinite: true,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 5000,
+      });
+    });
+  </script>
+
 </body>
+
+ 
+<!-- Footer -->
+<%@include file="footer.jspf" %>
 
 </html>

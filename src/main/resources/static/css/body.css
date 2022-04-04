@@ -39,8 +39,8 @@
 }
 
 
-#authorOfTheMonthFindMore{
-
+.slick-prev:before, .slick-next:before{
+  color:yellow!important;
 }
 
 
