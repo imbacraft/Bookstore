@@ -29,6 +29,7 @@ h3::before, h3::after {
 .login-area .title {
 
     margin-top: 30px;
+    font-weight: bold;
 }
 
 .log-reg-box {
@@ -68,7 +69,12 @@ h3::before, h3::after {
 
 #register-button {
 
-    padding-bottom: 125px;
+    padding-bottom: 120px;
+}
+
+#registerText{
+
+    padding: 2%;
 }
 
 .login-button input, 
