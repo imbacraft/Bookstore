@@ -9,13 +9,13 @@
 <div id="footerContainer">
     
     <div id="whoweare" class="footerBlock">
-        <p>Who we are</p>
+        <p class="title">Who we are</p>
         <p> At BookaPorta, we love high street shopping. From browsing to buying, finding new shops to meeting passionate staff. If we could live in a bookshop, we’d probably do it. Therefore, we decided to open a bookshop ourselves.
             We're working hard to keep that fun and sociable shopping experience alive for 15 years. </p>
     </div>
     
     <div id="helpfulLinks" class="footerBlock">
-        <p>Helpful links</p>
+        <p class="title">Helpful links</p>
         <ul>
             <li><a href="/bookstore/login">Sign in / Register</a></li>
             <li><a href="#">My Account</a></li>
@@ -25,7 +25,7 @@
     </div>
     
     <div id="socialLinks" class="footerBlock">
-        <p>Find us on social media</p>
+        <p class="title">Social media</p>
         <ul>
             <li><span class="social-rendering"><a href="https://facebook.com"><img src="https://peoplecertproject.s3.eu-central-1.amazonaws.com/UI/f_logo_RGB-Blue_128.png" width="24" height="24" alt="Facebook logo"/></a></span></li>
             

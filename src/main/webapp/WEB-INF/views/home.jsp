@@ -43,13 +43,14 @@
             <li data-target="#carouselExampleIndicators" data-slide-to="2" class=""></li>
           </ol>
           <div class="carousel-inner">
+            <!-- TODO: Define logic to pick category images. Right now its arbitrary -->
               <div class="carousel-item active">
-                <a href="${pageContext.request.contextPath}/books/Medicine">
+                <a href="${pageContext.request.contextPath}/books/Comic">
                     <img class="d-block w-100" src="./images/Batman-etc.jpg" alt="First slide">
                 </a>
               </div>
               <div class="carousel-item">
-                <a href="${pageContext.request.contextPath}/books/Comic">
+                <a href="${pageContext.request.contextPath}/books/Psychology">
                 <img class="d-block w-100" src="./images/MentalHealth.jpg" alt="Second slide">
                 </a>
               </div>

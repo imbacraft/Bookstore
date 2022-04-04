@@ -10,6 +10,20 @@
 .footerBlock {
   width: 33%;
   line-height: 2;
+  text-align: justify;
+  padding-left: 30px;
+  padding-right: 30px;
+
+}
+
+.footerBlock .title{
+  width: 45%;
+  margin-left: 25%;
+  background-color:yellow;
+  border: 1px solid grey;
+  border-radius: 25px;
+  font-weight: bold;
+  text-align: center;
 }
 
 .footerBlock ul {
@@ -17,6 +31,9 @@
 }
 
 #whoweare {
+
+  padding-left: 20px;
+  padding-right: 20px;
 
 }
   
