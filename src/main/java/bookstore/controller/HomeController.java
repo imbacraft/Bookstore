@@ -56,20 +56,19 @@ public class HomeController {
         //upcoming books--for multiple itemsPerSlide carousel
         List<Book> upcomingBooks=bookRepo.findUpcomingBooks();
 
-        Author authorOfTheMOnth=authorRepo.findById(17);//thelw specifically ton slott, g auto to bazw etsi
-        
-        
-        
-        
+
+        //TODO: define logic to pick author of the Month. Right now it is arbitrarily id 17.
+        Author authorOfTheMonth=authorRepo.findById(17);//thelw specifically ton slott, g auto to bazw etsi
+
+        //BookOfTheMonth--dialeksa to pio akrivo
         Book bookOfTheMonth=bookRepo.findBookOfTheMonth();
         
         
-        //add BookOfTheMonth--dialeksa to pio akrivo
         
         model.addAttribute("categories", categories);
         model.addAttribute("authors", allAuthors);
         model.addAttribute("upcomingBooks",upcomingBooks);
-       model.addAttribute("authorOfTheMonth", authorOfTheMOnth);
+        model.addAttribute("authorOfTheMonth", authorOfTheMonth);
         model.addAttribute("bookOfTheMonth", bookOfTheMonth);
       
 

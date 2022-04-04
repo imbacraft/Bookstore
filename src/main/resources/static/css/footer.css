@@ -1,26 +1,28 @@
 
 /*    footer*/
-#footer {
+#footerContainer {
+  padding: 0;
   display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 
 .footerBlock {
-  position: relative;
-  flex: 1 1 200px;
+  width: 33%;
   line-height: 2;
 }
 
+.footerBlock ul {
+  list-style-type: none;
+}
+
 #whoweare {
-  position: relative;
-  background-color: #ededed;
-  display: block;
 
 }
   
 #helpfulLinks {
   text-align: center;
   
-  background-color: #ededed;
   border-left: 1px solid #cccccc;
   border-right: 1px solid #cccccc;
 }
@@ -37,9 +39,7 @@
 }
 
 #socialLinks {
-  display: flex;
-  background-color: #e0e0e0;
-  justify-content: center;
+  text-align: center;
 }
 #socialLinks img {
   padding-top: 5px;

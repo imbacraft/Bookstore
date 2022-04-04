@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="./css/body.css" />
         <link rel="stylesheet" href="./css/multipleItemsCarousel.css"/>
 
-        <%-- Libraries --%>
+        <!-- Libraries -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
@@ -35,7 +35,7 @@
       <%@include file="header.jspf"%>
 
       
-        <!-- Carousel with 3 categories -->
+        <!-- Carousel with 3 example books -->
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
           <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -75,30 +75,28 @@
      <!-- book of the month -->
     <section id="bookOfTheMonth">
 
-        <div id="bookMonthDiv">
+        <hr style="height: 1px; border-width: 0; color: #e0e0e0; background-color: #e0e0e0;"/>
+        <h1>Book Of The Month</h1>  
+        <hr style="height: 1px; border-width: 0; color: #e0e0e0; background-color: #e0e0e0;"/>
 
-          <div class="row">
+        <div id="bookOfTheMonthContainer">
 
-            <div class="col-4">
-              
+
                 <a href="${pageContext.request.contextPath}/books/search/${bookOfTheMonth.bookid}">
-                    <img id="monthBookImage" src="${bookOfTheMonth.bookdetailsList.toArray()[0].frontcover}" alt="bookOfTheMonthImage">
+                    <img id="bookOfTheMonthImage" src="${bookOfTheMonth.bookdetailsList.toArray()[0].frontcover}" alt="bookOfTheMonthImage">
                 </a>
-            </div>
 
-            <div class="col-7 bookMonthCol" >
-                <h1>Book Of The Month</h1>  
-              <h2>${bookOfTheMonth.title}</h2>
-              <h3><a href="${pageContext.request.contextPath}/authors/${bookOfTheMonth.authorList.toArray()[0].lastname}">${bookOfTheMonth.authorList.toArray()[0].firstname} ${bookOfTheMonth.authorList.toArray()[0].lastname}</a>
-              </h3>
 
-              <p id="bookMonthColText"> 
-                  ${bookOfTheMonth.description}
-              </p>
-              <a href="${pageContext.request.contextPath}/books/search/${bookOfTheMonth.bookid}">Find Out More >></a>
-            </div>
-          </div>
-
+              <div id="bookOfTheMonthDetails">
+                <a href="${pageContext.request.contextPath}/books/search/${bookOfTheMonth.bookid}"><h2>${bookOfTheMonth.title}</h2></a>
+                <h3><a href="${pageContext.request.contextPath}/authors/${bookOfTheMonth.authorList.toArray()[0].lastname}">${bookOfTheMonth.authorList.toArray()[0].firstname} ${bookOfTheMonth.authorList.toArray()[0].lastname}</a></h3>
+                <p id="bookMonthColText"> 
+                    ${bookOfTheMonth.description}
+                </p>
+                
+                <a href="${pageContext.request.contextPath}/books/search/${bookOfTheMonth.bookid}">Find Out More >></a>
+              </div>
+        
         </div>
     </section>
         
@@ -121,16 +119,22 @@
         <hr style="height: 1px; border-width: 0; color: #e0e0e0; background-color: #e0e0e0;"/>
       
         <div id="authorMonthContainer">
-          <img  id="authorOfTheMonthImage" src="${authorOfTheMonth.portrait}" alt="authorOfTheMonth">
+
+          <a href="${pageContext.request.contextPath}/authors/${authorOfTheMonth.lastname}"><img  id="authorOfTheMonthImage" src="${authorOfTheMonth.portrait}" alt="authorOfTheMonth"></a>
 
           <div id="authorOfTheMonthNameAndBio">
             <h2><a href="${pageContext.request.contextPath}/authors/${authorOfTheMonth.lastname}">${authorOfTheMonth.firstname} ${authorOfTheMonth.lastname}</a></h2>
             <p id="authorMonthColText">${authorOfTheMonth.biography}</p>
-          </div>
-           
+          <a id="authorOfTheMonthFindMore" href="${pageContext.request.contextPath}/authors/${authorOfTheMonth.lastname}">Explore books from ${authorOfTheMonth.firstname} >></a>
+
         </div>
 
-          <a href="${pageContext.request.contextPath}/authors/${authorOfTheMonth.lastname}">Explore books from ${authorOfTheMonth.firstname} >></a>
+      </div>
+           
+        
+        <hr style="height: 1px; border-width: 0; color: #e0e0e0; background-color: #e0e0e0;"/>
+        <h1 id="authorOfTheMonthTitle">Books from ${authorOfTheMonth.firstname} ${authorOfTheMonth.lastname}</h1>
+        <hr style="height: 1px; border-width: 0; color: #e0e0e0; background-color: #e0e0e0;"/>
 
               <div class="carousel slide multi-item-carousel" id="theCarousel2">
                 <div class="carousel-inner">

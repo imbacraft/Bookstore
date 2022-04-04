@@ -1,3 +1,13 @@
+h3 {
+
+    text-align: center;
+
+}
+
+.login-error{
+
+    color: red;
+}
 
 h3::before, h3::after {
     border-top: 1px solid #cbe8f0;
@@ -9,30 +19,45 @@ h3::before, h3::after {
 }
     
 .login-area {
+    padding: 0%;
     display: flex;
     flex-flow: wrap;
     justify-content: space-between;
+    gap: 30px;
 }
+
+.login-area .title {
+
+    margin-top: 30px;
+}
+
 .log-reg-box {
     border: 1px solid #2794ad;
     height: 450px;
     display: flex;
+    flex-direction: column;
+    
     flex: 1 1 400px;
     
     text-align: center;
-     align-content: center;
-     justify-content: center;
-     margin: 10px;
-     flex-basis: 200px;
+    align-content: center;
+    justify-content: space-between;
+    flex-basis: 200px;
+}
+
+#loginItemBox{
+
+    width: 38%;
+
 }
 
 .credentials {
-     
-    position: relative;
-    
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+
     margin: 70px;
     height: 50px;
-    display: flex;
 
 }
 .credentials input {
@@ -41,9 +66,15 @@ h3::before, h3::after {
     
 }
 
+#register-button {
+
+    padding-bottom: 125px;
+}
+
 .login-button input, 
-.register-button  button {
+#register-button  button {
     font-family: "Georgia", serif;
+    margin-top: 40px;
     
     right: 30px;
     bottom: 40px;

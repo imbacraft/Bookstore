@@ -27,8 +27,6 @@ public interface BookRepo extends JpaRepository<Book, Integer> {
     public Book findByBookid(int bookid);
     
     @Query(value="select book.* from book,category,joinedbookcategory where book.bookid=joinedbookcategory.bookid"
-
-
             + " and category.categoryid=joinedbookcategory.categoryid and category.name=?1 "
             ,nativeQuery = true)
     List<Book> findByCategory(String categoryName);//paizei, den thelei ta booktype
@@ -52,6 +50,8 @@ public interface BookRepo extends JpaRepository<Book, Integer> {
     List<Book> findUpcomingBooks();
 
     
+
+    //TODO: implement logic to find the Book of the Month. Right now it gets the most expensive book.
     @Query(value="select book.* from book,bookdetails,format where format.formatid=bookdetails.formatid and book.bookid=bookdetails.bookid \n" +
 "order by bookdetails.price\n" +
 "desc limit 2,1;",nativeQuery=true)

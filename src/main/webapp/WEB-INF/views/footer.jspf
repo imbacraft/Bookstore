@@ -4,9 +4,9 @@
 
 <footer>
 
-<hr style="height: 1px; border-width: 0; color: #2794ad; background-color: #2794ad;"/>  
+<hr style="height: 1px; border-width: 0; color: #e0e0e0; background-color: #e0e0e0;"/>
 
-<div id="footer">
+<div id="footerContainer">
     
     <div id="whoweare" class="footerBlock">
         <p>Who we are</p>
@@ -21,13 +21,13 @@
             <li><a href="#">My Account</a></li>
             <li><a href="${pageContext.request.contextPath}/contact">Contact us</a></li>
             <li><a href="${pageContext.request.contextPath}/faqs">FAQs</a></li>
-            <li><a href="${pageContext.request.contextPath}/logout">Log out</a></li>
         </ul>
     </div>
     
     <div id="socialLinks" class="footerBlock">
+        <p>Find us on social media</p>
         <ul>
-            <li><span class="social-rendering"><img src="https://peoplecertproject.s3.eu-central-1.amazonaws.com/UI/f_logo_RGB-Blue_128.png" width="24" height="24" alt="Facebook logo"/>Facebook</span></li>
+            <li><span class="social-rendering"><a href="https://facebook.com"><img src="https://peoplecertproject.s3.eu-central-1.amazonaws.com/UI/f_logo_RGB-Blue_128.png" width="24" height="24" alt="Facebook logo"/></a></span></li>
             
             <li><span class="social-rendering"><img src="https://peoplecertproject.s3.eu-central-1.amazonaws.com/UI/2021+Twitter+logo+-+blue-128.png" width="24" height="24" alt="Twitter logo"/>Twitter</span></li>
             
