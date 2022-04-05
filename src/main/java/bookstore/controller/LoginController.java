@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping({"/login"})
+@RequestMapping("/login")
 public class LoginController {
 
     @Autowired
@@ -45,7 +45,7 @@ public class LoginController {
     BookService bookService;
 
     //*****all categories in homepage as options in select tag in 
-    @RequestMapping
+    @GetMapping
     public String showLogin(Model model) {
         //all categories--for menu
         List<Category> categories = categoryRepo.findAll();
