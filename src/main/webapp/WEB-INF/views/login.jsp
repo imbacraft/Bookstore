@@ -7,9 +7,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link rel="icon" href="./images/favicon.ico">
+
+
         <title>BookaPorta login</title>
-         <link rel="stylesheet" href="./css/body.css" />
-         <link rel="stylesheet" href="./css/login.css" />
+
+    
+        <link rel="stylesheet" href="./css/body.css" />
+        <link rel="stylesheet" href="./css/login.css" />
 
          <%@include file="library-dependencies.jspf" %>
          
