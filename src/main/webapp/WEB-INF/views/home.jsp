@@ -14,9 +14,7 @@
         <link rel="stylesheet" href="./css/footer.css" />
         <link rel="stylesheet" href="./css/body.css" />
        
-        <%@include file="library-dependencies.jspf" %>
 
-  <!-- Slick is required for the book Carousel -->
 </head>
 
 
