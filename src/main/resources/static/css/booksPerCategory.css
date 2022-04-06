@@ -1,0 +1,81 @@
+#booksPerCategory {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+    
+  }
+
+#booksPerCategory a {
+  color: #007bff;
+}
+
+.specific-row {
+  padding-left: 8%;
+  display: flex;
+  justify-content: space-evenly;
+  }
+
+.specific-row h4 {
+
+  font-size: large;
+}
+
+.specific-row h5 {
+
+  font-size: larger;
+}
+
+
+  .image {
+    height: 100%;
+    max-height: 310px;
+    width: 110%;
+    margin-top: 10%;
+  }
+
+  .despatched {
+    font-size: large;
+  }
+  .addToBasket {
+    top: 38%;
+  }
+  .mainContent {
+    margin-top: 5%;
+  }
+  .addToBasketPrice {
+    text-align: center;
+  }
+  .addCartBtn {
+    background: #3498db;
+    background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+    background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+    background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+    background-image: -o-linear-gradient(top, #3498db, #2980b9);
+    background-image: linear-gradient(to bottom, #3498db, #2980b9);
+    border-radius: 28px;
+    color: #ffffff;
+    font-size: 14px;
+    text-decoration: none;
+  }
+
+
+  .OutOfStock{
+       border-radius:10%; 
+      height: auto;
+      width: auto;
+      background-color: grey;
+  }
+
+  .add-basket{
+      margin-top: 40%;
+  }
+
+.hr{
+      margin-right: 20%;
+  }
+
+h5 {
+
+  font-size: medium;
+}

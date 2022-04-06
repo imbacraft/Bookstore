@@ -12,8 +12,10 @@
 
         <title>Bookaporta Home</title>
 
-        <link rel="stylesheet" href="./css/footer.css" />
         <link rel="stylesheet" href="./css/body.css" />
+
+        <%@include file="library-dependencies.jspf"%>  
+
        
     </head>
 
@@ -79,7 +81,7 @@
 
               <div id="bookOfTheMonthDetails">
                 <a href="${pageContext.request.contextPath}/books/search/${bookOfTheMonth.bookid}"><h2>${bookOfTheMonth.title}</h2></a>
-                <h3><a href="${pageContext.request.contextPath}/authors/${bookOfTheMonth.authorList.toArray()[0].lastname}">${bookOfTheMonth.authorList.toArray()[0].firstname} ${bookOfTheMonth.authorList.toArray()[0].lastname}</a></h3>
+                <h3>By <a href="${pageContext.request.contextPath}/authors/${bookOfTheMonth.authorList.toArray()[0].lastname}">${bookOfTheMonth.authorList.toArray()[0].firstname} ${bookOfTheMonth.authorList.toArray()[0].lastname}</a></h3>
                 <p id="bookMonthColText"> 
                     ${bookOfTheMonth.description}
                 </p>

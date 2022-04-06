@@ -12,6 +12,7 @@
   text-align: center;
 }
 
+
 /* Carousel section */
 .d-block w-100 {
 
@@ -30,6 +31,11 @@
   text-align: justify;
 }
 
+#authorMonthContainer a, #bookOfTheMonthContainer a{
+  color: #007bff;
+
+}
+
 
 
 #authorOfTheMonthImage {
@@ -45,7 +51,8 @@
 
 .bookCarousel img {
 
-  height: 500px;
+  height: 400px;
+  
 }
 
 
