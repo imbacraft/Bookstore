@@ -1,12 +1,14 @@
 
 //jqueryui, autocomplete
 
+var ctx = "http://localhost:8080/bookstore/"
+
 $(function () {
            
 
             $("#searchText").autocomplete({
                     minLength: 0,
-                    source: "booksAutocomplete",
+                    source: ctx+"booksAutocomplete",
                     select: function (event, ui) {
                         console.log(ui.item.url);
                         console.log(ui.item.ui);

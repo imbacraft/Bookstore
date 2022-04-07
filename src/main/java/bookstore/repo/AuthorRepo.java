@@ -36,6 +36,8 @@ public interface AuthorRepo extends JpaRepository<Author, Integer> {
 
 
     public List<Author> findByFirstnameContainingIgnoreCase(String term);
+
+    public List<Author> findByLastnameStartingWithIgnoreCaseOrderByLastname(String term);
    
 
     @Query(value="select author.* from author where author.lastname=?1",nativeQuery=true)

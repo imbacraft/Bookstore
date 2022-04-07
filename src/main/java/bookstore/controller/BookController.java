@@ -15,6 +15,8 @@ import bookstore.repo.BookdetailsRepo;
 import bookstore.repo.CategoryRepo;
 import bookstore.service.BookService;
 import java.util.List;
+import java.util.Objects;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -68,17 +70,8 @@ public class BookController {
          return "specificBook";
     }
     
-    @PostMapping("/books/search")
-    public String searchByTerm(@RequestParam("title")String title){
-        Book book;
     
-       try{
-           book=bookRepo.findByTitleIgnoreCase(title);
-       }catch(Exception exc){
-           exc.printStackTrace();
-           return "redirect:/home";
-       }
-        return "redirect:/books/search/"+book.getBookid();
+
+
 }
     
-}

@@ -8,7 +8,7 @@
     <a id= "bookaPortaLink" href="${pageContext.request.contextPath}"><img src="https://peoplecertproject.s3.eu-central-1.amazonaws.com/UI/bookaporta-logo.png" alt="bookLogo" id="bookaportaLogo" /></a>
 
     <!-- Search bar -->
-    <form:form action="${pageContext.request.contextPath}/books/search" method="POST" id="searchBar">
+    <form:form action="${pageContext.request.contextPath}/search" method="POST" id="searchBar">
         <input type="text" name="title" placeholder="Search books or authors..." id="searchText" required/>
         <input type="submit" value="" id="searchButton" />
     </form:form>
