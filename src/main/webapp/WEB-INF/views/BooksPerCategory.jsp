@@ -10,8 +10,6 @@
     <title>Books per Category</title>
   
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/booksPerCategory.css" />
-
     <%@include file="library-dependencies.jspf"%>  
     
 
@@ -24,16 +22,16 @@
       <!-- Header -->
       <%@include file="header.jspf"%>  
                    
-          <section id="booksPerCategory">
+          <section id="booksPer">
 
                 <c:forEach items="${booksPerCategory}" var="book">
                       
-                        <div class="row specific-row">
+                        <div class="specific-row">
                         
                                 <div class="col-3">
                                   <a href="${pageContext.request.contextPath}/books/search/${book.bookid}"><img class="image" src="${book.bookdetailsList.toArray()[0].frontcover}" alt="bookImage" ></a><!--to frontcover tha nai se kathe biblio to idio, opote pairnw to [0] -->
                                 </div>
-                
+
                                 <div class="col-5">
           
                                     <h4 class="mainContent"><a href="${pageContext.request.contextPath}/books/search/${book.bookid}">${book.title}</a></h4>
@@ -49,17 +47,17 @@
                                           <h5>&euro; ${bookDetail.price}</h5>
                                             <c:choose>
                                                 <c:when test="${bookDetail.count<30}">
-                                                      <h6>⚠ Only  ${bookDetail.count} left in stock! </h6>
+                                                      <h6 id="warningLowStock">⚠ Only  ${bookDetail.count} left in stock! </h6>
                                                 </c:when>
 
                                               <c:otherwise>
-                                                      <h6> ✔ In Stock - Usually dispatched within 48 hours  </h6>
+                                                      <h6 id="inStock"> ✔ In Stock - Usually dispatched within 48 hours  </h6>
                                               </c:otherwise>
                                             </c:choose>        
                                     
                                           <hr class="hr">
                                       </c:forEach>
-                                  </div>
+                                </div>
                     
                               <div class="col-4" >
                                     <div class="row add-basket">
@@ -76,11 +74,11 @@
 
                                       </form:form>  
                               
-                                     </div>
-                                </div>
+                                    </div>
+                              </div>
                         </div>
 
-                        <br>
+
               </c:forEach>
                       
                 

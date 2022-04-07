@@ -68,10 +68,12 @@ public interface BookRepo extends JpaRepository<Book, Integer> {
     //bres ta 5 prwta biblia pou periexoun ton titlo pou erxetai san parameter!!
     public List<Book> findFirst5ByTitleContainingIgnoreCase(String term);//auto paizei!!
    
+
+    //First 5 books starting with term.
+    public List<Book> findFirst5ByTitleStartingWithIgnoreCaseOrderByTitle(String term);
   
     
     
-   
     
 //    @Query(value="select book.* from book,author,joinedbookauthor \n" +
 //" where book.bookid=joinedbookauthor.bookid and author.authorid=joinedbookauthor.authorid\n" +

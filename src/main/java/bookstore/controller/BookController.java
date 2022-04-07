@@ -68,7 +68,7 @@ public class BookController {
          return "specificBook";
     }
     
-    @PostMapping("/search")
+    @PostMapping("/books/search")
     public String searchByTerm(@RequestParam("title")String title){
         Book book;
     

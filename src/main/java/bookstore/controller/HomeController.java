@@ -105,8 +105,8 @@ public class HomeController {
    
     @GetMapping("/bestsellers")
     public String getBestsellers(Model model){
-        //find bestsellers
         
+        //find bestsellers
         List<Book> bestsellers=bookRepo.findTop5();//agiogdutes, ta piasame  me thn timh
         
         //all categories--for menu
@@ -123,13 +123,14 @@ public class HomeController {
        
         return "bestsellers";
     }
+
     @GetMapping("/booksAutocomplete")
    @ResponseBody 
     public List<String> booksAutocomplete(@RequestParam( value="term",required=false,defaultValue="")String term){
          
         //books autocompleted depends on bookDetails
-      List<Book> autoBooks_BookDetails=bookRepo.findFirst5ByTitleContainingIgnoreCase(term);
-      List<String> suggestions=new ArrayList(); 
+      List<Book> autoBooks_BookDetails=bookRepo.findFirst5ByTitleStartingWithIgnoreCaseOrderByTitle(term);
+      List<String> suggestions= new ArrayList<>(); 
       
       for(Book b:autoBooks_BookDetails){
           suggestions.add(b.getTitle());
