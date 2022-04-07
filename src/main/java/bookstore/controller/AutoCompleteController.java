@@ -54,19 +54,23 @@ public class AutoCompleteController {
         // books autocompleted depends on bookDetails
         List<Book> autoBooks_BookDetails = bookRepo.findFirst5ByTitleStartingWithIgnoreCaseOrderByTitle(term);
 
-        List<Author> autocompleteAuthorNames = authorRepo.findByLastnameStartingWithIgnoreCaseOrderByLastname(term);
+        List<Author> autocompleteAuthorLastNames = authorRepo.findByLastnameStartingWithIgnoreCaseOrderByLastname(term);
+        List<Author> autocompleteAuthorFirstNames = authorRepo.findByFirstnameStartingWithIgnoreCaseOrderByFirstname(term);
+
         List<String> suggestions = new ArrayList<>();
 
         for (Book b : autoBooks_BookDetails) {
             suggestions.add(b.getTitle());
         }
 
-        if (autoBooks_BookDetails.isEmpty()) {
+        for (Author a : autocompleteAuthorLastNames) {
 
-            for (Author a : autocompleteAuthorNames) {
+            suggestions.add(a.getFirstname()+" "+a.getLastname());
+        }
 
-                suggestions.add(a.getLastname());
-            }
+        for (Author a : autocompleteAuthorFirstNames) {
+
+            suggestions.add(a.getFirstname()+" "+a.getLastname());
         }
 
         return suggestions;// twra tha paw sto front page kai tha looparw ta values tou map, analogws me to
@@ -75,35 +79,37 @@ public class AutoCompleteController {
     }
 
     @PostMapping("/search")
-    public String searchByTerm(@RequestParam("title")String title){
+    public String searchByTerm(@RequestParam("title") String title) {
         Book book;
         Author author;
-    
-       try{
-           book=bookRepo.findByTitleIgnoreCase(title);
-           author = authorRepo.findByLastname(title);
-       }catch(Exception exc){
 
-           exc.printStackTrace();
-           return "redirect:/home";
-       }
+        String[]splitAuthorName = title.split(" ");
 
 
-       if (!Objects.isNull(author)){
+        try {
+            book = bookRepo.findByTitleIgnoreCase(title);
+            author = authorRepo.findByLastname(splitAuthorName[1]);
 
-        return "redirect:/authors/"+author.getLastname() ;
+        } catch (Exception exc) {
 
-       } 
+            exc.printStackTrace();
+            return "redirect:/home";
+        }
 
-       if (!Objects.isNull(book)){
+        if (!Objects.isNull(author)) {
 
-        return "redirect:/books/search/"+ book.getBookid();
+            return "redirect:/authors/" + author.getLastname();
 
+        }
 
-       } 
-       
-       return "redirect:/home";
+        if (!Objects.isNull(book)) {
 
-}
+            return "redirect:/books/search/" + book.getBookid();
+
+        }
+
+        return "redirect:/home";
+
+    }
 
 }

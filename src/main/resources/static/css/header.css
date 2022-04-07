@@ -182,3 +182,8 @@
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {display: block;}
+
+
+.ui-menu-item:hover{
+   background-color:yellow !important;
+}

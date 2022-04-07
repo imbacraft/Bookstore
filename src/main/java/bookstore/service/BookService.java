@@ -36,6 +36,7 @@ public class BookService {
         Book book= bookRepo.findByBookid(bookid);
         formatid=book.getBookdetailsList().get(0).getFormat().getFormatid();
      }
+     
      return formatid;
 
    

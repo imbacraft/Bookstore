@@ -47,7 +47,7 @@ public class BookController {
     @GetMapping("/books/search/{bookid}")
     public String getSpecificBook(@PathVariable("bookid") int bookid,@RequestParam(value="formatid", required= false, defaultValue="0") Integer formatid, Model model) {
         formatid=bookService.findAFormatOfABook(bookid, formatid);
-        Bookdetails detailsByBookAndFormatId=bookdetailsRepo.findByBookidandFormatid(bookid,formatid);
+        Bookdetails detailsByBookAndFormatId = bookdetailsRepo.findByBookidandFormatid(bookid,formatid);
         model.addAttribute("detailsByBookAndFormatId", detailsByBookAndFormatId);
         
         Book book= bookRepo.findByBookid(bookid);
@@ -67,6 +67,7 @@ public class BookController {
         
         model.addAttribute("categories", categories);
         model.addAttribute("authors", allAuthors);
+
          return "specificBook";
     }
     
