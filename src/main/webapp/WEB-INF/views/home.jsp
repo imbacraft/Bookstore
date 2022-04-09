@@ -11,8 +11,6 @@
 
         <title>Bookaporta Home</title>
 
-        <link rel="stylesheet" href="./css/body.css" />
-
         <%@include file="library-dependencies.jspf"%>  
 
        
@@ -70,6 +68,7 @@
         <h1>Book Of The Month</h1>  
         <hr style="height: 1px; border-width: 0; color: #e0e0e0; background-color: #e0e0e0;"/>
 
+        
         <div id="bookOfTheMonthContainer">
 
 

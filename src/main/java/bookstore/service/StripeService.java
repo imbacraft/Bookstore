@@ -91,6 +91,8 @@ public class StripeService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        System.out.println(">>>>Charge id is: "+chargeId);
         return chargeId;
     }
     
@@ -117,6 +119,9 @@ public class StripeService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        System.out.println(">>>>Charge id is: "+chargeId);
+
         return chargeId;
     }
 

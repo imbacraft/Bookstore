@@ -52,7 +52,6 @@ public class Cart implements Serializable {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime datetime;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 160)
     @Column(name = "payment")
     private String payment;

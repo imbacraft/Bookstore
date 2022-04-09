@@ -32,7 +32,7 @@ public class PaymentController {
 
     @Autowired
     CartRepo cartRepo;
-    
+
     @Autowired
     CartService cartService;
 
@@ -43,18 +43,18 @@ public class PaymentController {
     PaymentService paymentService;
 
     @GetMapping
-    public String showchargePage(@RequestParam(required=false, name="shippingCost") String shippingCost, @ModelAttribute Customer customer, @ModelAttribute Visitor visitor, Model model, HttpSession session) {
+    public String showchargePage(@RequestParam(required = false, name = "shippingCost") String shippingCost,
+            @ModelAttribute Customer customer, @ModelAttribute Visitor visitor, Model model, HttpSession session) {
         List<Cartitem> cart = (List<Cartitem>) session.getAttribute("cart");
         boolean containsOnlyEbook = cartService.cartContainsOnlyEbooks(cart);
         double shippingCostNumber = 0.0;
         double bookprice = paymentService.calculateBookPrice(cart);
-        
-        
-        if (shippingCost != null){
-        shippingCostNumber = Double.parseDouble(shippingCost);
-        
+
+        if (shippingCost != null) {
+            shippingCostNumber = Double.parseDouble(shippingCost);
+
         }
-        System.out.println(">>>>>>>Visitor to be sent to JSP="+ visitor);
+        System.out.println(">>>>>>>Visitor to be sent to JSP=" + visitor);
         model.addAttribute("stripePublicKey", API_PUBLIC_KEY);
         model.addAttribute("amount", bookprice);
         model.addAttribute("customer", customer);
@@ -66,32 +66,38 @@ public class PaymentController {
     }
 
     @PostMapping
-    public String createCharge(@RequestParam(required = false, name = "shippingcost") String shipping, @RequestParam(required = false, name = "customer") String customerstring, @RequestParam(required = false, name = "visitor") String visitorstring,
-            @RequestParam String token, String amount, String total, RedirectAttributes redirectAttributes, HttpSession session) {
+    public String createCharge(@RequestParam(required = false, name = "shippingcost") String shipping,
+            @RequestParam(required = false, name = "customer") String customerstring,
+            @RequestParam(required = false, name = "visitor") String visitorstring,
+            @RequestParam String token, String amount, String total, RedirectAttributes redirectAttributes,
+            HttpSession session) {
 
         Customer customer = null;
         Visitor visitor = null;
 
-        //Bookprice is divided by 100 and rounded because the price must be turned from Cents to Euros.
+        // Bookprice is divided by 100 and rounded because the price must be turned from
+        // Cents to Euros.
         double bookprice = paymentService.roundDouble(Double.parseDouble(amount) / 100, 2);
         double totalamount = Double.parseDouble(total);
         double shippingcost = Double.parseDouble(shipping);
         LocalDateTime orderdatetime = LocalDateTime.now();
         List<Cartitem> shoppingCart = (List<Cartitem>) session.getAttribute("cart");
 
-        System.out.println(">>>>>>>>>>>>Total is: " + total + "Bookprice is: " + bookprice + " Shipping cost is: " + shipping);
+        System.out.println(
+                ">>>>>>>>>>>>Total is: " + total + "Bookprice is: " + bookprice + " Shipping cost is: " + shipping);
 
-        //Order object (Cart) must be constructed with available parameters.
+        // Order object (Cart) must be constructed with available parameters.
         Cart cart = new Cart();
 
         cart.setDatetime(orderdatetime);
         cart.setBookprice(bookprice);
         cart.setShippingcost(shippingcost);
         cart.setTotalprice(totalamount);
-        //Setting CartItemList for db insertion later
+        // Setting CartItemList for db insertion later
         cart.setCartitemList(shoppingCart);
 
-        //If visitorstring is empty, it means a customer made the order, therefore charge the customer.
+        // If visitorstring is empty, it means a customer made the order, therefore
+        // charge the customer.
         if (visitorstring == "") {
 
             customer = paymentService.chargeCustomer(customerstring, totalamount, cart, token);
@@ -110,17 +116,21 @@ public class PaymentController {
             redirectAttributes.addAttribute("message", "An error accurred while trying to charge.");
         }
 
-        //Save order to db
+        System.out.println("Order details: " + cart.toString());
+
+        // Save order to db
         cartRepo.save(cart);
 
-        //save all cartitems to db
+        // save all cartitems to db
         for (Cartitem item : cart.getCartitemList()) {
 
             item.setCart(cart);
             cartitemRepo.save(item);
         }
 
-        redirectAttributes.addAttribute("message", "Successfully paid amount: " + paymentService.roundDouble(totalamount, 2) + " \u20ac. <br> Your charge id in Stripe.com is: " + cart.getPayment());
+        redirectAttributes.addAttribute("message",
+                "Successfully paid amount: " + paymentService.roundDouble(totalamount, 2)
+                        + " \u20ac. <br> Your charge id in Stripe.com is: " + cart.getPayment());
         redirectAttributes.addAttribute("customer", customer);
         redirectAttributes.addAttribute("visitor", visitor);
         redirectAttributes.addAttribute("shippingCost", cart.getShippingcost());
@@ -129,23 +139,25 @@ public class PaymentController {
     }
 
     @GetMapping("/complete")
-    public String showOrderCompletedPage(@ModelAttribute Customer customer, @ModelAttribute Visitor visitor, @RequestParam("message") String message, @RequestParam(required=false, name="shippingCost") String shipping, Model model, HttpSession session) {
+    public String showOrderCompletedPage(@ModelAttribute Customer customer, @ModelAttribute Visitor visitor,
+            @RequestParam("message") String message,
+            @RequestParam(required = false, name = "shippingCost") String shipping, Model model, HttpSession session) {
         double shippingCost = Double.parseDouble(shipping);
         List<Cartitem> shoppingCart = (List<Cartitem>) session.getAttribute("cart");
         HashMap<Cartitem, String> ebooks = new HashMap();
 
-        //This method checks if there are ebooks in the shopping cart, and puts them, along with their download links, into a map.
+        // This method checks if there are ebooks in the shopping cart, and puts them,
+        // along with their download links, into a map.
         ebooks = cartService.getEbookDownloadLinks(shoppingCart);
 
         model.addAttribute("message", message);
         model.addAttribute("customer", customer);
         model.addAttribute("visitor", visitor);
-        
-       
+
         model.addAttribute("ebooks", ebooks);
         model.addAttribute("shippingCost", shippingCost);
-        //need to add order details
-        //need to add link to ebook, if ordered book is ebook.
+        // need to add order details
+        // need to add link to ebook, if ordered book is ebook.
         return "order-completed";
     }
 
