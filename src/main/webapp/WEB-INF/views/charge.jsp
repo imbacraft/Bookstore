@@ -1,12 +1,10 @@
-
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <head>
-    <title>Charge</title>
+    <title>Checkout</title>
     <!--Bootstrap 4 CSS-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
@@ -17,6 +15,8 @@
     <!--Stripe JavaScript Library-->
     <script src="https://js.stripe.com/v3/"></script>
 </head>
+
+
 <body class="bg-light pt-5">
 
     <!--hero section-->

@@ -597,9 +597,10 @@
 <a href="${pageContext.request.contextPath}/cart/index">Back to Cart</a>
 
     </main>
-<%@include file="footer.jspf" %>
 
 </body>
 
+
+<%@include file="footer.jspf" %>
 
 </html>

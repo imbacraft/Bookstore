@@ -72,7 +72,7 @@ public class CartController {
         List<Category> categories = categoryRepo.findAll();
         
         //all authors-- for menu
-        List<Author> allAuthors = authorRepo.findAll();
+        List<Author> allAuthors = authorRepo.findAllByOrderByLastname();
         
         model.addAttribute("categories", categories);
         model.addAttribute("authors", allAuthors);

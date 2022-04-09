@@ -19,6 +19,8 @@ public interface AuthorRepo extends JpaRepository<Author, Integer> {
         @Override
         public List<Author> findAll();
 
+        public List<Author> findAllByOrderByLastname();
+
         @Query(value = "select author.* from author where author.authorid=?1", nativeQuery = true)
         Author findById(int id);
 

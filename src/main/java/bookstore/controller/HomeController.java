@@ -51,13 +51,12 @@ public class HomeController {
         List<Category> categories = categoryRepo.findAll();
 
         // all authors-- for menu
-        List<Author> allAuthors = authorRepo.findAll();
+        List<Author> allAuthors = authorRepo.findAllByOrderByLastname();
 
         // upcoming books--for multiple itemsPerSlide carousel
         List<Book> upcomingBooks = bookRepo.findUpcomingBooks();
 
-        // TODO: define logic to pick author of the Month. Right now it is arbitrarily
-        // id 17.
+        // TODO: define logic to pick author of the Month. Right now it is arbitrarily author with id 17 (Dan Slott).
         Author authorOfTheMonth = authorRepo.findById(17);// thelw specifically ton slott, g auto to bazw etsi
 
         // BookOfTheMonth--dialeksa to pio akrivo
@@ -79,7 +78,8 @@ public class HomeController {
 
         // menu tabs
         List<Category> categories = categoryRepo.findAll();
-        List<Author> allAuthors = authorRepo.findAll();
+        List<Author> allAuthors = authorRepo.findAllByOrderByLastname();
+
 
         // bring all books where category=categoryName
         List<Book> booksPerCategory = bookRepo.findByCategory(categoryName);
@@ -102,7 +102,7 @@ public class HomeController {
         List<Category> categories = categoryRepo.findAll();
 
         // all authors-- for menu
-        List<Author> allAuthors = authorRepo.findAll();
+        List<Author> allAuthors = authorRepo.findAllByOrderByLastname();
 
         // send through model to the right jsp
         model.addAttribute("bestsellers", bestsellers);
@@ -111,33 +111,5 @@ public class HomeController {
 
         return "bestsellers";
     }
-
-    // @GetMapping("/booksAutocomplete")
-    // @ResponseBody
-    // public List<String> booksAutocomplete(
-    //         @RequestParam(value = "term", required = false, defaultValue = "") String term) {
-
-    //     // books autocompleted depends on bookDetails
-    //     List<Book> autoBooks_BookDetails = bookRepo.findFirst5ByTitleStartingWithIgnoreCaseOrderByTitle(term);
-
-    //     List<Author> autocompleteAuthorNames = authorRepo.findByLastnameStartingWithIgnoreCaseOrderByLastname(term);
-    //     List<String> suggestions = new ArrayList<>();
-
-    //     for (Book b : autoBooks_BookDetails) {
-    //         suggestions.add(b.getTitle());
-    //     }
-
-    //     if (autoBooks_BookDetails.isEmpty()) {
-
-    //         for (Author a : autocompleteAuthorNames) {
-
-    //             suggestions.add(a.getLastname());
-    //         }
-    //     }
-
-    //     return suggestions;// twra tha paw sto front page kai tha looparw ta values tou map, analogws me to
-    //                        // an einai
-    //     // book, format h category key, kai tha parapempei sta antistoixa link
-    // }
 
 }

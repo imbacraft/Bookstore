@@ -55,11 +55,7 @@
   color: black;
 }
 
-#socialLinks {
-}
-
-
-#socialLinks ul {        
+#socialLinks ul {
   display: flex;
   gap: 5%;
 }

@@ -173,13 +173,13 @@
                                 </c:forEach>  
                             </div>
                             <div class="col-4">
-                                <c:forEach items="${authors}" var="author" begin="7" end="13" ><!--edw mpainei karfwto -->
+                                <c:forEach items="${authors}" var="author" begin="7" end="13" >
                                     <a href="${pageContext.request.contextPath}/authors/${author.lastname}">${author.firstname} ${author.lastname}</a>
                                 </c:forEach>
                             </div> 
 
                             <div class="col-4">
-                                <c:forEach items="${authors}" var="author" begin="14" end="20" ><!--edw mpainei karfwto -->
+                                <c:forEach items="${authors}" var="author" begin="14" end="20" >
                                     <a href="${pageContext.request.contextPath}/authors/${author.lastname}">${author.firstname} ${author.lastname}</a>
                                 </c:forEach>
                             </div> 

@@ -14,9 +14,17 @@
 
 
 /* Carousel section */
-.d-block w-100 {
+/* .d-block w-100 {
 
   height: 800px;
+} */
+#carouselExampleIndicators{
+  overflow: hidden;
+}
+#carouselExampleIndicators img{
+
+  height: 450px;
+  
 }
 
 #bookOfTheMonthImage{

@@ -35,7 +35,8 @@ public class AuthorController {
          Author author=authorRepo.findByLastname(lastname);
           //menu tabs
         List<Category> categories = categoryRepo.findAll();
-        List<Author> allAuthors = authorRepo.findAll();
+        List<Author> allAuthors = authorRepo.findAllByOrderByLastname();
+
          model.addAttribute("author",author);
          
      //    List <Book> booksFromSameAuthor=authorRepo.findBooksFromSameAuthor(author.getAuthorid());
