@@ -133,12 +133,17 @@
     
           <div class="otherBooksCarousel">
     
-                  <c:forEach items="${book.authorList.toArray()[0].bookList}"  var="book" begin="1"><!--kakws exoume many to many ton author,g auto ton proseggizw me [0] -->
+                  <c:forEach items="${book.authorList.toArray()[0].bookList}"  var="bookAuthor"><!--kakws exoume many to many ton author,g auto ton proseggizw me [0] -->
+
+                  <c:choose>
+                    <c:when test="${bookAuthor.title != book.title}">
                     <div class="row">
                               <div class="col-2">
-                                  <a  href="${pageContext.request.contextPath}/books/search/${book.bookid}"><img src="${book.bookdetailsList.toArray()[0].frontcover}"/></a>
+                                  <a  href="${pageContext.request.contextPath}/books/search/${bookAuthor.bookid}"><img src="${bookAuthor.bookdetailsList.toArray()[0].frontcover}"/></a>
                               </div>
                     </div>
+                  </c:when>
+                </c:choose>     
                   </c:forEach>
                   
           </div>
