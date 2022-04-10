@@ -1,9 +1,3 @@
-<%-- 
-    Document   : login.jsp
-    Created on : 1 Απρ 2021, 3:47:58 π.μ.
-    Author     : Georgios Tsalikis
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
