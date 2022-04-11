@@ -5,15 +5,10 @@
 <!DOCTYPE html>
 <head>
     <title>Checkout</title>
-    <!--Bootstrap 4 CSS-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-    <!--Bootstrap 4 JavaScript-->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <%@include file="library-dependencies.jspf"%>  
 
-    <!--Stripe JavaScript Library-->
-    <script src="https://js.stripe.com/v3/"></script>
+    
 </head>
 
 
@@ -25,7 +20,7 @@
             <div class="row">
                 <div class="col-lg-6 col-md-8 col-12 my-auto mx-auto">
                     <h1>
-                        Pay with Stripe
+                        Checkout
                     </h1>
 
                     <!-- Cart contents here -->
@@ -34,7 +29,6 @@
 
 
 
-                            Cart  Details
                             <table cellpadding="2" cellspacing="2" border="1">
                                 <tr>
                                     <th>Book</th>

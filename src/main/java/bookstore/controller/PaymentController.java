@@ -112,10 +112,6 @@ public class PaymentController {
             redirectAttributes.addAttribute("message", "Stripe payment token is missing. please try again later.");
         }
 
-        if (cart.getPayment() == null) {
-            redirectAttributes.addAttribute("message", "An error accurred while trying to charge.");
-        }
-
         System.out.println("Order details: " + cart.toString());
 
         // Save order to db
@@ -129,8 +125,7 @@ public class PaymentController {
         }
 
         redirectAttributes.addAttribute("message",
-                "Successfully paid amount: " + paymentService.roundDouble(totalamount, 2)
-                        + " \u20ac. <br> Your charge id in Stripe.com is: " + cart.getPayment());
+                "Successfully paid amount: " + paymentService.roundDouble(totalamount, 2));
         redirectAttributes.addAttribute("customer", customer);
         redirectAttributes.addAttribute("visitor", visitor);
         redirectAttributes.addAttribute("shippingCost", cart.getShippingcost());

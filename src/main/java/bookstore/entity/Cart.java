@@ -41,7 +41,6 @@ import org.springframework.format.annotation.DateTimeFormat;
     @NamedQuery(name = "Cart.findAll", query = "SELECT c FROM Cart c")
     , @NamedQuery(name = "Cart.findByCartid", query = "SELECT c FROM Cart c WHERE c.cartid = :cartid")
     , @NamedQuery(name = "Cart.findByLocalDateTimetime", query = "SELECT c FROM Cart c WHERE c.datetime = :datetime")
-    , @NamedQuery(name = "Cart.findByPayment", query = "SELECT c FROM Cart c WHERE c.payment = :payment")
     , @NamedQuery(name = "Cart.findByShippingcost", query = "SELECT c FROM Cart c WHERE c.shippingcost = :shippingcost")
     , @NamedQuery(name = "Cart.findByTotalprice", query = "SELECT c FROM Cart c WHERE c.totalprice = :totalprice")})
 public class Cart implements Serializable {
@@ -51,10 +50,6 @@ public class Cart implements Serializable {
     @Column(name = "datetime")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime datetime;
-    @Basic(optional = false)
-    @Size(min = 1, max = 160)
-    @Column(name = "payment")
-    private String payment;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
@@ -91,17 +86,15 @@ public class Cart implements Serializable {
         this.cartid = cartid;
     }
 
-    public Cart(Integer cartid, LocalDateTime datetime, String payment, double shippingcost, double totalprice) {
+    public Cart(Integer cartid, LocalDateTime datetime, double shippingcost, double totalprice) {
         this.cartid = cartid;
         this.datetime = datetime;
-        this.payment = payment;
         this.shippingcost = shippingcost;
         this.totalprice = totalprice;
     }
 
-    public Cart(LocalDateTime datetime, String payment, double bookprice, double shippingcost, double totalprice, Customer customer, List<Cartitem> cartitemList) {
+    public Cart(LocalDateTime datetime, double bookprice, double shippingcost, double totalprice, Customer customer, List<Cartitem> cartitemList) {
         this.datetime = datetime;
-        this.payment = payment;
         this.bookprice = bookprice;
         this.shippingcost = shippingcost;
         this.totalprice = totalprice;
@@ -109,9 +102,8 @@ public class Cart implements Serializable {
         this.cartitemList = cartitemList;
     }
 
-    public Cart(LocalDateTime datetime, String payment, double bookprice, double shippingcost, double totalprice, Visitor visitor, List<Cartitem> cartitemList) {
+    public Cart(LocalDateTime datetime, double bookprice, double shippingcost, double totalprice, Visitor visitor, List<Cartitem> cartitemList) {
         this.datetime = datetime;
-        this.payment = payment;
         this.bookprice = bookprice;
         this.shippingcost = shippingcost;
         this.totalprice = totalprice;
@@ -186,14 +178,6 @@ public class Cart implements Serializable {
 
     public void setDatetime(LocalDateTime datetime) {
         this.datetime = datetime;
-    }
-
-    public String getPayment() {
-        return payment;
-    }
-
-    public void setPayment(String payment) {
-        this.payment = payment;
     }
 
     public double getBookprice() {

@@ -73,7 +73,6 @@ public class PaymentService {
         chargeId = stripeService.createChargeForSimpleEmail(customer.getEmail(), totalamount, token);
 
         cart.setCustomer(customer);
-        cart.setPayment(chargeId);
 
         return customer;
     }
@@ -100,7 +99,6 @@ public class PaymentService {
         chargeId = stripeService.createChargeForSimpleEmail(visitor.getEmail(), totalamount, token);
         
         cart.setVisitor(visitor);
-        cart.setPayment(chargeId);
 
         return visitor;
     }

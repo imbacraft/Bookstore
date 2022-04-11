@@ -25,7 +25,9 @@ public class CartService {
     
     //This method checks if there are ebooks in the shopping cart, and puts them, along with their download links, into a map.
     public HashMap<Cartitem, String> getEbookDownloadLinks(List<Cartitem> cart) {
-        String downloadURL = "https://peoplecertproject.s3.eu-central-1.amazonaws.com/git.txt";
+
+        // The downloadURL right now is random
+        String downloadURL = "https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-zip-file.zip";
         HashMap<Cartitem, String> ebooks = new HashMap();
 
         //  (4) is the number of ebook format in the DB.

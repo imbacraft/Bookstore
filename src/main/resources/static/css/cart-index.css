@@ -1,0 +1,198 @@
+
+#empty-error-page {
+    display :none;
+    margin: 15%;
+    text-align: center;
+
+}
+
+.bookTitle, .quantityAndSubtotal {
+background-color: #f7f6ff;
+}
+
+.updateQuantityButton {
+   width: 61px;
+   height: 28px;
+   color: white;
+   background: #3498db;
+   background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+   background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+   background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+   background-image: -o-linear-gradient(top, #3498db, #2980b9);
+   background-image: linear-gradient(to bottom, #3498db, #2980b9);
+   border-bottom-left-radius: 5px;
+   border-bottom-right-radius: 5px;
+   border: 0;
+   margin-top: -1px;
+   padding: 2px;
+}
+
+#cart-contents {
+
+display: flex;
+flex-direction: column;
+}
+
+.bookItem {
+
+    display: flex;
+    border: 1px solid;
+    margin-left: 10%;
+    margin-bottom: 30px;
+    width: 700px;
+}
+
+
+.bookTitle{
+
+    border-right: 1px solid;
+}
+
+
+.bookTitle img {
+
+    width: 150px;
+    height: 220px;
+}
+
+.quantityAndSubtotal{
+    width: 500px;
+}
+
+
+.quantityAndSubtotal th{
+    padding-top: 18%;
+    width: 100px;
+    height: 50px;
+    text-align: center;
+}
+
+.quantityAndSubtotal tr{
+    text-align: center;
+}
+
+.quantityAndSubtotal td{
+    padding-bottom: 20%;
+
+}
+
+
+
+
+#table-title {
+
+    width: 200px;
+    text-align: center;
+    margin-left: 2%;
+
+}
+
+#table-format {
+
+    width: 200px;
+text-align: center;
+font-size: 10pt;
+font-style: oblique
+}
+
+#quantity {
+max-width: 60px;
+}
+
+.removeButton {
+
+    padding: 5%;
+    height: 30px;
+
+    border:1px solid;
+    border-radius:20px;
+
+    text-decoration: none;
+    text-align: center;
+
+    color: white;
+
+    background: #3498db;
+    background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+    background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+    background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+    background-image: -o-linear-gradient(top, #3498db, #2980b9);
+    background-image: linear-gradient(to bottom, #3498db, #2980b9);
+
+}
+
+.removeButton:hover{
+
+    text-decoration: none;
+    color:white;
+
+}
+
+.next-step {
+    display: flex;
+    text-align: center;
+    margin-left: 10%;
+    gap: 24%;
+
+}
+
+.proccedToCheckoutContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+.ultimateTotal{
+    color:black;
+    background:yellow;
+    border: 1px solid;
+    border-radius: 12px 12px 0px 0px;
+    margin: 0;
+
+}
+
+.ultimateTotalLink:hover{
+    text-decoration: none;
+    color:black;
+}
+
+
+a#proceed-checkout {
+    height: 22px;
+    background-color: #2794ad;
+    
+    color: white;
+
+    background: #3498db;
+    background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+    background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+    background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+    background-image: -o-linear-gradient(top, #3498db, #2980b9);
+    background-image: linear-gradient(to bottom, #3498db, #2980b9);
+    text-decoration: none;
+    width: 250px;
+    border-radius: 0 0 12px 12px;
+    
+    }
+    
+   
+
+a#continue-shopping {
+
+    /* margin-top: 20px; */
+    height: 44px;
+    width: 250px;
+    border:1px solid;
+    padding: 1.5%;
+    border-radius: 12px;
+    color: white;
+
+    background: #3498db;
+    background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+    background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+    background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+    background-image: -o-linear-gradient(top, #3498db, #2980b9);
+    background-image: linear-gradient(to bottom, #3498db, #2980b9);
+    text-decoration: none;
+
+    line-height: 18px;
+}

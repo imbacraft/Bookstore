@@ -81,7 +81,7 @@
     </div>
       
 
-            <br>
+            <br> <br>
  
 
 
@@ -129,14 +129,18 @@
 
                         <br>
 
+            </div>
+
+
                         </sec:authorize>
                     
-            </div>
             
+
+
+    <sec:authorize access="!isAuthenticated()">
 
         <div class="deliveryAddress">
 
-               <sec:authorize access="!isAuthenticated()">
 
              <c:if test = "${containsOnlyEbook == false}">
             
@@ -185,11 +189,15 @@
     <br>
     <br>
        </c:if>
-       </sec:authorize>
 
     </div>
 
 </div>
+
+
+       </sec:authorize>
+
+
 
 <div class="deliveryButtonsContainer">
 
