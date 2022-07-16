@@ -5,7 +5,7 @@
 <div id="logoContainer">
 
     <!-- Logo -->
-    <a id= "bookaPortaLink" href="${pageContext.request.contextPath}"><img src="https://peoplecertproject.s3.eu-central-1.amazonaws.com/UI/bookaporta-logo.png" alt="bookLogo" id="bookaportaLogo" /></a>
+    <a id= "bookaPortaLink" href="${pageContext.request.contextPath}"><img src="${pageContext.request.contextPath}/images/bookaporta-logo.png" alt="bookLogo" id="bookaportaLogo" /></a>
 
     <!-- Search bar -->
     <form:form action="${pageContext.request.contextPath}/search" method="POST" id="searchBar">
