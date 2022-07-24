@@ -23,6 +23,7 @@ It supports the following views:
 
 1. Chat via websockets
 2. Autocomplete for search bar (authors & book titles)
+3. Credit card payment via Stripe.com
 
 ## Technologies used
 
