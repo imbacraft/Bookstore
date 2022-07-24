@@ -182,8 +182,25 @@
                                 <c:forEach items="${authors}" var="author" begin="14" end="20" >
                                     <a href="${pageContext.request.contextPath}/authors/${author.lastname}">${author.firstname} ${author.lastname}</a>
                                 </c:forEach>
-                            </div> 
-                        
+                            </div>
+
+                            <div class="col-4">
+                                <c:forEach items="${authors}" var="author" begin="21" end="27" >
+                                    <a href="${pageContext.request.contextPath}/authors/${author.lastname}">${author.firstname} ${author.lastname}</a>
+                                </c:forEach>
+                            </div>
+
+                             <div class="col-4">
+                                <c:forEach items="${authors}" var="author" begin="28" end="34" >
+                                    <a href="${pageContext.request.contextPath}/authors/${author.lastname}">${author.firstname} ${author.lastname}</a>
+                                </c:forEach>
+                            </div>
+
+                             <div class="col-4">
+                                <c:forEach items="${authors}" var="author" begin="35" end="41" >
+                                    <a href="${pageContext.request.contextPath}/authors/${author.lastname}">${author.firstname} ${author.lastname}</a>
+                                </c:forEach>
+                            </div>
                         </div><!--edw kleinei to endiameso row -->
 
                     </div>
